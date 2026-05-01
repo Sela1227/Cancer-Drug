@@ -1232,13 +1232,20 @@
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v3.5</span>
+        <span class="brand-version">v3.6</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
         <span class="brand-divider">·</span> 
         <span class="brand-data-date">資料截止 115/4/23</span>
       </div>
+      <a class="update-badge" id="update-badge" style="display:none" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+          <path d="M6 1L11 10.5H1L6 1Z"/>
+          <path d="M6 5v2.5M6 9v0.3" stroke-linecap="round"/>
+        </svg>
+        <span id="update-badge-text">有新版</span>
+      </a>
     </div>
     <div class="topbar-actions">
       <button class="icon-btn" id="btn-filter" data-action="filter" aria-label="篩選">
@@ -2025,6 +2032,7 @@ const drugs = [
       "乳癌",
       "肺癌",
       "婦癌",
+      "肝膽胰胃癌",
       "其他癌"
     ],
     "types": [
@@ -2083,9 +2091,15 @@ const drugs = [
       },
       {
         "num": "◆",
-        "header": "【9.5.2　Albumin-based paclitaxel】 9.5.2.Albumin-based paclitaxel（如 Abraxane）： 限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。",
+        "header": "【9.5.2　Albumin-based paclitaxel (Abraxane)】",
         "subitems": [],
         "_is_source_marker": true
+      },
+      {
+        "num": "1",
+        "header": "限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。",
+        "subitems": [],
+        "_is_unnumbered": true
       }
     ],
     "per_cancer": {
@@ -2168,11 +2182,27 @@ const drugs = [
             "subitems": []
           }
         ]
+      },
+      "肝膽胰胃癌": {
+        "clauses": [
+          {
+            "num": "◆",
+            "header": "【9.5.2　Albumin-based paclitaxel (Abraxane)】",
+            "subitems": [],
+            "_is_source_marker": true
+          },
+          {
+            "num": "1",
+            "header": "限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。",
+            "subitems": [],
+            "_is_unnumbered": true
+          }
+        ]
       }
     },
     "is_manual_split": false,
     "common_data": [],
-    "search_text": "paclitaxel 成分劑  【9.5.1　paclitaxel 成分注射劑】 晚期卵巢癌，作為第一線治療時需與 cisplatin 併用。 非小細胞肺癌，作為第一線用藥時需與 cisplatin 併用。 與 pembrolizumab 及 carboplatin 併用於轉移性鱗狀非小細胞肺癌的第一線治療，患 者需符合免疫檢查點抑制劑之藥品給付規定。 已使用合併療法(除非有禁忌症、至少應包括使用 anthracycline)失敗的轉移性乳癌 患者。 腋下淋巴轉移之乳癌且動情素受體為陰性之患者，paclitaxel 可作為接續含 doxorubicin 在內之輔助化學治療。 卡波西氏肉瘤第二線用藥。 與 pembrolizumab 及 carboplatin 併用於早期三陰性乳癌(第 ii 期至第 iiib 期， ct1c n1-2 或 t2-4 n0-2)病人的術前前導性治療用藥，病人需符合免疫檢查點抑制 劑之藥品給付規定。 與 atezolizumab 及 bevacizumab(限使用 alymsys、avastin、abevmy、vegzelma 或 mvasi)、carboplatin 併用於轉移性非鱗狀非小細胞肺癌第一線治療，患者需符合免 疫檢查點抑制劑之藥品給付規定。 【9.5.2　albumin-based paclitaxel】 9.5.2.albumin-based paclitaxel（如 abraxane）： 限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。"
+    "search_text": "paclitaxel 成分劑  【9.5.1　paclitaxel 成分注射劑】 晚期卵巢癌，作為第一線治療時需與 cisplatin 併用。 非小細胞肺癌，作為第一線用藥時需與 cisplatin 併用。 與 pembrolizumab 及 carboplatin 併用於轉移性鱗狀非小細胞肺癌的第一線治療，患 者需符合免疫檢查點抑制劑之藥品給付規定。 已使用合併療法(除非有禁忌症、至少應包括使用 anthracycline)失敗的轉移性乳癌 患者。 腋下淋巴轉移之乳癌且動情素受體為陰性之患者，paclitaxel 可作為接續含 doxorubicin 在內之輔助化學治療。 卡波西氏肉瘤第二線用藥。 與 pembrolizumab 及 carboplatin 併用於早期三陰性乳癌(第 ii 期至第 iiib 期， ct1c n1-2 或 t2-4 n0-2)病人的術前前導性治療用藥，病人需符合免疫檢查點抑制 劑之藥品給付規定。 與 atezolizumab 及 bevacizumab(限使用 alymsys、avastin、abevmy、vegzelma 或 mvasi)、carboplatin 併用於轉移性非鱗狀非小細胞肺癌第一線治療，患者需符合免 疫檢查點抑制劑之藥品給付規定。 【9.5.2　albumin-based paclitaxel (abraxane)】 限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。"
   },
   {
     "num": "9.5.1",
@@ -2309,11 +2339,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "albumin-based paclitaxel abraxane"
+    "search_text": "albumin-based paclitaxel abraxane 限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。"
   },
   {
     "num": "9.6",
@@ -2329,27 +2366,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限惡性腫瘤患者患有惡性腹水，肋膜積水或心包膜積水時使用，需檢附病歷摘要。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "streptococcus pyrogene picibanil"
-  },
-  {
-    "num": "9.7",
-    "name": "",
-    "brand": "",
-    "cancers": [],
-    "types": [],
-    "pre_review": false,
-    "form_no": "",
-    "is_parent": false,
-    "is_real_parent_with_children": false,
-    "items": [],
-    "per_cancer": null,
-    "is_manual_split": false,
-    "common_data": null,
-    "search_text": " "
+    "search_text": "streptococcus pyrogene picibanil 限惡性腫瘤患者患有惡性腹水，肋膜積水或心包膜積水時使用，需檢附病歷摘要。"
   },
   {
     "num": "9.8",
@@ -2365,11 +2393,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限用於停經後，且女性荷爾蒙接受體(estrogen receptor)為陽性之轉移性乳癌病 患。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "toremifene fareston"
+    "search_text": "toremifene fareston 限用於停經後，且女性荷爾蒙接受體(estrogen receptor)為陽性之轉移性乳癌病 患。"
   },
   {
     "num": "9.9",
@@ -2704,7 +2739,7 @@ const drugs = [
       },
       {
         "num": "2",
-        "header": "與5-fluorouracil、leucovorin 及 oxaliplatin 併用(FOLFIRINOX)，做為轉移性胰 臟癌之第一線治療(限用 Irino、Irinotel、Campto、Irinotecan Injection Concentrate、Irican、Innocan、Irinotecan Injection)。(110/5/1、110/7/1、 110/8/1、112/2/1)",
+        "header": "與5-fluorouracil、leucovorin 及 oxaliplatin 併用(FOLFIRINOX)，做為轉移性胰 臟癌之第一線治療(限用 Irino、Irinotel、Campto、Irinotecan Injection Concentrate、Irican、Innocan、Irinotecan Injection)。(110/5/1、110/7/1、",
         "subitems": []
       },
       {
@@ -2754,7 +2789,7 @@ const drugs = [
           },
           {
             "num": "2",
-            "header": "與5-fluorouracil、leucovorin 及 oxaliplatin 併用(FOLFIRINOX)，做為轉移性胰 臟癌之第一線治療(限用 Irino、Irinotel、Campto、Irinotecan Injection Concentrate、Irican、Innocan、Irinotecan Injection)。(110/5/1、110/7/1、 110/8/1、112/2/1)",
+            "header": "與5-fluorouracil、leucovorin 及 oxaliplatin 併用(FOLFIRINOX)，做為轉移性胰 臟癌之第一線治療(限用 Irino、Irinotel、Campto、Irinotecan Injection Concentrate、Irican、Innocan、Irinotecan Injection)。(110/5/1、110/7/1、",
             "subitems": []
           }
         ]
@@ -2787,7 +2822,7 @@ const drugs = [
     },
     "is_manual_split": false,
     "common_data": [],
-    "search_text": "irinotecan  【9.12.1　irinotecan (campto injection)】 限轉移性大腸直腸癌之第一線治療藥物: 與5-fu 及 folinic acid 合併，使用於未曾接受過化學治療之患者。 單獨使用於曾接受5-fu 療程治療無效之患者。 與5-fluorouracil、leucovorin 及 oxaliplatin 併用(folfirinox)，做為轉移性胰 臟癌之第一線治療(限用 irino、irinotel、campto、irinotecan injection concentrate、irican、innocan、irinotecan injection)。(110/5/1、110/7/1、 110/8/1、112/2/1) 【9.12.2　irinotecan 微脂體注射劑 (onivyde)】 與5-fu 及 leucovorin 合併使用於曾接受過 gemcitabine 治療後復發或惡化之轉移 性胰腺癌。 與 oxaliplatin、5-fu 和 leucovorin 併用，作為轉移性胰腺癌成人病人第一線治 療。 需經事前審查核准後使用。"
+    "search_text": "irinotecan  【9.12.1　irinotecan (campto injection)】 限轉移性大腸直腸癌之第一線治療藥物: 與5-fu 及 folinic acid 合併，使用於未曾接受過化學治療之患者。 單獨使用於曾接受5-fu 療程治療無效之患者。 與5-fluorouracil、leucovorin 及 oxaliplatin 併用(folfirinox)，做為轉移性胰 臟癌之第一線治療(限用 irino、irinotel、campto、irinotecan injection concentrate、irican、innocan、irinotecan injection)。(110/5/1、110/7/1、 【9.12.2　irinotecan 微脂體注射劑 (onivyde)】 與5-fu 及 leucovorin 合併使用於曾接受過 gemcitabine 治療後復發或惡化之轉移 性胰腺癌。 與 oxaliplatin、5-fu 和 leucovorin 併用，作為轉移性胰腺癌成人病人第一線治 療。 需經事前審查核准後使用。"
   },
   {
     "num": "9.12.1",
@@ -2820,14 +2855,14 @@ const drugs = [
       },
       {
         "num": "2",
-        "header": "與5-fluorouracil、leucovorin 及 oxaliplatin 併用(FOLFIRINOX)，做為轉移性胰 臟癌之第一線治療(限用 Irino、Irinotel、Campto、Irinotecan Injection Concentrate、Irican、Innocan、Irinotecan Injection)。(110/5/1、110/7/1、 110/8/1、112/2/1)",
+        "header": "與5-fluorouracil、leucovorin 及 oxaliplatin 併用(FOLFIRINOX)，做為轉移性胰 臟癌之第一線治療(限用 Irino、Irinotel、Campto、Irinotecan Injection Concentrate、Irican、Innocan、Irinotecan Injection)。(110/5/1、110/7/1、",
         "subitems": []
       }
     ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "irinotecan campto injection 限轉移性大腸直腸癌之第一線治療藥物: 與5-fu 及 folinic acid 合併，使用於未曾接受過化學治療之患者。 單獨使用於曾接受5-fu 療程治療無效之患者。 與5-fluorouracil、leucovorin 及 oxaliplatin 併用(folfirinox)，做為轉移性胰 臟癌之第一線治療(限用 irino、irinotel、campto、irinotecan injection concentrate、irican、innocan、irinotecan injection)。(110/5/1、110/7/1、 110/8/1、112/2/1)"
+    "search_text": "irinotecan campto injection 限轉移性大腸直腸癌之第一線治療藥物: 與5-fu 及 folinic acid 合併，使用於未曾接受過化學治療之患者。 單獨使用於曾接受5-fu 療程治療無效之患者。 與5-fluorouracil、leucovorin 及 oxaliplatin 併用(folfirinox)，做為轉移性胰 臟癌之第一線治療(限用 irino、irinotel、campto、irinotecan injection concentrate、irican、innocan、irinotecan injection)。(110/5/1、110/7/1、"
   },
   {
     "num": "9.12.2",
@@ -2879,11 +2914,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限轉移性腎細胞癌及惡性黑色素癌病患使用。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "aldesleukin proleukin for injection"
+    "search_text": "aldesleukin proleukin for injection 限轉移性腎細胞癌及惡性黑色素癌病患使用。"
   },
   {
     "num": "9.14",
@@ -2961,19 +3003,26 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限急性前髓性白血病使用。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "tretinoin vesanoid soft gelatin"
+    "search_text": "tretinoin vesanoid soft gelatin 限急性前髓性白血病使用。"
   },
   {
     "num": "9.16",
     "name": "Topotecan",
     "brand": "Hycamtin",
     "cancers": [
-      "婦癌",
-      "肺癌"
+      "肺癌",
+      "婦癌"
     ],
     "types": [
       "化療"
@@ -3001,9 +3050,15 @@ const drugs = [
       },
       {
         "num": "◆",
-        "header": "【9.16.2　Topotecan 口服劑型】 限用於小細胞肺癌之第二線化學治療（第一線治療應包括白金化合物）。",
+        "header": "【9.16.2　Topotecan 口服劑型】",
         "subitems": [],
         "_is_source_marker": true
+      },
+      {
+        "num": "1",
+        "header": "限用於小細胞肺癌之第二線化學治療（第一線治療應包括白金化合物）。",
+        "subitems": [],
+        "_is_unnumbered": true
       }
     ],
     "per_cancer": {
@@ -3024,6 +3079,18 @@ const drugs = [
             "num": "2",
             "header": "與 cisplatin 併用適用於治療經組織學檢查確定患有第 IV-B 期復發性或持續性子宮 頸癌，且不適合以外科手術及（或）放射療法進行治療的患者。",
             "subitems": []
+          },
+          {
+            "num": "◆",
+            "header": "【9.16.2　Topotecan 口服劑型】",
+            "subitems": [],
+            "_is_source_marker": true
+          },
+          {
+            "num": "1",
+            "header": "限用於小細胞肺癌之第二線化學治療（第一線治療應包括白金化合物）。",
+            "subitems": [],
+            "_is_unnumbered": true
           }
         ]
       },
@@ -3123,11 +3190,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限用於小細胞肺癌之第二線化學治療（第一線治療應包括白金化合物）。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "topotecan 口服劑型 "
+    "search_text": "topotecan 口服劑型  限用於小細胞肺癌之第二線化學治療（第一線治療應包括白金化合物）。"
   },
   {
     "num": "9.17",
@@ -3186,7 +3260,7 @@ const drugs = [
       },
       {
         "num": "6",
-        "header": "與 nivolumab 及 oxaliplatin 併用於第一線治療晚期或轉移性且不具有 HER2過度表 現的胃癌病人，病人需符合免疫檢查點抑制劑之藥品給付規定。(113/4/1、 113/6/1、115/2/1)",
+        "header": "與 nivolumab 及 oxaliplatin 併用於第一線治療晚期或轉移性且不具有 HER2過度表 現的胃癌病人，病人需符合免疫檢查點抑制劑之藥品給付規定。(113/4/1、",
         "subitems": []
       }
     ],
@@ -3241,7 +3315,7 @@ const drugs = [
           },
           {
             "num": "6",
-            "header": "與 nivolumab 及 oxaliplatin 併用於第一線治療晚期或轉移性且不具有 HER2過度表 現的胃癌病人，病人需符合免疫檢查點抑制劑之藥品給付規定。(113/4/1、 113/6/1、115/2/1)",
+            "header": "與 nivolumab 及 oxaliplatin 併用於第一線治療晚期或轉移性且不具有 HER2過度表 現的胃癌病人，病人需符合免疫檢查點抑制劑之藥品給付規定。(113/4/1、",
             "subitems": []
           }
         ]
@@ -3249,7 +3323,7 @@ const drugs = [
     },
     "is_manual_split": false,
     "common_data": [],
-    "search_text": "capecitabine xeloda capecitabine 與 docetaxel 併用於治療對 anthracycline 化學治療無效之局部晚期 或轉移性乳癌病患。 用於局部晚期或轉移性乳癌，需符合下列條件之一： capecitabine 單獨用於無法接受 anthracycline 治療者。 capecitabine 合併 ixabepilone 用於對 taxane 有抗藥性且無法接受 anthracycline 治療者。 capecitabine 單獨或合併 ixabepilone 用於對 taxane 及 anthracycline 治療無效 者。 治療轉移性結腸直腸癌的第一線用藥。 第三期結腸癌患者手術後的輔助性療法，以八個療程為限。 capecitabine 合併 platinum 可使用於晚期胃癌之第一線治療。 與 nivolumab 及 oxaliplatin 併用於第一線治療晚期或轉移性且不具有 her2過度表 現的胃癌病人，病人需符合免疫檢查點抑制劑之藥品給付規定。(113/4/1、 113/6/1、115/2/1)"
+    "search_text": "capecitabine xeloda capecitabine 與 docetaxel 併用於治療對 anthracycline 化學治療無效之局部晚期 或轉移性乳癌病患。 用於局部晚期或轉移性乳癌，需符合下列條件之一： capecitabine 單獨用於無法接受 anthracycline 治療者。 capecitabine 合併 ixabepilone 用於對 taxane 有抗藥性且無法接受 anthracycline 治療者。 capecitabine 單獨或合併 ixabepilone 用於對 taxane 及 anthracycline 治療無效 者。 治療轉移性結腸直腸癌的第一線用藥。 第三期結腸癌患者手術後的輔助性療法，以八個療程為限。 capecitabine 合併 platinum 可使用於晚期胃癌之第一線治療。 與 nivolumab 及 oxaliplatin 併用於第一線治療晚期或轉移性且不具有 her2過度表 現的胃癌病人，病人需符合免疫檢查點抑制劑之藥品給付規定。(113/4/1、"
   },
   {
     "num": "9.18",
@@ -3310,7 +3384,7 @@ const drugs = [
       },
       {
         "num": "4",
-        "header": "經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、 114/5/1）",
+        "header": "經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、",
         "subitems": []
       }
     ],
@@ -3355,7 +3429,7 @@ const drugs = [
           },
           {
             "num": "4",
-            "header": "經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、 114/5/1）",
+            "header": "經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、",
             "subitems": []
           }
         ]
@@ -3369,7 +3443,7 @@ const drugs = [
           },
           {
             "num": "4",
-            "header": "經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、 114/5/1）",
+            "header": "經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、",
             "subitems": []
           }
         ]
@@ -3377,7 +3451,7 @@ const drugs = [
     },
     "is_manual_split": false,
     "common_data": [],
-    "search_text": "trastuzumab herceptin 早期乳癌(99/1/1、99/8/1、99/10/1、101/1/1、111/12/1、112/10/1、113/8/1、 外科手術前後、化學療法(術前輔助治療或輔助治療)治療後，具 her2過度表現 (ihc3+或 fish+)，且具腋下淋巴結轉移但無遠處臟器轉移之早期乳癌患者，作為 輔助性治療用藥：(99/8/1、99/10/1、101/1/1、111/12/1、112/10/1、 i.外科手術後達病理上緩解(pcr)，下列 i.~iii.使用於外科手術前後之總療程合併 計算，依藥品仿單記載以18個療程為上限：(113/8/1、113/12/1、114/1/1、 i.本藥品 ii.pertuzumab 與 trastuzumab 併用 iii.pertuzumab 與 trastuzumab 皮下注射複方製劑(如 phesgo) ⅱ.若外科手術後無法達病理上緩解(non-pcr)，本藥品與 trastuzumab emtansine 使用於外科手術前後的總療程合併計算，依藥品仿單記載以全部18個療程為上 限，其中 trastuzumab emtansine 以14個療程為上限。 外科手術前後、化學療法(術前輔助治療或輔助治療)治療後，符合下列所有條件 之早期乳癌患者：(111/12/1、112/10/1、113/8/1、113/12/1、114/1/1、 ⅰ.her2過度表現(ihc 3+或 fish+)。 ⅱ.雌激素受體（er)為陰性。 ⅲ.腫瘤大於2公分。須經乳房超音波或乳房 x 光攝影或核磁共振診斷。 ⅳ.且未發生腋下淋巴結轉移之早期乳癌患者，作為輔助性治療用藥。 ⅴ.依下列條件之一使用： i.外科手術後達病理上緩解(pcr)，本藥品使用於外科手術前後以9個療程為上 限。 ii.若外科手術後無法達病理上緩解(non-pcr)，本藥品與 trastuzumab emtansine 使用於外科手術前後的總療程合併計算，以全部18個療程為上限，其中 trastuzumab emtansine 以14個療程為上限。 轉移性乳癌 單獨使用於治療腫瘤細胞上有 her2過度表現(ihc3+或 fish+)，曾接受過一次以上 化學治療之轉移性乳癌病人。 與 paclitaxel 或 docetaxel 併用，使用於未曾接受過化學治療之轉移性乳癌病 患，且為 her2過度表現(ihc3+或 fish+)者。 轉移性乳癌且 her2過度表現之病人，僅限先前未使用過本藥品者方可使用。 若先前使用過 docetaxel 及 pertuzumab 與 trastuzumab 併用或 docetaxel 及 pertuzumab 與 trastuzumab 皮下注射複方製劑(如 phesgo)併用達18個月上限仍未 惡化者，得再次申請本藥品。 轉移性胃癌(限 iv 劑型) trastuzumab 合併 capecitabine (或5-fluorouracil)及 cisplatin 適用於未曾接受 過化學治療之 her2過度表現(ihc3+或 fish+)轉移性胃腺癌(或胃食道接合處腺癌)的 治療。 經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、 114/5/1）"
+    "search_text": "trastuzumab herceptin 早期乳癌(99/1/1、99/8/1、99/10/1、101/1/1、111/12/1、112/10/1、113/8/1、 外科手術前後、化學療法(術前輔助治療或輔助治療)治療後，具 her2過度表現 (ihc3+或 fish+)，且具腋下淋巴結轉移但無遠處臟器轉移之早期乳癌患者，作為 輔助性治療用藥：(99/8/1、99/10/1、101/1/1、111/12/1、112/10/1、 i.外科手術後達病理上緩解(pcr)，下列 i.~iii.使用於外科手術前後之總療程合併 計算，依藥品仿單記載以18個療程為上限：(113/8/1、113/12/1、114/1/1、 i.本藥品 ii.pertuzumab 與 trastuzumab 併用 iii.pertuzumab 與 trastuzumab 皮下注射複方製劑(如 phesgo) ⅱ.若外科手術後無法達病理上緩解(non-pcr)，本藥品與 trastuzumab emtansine 使用於外科手術前後的總療程合併計算，依藥品仿單記載以全部18個療程為上 限，其中 trastuzumab emtansine 以14個療程為上限。 外科手術前後、化學療法(術前輔助治療或輔助治療)治療後，符合下列所有條件 之早期乳癌患者：(111/12/1、112/10/1、113/8/1、113/12/1、114/1/1、 ⅰ.her2過度表現(ihc 3+或 fish+)。 ⅱ.雌激素受體（er)為陰性。 ⅲ.腫瘤大於2公分。須經乳房超音波或乳房 x 光攝影或核磁共振診斷。 ⅳ.且未發生腋下淋巴結轉移之早期乳癌患者，作為輔助性治療用藥。 ⅴ.依下列條件之一使用： i.外科手術後達病理上緩解(pcr)，本藥品使用於外科手術前後以9個療程為上 限。 ii.若外科手術後無法達病理上緩解(non-pcr)，本藥品與 trastuzumab emtansine 使用於外科手術前後的總療程合併計算，以全部18個療程為上限，其中 trastuzumab emtansine 以14個療程為上限。 轉移性乳癌 單獨使用於治療腫瘤細胞上有 her2過度表現(ihc3+或 fish+)，曾接受過一次以上 化學治療之轉移性乳癌病人。 與 paclitaxel 或 docetaxel 併用，使用於未曾接受過化學治療之轉移性乳癌病 患，且為 her2過度表現(ihc3+或 fish+)者。 轉移性乳癌且 her2過度表現之病人，僅限先前未使用過本藥品者方可使用。 若先前使用過 docetaxel 及 pertuzumab 與 trastuzumab 併用或 docetaxel 及 pertuzumab 與 trastuzumab 皮下注射複方製劑(如 phesgo)併用達18個月上限仍未 惡化者，得再次申請本藥品。 轉移性胃癌(限 iv 劑型) trastuzumab 合併 capecitabine (或5-fluorouracil)及 cisplatin 適用於未曾接受 過化學治療之 her2過度表現(ihc3+或 fish+)轉移性胃腺癌(或胃食道接合處腺癌)的 治療。 經事前審查核准後使用，核准後早期乳癌及轉移性胃癌每24週、晚期乳癌每18週須檢 附療效評估資料再次申請，若疾病有惡化情形即不應再行申請。（105/11/1、"
   },
   {
     "num": "9.19",
@@ -3531,14 +3605,14 @@ const drugs = [
       },
       {
         "num": "10",
-        "header": "使用於1、4、5、6、7、8及9病人時，需經事前審查核准後使用。(102/1/1、 103/2/1、103/9/1、113/12/1、115/5/1)",
+        "header": "使用於1、4、5、6、7、8及9病人時，需經事前審查核准後使用。(102/1/1、",
         "subitems": []
       }
     ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "rituximab 注射劑  復發或對化學療效有抗性之低惡度 b 細胞非何杰金氏淋巴瘤。 併用 polatuzumab vedotin 或 chop 或其他化學療法，用於 cd20抗原陽性之 b 瀰漫 性大細胞非何杰金氏淋巴瘤之病患。 併用 cvp 化學療法，用於未經治療之和緩性（組織型態為濾泡型）b 細胞非何杰金 氏淋巴瘤的病人。 作為濾泡性淋巴瘤患者於接受含 rituximab 誘導化學治療後產生反應(達 partial remission 或 complete remission)之病患，若在接受含 rituximab 誘導化學治療 前有下列情形之一者，得接受 rituximab 維持治療，限用八劑，每三個月使用一 劑，最多不超過二年。 有單一腫瘤直徑超過7公分者； 有超過三顆腫瘤直徑超過3公分者； 脾臟腫大，其長度超過16公分者； 對 vitalorgans 造成擠壓者； 周邊血中出現淋巴球增生超過5000/mm3者； 出現任一系列血球低下者(platelet<100,000/mm3，或 hb<10gm/dl，或 absolute neutrophil count<1500/mm3)。 慢性淋巴球性白血病： rai stage ⅲ/ⅳ(或 binet c 級)之 cll 病人。若用於 rai stageⅰ/ⅱ(或 binet a/b 級)併有疾病相關免疫性症候(如自體免疫性溶血、免疫性血小板低下紫瘢症 等)的病人時，需經過至少一種標準的烷化基劑治療無效或病情惡化者，且 cd20 陽性細胞須大於50%。（rixathon 不受「需經過一種標準的烷化基劑治療無效或病 情惡化，且 cd20陽性細胞須大於50%」限制，僅須符合具 cd20陽性細胞即可使 用，做為第一線用藥需與 fludarabine 及 cyclophosphamide 併用） 與化學療法併用，做為復發或頑固性的 cd20陽性慢性淋巴球性白血病病患的治療 用藥，且 cd20陽性細胞須大於50%。（rixathon 不受「cd20陽性細胞須大於50%」 限制，僅須符合具 cd20陽性細胞即可使用） 初次申請最多六個（月）療程，再次申請以三個療程為限。 與類固醇併用，治療嗜中性白血球細胞質抗體(anca)陽性之肉芽腫性血管炎及顯微 多發性血管炎病人： 需經事前審查核准後使用，診斷需有病理報告確定及血清學檢驗結果。 初次發作之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週 以上但療效不佳者。 復發之肉芽腫性血管炎(gpa，或稱為韋格納肉芽腫症 wegener’s granulomatosis)及顯微多發性血管炎(mpa)，先前曾接受過 cyclophosphamide 治療者。 對 cyclophosphamide 治療無法耐受且有具體事證，或具使用禁忌之肉芽腫性血管 炎及顯微多發性血管炎。 每次申請，以治療4週之療程為限。復發時可再次申請。 註：原發(初次發作)之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週以上但療效不佳者之定義為： 經 cyclophosphamide 治療4週以上，但至少有一項受侵犯的主要器官症狀未能改 善，包括: a 肺部 b 腎臟 c 神經系統 d 腸胃道系統 申請時需檢附病歷及病理及影像資料等，經專科醫師事前審查同意後使用。 合併 bendamustine 適用於先前未曾接受治療的 cd20陽性、第 iii/iv 期和緩性非何 杰金氏淋巴瘤。 合併 bendamustine 用於先前未曾接受治療且不適合自體幹細胞移植的第 iii/iv 期 被套細胞淋巴瘤。 rituximab(限使用 rixathon)合併 lenalidomide(限使用 revlimid)用於先前曾接受 至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人，需符合 lenalidomide 之藥品給付規定。 使用於1、4、5、6、7、8及9病人時，需經事前審查核准後使用。(102/1/1、 103/2/1、103/9/1、113/12/1、115/5/1)"
+    "search_text": "rituximab 注射劑  復發或對化學療效有抗性之低惡度 b 細胞非何杰金氏淋巴瘤。 併用 polatuzumab vedotin 或 chop 或其他化學療法，用於 cd20抗原陽性之 b 瀰漫 性大細胞非何杰金氏淋巴瘤之病患。 併用 cvp 化學療法，用於未經治療之和緩性（組織型態為濾泡型）b 細胞非何杰金 氏淋巴瘤的病人。 作為濾泡性淋巴瘤患者於接受含 rituximab 誘導化學治療後產生反應(達 partial remission 或 complete remission)之病患，若在接受含 rituximab 誘導化學治療 前有下列情形之一者，得接受 rituximab 維持治療，限用八劑，每三個月使用一 劑，最多不超過二年。 有單一腫瘤直徑超過7公分者； 有超過三顆腫瘤直徑超過3公分者； 脾臟腫大，其長度超過16公分者； 對 vitalorgans 造成擠壓者； 周邊血中出現淋巴球增生超過5000/mm3者； 出現任一系列血球低下者(platelet<100,000/mm3，或 hb<10gm/dl，或 absolute neutrophil count<1500/mm3)。 慢性淋巴球性白血病： rai stage ⅲ/ⅳ(或 binet c 級)之 cll 病人。若用於 rai stageⅰ/ⅱ(或 binet a/b 級)併有疾病相關免疫性症候(如自體免疫性溶血、免疫性血小板低下紫瘢症 等)的病人時，需經過至少一種標準的烷化基劑治療無效或病情惡化者，且 cd20 陽性細胞須大於50%。（rixathon 不受「需經過一種標準的烷化基劑治療無效或病 情惡化，且 cd20陽性細胞須大於50%」限制，僅須符合具 cd20陽性細胞即可使 用，做為第一線用藥需與 fludarabine 及 cyclophosphamide 併用） 與化學療法併用，做為復發或頑固性的 cd20陽性慢性淋巴球性白血病病患的治療 用藥，且 cd20陽性細胞須大於50%。（rixathon 不受「cd20陽性細胞須大於50%」 限制，僅須符合具 cd20陽性細胞即可使用） 初次申請最多六個（月）療程，再次申請以三個療程為限。 與類固醇併用，治療嗜中性白血球細胞質抗體(anca)陽性之肉芽腫性血管炎及顯微 多發性血管炎病人： 需經事前審查核准後使用，診斷需有病理報告確定及血清學檢驗結果。 初次發作之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週 以上但療效不佳者。 復發之肉芽腫性血管炎(gpa，或稱為韋格納肉芽腫症 wegener’s granulomatosis)及顯微多發性血管炎(mpa)，先前曾接受過 cyclophosphamide 治療者。 對 cyclophosphamide 治療無法耐受且有具體事證，或具使用禁忌之肉芽腫性血管 炎及顯微多發性血管炎。 每次申請，以治療4週之療程為限。復發時可再次申請。 註：原發(初次發作)之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週以上但療效不佳者之定義為： 經 cyclophosphamide 治療4週以上，但至少有一項受侵犯的主要器官症狀未能改 善，包括: a 肺部 b 腎臟 c 神經系統 d 腸胃道系統 申請時需檢附病歷及病理及影像資料等，經專科醫師事前審查同意後使用。 合併 bendamustine 適用於先前未曾接受治療的 cd20陽性、第 iii/iv 期和緩性非何 杰金氏淋巴瘤。 合併 bendamustine 用於先前未曾接受治療且不適合自體幹細胞移植的第 iii/iv 期 被套細胞淋巴瘤。 rituximab(限使用 rixathon)合併 lenalidomide(限使用 revlimid)用於先前曾接受 至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人，需符合 lenalidomide 之藥品給付規定。 使用於1、4、5、6、7、8及9病人時，需經事前審查核准後使用。(102/1/1、"
   },
   {
     "num": "9.21",
@@ -3742,11 +3816,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限用於急性前骨髓細胞白血病患者。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "arsenic trioxide asadin inj."
+    "search_text": "arsenic trioxide asadin inj. 限用於急性前骨髓細胞白血病患者。"
   },
   {
     "num": "9.24",
@@ -4401,32 +4482,6 @@ const drugs = [
             ]
           }
         ]
-      },
-      "肝膽胰胃癌": {
-        "clauses": [
-          {
-            "num": "3",
-            "header": "進展性，無法切除或轉移性分化良好之胰臟神經內分泌腫瘤的成人病患，須同時符 合下列條件：",
-            "subitems": [
-              {
-                "num": "(1)",
-                "text": "符合 WHO 2010分類方式之 G1 or G2胰臟神經內分泌瘤。"
-              },
-              {
-                "num": "(2)",
-                "text": "於一年內影像檢查證實有明顯惡化者。"
-              },
-              {
-                "num": "(3)",
-                "text": "不可合併使用化學治療或相關標靶藥物。"
-              },
-              {
-                "num": "(4)",
-                "text": "經事前專案審查核准後使用，且需每3個月評估一次。"
-              }
-            ]
-          }
-        ]
       }
     },
     "is_manual_split": false,
@@ -4582,11 +4637,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "治療新診斷多發性骨髓瘤。使用時須和 prednisolone 及 oral melphalan 併用，或 和骨髓移植併用，或和 palmidronate 併用於骨髓移植後之治療。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "thalidomide thado"
+    "search_text": "thalidomide thado 治療新診斷多發性骨髓瘤。使用時須和 prednisolone 及 oral melphalan 併用，或 和骨髓移植併用，或和 palmidronate 併用於骨髓移植後之治療。"
   },
   {
     "num": "9.34",
@@ -4931,43 +4993,6 @@ const drugs = [
           }
         ]
       },
-      "肝膽胰胃癌": {
-        "clauses": [
-          {
-            "num": "◆",
-            "header": "【9.36.1　Everolimus 5mg 及10mg (Afinitor 5mg 及10mg)】",
-            "subitems": [],
-            "_is_source_marker": true
-          },
-          {
-            "num": "2",
-            "header": "使用於胰臟神經內分泌腫瘤成人病患，需同時符合下列條件：",
-            "subitems": [
-              {
-                "num": "(1)",
-                "text": "無法切除或轉移的成人胰臟內分泌腫瘤，其分化程度為良好或中度，或 WHO 2010 年分類為 G1、G2者。"
-              },
-              {
-                "num": "(2)",
-                "text": "為進展性腫瘤，即過去12個月影像檢查為持續惡化者（RECIST 定義為疾病惡化 者）。"
-              },
-              {
-                "num": "(3)",
-                "text": "不可合併使用化學藥物或其他標靶藥物。"
-              },
-              {
-                "num": "(4)",
-                "text": "除因病人使用本品後，發生嚴重不良反應或耐受不良之情形外，本品與 sunitinib 不得轉換使用。"
-              }
-            ]
-          },
-          {
-            "num": "6",
-            "header": "限每日最大劑量為10mg。",
-            "subitems": []
-          }
-        ]
-      },
       "其他癌": {
         "clauses": [
           {
@@ -5188,32 +5213,6 @@ const drugs = [
             "num": "5",
             "header": "除晚期腎細胞癌之外，其他疾病需經事前審查核准後使用，每次申請之療程以3個月 為限。初次申請時需檢送病理報告及影像報告，之後每3個月申請一次，再次申請時 需檢附影像資料及前次治療結果評估資料證實無惡化，才可繼續使用。(104/12/1、",
             "subitems": []
-          }
-        ]
-      },
-      "肝膽胰胃癌": {
-        "clauses": [
-          {
-            "num": "2",
-            "header": "使用於胰臟神經內分泌腫瘤成人病患，需同時符合下列條件：",
-            "subitems": [
-              {
-                "num": "(1)",
-                "text": "無法切除或轉移的成人胰臟內分泌腫瘤，其分化程度為良好或中度，或 WHO 2010 年分類為 G1、G2者。"
-              },
-              {
-                "num": "(2)",
-                "text": "為進展性腫瘤，即過去12個月影像檢查為持續惡化者（RECIST 定義為疾病惡化 者）。"
-              },
-              {
-                "num": "(3)",
-                "text": "不可合併使用化學藥物或其他標靶藥物。"
-              },
-              {
-                "num": "(4)",
-                "text": "除因病人使用本品後，發生嚴重不良反應或耐受不良之情形外，本品與 sunitinib 不得轉換使用。"
-              }
-            ]
           }
         ]
       },
@@ -5694,11 +5693,18 @@ const drugs = [
     "form_no": "",
     "is_parent": false,
     "is_real_parent_with_children": false,
-    "items": [],
+    "items": [
+      {
+        "num": "1",
+        "header": "限用於與 LHRH 類似劑療法或手術去勢療法併用於進展性攝護腺癌。",
+        "subitems": [],
+        "_is_unnumbered": true
+      }
+    ],
     "per_cancer": null,
     "is_manual_split": false,
     "common_data": null,
-    "search_text": "bicalutamide "
+    "search_text": "bicalutamide  限用於與 lhrh 類似劑療法或手術去勢療法併用於進展性攝護腺癌。"
   },
   {
     "num": "9.41",
@@ -13290,6 +13296,56 @@ renderAll();
       const search = document.getElementById("search");
       if (search) search.focus();
     }, 100);
+    // 查 GitHub API 看有無新版警示
+    checkUpdateNotice();
+  }
+  
+  // 從 location 推斷 GitHub repo (用 GitHub Pages URL 格式: <user>.github.io/<repo>/)
+  function detectGithubRepo() {
+    const host = location.hostname;
+    if (!host.endsWith(".github.io")) return null;
+    const owner = host.split(".")[0];
+    const path = location.pathname.replace(/^\//, "").split("/")[0];
+    if (!path) return null;
+    return { owner, repo: path };
+  }
+  
+  async function checkUpdateNotice() {
+    const r = detectGithubRepo();
+    if (!r) return;  // 不在 GitHub Pages 上
+    
+    try {
+      const url = `https://api.github.com/repos/${r.owner}/${r.repo}/issues?labels=nhi-update&state=open&per_page=5`;
+      const resp = await fetch(url, { headers: { "Accept": "application/vnd.github+json" }});
+      if (!resp.ok) return;
+      const issues = await resp.json();
+      if (!issues || issues.length === 0) return;
+      
+      // 找最新的 nhi-update issue
+      const latest = issues[0];
+      // 從 title 抓日期: 「健保署第九節抗癌瘤藥物有新版（115.7.23）」
+      const m = latest.title.match(/[（(]([\d.]+)[）)]/);
+      if (!m) return;
+      
+      const newDate = m[1];
+      // 跟系統當前日期比對 (寫死從 brand-data-date 抓)
+      const currentDateEl = document.querySelector(".brand-data-date");
+      const currentText = currentDateEl?.textContent || "";
+      const currentMatch = currentText.match(/[\d.\/]+/);
+      const currentDate = currentMatch ? currentMatch[0].replace(/\//g, ".") : "";
+      
+      // 如果 newDate 不等於 currentDate,顯示警示
+      if (newDate.replace(/\//g, ".") !== currentDate) {
+        const badge = document.getElementById("update-badge");
+        const text = document.getElementById("update-badge-text");
+        text.textContent = `有新版 ${newDate}`;
+        badge.href = latest.html_url;
+        badge.style.display = "inline-flex";
+      }
+    } catch (e) {
+      // 靜默失敗 (API rate limit 等),不影響使用
+      console.log("更新檢查失敗:", e);
+    }
   }
   
   function showError() {
