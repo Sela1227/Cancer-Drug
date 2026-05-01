@@ -4,28 +4,67 @@
 
 **執行頻率**：每週一台灣時間 08:00 自動執行（也可手動觸發）
 
-## 檢測策略（多重備援）
+## 運作流程
 
-健保署網站擋自動化爬蟲非常嚴格（包括擋 GitHub Actions IP），所以採取多重備援，依序嘗試直到成功：
+```
+每週一 08:00
+   ↓
+1. 用 5 種策略嘗試抓健保署網頁
+   - 直連 (Chrome UA)
+   - 直連 (Safari UA)
+   - r.jina.ai 代理
+   - Google Cache
+   - Wayback Machine
+   ↓
+2. 找出第九節抗癌瘤藥物的更新日期
+   ↓
+3. 比對 CURRENT_DATA_DATE
+   ↓
+   ├── 沒更新 → 安靜結束
+   ├── 有更新 → 4. 自動下載 PDF
+   │              ↓
+   │           5. 上傳 PDF 為 artifact (保留 90 天)
+   │              ↓
+   │           6. 建立 GitHub Issue (含 PDF 下載連結)
+   │              ↓
+   │           7. GitHub 自動寄 email 通知 (預設已開)
+   │
+   └── 全部失敗 → 建立警告 Issue
+```
 
-1. **直連 + Chrome UA** — 第一線嘗試
-2. **直連 + Safari UA** — 換 UA 再試
-3. **r.jina.ai 代理** — 把網頁轉成 markdown 的免費代理服務（最常用的備援）
-4. **Google Cache** — 鏡像
-5. **Wayback Machine** — Internet Archive 鏡像
+## 收到通知的處理流程
 
-任何一個策略成功抓到日期就停止。
+### 1. Email 通知
 
-## 抓到日期後
+GitHub 預設會把 Issue 通知寄到你註冊的 email：
+- 主旨類似「[Sela1227/cancer-drug] 健保署第九節抗癌瘤藥物有新版（115.7.23）」
+- 內文包含 Issue 連結
 
-從文字內容用 regex 抓:
-- `第九節 抗癌瘤藥物 (115.4.23 更新)` → 主要來源
-- `chap9_1150423.pdf` → 從 PDF 檔名推回日期
+### 2. 點 Issue 連結
 
-與 `check_nhi.py` 中的 `CURRENT_DATA_DATE` 比對:
-- 不一樣 → 自動建 GitHub Issue（labels: `nhi-update`）
-- 一樣 → 安靜結束
-- 全部失敗 → 建另一個 issue（labels: `check-failed`）
+裡面會有：
+- 新舊版本日期比對
+- **新版 PDF 自動下載連結**（指向 GitHub Actions artifact）
+- 健保署原始連結（備援）
+- 接手步驟
+
+### 3. 下載 PDF
+
+點 Issue 內的「前往下載」連結 → 進入 Actions run 頁面 → 滑到底找 Artifacts 區 → 下載 `chap9-pdf-XXX.zip` → 解壓得到 PDF
+
+### 4. 給 Claude 重做資料
+
+開新對話：
+> 健保署有新版了，請重新整理資料
+
+上傳 PDF。Claude 會重跑解析 → 切片 → 重新打包。
+
+### 5. 推送並更新版本標記
+
+收到新 Zip 後：
+1. 用 Git Pusher 推送
+2. **改 `.github/scripts/check_nhi.py` 中的 `CURRENT_DATA_DATE`** 為新日期 ⚠️ 重要
+3. 關閉 GitHub Issue
 
 ## 設定步驟
 
@@ -37,22 +76,16 @@ GitHub Repo → Settings → Actions → General → "Allow all actions and reus
 
 Settings → Actions → General → Workflow permissions → 選 "Read and write permissions"
 
-### 3. 手動測試
+### 3. Email 通知（預設已開，可確認）
 
-Actions tab → 點 "健保署資料更新檢查" → "Run workflow"
+Settings → Notifications → Email：
+- 確認 "Issues" 那欄勾了 "Email"
+- 也確認你的 email 已 verified
 
-## 收到更新通知後的處理
+## 為什麼 PDF 用 artifact 不直接附在 Issue？
 
-### 步驟（給 Sela）
+GitHub Issue 雖然支援檔案附件，但 **Actions 用 API 建 Issue 時無法直接附檔**。所以採用：
+- **Artifact** 儲存 PDF（90 天有效期）
+- **Issue 內容**包含 artifact 下載連結
 
-1. 到 https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html 下載新版 PDF
-2. 跟 Claude 說「健保署有新版了，請重新整理資料」並上傳 PDF
-3. Claude 重跑：
-   - PDF 解析 → 145+ 個藥物項目
-   - 自動逐癌切片
-   - 9.69 等手工切片更新
-   - cancer_keywords 字典是否需新增關鍵字
-4. 收到新 `Cancer Drug V3.X.zip` 後用 Git Pusher 重打包
-5. **改 `.github/scripts/check_nhi.py` 中 `CURRENT_DATA_DATE`** 為新版日期 ⚠️ 不改的話下週又會通知
-6. push 後關閉 issue
-
+實務上多按一個連結就到，不算太麻煩。
