@@ -1497,7 +1497,7 @@
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v3.8</span>
+        <span class="brand-version">v3.9</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -9229,6 +9229,1451 @@ const drugEducation = {
       "QT 延長黑框警告,空腹服很重要",
       "心血管病人選 dasatinib 較安全",
       "用藥晝夜兩次,空腹時間規律"
+    ]
+  },
+  "9.6": {
+    "drug_class": "鏈球菌製劑(免疫刺激)",
+    "mechanism": "凍乾減毒型 A 群鏈球菌(Streptococcus pyogenes)製劑,刺激局部免疫(NK/巨噬細胞、IL-12/IFN-γ),用於惡性腫瘤之惡性腹水、肋膜積水、心包膜積水,以及小兒囊水瘤(lymphangioma)硬化治療。",
+    "side_effects": [
+      {
+        "name": "發燒、寒顫",
+        "frequency": ">90%",
+        "timing": "注射後 2-6 小時",
+        "note": "代表性副作用,多自限性 24-48 小時"
+      },
+      {
+        "name": "注射部位/腔室疼痛",
+        "frequency": "70%",
+        "timing": "注射當天",
+        "note": "胸腔內注射可能很痛"
+      },
+      {
+        "name": "局部紅腫、硬結",
+        "frequency": "50%",
+        "timing": "注射後 1-3 天",
+        "note": ""
+      },
+      {
+        "name": "過敏反應(對 penicillin 過敏者)",
+        "frequency": "罕見但嚴重",
+        "timing": "注射中",
+        "note": "**Penicillin 過敏者禁用**"
+      },
+      {
+        "name": "白血球升高(免疫激活)",
+        "frequency": "常見",
+        "timing": "用藥後",
+        "note": "屬正常反應"
+      }
+    ],
+    "monitoring": [
+      "**Penicillin 過敏史篩檢**(製造過程含微量 penicillin,絕對禁忌)",
+      "皮膚試驗(0.2 KE 皮內)前先做",
+      "前用藥可給予 acetaminophen 預防發燒",
+      "胸/腹腔注射後監測生命徵象 4-6 小時"
+    ],
+    "warnings": [
+      "注射中嚴重過敏(蕁麻疹、呼吸困難、休克) - 立即停藥",
+      "高燒不退(>39°C 超過 24 小時)",
+      "嚴重呼吸困難 - 排除張力性氣胸或膿胸",
+      "意識變化"
+    ],
+    "lifestyle": [
+      "注射後當天充分休息",
+      "高燒時可用 acetaminophen",
+      "腔室注射後 4-6 小時內每 1-2 小時翻身一次,讓藥物均勻接觸腔壁",
+      "不可與 warfarin、aminoglycoside 抗生素併用(影響活性)"
+    ],
+    "patient_edu_warnings": [
+      "**Penicillin 過敏絕對禁忌**,務必詢問病史",
+      "發燒寒顫是預期效果,不是過敏(但要警覺真過敏)",
+      "腔室硬化目的是讓積液減少,可能需多次治療",
+      "與化療藥不同,屬免疫調節非細胞毒性"
+    ]
+  },
+  "9.13": {
+    "drug_class": "高劑量 IL-2 細胞激素",
+    "mechanism": "重組人類 IL-2(白血球介素),激活 T 細胞與 NK 細胞,用於轉移性腎細胞癌、惡性黑色素瘤。屬高劑量免疫療法。",
+    "side_effects": [
+      {
+        "name": "微血管滲漏症候群(CLS)",
+        "frequency": ">80%",
+        "timing": "用藥 2-4 小時開始",
+        "note": "**致命警告**:低血壓、肺水腫、腎衰竭、心律不整"
+      },
+      {
+        "name": "發燒、寒顫、肌肉痛(類流感)",
+        "frequency": ">90%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "低血壓、休克",
+        "frequency": "高",
+        "timing": "用藥中",
+        "note": "需升壓劑支持"
+      },
+      {
+        "name": "腎前性氮血症、寡尿",
+        "frequency": "60%",
+        "timing": "用藥後 1-3 天",
+        "note": ""
+      },
+      {
+        "name": "甲狀腺功能異常(自體免疫)",
+        "frequency": "20%",
+        "timing": "用藥後",
+        "note": "可能不可逆"
+      },
+      {
+        "name": "皮疹、瘙癢",
+        "frequency": "高",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "凝血/血小板異常",
+        "frequency": "高",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**僅在重症加護病房或專科監護病房使用**",
+      "嚴密監測血壓、心率、尿量、體重、Lab",
+      "心臟、肺臟、肝臟、腎臟功能基準評估",
+      "心臟疾病、肺病、自體免疫病禁用或慎用",
+      "感染禁用(會放大菌血症)"
+    ],
+    "warnings": [
+      "急性低血壓、呼吸困難 - CLS",
+      "尿量銳減",
+      "意識變化",
+      "嚴重心律不整"
+    ],
+    "lifestyle": [
+      "**住院治療,需 ICU 等級監護**",
+      "病人預先了解嚴重副作用",
+      "治療後仍可能持續數天症狀",
+      "甲狀腺功能後續長期追蹤"
+    ],
+    "patient_edu_warnings": [
+      "**這不是日常門診藥**,屬重症監護治療",
+      "微血管滲漏致命警告,病人簽屬同意書",
+      "現代多被免疫檢查點抑制劑取代,使用機會少",
+      "甲狀腺異常可能不可逆,終身追蹤"
+    ]
+  },
+  "9.64": {
+    "drug_class": "BiTE - CD19 × CD3 雙特異性 T 細胞接合抗體",
+    "mechanism": "雙特異性 T 細胞接合(BiTE)抗體,一端結合 CD19(B 淋巴球),另一端結合 CD3(T 細胞),把 T 細胞引到腫瘤旁殺傷,用於 B 細胞前驅 ALL(復發/難治、MRD 陽性)。",
+    "side_effects": [
+      {
+        "name": "細胞激素釋放症候群(CRS)",
+        "frequency": "10-15%(重度)",
+        "timing": "用藥前 9 天",
+        "note": "**黑框警告**:發燒、低血壓、缺氧;嚴重時致命"
+      },
+      {
+        "name": "神經毒性(ICANS)",
+        "frequency": "50%(輕中度),12% 重度",
+        "timing": "用藥前 14 天",
+        "note": "**黑框警告**:意識變化、抽搐、腦水腫"
+      },
+      {
+        "name": "感染(包括 PCP、CMV)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "發燒",
+        "frequency": "85%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下、貧血、血小板低下",
+        "frequency": "60-70%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "首次治療",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "胰臟炎(amylase/lipase 上升)",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**連續 IV 輸注 24 小時 × 28 天為一個 cycle**(需中央靜脈導管)",
+      "**首次治療住院觀察 9 天,後續週期住院 2 天**",
+      "前用藥:dexamethasone(預防 CRS、ICANS)",
+      "預防腫瘤溶解(allopurinol、水化)",
+      "預防 PCP、HSV/VZV",
+      "密切神經學評估(意識、書寫測試)",
+      "嚴重 CRS/ICANS 立即停藥 + tocilizumab"
+    ],
+    "warnings": [
+      "高燒不退、低血壓、呼吸喘 - **CRS,立即就醫**",
+      "意識變化、無法書寫、抽搐 - **ICANS,立即就醫**",
+      "嚴重腹痛 - 胰臟炎",
+      "嚴重感染症狀"
+    ],
+    "lifestyle": [
+      "**24 小時連續輸注,需常駐中央導管**",
+      "病人攜帶輸注幫浦",
+      "治療期間嚴格無菌技術",
+      "出院後仍需密切回診",
+      "嚴格避孕",
+      "輸注幫浦故障處置 SOP 必須教給病人/家屬"
+    ],
+    "patient_edu_warnings": [
+      "**CRS、ICANS 兩個黑框警告**,病人住院觀察必要",
+      "與化療不同,作用快速但毒性也急",
+      "CD19(+) ALL 突破性療法",
+      "與 CAR-T 比較選擇:Blinatumomab 反應快但需連續輸注"
+    ]
+  },
+  "9.69": {
+    "drug_class": "免疫檢查點抑制劑(ICI) - PD-1/PD-L1/CTLA-4 抗體",
+    "mechanism": "PD-1 抑制劑(pembrolizumab、nivolumab、cemiplimab)阻斷 T 細胞 PD-1 與腫瘤 PD-L1 結合;PD-L1 抑制劑(atezolizumab、avelumab、durvalumab)阻斷 PD-L1;CTLA-4 抑制劑(ipilimumab、tremelimumab)阻斷 T 細胞早期活化檢查點。皆釋放免疫剎車讓 T 細胞攻擊腫瘤。",
+    "side_effects": [
+      {
+        "name": "免疫相關不良反應(irAE) - 全身性",
+        "frequency": "整體 60-80%(任何 grade)",
+        "timing": "任何時間,可能用藥後數月",
+        "note": "代表性副作用,影響任何器官"
+      },
+      {
+        "name": "皮膚毒性(皮疹、瘙癢、白斑)",
+        "frequency": "30-50%",
+        "timing": "Week 2-6",
+        "note": "最常見,通常輕度"
+      },
+      {
+        "name": "腸炎/腹瀉",
+        "frequency": "20-30%(ipilimumab 高)",
+        "timing": "Week 4-12",
+        "note": "嚴重時腸穿孔致命"
+      },
+      {
+        "name": "肝炎(GOT/GPT 上升)",
+        "frequency": "10-15%",
+        "timing": "Week 6-12",
+        "note": "需排除病毒、酒精"
+      },
+      {
+        "name": "內分泌異常(甲狀腺、垂體、腎上腺、糖尿病)",
+        "frequency": "5-15%",
+        "timing": "Week 4-24",
+        "note": "**通常不可逆,需終身荷爾蒙補充**"
+      },
+      {
+        "name": "肺炎(免疫相關 pneumonitis)",
+        "frequency": "3-5%",
+        "timing": "Week 6-12",
+        "note": "**致死率最高的 irAE**"
+      },
+      {
+        "name": "心肌炎",
+        "frequency": "<1% 但致命",
+        "timing": "Week 2-6",
+        "note": "黑框警告,致死率 50%"
+      },
+      {
+        "name": "神經毒性(GBS、myasthenia、腦炎)",
+        "frequency": "<1%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "腎炎",
+        "frequency": "2-5%",
+        "timing": "Week 6-12",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "5%",
+        "timing": "輸注中",
+        "note": "比化療輕"
+      }
+    ],
+    "monitoring": [
+      "**事前審查:必須申請核准後使用**",
+      "**PD-L1 表現量檢測**(依癌別/藥物有不同門檻,例如肺癌 TPS≥50%、頭頸癌 CPS≥20)",
+      "ECOG ≤1、心肺肝腎功能 baseline",
+      "**每 2-3 週監測**:CBC、肝腎功能、TSH/T4、cortisol、葡萄糖",
+      "**每 12 週影像評估**(以 i-RECIST,HCC 用 mRECIST)",
+      "irAE Grade ≥2 暫停藥 + 高劑量類固醇(prednisolone 1-2 mg/kg);Grade 3-4 永久停藥",
+      "**每位病人每個適應症限給付一種 ICI 且不得互換**"
+    ],
+    "warnings": [
+      "**新發呼吸困難、乾咳 - 肺炎(致命)**",
+      "**胸痛、心悸、活動後喘 - 心肌炎(致命)**",
+      "嚴重腹瀉(>7 次/天)、便血 - 重度腸炎",
+      "黃疸、暗尿 - 肝炎",
+      "嚴重頭痛、視力異常、噁心 - 垂體炎",
+      "極度疲倦、頭暈、低血壓 - 腎上腺危象",
+      "頻尿、口渴、噁心 - 第一型糖尿病(DKA)",
+      "意識變化、肌肉無力 - 神經毒性",
+      "尿量減少、下肢水腫 - 腎炎"
+    ],
+    "lifestyle": [
+      "**衛教病人 irAE 警示症狀**,任何新症狀都要報告",
+      "**自體免疫疾病史病人慎用或禁用**(會惡化)",
+      "**使用過 ICI 後不可再活疫苗接種**",
+      "**避免長期高劑量類固醇**(影響療效),使用 irAE 治療要短期",
+      "**不可合併申報該適應症之標靶藥物**(健保規定)",
+      "甲狀腺、糖尿病等內分泌異常可能終身需要補充",
+      "嚴格避孕(致畸性不確定但建議避免)"
+    ],
+    "patient_edu_warnings": [
+      "**irAE 是 ICI 與化療最大差異**,病人要學會自我警覺",
+      "**心肌炎、肺炎致死率高**,黑框警告",
+      "**內分泌異常常不可逆**(尤其甲狀腺、糖尿病),病人需有心理準備終身用藥",
+      "免疫療效可能延遲(3-6 個月才看到),不要太早判定無效",
+      "PD-L1 檢測門檻依癌別不同,不是越高越好",
+      "**事前審查文件齊全是給付關鍵**(基因檢測、PD-L1、影像、ECOG)",
+      "ipilimumab 副作用最重(CTLA-4),pembrolizumab/nivolumab 較輕(PD-1),併用毒性顯著加成"
+    ]
+  },
+  "9.102": {
+    "drug_class": "抗 GD2 單株抗體",
+    "mechanism": "結合 GD2(神經母細胞瘤高度表現),誘導 ADCC 與 CDC,用於高危險群兒童神經母細胞瘤(維持期)。",
+    "side_effects": [
+      {
+        "name": "神經痛(嚴重)",
+        "frequency": ">90%",
+        "timing": "輸注中與輸注後",
+        "note": "**代表性副作用**,需嗎啡類止痛"
+      },
+      {
+        "name": "發燒",
+        "frequency": "75%",
+        "timing": "輸注中",
+        "note": ""
+      },
+      {
+        "name": "微血管滲漏症候群",
+        "frequency": "30%",
+        "timing": "用藥中",
+        "note": "低血壓、水腫"
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "高",
+        "timing": "輸注中",
+        "note": "需前用藥"
+      },
+      {
+        "name": "感染(尤其導管相關)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "神經眼科異常(瞳孔、視覺)",
+        "frequency": "10%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**兒科腫瘤專科病房使用**",
+      "**疼痛控制 SOP**:嗎啡類止痛預防性持續輸注(8 hours per day × 5 days)",
+      "前用藥:抗組織胺 + acetaminophen",
+      "輸液 + 升壓劑準備",
+      "10 天為 1 cycle,共 5 cycles"
+    ],
+    "warnings": [
+      "嚴重疼痛無法忍受 - 加強止痛或暫停",
+      "急性低血壓、呼吸困難 - CLS",
+      "嚴重輸注反應",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "兒童病人,家長配合度關鍵",
+      "**疼痛 SOP 嚴格按照**(嗎啡持續輸注 + PCA 機制)",
+      "住院治療",
+      "中央靜脈導管照護"
+    ],
+    "patient_edu_warnings": [
+      "**兒童神經母細胞瘤維持期**,治療完成後仍需追蹤",
+      "**疼痛是主要副作用**,家長要心理準備",
+      "輸注時間長(10 小時 × 5 天 × 每月),家屬陪伴重要"
+    ]
+  },
+  "9.103": {
+    "drug_class": "CD19 CAR-T 細胞療法",
+    "mechanism": "**個人化基因工程**:採集病人 T 細胞,基因工程加裝 CD19 嵌合抗原受體(CAR),擴增後回輸殺傷 CD19(+) B 細胞癌細胞。用於兒童及年輕成人 B-ALL、復發性大 B 細胞淋巴瘤。",
+    "side_effects": [
+      {
+        "name": "細胞激素釋放症候群(CRS)",
+        "frequency": "75-95%(任何 grade)",
+        "timing": "回輸後 1-14 天",
+        "note": "**黑框警告致命**,Grade 3-4 約 25-50%"
+      },
+      {
+        "name": "神經毒性(ICANS)",
+        "frequency": "40-65%",
+        "timing": "CRS 後或同時",
+        "note": "**黑框警告**:意識變化、失語、抽搐、腦水腫"
+      },
+      {
+        "name": "B 細胞發育不全(長期 IgG 低)",
+        "frequency": "幾乎 100%",
+        "timing": "持續性",
+        "note": "需 IVIG 補充"
+      },
+      {
+        "name": "感染",
+        "frequency": "30-50%",
+        "timing": "持續性",
+        "note": "嚴重免疫抑制"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "首次回輸",
+        "timing": "Day 1-7",
+        "note": ""
+      },
+      {
+        "name": "巨噬細胞激活症候群(MAS)",
+        "frequency": "<5% 但致命",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "再生不良(嚴重 cytopenia)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "可能持續數月"
+      }
+    ],
+    "monitoring": [
+      "**僅在認證 CAR-T 中心治療**",
+      "**REMS 計畫嚴格**(美國)",
+      "lymphodepleting chemotherapy(fludarabine + cyclophosphamide)前處理",
+      "**回輸後住院 14 天嚴密監測**",
+      "tocilizumab 必須備好(治療 CRS)",
+      "頻繁神經學評估、ECG、生命徵象",
+      "回輸後 4 週內病人**不可開車**",
+      "**B 細胞功能可能永久喪失**,終身 IVIG 補充"
+    ],
+    "warnings": [
+      "高燒、低血壓、缺氧 - **CRS 立即處置**",
+      "意識變化、語言不順、抽搐 - **ICANS 立即處置**",
+      "嚴重感染",
+      "嚴重出血",
+      "新發心律不整"
+    ],
+    "lifestyle": [
+      "**回輸是一次性療程**,不需重複",
+      "回輸後 8 週內保持距離治療中心 2 小時車程內",
+      "回輸 4 週內不可開車或操作機械",
+      "嚴格避免感染",
+      "終身追蹤(B 細胞功能、二次癌症)",
+      "嚴格避孕(致畸性未知)"
+    ],
+    "patient_edu_warnings": [
+      "**CRS 與 ICANS 是 CAR-T 最危險副作用**",
+      "**個人化治療**,從採血到回輸需 3-4 週,過程中可能病情惡化",
+      "費用極高(~3000 萬台幣),健保事前審查嚴格",
+      "**B-ALL 兒童突破性治療**,長期緩解可達 50-80%",
+      "B 細胞發育不全需終身 IVIG,要有經濟與心理準備",
+      "與化療思維完全不同,屬細胞治療新典範"
+    ]
+  },
+  "9.118": {
+    "drug_class": "BCMA × CD3 雙特異性 T 細胞接合抗體",
+    "mechanism": "BiTE 抗體,一端結合 BCMA(MM 高度表現),一端結合 CD3 T 細胞,引導 T 細胞攻擊骨髓瘤細胞。用於多發性骨髓瘤多線抗藥。",
+    "side_effects": [
+      {
+        "name": "細胞激素釋放症候群(CRS)",
+        "frequency": "60%(多輕度)",
+        "timing": "前 2 週",
+        "note": "前 2 週需逐步加量"
+      },
+      {
+        "name": "神經毒性(ICANS)",
+        "frequency": "5-10%",
+        "timing": "前 2 週",
+        "note": ""
+      },
+      {
+        "name": "感染(嚴重,包括 PJP、CMV)",
+        "frequency": ">60%",
+        "timing": "持續性",
+        "note": "**致死率高**,需嚴格預防"
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "40-50%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "貧血、血小板低下",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "低 IgG 血症",
+        "frequency": "幾乎 100%",
+        "timing": "持續性",
+        "note": "需 IVIG 補充"
+      }
+    ],
+    "monitoring": [
+      "**Step-up dosing**:首兩劑(12mg、32mg)需住院觀察 48 小時",
+      "前用藥:dexamethasone + 抗組織胺 + acetaminophen",
+      "**預防性抗病毒、抗黴菌、PJP 預防**",
+      "IVIG 補充(若 IgG <400)",
+      "tocilizumab 備好",
+      "皮下注射(SC),非 IV"
+    ],
+    "warnings": [
+      "高燒、低血壓 - CRS",
+      "意識變化、書寫異常 - ICANS",
+      "持續發燒 - 感染",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "皮下注射可能在門診進行(step-up 後)",
+      "嚴格預防感染",
+      "規律 IVIG 補充",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "**MM 多線抗藥後選項**(已用過 lenalidomide、bortezomib、daratumumab)",
+      "**感染致死率高**,預防性抗微生物不可漏",
+      "Step-up dosing 不可省略",
+      "BiTE 與 CAR-T 比較:BiTE 不需採血,可現用"
+    ]
+  },
+  "9.119": {
+    "drug_class": "BCMA × CD3 雙特異性 T 細胞接合抗體",
+    "mechanism": "與 elranatamab 同類,用於 MM 多線抗藥(已用過 PI、IMiD、抗 CD38)。",
+    "side_effects": [
+      {
+        "name": "細胞激素釋放症候群(CRS)",
+        "frequency": "70%(多輕中度)",
+        "timing": "前 2 週",
+        "note": "Step-up 期最高"
+      },
+      {
+        "name": "神經毒性(ICANS)",
+        "frequency": "5-10%",
+        "timing": "前 2 週",
+        "note": ""
+      },
+      {
+        "name": "**嚴重感染(PCP、CMV、其他機會性)**",
+        "frequency": ">75%",
+        "timing": "持續性",
+        "note": "**致死率最高的副作用**"
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "65%",
+        "timing": "Cycle 1-3",
+        "note": ""
+      },
+      {
+        "name": "貧血、血小板低下",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "低 IgG 血症",
+        "frequency": "幾乎 100%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**Step-up dosing**(0.06、0.3、1.5 mg/kg 漸進加量)",
+      "首 3 劑住院觀察",
+      "前用藥同 elranatamab",
+      "**預防性 anti-PJP(Bactrim)、抗皰疹、抗黴菌**",
+      "IVIG 補充標準化",
+      "皮下注射",
+      "tocilizumab 備好"
+    ],
+    "warnings": [
+      "持續發燒 - 排除感染或 CRS",
+      "嚴重低血壓",
+      "意識變化",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "嚴格預防感染(口罩、避免人群)",
+      "預防性藥按時不漏",
+      "規律 IVIG",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "**MM 第四線後選項**",
+      "感染風險 > 50%,致死案例多",
+      "與 daratumumab 不同靶點(BCMA vs CD38)",
+      "比 CAR-T(idecabtagene、ciltacabtagene)便利但療效略低"
+    ]
+  },
+  "9.120": {
+    "drug_class": "CD20 × CD3 雙特異性抗體",
+    "mechanism": "BiTE 結構,結合 CD20(B 細胞)與 CD3 T 細胞,用於復發性大 B 細胞淋巴瘤(DLBCL)。",
+    "side_effects": [
+      {
+        "name": "細胞激素釋放症候群(CRS)",
+        "frequency": "65%(多輕中度)",
+        "timing": "Cycle 1 Day 8",
+        "note": "前用 obinutuzumab 7 天可降低"
+      },
+      {
+        "name": "神經毒性(ICANS)",
+        "frequency": "5-10%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下、感染",
+        "frequency": "40-50%",
+        "timing": "Cycle 1-3",
+        "note": ""
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "5-10%",
+        "timing": "首次治療",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "30%",
+        "timing": "輸注中",
+        "note": ""
+      },
+      {
+        "name": "貧血、血小板低下",
+        "frequency": "30-40%",
+        "timing": "Cycle 1-3",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**Cycle 1 Day -7 給予 obinutuzumab 1000mg 預治療**(降低 CRS)",
+      "Step-up dosing(2.5、10、30mg)",
+      "前用藥每劑都要(類固醇 + 抗組織胺 + acetaminophen)",
+      "首次治療住院觀察",
+      "預防 PJP、抗病毒",
+      "**固定週期 12 個 cycle 後停藥**(不像 IMiD 持續用)"
+    ],
+    "warnings": [
+      "高燒、低血壓 - CRS",
+      "意識變化 - ICANS",
+      "腫瘤溶解症狀",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "規律治療不可中斷(每 21 天)",
+      "完成 12 cycles 後停藥(若有反應)"
+    ],
+    "patient_edu_warnings": [
+      "**DLBCL 第三線後選項**",
+      "**有限療程**(12 cycles ~9 個月)而非終身用藥",
+      "obinutuzumab 預處理是降低 CRS 關鍵",
+      "與 CAR-T 比較:現用、但需要每週/雙週治療"
+    ]
+  },
+  "9.121": {
+    "drug_class": "CD20 × CD3 雙特異性抗體(皮下)",
+    "mechanism": "與 glofitamab 同類但皮下注射,用於 DLBCL、濾泡性淋巴瘤。",
+    "side_effects": [
+      {
+        "name": "細胞激素釋放症候群(CRS)",
+        "frequency": "50-60%(多輕中度)",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "神經毒性(ICANS)",
+        "frequency": "5-10%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "注射部位反應",
+        "frequency": "60%",
+        "timing": "皮下注射後",
+        "note": "局部紅腫"
+      },
+      {
+        "name": "感染",
+        "frequency": "40-50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下、貧血、血小板低下",
+        "frequency": "30-40%",
+        "timing": "Cycle 1-3",
+        "note": ""
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "首次治療",
+        "timing": "Cycle 1",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "Step-up dosing(0.16mg、0.8mg、48mg)",
+      "Cycle 1 嚴格住院監測",
+      "前用藥",
+      "預防感染",
+      "**皮下注射方便性高於 glofitamab IV**"
+    ],
+    "warnings": [
+      "持續發燒、低血壓 - CRS",
+      "意識變化",
+      "注射部位嚴重反應"
+    ],
+    "lifestyle": [
+      "皮下注射輪換部位",
+      "Cycle 1 住院",
+      "後續可門診注射"
+    ],
+    "patient_edu_warnings": [
+      "DLBCL/FL 第三線後選項",
+      "皮下注射是主要優勢",
+      "與 glofitamab 同類,選擇依方便性"
+    ]
+  },
+  "9.1": {
+    "drug_class": "芳香酶抑制劑(AI)",
+    "mechanism": "抑制 aromatase 酵素,阻斷雄激素轉換為雌激素,降低周邊組織雌激素濃度。**僅用於停經後婦女**(停經前因卵巢仍可分泌雌激素,需配合卵巢抑制)。HR(+) 乳癌主流療法。",
+    "side_effects": [
+      {
+        "name": "骨質疏鬆、骨折風險",
+        "frequency": "**長期使用累積**",
+        "timing": "用藥 6-12 個月起",
+        "note": "代表性副作用,需 DEXA 與鈣 + Vit D 補充"
+      },
+      {
+        "name": "肌肉骨骼疼痛、關節僵硬",
+        "frequency": "50%",
+        "timing": "用藥前 3 個月",
+        "note": "晨間僵硬、手指、膝蓋痛"
+      },
+      {
+        "name": "熱潮紅、夜間盜汗",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "陰道乾燥、性慾減退",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血脂",
+        "frequency": "20-30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常(輕度)",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**DEXA 骨密度(基準與每 1-2 年)**",
+      "鈣 + 維生素 D 補充(Ca 1000-1200mg/day, Vit D 800-1000 IU/day)",
+      "T-score < -2.0 考慮 bisphosphonate 或 denosumab",
+      "血脂、肝功能、血壓",
+      "**僅用於停經後**",
+      "持續用 5 年(輔助治療),高復發風險可延長至 10 年"
+    ],
+    "warnings": [
+      "新發劇烈背痛、髖部痛 - 骨折",
+      "嚴重關節痛影響日常",
+      "黃疸、深色尿",
+      "持續陰道出血(仍未停經?)"
+    ],
+    "lifestyle": [
+      "**負重運動**(預防骨質疏鬆,建議每週 ≥150 分鐘)",
+      "戒菸、限酒",
+      "鈣與維生素 D 飲食或補充",
+      "陰道乾燥可用非荷爾蒙潤滑劑",
+      "**勿自行停藥**(復發風險)"
+    ],
+    "patient_edu_warnings": [
+      "**僅停經後婦女使用**(停經前選擇 tamoxifen + 卵巢抑制)",
+      "副作用累積,前 3 個月最不適,後可能改善",
+      "骨折風險是長期關注重點",
+      "9.1.1 Exemestane(類固醇結構)、9.1.2 Anastrozole、9.1.3 Letrozole 三者副作用譜略不同,可換藥"
+    ]
+  },
+  "9.1.1": {
+    "drug_class": "AI - 不可逆性類固醇結構",
+    "mechanism": "Exemestane 為類固醇結構不可逆性 AI(suicide inhibitor),與 aromatase 共價結合永久滅活。與 anastrozole/letrozole 不同(後二者非類固醇可逆性)。",
+    "side_effects": [
+      {
+        "name": "肌肉骨骼疼痛",
+        "frequency": "50%",
+        "timing": "用藥前 3 個月",
+        "note": ""
+      },
+      {
+        "name": "熱潮紅",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨質疏鬆",
+        "frequency": "累積後",
+        "timing": "長期",
+        "note": ""
+      },
+      {
+        "name": "疲倦、頭痛",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "輕度雄激素效應(座瘡、體毛)",
+        "frequency": "輕度",
+        "timing": "累積後",
+        "note": "因類固醇結構,Anastrozole/Letrozole 沒有"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "輕度",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "與其他 AI 同(DEXA、鈣 Vit D、血脂)",
+      "**餐後服**(食物增加吸收 40%)",
+      "Tamoxifen 治療失敗或 2-3 年後可換 exemestane"
+    ],
+    "warnings": [
+      "嚴重關節痛",
+      "新發骨折",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**餐後服**(每日 25mg)",
+      "鈣 + Vit D",
+      "負重運動"
+    ],
+    "patient_edu_warnings": [
+      "與 letrozole/anastrozole 可換藥",
+      "餐後服很重要(吸收差異)"
+    ]
+  },
+  "9.1.2": {
+    "drug_class": "AI - 可逆性非類固醇結構",
+    "mechanism": "可逆性非類固醇 AI,與 letrozole 同類但結構不同。",
+    "side_effects": [
+      {
+        "name": "肌肉骨骼疼痛",
+        "frequency": "50%",
+        "timing": "用藥前 3 個月",
+        "note": ""
+      },
+      {
+        "name": "熱潮紅",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨質疏鬆",
+        "frequency": "累積後",
+        "timing": "長期",
+        "note": ""
+      },
+      {
+        "name": "疲倦、頭痛",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "陰道乾燥",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "心血管事件略增",
+        "frequency": "輕度增加",
+        "timing": "長期",
+        "note": "比 tamoxifen 略高"
+      }
+    ],
+    "monitoring": [
+      "與其他 AI 同",
+      "**與食物無關**(空腹餐後皆可)",
+      "每日 1mg 固定劑量"
+    ],
+    "warnings": [
+      "嚴重關節痛",
+      "胸痛、活動後喘 - 心血管事件",
+      "新發骨折"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "鈣 + Vit D",
+      "負重運動"
+    ],
+    "patient_edu_warnings": [
+      "心血管副作用比 tamoxifen 略高",
+      "用藥規律,不可漏"
+    ]
+  },
+  "9.1.3": {
+    "drug_class": "AI - 可逆性非類固醇結構",
+    "mechanism": "與 anastrozole 同類,壓制體內雌激素更徹底(>98%)。",
+    "side_effects": [
+      {
+        "name": "肌肉骨骼疼痛",
+        "frequency": "55%",
+        "timing": "用藥前 3 個月",
+        "note": "比 anastrozole 略多"
+      },
+      {
+        "name": "熱潮紅",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨質疏鬆",
+        "frequency": "累積後",
+        "timing": "長期",
+        "note": ""
+      },
+      {
+        "name": "高膽固醇",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": "比 anastrozole 略高"
+      },
+      {
+        "name": "疲倦、頭暈",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "與其他 AI 同",
+      "**與食物無關**",
+      "與 CDK4/6 抑制劑(palbociclib 等)併用為 HR(+) 乳癌標準"
+    ],
+    "warnings": [
+      "嚴重關節痛",
+      "新發骨折",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "鈣 + Vit D",
+      "負重運動"
+    ],
+    "patient_edu_warnings": [
+      "與 CDK4/6 併用為前線標準",
+      "副作用譜與 anastrozole 略不同,可換藥"
+    ]
+  },
+  "9.8": {
+    "drug_class": "選擇性雌激素受體調節劑(SERM)",
+    "mechanism": "與 tamoxifen 同類 SERM,在乳腺有抗雌激素效應、在子宮內膜部分激動。用於停經後 HR(+) 轉移性乳癌。",
+    "side_effects": [
+      {
+        "name": "熱潮紅",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "陰道分泌物、出血",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "靜脈血栓栓塞",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": "**需警覺**"
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": "比 tamoxifen 多"
+      },
+      {
+        "name": "子宮內膜增生(風險低於 tamoxifen)",
+        "frequency": "<2%",
+        "timing": "長期",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "ECG(基準與電解質)",
+      "婦科追蹤(子宮內膜)",
+      "監測下肢血栓徵象",
+      "與其他延長 QTc 藥避免"
+    ],
+    "warnings": [
+      "下肢腫痛 - DVT",
+      "突發胸痛、呼吸困難 - 肺栓塞",
+      "陰道異常出血(停經後)",
+      "心悸、暈厥"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "鼓勵活動(預防血栓)",
+      "規律婦科檢查"
+    ],
+    "patient_edu_warnings": [
+      "**僅停經後婦女**",
+      "與 tamoxifen 類似但結構不同,選擇依個人化",
+      "血栓風險是主要警覺點"
+    ]
+  },
+  "9.39": {
+    "drug_class": "抗雄激素 / GnRH agonist",
+    "mechanism": "**Flutamide**:純粹 androgen receptor 拮抗劑,阻斷雄激素效應。**Buserelin**:GnRH agonist,初期短暫 LH/testosterone 上升(flare),持續使用後抑制 GnRH 受體導致睪固酮下降至去勢水平。兩者通常合併使用於進展性攝護腺癌(達到完全雄激素阻斷,CAB)。",
+    "side_effects": [
+      {
+        "name": "Flare 現象(buserelin 初期)",
+        "frequency": "前 1-2 週",
+        "timing": "首次注射後",
+        "note": "睪固酮短暫上升,可能加重骨痛、尿路阻塞;**flutamide 可預防 flare**"
+      },
+      {
+        "name": "性慾減退、勃起功能障礙",
+        "frequency": ">90%",
+        "timing": "持續性",
+        "note": "去勢效應"
+      },
+      {
+        "name": "熱潮紅",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "男性女乳",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "Flutamide 肝毒性",
+        "frequency": "5%",
+        "timing": "用藥前 3-6 個月",
+        "note": "**致死性肝衰竭報告**,黑框警告"
+      },
+      {
+        "name": "骨質疏鬆",
+        "frequency": "長期",
+        "timing": "用藥 1 年起",
+        "note": "去勢效應"
+      },
+      {
+        "name": "代謝症候群(肥胖、糖尿病、心血管)",
+        "frequency": "長期",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**Flutamide 肝功能黑框警告**:基準、用藥 1 個月、後每 1-3 個月",
+      "PSA 監測(治療反應)",
+      "睪固酮(去勢水平 <50 ng/dL)",
+      "DEXA(長期使用)",
+      "心血管風險評估",
+      "**Flutamide 須在 buserelin 注射前 7 天起服**(預防 flare)"
+    ],
+    "warnings": [
+      "**黃疸、暗尿 - flutamide 肝毒性立即停藥**",
+      "突發劇烈骨痛、尿失禁 - flare 加重",
+      "胸痛 - 心血管事件",
+      "嚴重憂鬱"
+    ],
+    "lifestyle": [
+      "**Flutamide 餐後服 3 次/日**",
+      "buserelin 皮下注射或鼻噴",
+      "嚴格肝功能追蹤",
+      "規律 PSA",
+      "預防骨折:鈣 + Vit D + 運動",
+      "心血管風險控制"
+    ],
+    "patient_edu_warnings": [
+      "**flutamide 肝毒性致死警告**,黃疸立即停藥",
+      "Buserelin flare 預防是 CAB 首要",
+      "去勢效應病人需心理準備",
+      "現代多以 LHRH antagonist (degarelix) 或新型抗雄激素(enzalutamide)取代"
+    ]
+  },
+  "9.40": {
+    "drug_class": "抗雄激素(第一代)",
+    "mechanism": "Androgen receptor 拮抗劑,比 flutamide 半衰期長(每日 1 次)、肝毒性較低。用於進展性攝護腺癌(配合 LHRH 類似劑或手術去勢)。",
+    "side_effects": [
+      {
+        "name": "男性女乳、乳房疼痛",
+        "frequency": "30-50%",
+        "timing": "用藥 1-3 個月後",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "熱潮紅",
+        "frequency": "10-20%",
+        "timing": "持續性",
+        "note": "比完全去勢輕"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "5%",
+        "timing": "持續性",
+        "note": "比 flutamide 輕但仍需監測"
+      },
+      {
+        "name": "性慾減退",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "光敏感",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "肝功能(基準、3 個月、後定期)",
+      "PSA",
+      "與 LHRH 類似劑或手術去勢併用",
+      "**flare 預防**:LHRH 注射前 5-7 天先給 bicalutamide"
+    ],
+    "warnings": [
+      "黃疸、深色尿 - 肝毒性",
+      "嚴重乳房腫脹疼痛",
+      "心悸、胸痛"
+    ],
+    "lifestyle": [
+      "**每日 1 次,與食物無關**",
+      "規律監測",
+      "防曬(光敏感)",
+      "乳房疼痛可預防性低劑量放療(先驅治療)"
+    ],
+    "patient_edu_warnings": [
+      "比 flutamide 安全",
+      "男性女乳是預期副作用,提前心理準備",
+      "與 LHRH 同步給藥"
+    ]
+  },
+  "9.54": {
+    "drug_class": "抗雄激素(第二代,新型)",
+    "mechanism": "新型 AR 拮抗劑,比 bicalutamide 親和力高 5-8 倍,並抑制 AR 進入細胞核與 DNA 結合。用於去勢抗性攝護腺癌(mCRPC)、轉移性荷爾蒙敏感性攝護腺癌(mHSPC)。",
+    "side_effects": [
+      {
+        "name": "疲倦",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "高血壓",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "**癲癇**",
+        "frequency": "<1% 但嚴重",
+        "timing": "用藥中",
+        "note": "**降低癲癇閾值,有癲癇史病人禁用**"
+      },
+      {
+        "name": "跌倒、骨折",
+        "frequency": "10%",
+        "timing": "累積後",
+        "note": "認知影響 + 骨質疏鬆"
+      },
+      {
+        "name": "認知障礙、失眠",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "潮紅、骨關節痛",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "PRES(可逆性後腦病症候群)",
+        "frequency": "罕見",
+        "timing": "用藥中",
+        "note": "頭痛、視覺異常"
+      }
+    ],
+    "monitoring": [
+      "**癲癇史評估**(禁用)",
+      "血壓",
+      "PSA",
+      "認知評估(老年人)",
+      "與 warfarin、其他降低癲癇閾值藥避免"
+    ],
+    "warnings": [
+      "**癲癇發作 - 立即停藥就醫**",
+      "嚴重頭痛、視覺異常 - PRES",
+      "突發跌倒、無法平衡",
+      "嚴重高血壓"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "整顆吞服",
+      "防跌倒(尤其老人)",
+      "規律運動預防骨質疏鬆",
+      "癲癇史病人禁用"
+    ],
+    "patient_edu_warnings": [
+      "**癲癇風險低但禁忌相關**,有癲癇史絕對禁用",
+      "認知影響在老年人較明顯",
+      "比 bicalutamide 強很多,療效顯著"
+    ]
+  },
+  "9.90": {
+    "drug_class": "抗雄激素(第二代)",
+    "mechanism": "與 enzalutamide 同類但結構不同,血腦屏障穿透低,癲癇風險低。用於非轉移性 CRPC、轉移性 HSPC。",
+    "side_effects": [
+      {
+        "name": "皮疹(包括嚴重 SJS)",
+        "frequency": "25%(總)、5% 嚴重",
+        "timing": "用藥前 3 個月",
+        "note": "**罕見 SJS/TEN 致死報告**"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "甲狀腺功能低下",
+        "frequency": "8%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "跌倒、骨折",
+        "frequency": "10%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "癲癇",
+        "frequency": "<0.5%",
+        "timing": "用藥中",
+        "note": "比 enzalutamide 少"
+      }
+    ],
+    "monitoring": [
+      "皮膚評估(早期皮疹處置)",
+      "TSH(基準與每 4 個月)",
+      "血壓",
+      "PSA"
+    ],
+    "warnings": [
+      "**皮疹擴散、水泡 - SJS 警訊立即停藥**",
+      "嚴重高血壓",
+      "新發癲癇",
+      "嚴重疲倦、體重增加 - 甲狀腺低下"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "整顆吞服",
+      "皮膚保濕",
+      "規律監測甲狀腺"
+    ],
+    "patient_edu_warnings": [
+      "**皮膚嚴重反應雖罕見但致死**",
+      "與 enzalutamide 比較癲癇風險較低",
+      "甲狀腺異常需注意"
+    ]
+  },
+  "9.94": {
+    "drug_class": "抗雄激素(第二代)",
+    "mechanism": "結構與 enza/apalutamide 不同,血腦屏障穿透極低,中樞副作用最少。用於非轉移性 CRPC、轉移性 HSPC(與 docetaxel 併用)。",
+    "side_effects": [
+      {
+        "name": "疲倦",
+        "frequency": "16%",
+        "timing": "持續性",
+        "note": "比其他第二代少"
+      },
+      {
+        "name": "肢端疼痛",
+        "frequency": "6%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "3%",
+        "timing": "用藥中",
+        "note": "比 apalutamide 少"
+      },
+      {
+        "name": "癲癇",
+        "frequency": "<0.2%",
+        "timing": "用藥中",
+        "note": "最低風險"
+      },
+      {
+        "name": "心血管事件略增",
+        "frequency": "5%",
+        "timing": "長期",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "5%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "肝功能",
+      "PSA",
+      "**隨餐服**(增加吸收)"
+    ],
+    "warnings": [
+      "新發癲癇(雖罕見)",
+      "黃疸",
+      "胸痛 - 心血管事件"
+    ],
+    "lifestyle": [
+      "**隨餐服**(早晚)",
+      "整顆吞服",
+      "規律監測"
+    ],
+    "patient_edu_warnings": [
+      "**第二代抗雄激素中副作用最少**",
+      "中樞影響小,適合需高認知功能的病人",
+      "與 enzalutamide、apalutamide 三者選擇依適應症"
+    ]
+  },
+  "9.130": {
+    "drug_class": "選擇性雌激素受體降解劑(SERD)",
+    "mechanism": "與雌激素受體結合並誘導其降解(不像 tamoxifen 只阻斷),完全消除受體訊號。**僅停經後使用**。HR(+) 乳癌,常與 CDK4/6 抑制劑或 alpelisib 併用。",
+    "side_effects": [
+      {
+        "name": "注射部位反應",
+        "frequency": "30%",
+        "timing": "注射後",
+        "note": "肌肉注射(臀部),局部疼痛"
+      },
+      {
+        "name": "熱潮紅",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨關節痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "10%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "骨質疏鬆",
+        "frequency": "長期",
+        "timing": "用藥 1 年起",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**肌肉注射(IM)**:雙側臀部,每側 250mg(共 500mg)",
+      "首月需強化劑量(Day 1、15、29 各 500mg)",
+      "之後每月 1 次",
+      "肝功能、骨密度",
+      "可與 palbociclib、ribociclib、abemaciclib、alpelisib 併用"
+    ],
+    "warnings": [
+      "嚴重注射部位疼痛、感染",
+      "黃疸",
+      "新發骨折"
+    ],
+    "lifestyle": [
+      "**深部肌肉注射**,可能很痛",
+      "輪換臀部注射部位",
+      "預防骨質疏鬆",
+      "**僅停經後**"
+    ],
+    "patient_edu_warnings": [
+      "**注射時較痛**,需病人預期",
+      "首月強化劑量(每 2 週)後每月 1 次",
+      "與 CDK4/6 或 alpelisib 併用為標準",
+      "與口服 AI 比較:fulvestrant 適合 AI 失敗或更晚期"
     ]
   }
 };
