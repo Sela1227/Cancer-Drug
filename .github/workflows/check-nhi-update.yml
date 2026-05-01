@@ -1,0 +1,130 @@
+name: 健保署資料更新檢查
+
+# 每週一早上 UTC 00:00 (台灣時間 08:00) 執行一次
+# 也可手動觸發
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Check NHI website
+        id: check
+        run: |
+          python3 .github/scripts/check_nhi.py
+        continue-on-error: true
+      
+      - name: Create or update issue if updated
+        if: steps.check.outputs.updated == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const newDate = '${{ steps.check.outputs.new_date }}';
+            const oldDate = '${{ steps.check.outputs.old_date }}';
+            const sourceUrl = 'https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html';
+            
+            const title = `健保署第九節抗癌瘤藥物有新版（${newDate}）`;
+            const body = `
+            ## 偵測到健保署資料更新
+            
+            - **目前系統使用**: ${oldDate}
+            - **健保署最新版**: **${newDate}**
+            - **來源頁面**: ${sourceUrl}
+            
+            ---
+            
+            ## 接手步驟（給 Sela）
+            
+            1. 到健保署頁面下載新版 PDF (第九節 抗癌瘤藥物)
+            2. 用 Claude 重跑「PDF → 結構化資料」流程
+            3. 重新檢查：
+               - [ ] 新藥編號(9.X)的分類是否正確
+               - [ ] 9.69 等手工切片資料是否需要更新
+               - [ ] cancer_keywords 字典是否需要新增關鍵字
+               - [ ] 通用條件是否有變動
+            4. 用 Git Pusher 重打包 \`健保癌症藥物速查系統 V3.X.zip\`
+            5. push 後關閉本 issue
+            
+            ## 自動檢測說明
+            
+            - 本檢測每週一早上 8:00 (台灣時間) 自動執行
+            - 比對網頁上「第九節 抗癌瘤藥物」後面的更新日期
+            - 此 issue 由 GitHub Actions 自動建立
+            `;
+            
+            // 找已存在的 open issue (避免重複開)
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['nhi-update']
+            });
+            
+            const sameTitle = existing.data.find(i => i.title === title);
+            if (sameTitle) {
+              console.log(`已存在 issue #${sameTitle.number}，不重複建立`);
+              return;
+            }
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['nhi-update']
+            });
+            console.log(`已建立新 issue: ${title}`);
+      
+      - name: Report failure if check failed
+        if: steps.check.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `[警告] 健保署檢測失敗 (${new Date().toISOString().slice(0,10)})`;
+            const body = `
+            ## 檢測失敗
+            
+            自動檢測腳本執行失敗。可能原因:
+            - 健保署網站結構改變
+            - 健保署網站擋住 GitHub Actions IP
+            - 網路問題
+            
+            **請手動檢查**: https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html
+            
+            如連續多週失敗，可能要更新 \`.github/scripts/check_nhi.py\` 的解析邏輯。
+            `;
+            
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['check-failed']
+            });
+            
+            // 同週只報一次
+            const weekKey = title.split('(')[1];
+            const same = existing.data.find(i => i.title.includes(weekKey));
+            if (same) return;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['check-failed']
+            });
