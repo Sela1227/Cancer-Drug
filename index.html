@@ -1497,7 +1497,7 @@
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v3.7</span>
+        <span class="brand-version">v3.8</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -3688,9 +3688,5551 @@ const drugEducation = {
       "與 azacitidine 機轉相似,選擇依醫療團隊判斷",
       "至少需 4-6 療程才評估,中間骨髓抑制不要中斷"
     ]
+  },
+  "9.56": {
+    "drug_class": "ADC - 抗 CD30 抗體偶聯 MMAE",
+    "mechanism": "CD30 單株抗體連接 monomethyl auristatin E (MMAE) 微管抑制劑，主要用於何杰金氏淋巴瘤、ALCL 等 CD30 陽性血液癌。",
+    "side_effects": [
+      {
+        "name": "周邊神經病變",
+        "frequency": "60-70%",
+        "timing": "累積後",
+        "note": "感覺異常為主,可能不可逆"
+      },
+      {
+        "name": "骨髓抑制(嗜中性球低下)",
+        "frequency": "55%",
+        "timing": "Day 8-14",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10-15%",
+        "timing": "輸注中",
+        "note": "發燒、皮疹"
+      },
+      {
+        "name": "進行性多病灶腦白質病變(PML)",
+        "frequency": "罕見但致命",
+        "timing": "累積後",
+        "note": "意識變化、視力異常需警惕"
+      },
+      {
+        "name": "胰臟炎",
+        "frequency": "罕見",
+        "timing": "累積後",
+        "note": "嚴重腹痛需評估"
+      },
+      {
+        "name": "肺毒性",
+        "frequency": "5%(併用 bleomycin 時嚴重)",
+        "timing": "用藥後",
+        "note": "與 bleomycin 不可併用"
+      }
+    ],
+    "monitoring": [
+      "每次治療前 CBC、肝功能",
+      "神經學評估每次回診",
+      "**禁忌:不可與 bleomycin 併用**",
+      "監測意識狀態(PML 警示)",
+      "每次評估周邊神經病變,grade 2 考慮減量"
+    ],
+    "warnings": [
+      "意識變化、視力異常、單側無力 - PML 立即停藥就醫",
+      "嚴重腹痛 - 胰臟炎",
+      "突發呼吸困難 - 肺毒性",
+      "嚴重周邊麻木無法精細動作",
+      "輸注中發燒、皮疹、低血壓"
+    ],
+    "lifestyle": [
+      "周邊神經病變保護:避免外傷、注意溫度感覺",
+      "預防感染",
+      "禁止與 bleomycin 併用(合併嚴重肺毒性致死)",
+      "避免懷孕(致畸)"
+    ],
+    "patient_edu_warnings": [
+      "PML 雖罕見但致命,任何神經症狀立即就醫",
+      "bleomycin 互動致命警告必須強調(尤其何杰金氏淋巴瘤病人之前可能用過)",
+      "周邊神經病變累積性,可能影響日常"
+    ]
+  },
+  "9.73": {
+    "drug_class": "ADC - 抗 CD22 抗體偶聯 calicheamicin",
+    "mechanism": "CD22 單株抗體連接 calicheamicin DNA 切割劑,用於復發性急性淋巴性白血病(ALL)。",
+    "side_effects": [
+      {
+        "name": "肝靜脈閉塞病(VOD/SOS)",
+        "frequency": "13-15%",
+        "timing": "用藥後或骨髓移植後",
+        "note": "致死率高,致命警告"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "持續性",
+        "note": "ALL 病人本就骨髓功能差"
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "嚴重免疫抑制"
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10%",
+        "timing": "首次輸注",
+        "note": "需前用藥"
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "罕見",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝功能(尤其 bilirubin、GOT/GPT)",
+      "VOD 早期指標:體重增加、肝腫大、黃疸",
+      "若計畫骨髓移植,移植後 100 天內 VOD 風險最高",
+      "前用藥:抗組織胺 + dexamethasone"
+    ],
+    "warnings": [
+      "肝功能急速惡化、體重增加、腹脹 - VOD 緊急狀況",
+      "黃疸出現",
+      "發燒 - 嚴重感染",
+      "輸注中過敏反應"
+    ],
+    "lifestyle": [
+      "嚴格避免感染",
+      "監測體重每日(VOD 早期)",
+      "肝功能保護(不喝酒、避免肝毒性藥)",
+      "規律回診抽血"
+    ],
+    "patient_edu_warnings": [
+      "VOD 是致命性副作用,移植前後特別警覺",
+      "骨髓移植病人風險最高",
+      "前用藥不可省略"
+    ]
+  },
+  "9.87": {
+    "drug_class": "ADC - HER2 抗體偶聯 DM1",
+    "mechanism": "Trastuzumab (HER2 單抗) 連接 DM1 微管抑制劑,內吞後在 HER2 過度表現之乳癌細胞釋放細胞毒。",
+    "side_effects": [
+      {
+        "name": "血小板低下",
+        "frequency": "30%",
+        "timing": "Day 8",
+        "note": "Asian 人群風險較高"
+      },
+      {
+        "name": "肝毒性(GOT/GPT 上升)",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": "Grade 3-4 約 5%"
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "1-2%",
+        "timing": "累積後",
+        "note": "比 trastuzumab 略低"
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<1%但嚴重",
+        "timing": "累積後",
+        "note": "需停藥"
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10%",
+        "timing": "輸注中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝功能(bilirubin)",
+      "每 3 個月心臟超音波(LVEF)",
+      "肺部症狀必要時 HRCT",
+      "懷孕禁用"
+    ],
+    "warnings": [
+      "黃疸、嚴重腹脹 - 肝衰竭",
+      "嚴重出血、瘀青 - 血小板過低",
+      "活動後氣喘、下肢水腫 - 心衰竭",
+      "新發呼吸困難、乾咳 - 間質性肺炎"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "肝功能保護",
+      "嚴格避孕(致畸)",
+      "規律心臟追蹤"
+    ],
+    "patient_edu_warnings": [
+      "T-DM1 是針對 HER2(+) 乳癌的標靶治療",
+      "血小板低下亞洲人風險較高,要警覺出血",
+      "心臟毒性比 trastuzumab 低但仍要追蹤"
+    ]
+  },
+  "9.105": {
+    "drug_class": "ADC - 抗 CD79b 抗體偶聯 MMAE",
+    "mechanism": "CD79b 單抗連接 MMAE,用於復發或難治性瀰漫性大 B 細胞淋巴瘤(DLBCL)。",
+    "side_effects": [
+      {
+        "name": "周邊神經病變",
+        "frequency": "40%",
+        "timing": "累積後",
+        "note": "感覺、運動異常"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": ">70%",
+        "timing": "Day 8-14",
+        "note": "嗜中性球低下"
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10%",
+        "timing": "輸注中",
+        "note": "需前用藥"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "tumor burden 高者",
+        "timing": "首次治療",
+        "note": ""
+      },
+      {
+        "name": "PML",
+        "frequency": "罕見",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝腎功能",
+      "前用藥:抗組織胺 + acetaminophen",
+      "預防腫瘤溶解(allopurinol、水化)",
+      "嚴格神經學評估"
+    ],
+    "warnings": [
+      "嚴重周邊神經病變影響日常",
+      "意識變化 - PML",
+      "發燒",
+      "輸注中過敏"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "周邊保護",
+      "規律回診"
+    ],
+    "patient_edu_warnings": [
+      "DLBCL 復發治療,通常已多線",
+      "周邊神經病變可能影響預後生活品質"
+    ]
+  },
+  "9.106": {
+    "drug_class": "ADC - 抗 Trop-2 抗體偶聯 SN-38 (Irinotecan 活性代謝物)",
+    "mechanism": "Trop-2 單抗連接 SN-38(irinotecan 活性代謝物),用於三陰性轉移性乳癌、HR+/HER2- 乳癌。",
+    "side_effects": [
+      {
+        "name": "嚴重腹瀉(類似 irinotecan)",
+        "frequency": "60%",
+        "timing": "Day 5-10",
+        "note": "晚發性,須警覺脫水"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": ">70%",
+        "timing": "Day 8-14",
+        "note": "嗜中性球低下嚴重"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "65%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "脫髮",
+        "frequency": "45%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "30%",
+        "timing": "首次輸注",
+        "note": "需前用藥"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "前用藥:H1/H2 阻斷劑、類固醇、acetaminophen 預防輸注反應",
+      "每次 CBC、肝腎功能",
+      "UGT1A1*28 同型結合者風險高(同 irinotecan)",
+      "腹瀉處置:loperamide 早期介入"
+    ],
+    "warnings": [
+      "嚴重腹瀉(每天 >7 次或脫水) - 緊急就醫",
+      "腹瀉 + 發燒 - 緊急處理",
+      "發燒 - 中性球低下",
+      "輸注中過敏反應"
+    ],
+    "lifestyle": [
+      "備好 loperamide,腹瀉首發立即服用 4mg + 每 2 小時 2mg",
+      "腹瀉時清淡飲食、補充電解質",
+      "預防感染",
+      "脫髮預期"
+    ],
+    "patient_edu_warnings": [
+      "腹瀉是主要副作用,自我處理 SOP 必須教",
+      "三陰性乳癌晚期治療,病人通常已多線",
+      "與 irinotecan 副作用類似"
+    ]
+  },
+  "9.109": {
+    "drug_class": "ADC - 抗 Nectin-4 抗體偶聯 MMAE",
+    "mechanism": "Nectin-4 單抗連接 MMAE,用於先前接受過化療與免疫檢查點抑制劑失敗的轉移性泌尿道上皮癌。",
+    "side_effects": [
+      {
+        "name": "周邊神經病變",
+        "frequency": "50%",
+        "timing": "累積後",
+        "note": "感覺異常為主,grade 3 約 3%"
+      },
+      {
+        "name": "皮膚反應(包括 SJS/TEN)",
+        "frequency": "55%(皮疹)",
+        "timing": "Day 1-21",
+        "note": "罕見但嚴重 SJS/TEN 致死報告"
+      },
+      {
+        "name": "高血糖、糖尿病惡化",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": "DKA 風險"
+      },
+      {
+        "name": "視力異常(乾眼、視覺模糊)",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "30-40%",
+        "timing": "Day 8-14",
+        "note": ""
+      },
+      {
+        "name": "輸注部位反應(外滲)",
+        "frequency": "5%",
+        "timing": "輸注中",
+        "note": "外滲導致皮膚/組織壞死"
+      }
+    ],
+    "monitoring": [
+      "嚴格血糖監測(尤其糖尿病病人)",
+      "皮膚評估每次治療",
+      "視力檢查",
+      "嚴格中心靜脈導管或大靜脈給藥(避免外滲)"
+    ],
+    "warnings": [
+      "皮疹擴散、水泡、口腔潰瘍 - SJS/TEN 警訊,立即停藥",
+      "頻尿、口渴、噁心 - 高血糖/DKA",
+      "嚴重周邊麻木無力",
+      "視力急速惡化",
+      "輸注部位疼痛紅腫 - 外滲"
+    ],
+    "lifestyle": [
+      "監測血糖(糖尿病病人)",
+      "皮膚保濕、避免日曬",
+      "規律眼科檢查",
+      "周邊保護"
+    ],
+    "patient_edu_warnings": [
+      "皮膚嚴重反應致命,警覺皮疹擴散",
+      "糖尿病惡化要監測血糖",
+      "外滲組織壞死警覺"
+    ]
+  },
+  "9.113": {
+    "drug_class": "ADC - 抗 CD33 抗體偶聯 calicheamicin",
+    "mechanism": "CD33 單抗連接 calicheamicin DNA 切割劑,用於 CD33 陽性急性骨髓性白血病(AML)。",
+    "side_effects": [
+      {
+        "name": "肝靜脈閉塞病(VOD/SOS)",
+        "frequency": "5%",
+        "timing": "用藥後或移植後",
+        "note": "致死性,移植後 100 天內最高"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "持續性",
+        "note": "AML 病人本就骨髓功能差"
+      },
+      {
+        "name": "感染",
+        "frequency": ">80%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "30%",
+        "timing": "首次輸注",
+        "note": "嚴重低血壓、呼吸困難"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "高 tumor burden",
+        "timing": "首次治療",
+        "note": ""
+      },
+      {
+        "name": "出血(血小板低)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "前用藥:抗組織胺 + 類固醇 + acetaminophen",
+      "每次 CBC、肝功能(bilirubin)",
+      "預防腫瘤溶解",
+      "若計畫移植,移植與 Mylotarg 之間需間隔"
+    ],
+    "warnings": [
+      "肝功能惡化、體重增加、腹脹 - VOD",
+      "輸注中胸悶、低血壓 - 嚴重輸注反應",
+      "發燒",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "嚴格避免感染",
+      "規律回診抽血",
+      "監測體重"
+    ],
+    "patient_edu_warnings": [
+      "VOD 致命警告",
+      "AML 病人骨髓功能本就差,出血風險高",
+      "輸注反應可能很嚴重,前用藥重要"
+    ]
+  },
+  "9.115": {
+    "drug_class": "ADC - HER2 抗體偶聯 deruxtecan (拓樸異構酶抑制劑)",
+    "mechanism": "Trastuzumab (HER2 單抗) 連接 deruxtecan (DNA topoisomerase I 抑制劑),用於 HER2+ 或 HER2-low 乳癌等。",
+    "side_effects": [
+      {
+        "name": "間質性肺炎/肺毒性",
+        "frequency": "10-15%",
+        "timing": "用藥後任何時間",
+        "note": "致死率 2-3%,黑框警告"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": ">60%",
+        "timing": "Day 8-14",
+        "note": ""
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": ">75%",
+        "timing": "用藥後",
+        "note": "中-高致吐性"
+      },
+      {
+        "name": "脫髮",
+        "frequency": "45%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "2-3%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**密切監測肺部症狀** - 任何乾咳、氣喘要立即評估",
+      "胸部 HRCT 基準與定期追蹤",
+      "每 3 個月心臟超音波",
+      "預服止吐藥",
+      "每次 CBC、肝功能"
+    ],
+    "warnings": [
+      "新發乾咳、呼吸困難、運動耐力下降 - 立即停藥就醫排除間質性肺炎",
+      "活動後氣喘、下肢水腫 - 心衰竭",
+      "嚴重腹瀉",
+      "發燒"
+    ],
+    "lifestyle": [
+      "教育自我監測肺部症狀",
+      "若有任何呼吸異常立即就醫",
+      "預防感染",
+      "規律心臟追蹤"
+    ],
+    "patient_edu_warnings": [
+      "間質性肺炎是致命性副作用(黑框警告)",
+      "比 T-DM1 (Kadcyla) 肺毒性風險高",
+      "病人應有自我警覺呼吸症狀",
+      "HER2-low 乳癌新適應症"
+    ]
+  },
+  "9.52": {
+    "drug_class": "BRAF V600 抑制劑",
+    "mechanism": "選擇性抑制 BRAF V600E/K 突變激酶,用於 BRAF V600 突變黑色素瘤。",
+    "side_effects": [
+      {
+        "name": "皮膚毒性(光敏感、皮疹、角化症)",
+        "frequency": ">80%",
+        "timing": "Day 7-21",
+        "note": "嚴格防曬"
+      },
+      {
+        "name": "皮膚鱗狀細胞癌、角化棘皮瘤",
+        "frequency": "20-25%",
+        "timing": "用藥後 8-12 週",
+        "note": "代表性副作用,需手術切除"
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": "監測 ECG"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "關節痛",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**每月皮膚科檢查**(SCC 篩檢)",
+      "ECG(基準、用藥 2 週、4 週、後每 3 個月)",
+      "電解質維持(預防 QT 延長)",
+      "每月肝功能",
+      "皮膚 SCC 立即手術切除,通常仍可繼續用藥"
+    ],
+    "warnings": [
+      "新長出皮膚硬塊、潰瘍 - 立即就醫評估 SCC",
+      "嚴重曬傷、水泡 - 光敏感反應",
+      "心悸、暈厥 - QT 延長",
+      "黃疸、嚴重肝功能異常"
+    ],
+    "lifestyle": [
+      "**嚴格防曬**:SPF 50+、長袖、避免戶外活動",
+      "每月自我皮膚檢查",
+      "定期皮膚科追蹤",
+      "戒菸、戒酒(肝毒性)",
+      "與 dabrafenib + trametinib 僅得擇一"
+    ],
+    "patient_edu_warnings": [
+      "皮膚鱗狀細胞癌是代表性副作用,通常局部切除",
+      "防曬要徹底,病人要有心理準備",
+      "BRAF V600 檢測必須陽性才用"
+    ]
+  },
+  "9.91": {
+    "drug_class": "BRAF V600 抑制劑",
+    "mechanism": "選擇性抑制 BRAF V600E/K 突變,常與 trametinib(MEK 抑制劑)併用以減少抗藥性。",
+    "side_effects": [
+      {
+        "name": "發燒(熱症)",
+        "frequency": "55%(併用 trametinib 時)",
+        "timing": "Day 1-30",
+        "note": "代表性副作用,可能需暫停藥"
+      },
+      {
+        "name": "皮膚毒性(比 vemurafenib 輕)",
+        "frequency": "30%",
+        "timing": "Day 7-14",
+        "note": ""
+      },
+      {
+        "name": "皮膚鱗狀細胞癌",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "比 vemurafenib 少"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "頭痛、關節痛",
+        "frequency": "30-40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性(LVEF 下降,併用 trametinib)",
+        "frequency": "10%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每月皮膚檢查",
+      "每 3 個月心臟超音波(若併用 trametinib)",
+      "肝功能",
+      "發燒處置:暫停藥物 + 退燒,熱退後減量續用"
+    ],
+    "warnings": [
+      "持續發燒 ≥38.5°C - 與感染區分,可能需暫停藥",
+      "新長出皮膚硬塊 - SCC",
+      "活動後氣喘 - 心衰竭",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "防曬",
+      "皮膚自我檢查",
+      "發燒時可服 acetaminophen,但持續要回診",
+      "與 vemurafenib 不可換用(除耐受性不良)",
+      "與 ramucirumab 不可同時"
+    ],
+    "patient_edu_warnings": [
+      "發燒是代表性副作用,病人會嚇到以為感染",
+      "通常與 trametinib 併用,雙藥副作用要分別追蹤",
+      "BRAF V600 檢測必要"
+    ]
+  },
+  "9.116": {
+    "drug_class": "MEK 抑制劑",
+    "mechanism": "選擇性 MEK1/2 抑制劑,用於兒童神經纖維瘤病第 1 型(NF1)併叢狀神經纖維瘤。",
+    "side_effects": [
+      {
+        "name": "皮疹(類似青春痘)",
+        "frequency": "85%",
+        "timing": "Day 7-21",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "腹瀉、噁心嘔吐",
+        "frequency": "70%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肌肉骨骼痛",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": "通常輕度"
+      },
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "視網膜病變(RPED)",
+        "frequency": "5%",
+        "timing": "累積後",
+        "note": "需眼科追蹤"
+      },
+      {
+        "name": "CK 上升",
+        "frequency": "75%",
+        "timing": "持續性",
+        "note": "肌肉毒性"
+      }
+    ],
+    "monitoring": [
+      "兒科病人:每 3 個月心臟超音波、眼科檢查",
+      "每月 CBC、肝功能、CK",
+      "皮膚保護",
+      "整顆吞服"
+    ],
+    "warnings": [
+      "視力模糊、視野缺損 - RPED",
+      "活動後氣喘 - 心衰竭",
+      "嚴重肌肉痛無力 - 橫紋肌溶解",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "兒童病人家長配合度關鍵",
+      "皮膚保濕、避免抓撓",
+      "規律眼科追蹤",
+      "與食物分開服用(空腹或餐後 1 小時)"
+    ],
+    "patient_edu_warnings": [
+      "兒童病人,家長教育為主",
+      "皮疹預期但通常可耐受",
+      "視力變化要立即就醫"
+    ]
+  },
+  "9.134": {
+    "drug_class": "BRAF V600 抑制劑",
+    "mechanism": "選擇性 BRAF V600 抑制劑,通常與 cetuximab 併用於 BRAF V600E 突變大腸直腸癌。",
+    "side_effects": [
+      {
+        "name": "疲倦",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "20-30%",
+        "timing": "Day 7-21",
+        "note": "比 vemurafenib 輕"
+      },
+      {
+        "name": "皮膚 SCC",
+        "frequency": "<5%",
+        "timing": "累積後",
+        "note": "比其他 BRAFi 少"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "皮膚科檢查",
+      "ECG 基準與定期",
+      "肝功能",
+      "電解質",
+      "與 cetuximab 併用追蹤皮膚毒性"
+    ],
+    "warnings": [
+      "新長出皮膚硬塊",
+      "心悸、暈厥",
+      "黃疸",
+      "嚴重皮疹"
+    ],
+    "lifestyle": [
+      "防曬",
+      "與 cetuximab 併用時注意 cetuximab 的皮膚反應",
+      "BRAF V600E 檢測必要"
+    ],
+    "patient_edu_warnings": [
+      "BRAF V600E 大腸直腸癌新標準療法",
+      "皮膚毒性比黑色素瘤用藥輕"
+    ]
+  },
+  "9.85": {
+    "drug_class": "PARP 抑制劑",
+    "mechanism": "抑制 poly-ADP-ribose polymerase (PARP),阻斷 DNA 單股斷裂修復,在 BRCA 缺陷腫瘤細胞累積 DNA 損傷致死(合成致死)。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "60%",
+        "timing": "Week 4-8",
+        "note": "貧血為主,可能需減量或停藥"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "60-70%",
+        "timing": "用藥後",
+        "note": "通常 1-2 個月內適應"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "MDS/AML(骨髓化生不良/急性白血病)",
+        "frequency": "<2%",
+        "timing": "長期使用後",
+        "note": "罕見但致命,黑框警告"
+      },
+      {
+        "name": "肺栓塞",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": "尤其 niraparib"
+      },
+      {
+        "name": "高血壓(niraparib)",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每月 CBC、肝腎功能",
+      "Niraparib 監測血壓(可能需降壓藥)",
+      "BRCA 檢測或 HRD 陽性才給付",
+      "至少用藥 3 個月評估療效",
+      "貧血嚴重時暫停或減量"
+    ],
+    "warnings": [
+      "嚴重貧血、心悸、頭暈",
+      "突發胸痛、呼吸喘 - 肺栓塞",
+      "持續咳嗽、發燒、嗜中性球低 - 排除 MDS/AML",
+      "嚴重高血壓"
+    ],
+    "lifestyle": [
+      "整顆吞服(olaparib 配水,niraparib 隨餐或空腹皆可)",
+      "規律抽血追蹤",
+      "監測血壓(niraparib)",
+      "嚴格避孕(致畸)",
+      "預防靜脈血栓:鼓勵活動、避免久坐"
+    ],
+    "patient_edu_warnings": [
+      "MDS/AML 雖罕見但致命,長期用藥要警覺",
+      "需 BRCA 突變或 HRD 檢測陽性,基因檢測說明",
+      "前 2 個月噁心常見,通常會適應",
+      "olaparib、niraparib、talazoparib 三者選擇依適應症"
+    ]
+  },
+  "9.72": {
+    "drug_class": "CDK4/6 抑制劑",
+    "mechanism": "抑制 cyclin-dependent kinase 4/6,使 HR+/HER2- 乳癌細胞週期停在 G1 期,常與內分泌療法併用。",
+    "side_effects": [
+      {
+        "name": "嗜中性球低下",
+        "frequency": ">80%",
+        "timing": "Cycle 1-2",
+        "note": "代表性副作用,但通常無感染風險(因細胞週期停滯,非細胞死亡)"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心、腹瀉",
+        "frequency": "30-40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "QT 間期延長(ribociclib)",
+        "frequency": "ribociclib 較明顯",
+        "timing": "用藥中",
+        "note": "需 ECG 監測"
+      },
+      {
+        "name": "肝功能異常(ribociclib)",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<2%",
+        "timing": "累積後",
+        "note": "罕見但致命"
+      },
+      {
+        "name": "脫髮",
+        "frequency": "15%",
+        "timing": "Week 6-12",
+        "note": "輕度"
+      }
+    ],
+    "monitoring": [
+      "每 2 週 CBC(前 2 個月),之後每月",
+      "Ribociclib:ECG 基準、用藥 14 天、Cycle 2 開始,電解質維持",
+      "肝功能(ribociclib 較重要)",
+      "與 letrozole / fulvestrant 等併用",
+      "服藥 3 週,休 1 週為一個週期"
+    ],
+    "warnings": [
+      "發燒 - 雖嗜中性球低但要排除感染",
+      "心悸、暈厥 - QT 延長",
+      "新發呼吸困難、乾咳 - 間質性肺炎",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "規律服藥(早上一次)",
+      "ribociclib 隨餐或空腹皆可",
+      "palbociclib 與食物併服",
+      "不可碎開或溶解",
+      "與 strong CYP3A4 抑制劑(如 ketoconazole)避免"
+    ],
+    "patient_edu_warnings": [
+      "嗜中性球低下雖數值嚇人,但感染風險低於化療",
+      "需與內分泌療法併用,病人要兩種藥都按時服",
+      "服藥週期(3 週用 1 週休)要清楚",
+      "ribociclib 與 palbociclib 副作用譜略不同"
+    ]
+  },
+  "9.107": {
+    "drug_class": "CDK4/6 抑制劑",
+    "mechanism": "與 ribociclib/palbociclib 同類,但抑制 CDK4 強過 CDK6,腹瀉副作用較顯著。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": ">85%",
+        "timing": "Day 1-7",
+        "note": "代表性副作用,常見於用藥前 2 週"
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "60%",
+        "timing": "Cycle 1-2",
+        "note": "比其他 CDK4/6 抑制劑略輕"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "45%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "靜脈血栓栓塞",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<2%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "腹瀉處置:loperamide 早期介入",
+      "每 2 週 CBC(前 2 個月)",
+      "每月肝功能",
+      "與 letrozole 等併用",
+      "**連續用藥**(不像其他 CDK4/6 有用 3 休 1)"
+    ],
+    "warnings": [
+      "嚴重腹瀉(>7 次/天或脫水)",
+      "突發胸痛、呼吸困難 - 肺栓塞",
+      "新發呼吸困難、乾咳 - 間質性肺炎",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**連續每天服**(不像 palbociclib 用 3 休 1)",
+      "備好 loperamide,腹瀉立即處理",
+      "與食物無關(可隨意服用)",
+      "預防血栓:鼓勵活動",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "**腹瀉是代表副作用**,病人要學會自我處理",
+      "與其他 CDK4/6 不同的是連續服藥",
+      "前 2 週腹瀉最明顯,通常會適應"
+    ]
+  },
+  "9.28": {
+    "drug_class": "蛋白酶體抑制劑",
+    "mechanism": "可逆性抑制 26S 蛋白酶體,造成蛋白堆積與細胞凋亡。多發性骨髓瘤(MM)、套細胞淋巴瘤(MCL)主要藥物。",
+    "side_effects": [
+      {
+        "name": "周邊神經病變",
+        "frequency": "30-50%(IV)、15%(SC)",
+        "timing": "累積後",
+        "note": "改皮下注射可降低"
+      },
+      {
+        "name": "血小板低下",
+        "frequency": "35%",
+        "timing": "Day 8-14",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "40%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "帶狀皰疹",
+        "frequency": "13%",
+        "timing": "持續性",
+        "note": "需預防性 acyclovir"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "tumor burden 高者",
+        "timing": "首次治療",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**首選皮下注射(SC)** - 神經病變風險低於 IV",
+      "**預防性 acyclovir** 抗病毒",
+      "每次 CBC、神經學評估",
+      "預防腫瘤溶解",
+      "懷孕禁用"
+    ],
+    "warnings": [
+      "嚴重周邊麻木無力 - grade 3 需減量或停藥",
+      "皮膚出現帶狀皰疹皮疹 - 早期治療",
+      "嚴重出血 - 血小板過低",
+      "腹瀉 + 脫水"
+    ],
+    "lifestyle": [
+      "預防性抗病毒藥要按時服用",
+      "周邊保護",
+      "皮疹早期就醫",
+      "充足水份(腫瘤溶解預防)"
+    ],
+    "patient_edu_warnings": [
+      "周邊神經病變累積後可能不可逆,改皮下注射可降低",
+      "帶狀皰疹預防很重要,acyclovir 不可省略",
+      "MM 治療長期,需多年用藥"
+    ]
+  },
+  "9.75": {
+    "drug_class": "蛋白酶體抑制劑(不可逆)",
+    "mechanism": "不可逆性蛋白酶體抑制劑,比 bortezomib 強,用於 MM 第二線以後或對 bortezomib 不耐受。",
+    "side_effects": [
+      {
+        "name": "心臟毒性(心衰、心肌梗塞)",
+        "frequency": "8%",
+        "timing": "用藥後 30 天內",
+        "note": "代表性副作用,致命警告"
+      },
+      {
+        "name": "高血壓",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "急性腎損傷",
+        "frequency": "10%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "肺毒性(肺水腫、肺高壓)",
+        "frequency": "<5%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "30%",
+        "timing": "首次輸注",
+        "note": "需前用藥"
+      },
+      {
+        "name": "血栓性微血管病變(TMA)",
+        "frequency": "罕見",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "比 bortezomib 少",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**心臟基準評估**(LVEF、ECG)、用藥後追蹤",
+      "充足水化(預防 AKI 與輸注反應)",
+      "前用藥:dexamethasone",
+      "血壓監測",
+      "肺部症狀警覺"
+    ],
+    "warnings": [
+      "胸痛、呼吸困難、活動後氣喘 - 心臟事件",
+      "下肢嚴重水腫 - 心衰或腎衰",
+      "意識變化、神經症狀 - 罕見 PRES (後可逆性腦病)",
+      "輸注中嚴重反應"
+    ],
+    "lifestyle": [
+      "心臟功能不佳病人慎用",
+      "水化要充足(預防腎、心衰)",
+      "規律心臟、肺部追蹤",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "心臟毒性比 bortezomib 嚴重,有致死案例",
+      "心臟病史病人必告知",
+      "充足水化是預防 AKI 關鍵"
+    ]
+  },
+  "9.77": {
+    "drug_class": "蛋白酶體抑制劑(口服)",
+    "mechanism": "口服可逆性蛋白酶體抑制劑,用於 MM,常與 lenalidomide + dexamethasone 併用。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "45%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "便秘",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": "比 bortezomib 略輕"
+      },
+      {
+        "name": "血小板低下",
+        "frequency": "55%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每月 CBC、肝功能",
+      "每 4 週(Day 1, 8, 15)服藥,休息一週",
+      "與 lenalidomide + dexamethasone 三藥併用",
+      "預防性 acyclovir(同 bortezomib)"
+    ],
+    "warnings": [
+      "嚴重腹瀉",
+      "嚴重周邊麻木",
+      "嚴重出血",
+      "皮疹擴散"
+    ],
+    "lifestyle": [
+      "**空腹服藥**(餐前 1 小時或餐後 2 小時)",
+      "整顆吞服,勿剝開",
+      "若漏服超過 72 小時,跳過該次",
+      "與 lenalidomide 併用時注意血栓預防"
+    ],
+    "patient_edu_warnings": [
+      "口服蛋白酶體抑制劑,方便性高於 bortezomib",
+      "三藥併用,服藥複雜度高,日曆紀錄重要",
+      "空腹服很重要(食物影響吸收)"
+    ]
+  },
+  "9.33": {
+    "drug_class": "免疫調節劑(IMiD)第一代",
+    "mechanism": "免疫調節 + 抗血管新生 + 抗骨髓瘤直接作用,曾因致畸臭名,現用於 MM、麻瘋病。",
+    "side_effects": [
+      {
+        "name": "周邊神經病變",
+        "frequency": ">50%",
+        "timing": "累積後 3-6 個月",
+        "note": "代表性,可能不可逆"
+      },
+      {
+        "name": "嗜睡、便秘",
+        "frequency": "75%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "靜脈血栓",
+        "frequency": "15-20%(併用 dex 時更高)",
+        "timing": "用藥中",
+        "note": "需預防性抗凝(aspirin/LMWH)"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "致畸胎(Phocomelia)",
+        "frequency": "高",
+        "timing": "懷孕期",
+        "note": "**黑框警告,絕對禁忌**"
+      },
+      {
+        "name": "骨髓抑制(輕度)",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**Thalidomide REMS 計畫**(美國):嚴格懷孕測試與避孕",
+      "每月 CBC、神經學評估",
+      "**預防性抗凝**(aspirin 或 LMWH)",
+      "懷孕測試(育齡女性每月)",
+      "便秘預防"
+    ],
+    "warnings": [
+      "**懷孕(育齡女性) - 立即停藥**",
+      "下肢腫痛 - 深部靜脈血栓",
+      "突發胸痛、呼吸困難 - 肺栓塞",
+      "嚴重周邊麻木無力",
+      "嚴重皮疹(SJS/TEN)"
+    ],
+    "lifestyle": [
+      "**嚴格避孕**:育齡女性兩種避孕法,治療結束後 4 週仍需避孕",
+      "男性病患:用避孕套(精液有藥物)",
+      "禁止血液或精子捐贈",
+      "睡前服藥(避開嗜睡白天影響)",
+      "高纖飲食預防便秘",
+      "預防性抗凝藥按時"
+    ],
+    "patient_edu_warnings": [
+      "**致畸胎史是世紀災難**,絕對禁忌懷孕",
+      "周邊神經病變累積後可能永久",
+      "靜脈血栓風險高,預防性抗凝不可省略",
+      "比 lenalidomide 副作用更多,通常選 lenalidomide"
+    ]
+  },
+  "9.43": {
+    "drug_class": "免疫調節劑(IMiD)第二代",
+    "mechanism": "Thalidomide 衍生物,但無嗜睡、神經病變較輕,免疫調節更強。MM、MDS、淋巴瘤主要用藥。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">70%",
+        "timing": "Cycle 1-2",
+        "note": "嗜中性球與血小板都受影響"
+      },
+      {
+        "name": "靜脈血栓",
+        "frequency": "10-15%(併用 dex 更高)",
+        "timing": "用藥中",
+        "note": "需預防性抗凝"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "20-30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "致畸胎",
+        "frequency": "高",
+        "timing": "懷孕期",
+        "note": "**黑框警告**"
+      },
+      {
+        "name": "二次原發癌",
+        "frequency": "<5%",
+        "timing": "長期使用",
+        "note": "尤其用於 MM 維持期"
+      },
+      {
+        "name": "腫瘤閃焰反應(CLL)",
+        "frequency": "用藥初期",
+        "timing": "Day 1-7",
+        "note": "淋巴節腫大、皮疹"
+      }
+    ],
+    "monitoring": [
+      "**REMS 計畫嚴格避孕**",
+      "每月 CBC",
+      "預防性抗凝(aspirin 或 LMWH)",
+      "腎功能調整劑量(CrCl <60 減量)",
+      "21 天用藥 + 7 天休 = 1 cycle"
+    ],
+    "warnings": [
+      "**懷孕(育齡女性)**",
+      "下肢腫痛、突發胸痛 - 血栓",
+      "發燒 - 中性球低下",
+      "嚴重皮疹擴散"
+    ],
+    "lifestyle": [
+      "**嚴格避孕**(治療期間及結束後 4 週)",
+      "男性使用避孕套",
+      "禁止血液或精子捐贈",
+      "整顆吞服,可隨意服(空腹或餐後)",
+      "預防性抗凝按時",
+      "21+7 服藥週期日曆記錄"
+    ],
+    "patient_edu_warnings": [
+      "比 thalidomide 安全,但仍致畸",
+      "MM 維持期會用很久(數年),要警覺二次原發癌",
+      "REMS 嚴格,女性月月測孕"
+    ]
+  },
+  "9.62": {
+    "drug_class": "免疫調節劑(IMiD)第三代",
+    "mechanism": "比 lenalidomide 更強,用於對 lenalidomide 抗藥的 MM。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">70%",
+        "timing": "Cycle 1-2",
+        "note": "嗜中性球低下"
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "靜脈血栓",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": "預防性抗凝"
+      },
+      {
+        "name": "腹瀉、便秘",
+        "frequency": "30-40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "致畸胎",
+        "frequency": "高",
+        "timing": "懷孕期",
+        "note": "**黑框警告**"
+      },
+      {
+        "name": "肝毒性",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "REMS 計畫",
+      "每月 CBC、肝功能",
+      "預防性抗凝",
+      "預防感染",
+      "21 天用藥 + 7 天休"
+    ],
+    "warnings": [
+      "懷孕、感染、血栓(同其他 IMiD)",
+      "嚴重腹瀉、便秘交替",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "嚴格避孕",
+      "預防感染",
+      "預防性抗凝",
+      "21+7 週期服藥"
+    ],
+    "patient_edu_warnings": [
+      "MM 第三線以後用藥",
+      "與 lenalidomide 不可互換",
+      "REMS 嚴格遵守"
+    ]
+  },
+  "9.22": {
+    "drug_class": "BCR-ABL TKI(第一代)",
+    "mechanism": "抑制 BCR-ABL 融合激酶(CML 特徵),也抑制 c-KIT(GIST)、PDGFR。代表性靶向治療開創藥。",
+    "side_effects": [
+      {
+        "name": "周邊水腫(尤其眼瞼)",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "肌肉痙攣",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心、腹瀉",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨髓抑制(輕度)",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**配大量水及食物服**(預防胃腸不適)",
+      "每月 CBC、肝功能",
+      "BCR-ABL PCR 定量(CML 治療反應評估)",
+      "規律性追蹤分子反應",
+      "與 warfarin 互動"
+    ],
+    "warnings": [
+      "嚴重水腫(肺水腫、腹水)",
+      "黃疸",
+      "嚴重皮疹擴散",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "**配大量水(>240ml)及食物服**",
+      "每天固定時間",
+      "若漏服,12 小時內可補,過期跳過",
+      "監測體重(早期水腫)",
+      "嚴格避孕",
+      "與 grapefruit、聖約翰草避免"
+    ],
+    "patient_edu_warnings": [
+      "CML 標準療法,通常終身服藥",
+      "規律服藥不可漏(影響治療效果)",
+      "BCR-ABL 監測定期不可漏",
+      "GIST 病患連續服用直到疾病惡化"
+    ]
+  },
+  "9.24": {
+    "drug_class": "EGFR TKI(第一代)",
+    "mechanism": "可逆性抑制 EGFR 激酶,用於 EGFR 突變(Exon 19 Del / L858R)非小細胞肺癌。",
+    "side_effects": [
+      {
+        "name": "皮疹(類青春痘)",
+        "frequency": "60%",
+        "timing": "Day 7-14",
+        "note": "代表性,與療效相關"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "1-2%(亞洲人略高)",
+        "timing": "用藥後 4-12 週",
+        "note": "致命性,黑框警告"
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "20%",
+        "timing": "Week 4-8",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**EGFR 突變必須陽性**",
+      "每月肝功能",
+      "肺部症狀警覺(亞洲人 ILD 風險高)",
+      "皮膚科支持治療"
+    ],
+    "warnings": [
+      "新發乾咳、呼吸困難 - **間質性肺炎警訊,立即停藥就醫**",
+      "黃疸、嚴重肝功能異常",
+      "嚴重腹瀉",
+      "皮膚嚴重感染"
+    ],
+    "lifestyle": [
+      "皮膚保濕、避免日曬、痘痘藥外用",
+      "甲溝炎護理",
+      "與食物無關",
+      "懷孕禁用"
+    ],
+    "patient_edu_warnings": [
+      "皮疹與療效正相關,有皮疹反而是好事(但要控制)",
+      "間質性肺炎致命,呼吸喘要立即就醫",
+      "EGFR 檢測必要"
+    ]
+  },
+  "9.29": {
+    "drug_class": "EGFR TKI(第一代)",
+    "mechanism": "與 gefitinib 同類但結構不同,用於 EGFR 突變肺癌、胰腺癌。",
+    "side_effects": [
+      {
+        "name": "皮疹",
+        "frequency": "70%",
+        "timing": "Day 7-14",
+        "note": "比 gefitinib 略嚴重"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "1-2%",
+        "timing": "用藥後 4-12 週",
+        "note": "致命警告"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "15%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "結膜炎、角膜病變",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "EGFR 突變必須陽性",
+      "肺部症狀警覺",
+      "**空腹服藥** - 餐前 1 小時或餐後 2 小時(食物增加吸收 100%)",
+      "肝功能"
+    ],
+    "warnings": [
+      "新發呼吸困難、乾咳",
+      "黃疸",
+      "視力急速惡化",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "**空腹服藥**(關鍵,不像 gefitinib 可隨意)",
+      "皮膚保濕、防曬",
+      "戒菸(吸菸降低藥效一半)",
+      "避免懷孕"
+    ],
+    "patient_edu_warnings": [
+      "與食物吸收差異大,空腹服藥重要",
+      "**吸菸降低藥效**,鼓勵戒菸",
+      "皮疹比 gefitinib 重"
+    ]
+  },
+  "9.30": {
+    "drug_class": "BCR-ABL TKI(第二代,多激酶)",
+    "mechanism": "抑制 BCR-ABL(包括 imatinib 抗藥突變)、Src 家族,用於 CML、Ph+ ALL。",
+    "side_effects": [
+      {
+        "name": "肋膜積液",
+        "frequency": "20-30%",
+        "timing": "累積後",
+        "note": "代表性副作用,需暫停或減量"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "60%",
+        "timing": "Cycle 1",
+        "note": "比 imatinib 重"
+      },
+      {
+        "name": "肺動脈高壓(PAH)",
+        "frequency": "<2%",
+        "timing": "累積後",
+        "note": "罕見但嚴重"
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "出血(包括 GI 與顱內)",
+        "frequency": "5-10%",
+        "timing": "用藥中",
+        "note": "影響血小板功能"
+      },
+      {
+        "name": "頭痛、疲倦",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "胸部 X 光 + 心臟超音波(基準與每 3-6 個月)",
+      "ECG 與電解質",
+      "BCR-ABL PCR 監測",
+      "與 warfarin、aspirin 慎用(出血風險)",
+      "懷疑 PAH 立即停藥"
+    ],
+    "warnings": [
+      "活動後氣喘、下肢水腫 - 肋膜積液或心衰",
+      "突發呼吸困難 - PAH",
+      "嚴重頭痛 - 顱內出血",
+      "黑便、嘔血",
+      "心悸、暈厥"
+    ],
+    "lifestyle": [
+      "整顆吞服,可隨意(空腹或餐後)",
+      "與抗酸藥分開 2 小時",
+      "規律監測心肺功能",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "肋膜積液常見,呼吸喘要警覺",
+      "適合 imatinib 失敗或不耐受的 CML",
+      "出血風險,日常活動要小心"
+    ]
+  },
+  "9.31": {
+    "drug_class": "多重激酶 TKI (VEGFR/PDGFR/c-KIT)",
+    "mechanism": "抑制多種血管新生與成長相關激酶,用於 GIST、晚期腎細胞癌、胰臟神經內分泌瘤。",
+    "side_effects": [
+      {
+        "name": "高血壓",
+        "frequency": "30%",
+        "timing": "Week 2-4",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "手足症候群",
+        "frequency": "30%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "甲狀腺功能低下",
+        "frequency": "30%",
+        "timing": "Week 4-8",
+        "note": "需補充甲狀腺素"
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "30%",
+        "timing": "Week 2",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮膚色素脫失(髮色變淺)",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": "停藥可恢復"
+      },
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "腎上腺功能不全",
+        "frequency": "罕見",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "血壓監測(必要時降壓藥)",
+      "甲狀腺功能(TSH,基準與每 3 個月)",
+      "心臟超音波(LVEF)",
+      "用藥 4 週,休 2 週為一個週期"
+    ],
+    "warnings": [
+      "嚴重高血壓",
+      "活動後氣喘、下肢水腫 - 心衰",
+      "嚴重手足疼痛無法行走",
+      "嚴重腹瀉、口腔潰瘍無法進食"
+    ],
+    "lifestyle": [
+      "**4 週用 + 2 週休 = 1 cycle**",
+      "可隨意服藥(空腹或餐後)",
+      "手足保護:寬鬆鞋、避免摩擦",
+      "監測血壓",
+      "甲狀腺素補充按醫囑"
+    ],
+    "patient_edu_warnings": [
+      "服藥週期(4+2)要清楚",
+      "高血壓常見,在家量血壓",
+      "髮色變淺屬正常",
+      "GIST 為 imatinib 失敗後選擇"
+    ]
+  },
+  "9.32": {
+    "drug_class": "BCR-ABL TKI(第二代)",
+    "mechanism": "比 imatinib 強,用於 CML(包括 imatinib 抗藥)。",
+    "side_effects": [
+      {
+        "name": "QT 間期延長",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": "黑框警告,可致命心律不整"
+      },
+      {
+        "name": "高血糖",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "頭痛",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "胰臟炎(amylase/lipase 上升)",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "周邊動脈疾病、心血管事件",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "心血管風險病人慎用"
+      }
+    ],
+    "monitoring": [
+      "**ECG 監測**(基準、用藥 7 天、每變動劑量後)",
+      "電解質維持(K、Mg)",
+      "每月血糖、肝功能、amylase/lipase",
+      "心血管風險評估",
+      "**空腹服**(餐前 1 小時或餐後 2 小時)"
+    ],
+    "warnings": [
+      "心悸、暈厥 - QT 延長性心律不整",
+      "嚴重腹痛 - 胰臟炎",
+      "下肢冰冷、跛行 - 周邊動脈疾病",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**嚴格空腹**(食物大幅增加吸收與毒性)",
+      "與其他延長 QTc 藥避免",
+      "規律 ECG",
+      "心血管病史病人風險較高"
+    ],
+    "patient_edu_warnings": [
+      "QT 延長黑框警告,空腹服很重要",
+      "心血管病人選 dasatinib 較安全",
+      "用藥晝夜兩次,空腹時間規律"
+    ]
+  },
+  "9.45": {
+    "drug_class": "EGFR TKI(第二代,不可逆)",
+    "mechanism": "不可逆性抑制 EGFR 與 HER2,用於 EGFR 突變肺癌(包括罕見突變)。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": ">95%",
+        "timing": "Day 1-7",
+        "note": "代表性副作用,可能嚴重"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "85%",
+        "timing": "Day 7-14",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "70%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "60%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "1-2%",
+        "timing": "用藥後",
+        "note": "致命警告"
+      }
+    ],
+    "monitoring": [
+      "**腹瀉處置:loperamide 早期介入**(備用)",
+      "腎功能(CrCl <30 不建議)",
+      "肝功能",
+      "皮膚科支持",
+      "EGFR 突變陽性"
+    ],
+    "warnings": [
+      "嚴重腹瀉(>7 次/天) - 可能脫水",
+      "新發呼吸困難 - ILD",
+      "嚴重皮疹擴散",
+      "嚴重口腔潰瘍無法進食"
+    ],
+    "lifestyle": [
+      "**空腹服**(餐前 1 小時或餐後 3 小時)",
+      "備好 loperamide,腹瀉立即處理",
+      "皮膚保濕、防曬",
+      "甲溝炎護理"
+    ],
+    "patient_edu_warnings": [
+      "腹瀉是代表副作用,嚴重比 gefitinib/erlotinib 重",
+      "口腔黏膜、甲溝炎更嚴重,身心預期",
+      "罕見 EGFR 突變(如 G719X)的選擇"
+    ]
+  },
+  "9.47": {
+    "drug_class": "雙重 EGFR/HER2 TKI",
+    "mechanism": "可逆性抑制 EGFR 與 HER2,用於 HER2(+) 乳癌。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "65%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "45%",
+        "timing": "Day 7-14",
+        "note": ""
+      },
+      {
+        "name": "手足症候群(併用 capecitabine)",
+        "frequency": "50%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "1-2%",
+        "timing": "累積後",
+        "note": "比 trastuzumab 低"
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "罕見",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "心臟超音波 LVEF(基準、每 3-6 個月)",
+      "肝功能",
+      "**空腹服**",
+      "與 capecitabine 併用注意手足症候群"
+    ],
+    "warnings": [
+      "嚴重腹瀉",
+      "活動後氣喘 - 心衰",
+      "黃疸",
+      "嚴重手足疼痛"
+    ],
+    "lifestyle": [
+      "**空腹服(餐前 1 小時或餐後 1 小時)**",
+      "整顆吞服",
+      "備腹瀉藥"
+    ],
+    "patient_edu_warnings": [
+      "HER2(+) 乳癌可口服選項",
+      "與 capecitabine 併用效果好但毒性疊加"
+    ]
+  },
+  "9.50": {
+    "drug_class": "ALK/ROS1/MET TKI",
+    "mechanism": "抑制 ALK、ROS1、MET 重組基因,用於 ALK(+)、ROS1(+) 肺癌。",
+    "side_effects": [
+      {
+        "name": "視力異常(光暈、視覺軌跡)",
+        "frequency": "60%",
+        "timing": "Day 1-7",
+        "note": "特徵性副作用"
+      },
+      {
+        "name": "噁心、腹瀉、嘔吐",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "30%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<2%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "心搏過慢",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "肝功能(基準與用藥)",
+      "ECG",
+      "ALK/ROS1 檢測陽性",
+      "視力變化評估(通常不影響日常)"
+    ],
+    "warnings": [
+      "新發呼吸困難 - ILD",
+      "心悸、暈厥 - 心律問題",
+      "嚴重視力變化",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "視覺光暈通常不影響開車(夜間視覺問題輕)",
+      "ALK/ROS1 檢測必要",
+      "避免懷孕"
+    ],
+    "patient_edu_warnings": [
+      "視覺光暈是代表副作用,讓病人預期",
+      "ALK 肺癌會選 alectinib(更佳)",
+      "ROS1 仍是首選之一"
+    ]
+  },
+  "9.55": {
+    "drug_class": "JAK1/JAK2 抑制劑",
+    "mechanism": "抑制 JAK 路徑,用於骨髓纖維化、真性紅血球增多症、移植物抗宿主病。",
+    "side_effects": [
+      {
+        "name": "貧血",
+        "frequency": "40%",
+        "timing": "Cycle 1",
+        "note": "可能需輸血"
+      },
+      {
+        "name": "血小板低下",
+        "frequency": "30%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "感染(包括帶狀皰疹、TB 重激)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "JAK 抑制免疫"
+      },
+      {
+        "name": "頭痛、頭暈",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "脂肪上升、體重增加",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "戒斷症候群",
+        "frequency": "突然停藥",
+        "timing": "停藥後",
+        "note": "需逐漸減量"
+      }
+    ],
+    "monitoring": [
+      "每月 CBC",
+      "TB 篩檢(用藥前)",
+      "預防性 acyclovir(帶狀皰疹預防)",
+      "**逐漸減量,不可突然停藥**(避免症狀反彈)"
+    ],
+    "warnings": [
+      "發燒 - 嚴重感染(JAK 抑制免疫)",
+      "嚴重貧血 - 輸血",
+      "新發 TB 症狀(咳嗽、體重減輕、夜汗)",
+      "突發停藥後骨髓纖維化症狀加重"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "與食物無關",
+      "**絕對不可突然停藥**",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "戒斷症候群:停藥要與醫師討論逐漸減量",
+      "免疫抑制注意感染",
+      "骨髓纖維化的長期治療,目標症狀改善"
+    ]
+  },
+  "9.58": {
+    "drug_class": "VEGFR TKI",
+    "mechanism": "選擇性抑制 VEGFR 1/2/3,用於晚期腎細胞癌。",
+    "side_effects": [
+      {
+        "name": "高血壓",
+        "frequency": "40%",
+        "timing": "Week 2-4",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "手足症候群",
+        "frequency": "30%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "甲狀腺功能低下",
+        "frequency": "20%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "蛋白尿",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "出血",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "血壓(可能需 2 種降壓藥)",
+      "尿蛋白(每月)",
+      "甲狀腺功能",
+      "肝功能"
+    ],
+    "warnings": [
+      "嚴重高血壓",
+      "心悸、視力模糊 - 高血壓性腦病",
+      "尿少、下肢水腫 - 蛋白尿性腎症",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "監測血壓",
+      "手足保護"
+    ],
+    "patient_edu_warnings": [
+      "腎細胞癌第二線後選擇",
+      "高血壓比其他 VEGFR TKI 略高"
+    ]
+  },
+  "9.59": {
+    "drug_class": "ALK TKI(第二代)",
+    "mechanism": "比 crizotinib 強,用於 ALK(+) 肺癌(crizotinib 抗藥)。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "85%",
+        "timing": "Day 1-7",
+        "note": "代表性,通常需減量"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "75%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血糖",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "心搏過慢",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "2%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**空腹服改隨餐服**(2017 年改變,提高吸收降低劑量)",
+      "肝功能、血糖、ECG",
+      "腹瀉處置",
+      "ALK 突變陽性"
+    ],
+    "warnings": [
+      "嚴重腹瀉",
+      "黃疸",
+      "新發呼吸困難",
+      "心悸、暈厥"
+    ],
+    "lifestyle": [
+      "**隨餐服**(2017 後改變)",
+      "備腹瀉藥",
+      "肝功能保護"
+    ],
+    "patient_edu_warnings": [
+      "**用藥指引變了:現在隨餐服**(舊版說明可能還是空腹)",
+      "腹瀉嚴重,自我處理重要",
+      "alectinib 是更好的第二代選擇"
+    ]
+  },
+  "9.60": {
+    "drug_class": "ALK TKI(第二代)",
+    "mechanism": "選擇性 ALK 抑制劑,中樞神經系統穿透性好,目前 ALK(+) 肺癌首選。",
+    "side_effects": [
+      {
+        "name": "便秘",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肌肉痛、CK 上升",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "貧血",
+        "frequency": "20%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "心搏過慢",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": "比 crizotinib 少"
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<2%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "肝功能、CK 每月",
+      "**隨餐服**",
+      "ALK 檢測陽性",
+      "副作用整體比 crizotinib 輕"
+    ],
+    "warnings": [
+      "嚴重肌肉痛、深色尿 - 橫紋肌溶解",
+      "黃疸",
+      "新發呼吸困難",
+      "嚴重便秘"
+    ],
+    "lifestyle": [
+      "**隨餐服**(食物增加吸收)",
+      "整顆吞服",
+      "高纖預防便秘",
+      "規律運動"
+    ],
+    "patient_edu_warnings": [
+      "ALK(+) 肺癌**第一線首選**",
+      "腦轉移病人特別有效",
+      "副作用較輕,長期耐受性好"
+    ]
+  },
+  "9.61": {
+    "drug_class": "BTK 抑制劑(第一代)",
+    "mechanism": "不可逆性抑制 BTK,用於 CLL、套細胞淋巴瘤、瓦氏巨球蛋白血症。",
+    "side_effects": [
+      {
+        "name": "出血(包括嚴重)",
+        "frequency": "30-50%",
+        "timing": "用藥中",
+        "note": "影響血小板功能"
+      },
+      {
+        "name": "心房顫動",
+        "frequency": "10-15%",
+        "timing": "累積後",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染(包括 PCP、Aspergillus)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹、瘀青",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肌肉骨骼痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "ECG(心房顫動篩檢)",
+      "出血史評估",
+      "**手術或侵入性處置前停藥 3-7 天**",
+      "與 warfarin/aspirin 慎用",
+      "預防真菌感染"
+    ],
+    "warnings": [
+      "嚴重出血(腦、消化道)",
+      "心悸不規則 - 心房顫動",
+      "突發呼吸困難、發燒 - 感染",
+      "意識變化"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "整顆吞服",
+      "避免劇烈活動(出血風險)",
+      "手術前必須告知醫師(停藥)",
+      "與 grapefruit、聖約翰草避免"
+    ],
+    "patient_edu_warnings": [
+      "出血是嚴重副作用,任何手術都要告知醫師",
+      "心房顫動風險,規律監測脈搏",
+      "CLL 維持治療,通常數年用藥"
+    ]
+  },
+  "9.63": {
+    "drug_class": "多重激酶 TKI",
+    "mechanism": "抑制 VEGFR/FGFR/RET/c-KIT,用於甲狀腺癌、肝細胞癌、晚期腎細胞癌、子宮內膜癌。",
+    "side_effects": [
+      {
+        "name": "高血壓",
+        "frequency": "70%",
+        "timing": "Week 2-4",
+        "note": "代表性,常需降壓藥"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "食慾下降、體重減輕",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "蛋白尿",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "手足症候群",
+        "frequency": "30%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "血壓(可能需多種降壓藥)",
+      "尿蛋白(每月)",
+      "肝腎功能",
+      "甲狀腺功能(肝癌病人)",
+      "心臟超音波"
+    ],
+    "warnings": [
+      "嚴重高血壓 - 立即就醫",
+      "突發胸痛、呼吸困難 - 動脈血栓",
+      "嚴重蛋白尿、水腫 - 腎症候群",
+      "活動後氣喘 - 心衰"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "監測血壓多次/天",
+      "手足保護",
+      "食慾差時少量多餐"
+    ],
+    "patient_edu_warnings": [
+      "高血壓比例極高,在家量血壓很重要",
+      "肝癌、甲狀腺癌主流選擇",
+      "副作用多但療效顯著"
+    ]
+  },
+  "9.67": {
+    "drug_class": "BCR-ABL TKI(第三代)",
+    "mechanism": "對 T315I 突變仍有效,用於其他 TKI 抗藥的 CML/Ph+ ALL。",
+    "side_effects": [
+      {
+        "name": "動脈血栓事件",
+        "frequency": "20%",
+        "timing": "用藥中",
+        "note": "**黑框警告**:心肌梗塞、中風、周邊動脈疾病"
+      },
+      {
+        "name": "高血壓",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝毒性",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "胰臟炎",
+        "frequency": "10%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "60%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "40%",
+        "timing": "Day 7-21",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "心血管風險評估(嚴格)",
+      "血壓、血糖、血脂",
+      "肝功能、amylase/lipase",
+      "**有心血管病史病人禁用**"
+    ],
+    "warnings": [
+      "胸痛、呼吸困難 - 心肌梗塞",
+      "口齒不清、肢體無力 - 中風",
+      "下肢冰冷、跛行 - PAD",
+      "嚴重腹痛 - 胰臟炎"
+    ],
+    "lifestyle": [
+      "心血管風險嚴格控制",
+      "戒菸、運動",
+      "規律監測心血管狀況"
+    ],
+    "patient_edu_warnings": [
+      "**動脈血栓黑框警告致命**",
+      "T315I 突變或多線抗藥才用",
+      "心血管病人禁用"
+    ]
+  },
+  "9.74": {
+    "drug_class": "多重激酶 TKI(VEGFR/MET/AXL)",
+    "mechanism": "抑制 VEGFR、MET、AXL 等多種激酶,用於甲狀腺髓質癌、晚期腎細胞癌、肝細胞癌。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "65%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "手足症候群",
+        "frequency": "40%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "35%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "30%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "蛋白尿",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "傷口癒合不良、消化道穿孔(罕見但嚴重)",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": "手術前 3 週停藥"
+      }
+    ],
+    "monitoring": [
+      "血壓",
+      "尿蛋白",
+      "肝功能",
+      "**手術前 3 週停藥**(傷口癒合)"
+    ],
+    "warnings": [
+      "突發劇烈腹痛 - 消化道穿孔",
+      "嚴重高血壓",
+      "嚴重腹瀉",
+      "傷口不癒"
+    ],
+    "lifestyle": [
+      "**空腹服**(餐前 1 小時或餐後 2 小時)",
+      "整顆吞服",
+      "監測血壓",
+      "手足保護"
+    ],
+    "patient_edu_warnings": [
+      "腎癌、肝癌、甲狀腺髓質癌等多種適應症",
+      "侵入性處置前必須停藥"
+    ]
+  },
+  "9.80": {
+    "drug_class": "EGFR TKI(第三代)",
+    "mechanism": "對 EGFR 敏感突變(Exon 19/L858R)和 T790M 抗藥突變都有效,中樞神經穿透性好。NSCLC 第一線首選。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "50%",
+        "timing": "Day 1-7",
+        "note": "比第一/二代輕"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "40%",
+        "timing": "Day 7-14",
+        "note": "比 gefitinib/erlotinib 輕"
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "25%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "20%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性(LVEF 下降、QTc 延長)",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "需 ECG/超音波"
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "3-4%",
+        "timing": "用藥後 4-12 週",
+        "note": "黑框警告"
+      }
+    ],
+    "monitoring": [
+      "EGFR 突變陽性(基因檢測)",
+      "心臟超音波(基準與每 3-6 個月)",
+      "ECG",
+      "肺部症狀警覺",
+      "與食物無關"
+    ],
+    "warnings": [
+      "新發乾咳、呼吸困難 - **間質性肺炎,立即停藥**",
+      "活動後氣喘 - 心衰",
+      "心悸、暈厥 - QTc 延長",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "每天固定時間,可隨意服(空腹或餐後)",
+      "規律心臟追蹤",
+      "肺部症狀自我監測",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "**EGFR(+) NSCLC 第一線首選**",
+      "T790M 第二線適應症",
+      "副作用比第一/二代輕,但 ILD 致命",
+      "腦轉移特別有效"
+    ]
+  },
+  "9.81": {
+    "drug_class": "ALK/ROS1 TKI(第三代)",
+    "mechanism": "穿透血腦屏障最強的 ALK 抑制劑,用於 alectinib 抗藥之 ALK(+) 肺癌。",
+    "side_effects": [
+      {
+        "name": "高血脂(膽固醇/三酸甘油脂)",
+        "frequency": ">85%",
+        "timing": "Week 2-4",
+        "note": "代表性,需 statin"
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "認知功能異常(健忘、注意力)",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": "中樞神經穿透強"
+      },
+      {
+        "name": "情緒變化(焦慮、抑鬱)",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "體重增加",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**血脂監測**(基準、Cycle 1 月後、每 3 個月)",
+      "認知/情緒評估(家屬參與)",
+      "ECG",
+      "與 strong CYP3A4 抑制/誘導劑互動嚴重"
+    ],
+    "warnings": [
+      "嚴重情緒變化 - 自殺意念可能",
+      "嚴重認知障礙影響日常",
+      "嚴重周邊麻木",
+      "嚴重水腫"
+    ],
+    "lifestyle": [
+      "預防性 statin 控制血脂",
+      "與食物無關",
+      "避免 grapefruit",
+      "家屬注意病人情緒變化",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "**認知與情緒副作用是代表性的**,家屬要注意",
+      "高血脂幾乎必發生,statin 預防",
+      "ALK 多線後最終選項"
+    ]
+  },
+  "9.82": {
+    "drug_class": "ALK TKI(第二代)",
+    "mechanism": "另一種第二代 ALK 抑制劑,可作 crizotinib 抗藥後選擇。",
+    "side_effects": [
+      {
+        "name": "肺早期反應(呼吸困難)",
+        "frequency": "3-9%",
+        "timing": "Day 1-7",
+        "note": "獨特副作用,需從 90mg 起加量"
+      },
+      {
+        "name": "腹瀉、噁心",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "頭痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "血糖、CPK 上升",
+        "frequency": "30-40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "視力異常",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**起始劑量 90mg/日 × 7 天**,無副作用再加到 180mg",
+      "肺部症狀警覺",
+      "血壓、血糖、CPK",
+      "ALK 檢測陽性"
+    ],
+    "warnings": [
+      "前 7 天突發呼吸困難 - 早期肺反應",
+      "嚴重高血壓",
+      "心悸、暈厥"
+    ],
+    "lifestyle": [
+      "**起始 7 天劑量低,後加量**",
+      "與食物無關",
+      "監測血壓"
+    ],
+    "patient_edu_warnings": [
+      "前 7 天的肺反應警覺",
+      "起始低劑量必須遵守"
+    ]
+  },
+  "9.83": {
+    "drug_class": "EGFR TKI(第二代,不可逆)",
+    "mechanism": "與 afatinib 同類,用於 EGFR 突變肺癌第一線。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "85%",
+        "timing": "Day 1-7",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "75%",
+        "timing": "Day 7-14",
+        "note": ""
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "60%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "45%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "10%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<2%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "EGFR 突變陽性",
+      "腹瀉處置(loperamide 備好)",
+      "肝功能"
+    ],
+    "warnings": [
+      "嚴重腹瀉",
+      "新發呼吸困難",
+      "嚴重皮疹"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "備腹瀉藥",
+      "皮膚護理"
+    ],
+    "patient_edu_warnings": [
+      "副作用比 osimertinib 重",
+      "現多選 osimertinib(更好的選擇)"
+    ]
+  },
+  "9.93": {
+    "drug_class": "ROS1/NTRK/ALK TKI",
+    "mechanism": "抑制 ROS1、NTRK 融合基因,用於 ROS1(+) 肺癌、NTRK 融合實體瘤(癌種無關性)。",
+    "side_effects": [
+      {
+        "name": "認知功能異常、平衡感",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": "中樞神經穿透"
+      },
+      {
+        "name": "便秘",
+        "frequency": "45%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "體重增加",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性、QTc 延長",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "ROS1 或 NTRK 檢測陽性",
+      "ECG、心臟超音波",
+      "認知評估"
+    ],
+    "warnings": [
+      "嚴重認知障礙、平衡問題",
+      "心悸、暈厥",
+      "活動後氣喘"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "嚴格避孕",
+      "避免高處工作或開車(平衡感問題)"
+    ],
+    "patient_edu_warnings": [
+      "NTRK 融合癌種無關性,任何癌別都可能用",
+      "認知影響日常工作"
+    ]
+  },
+  "9.95": {
+    "drug_class": "NTRK 選擇性抑制劑",
+    "mechanism": "高度選擇性 NTRK 抑制劑,用於 NTRK 融合實體瘤(癌種無關性)。",
+    "side_effects": [
+      {
+        "name": "疲倦",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "頭暈",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "貧血",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "20%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "體重增加",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "NTRK 融合檢測陽性(NGS 或 FISH)",
+      "肝功能",
+      "與其他藥物互動"
+    ],
+    "warnings": [
+      "黃疸、嚴重肝功能異常",
+      "嚴重頭暈影響日常",
+      "嚴重貧血"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "嚴格避孕",
+      "規律抽血追蹤"
+    ],
+    "patient_edu_warnings": [
+      "副作用較少的 NTRK 抑制劑",
+      "癌種無關性適應症",
+      "通常終身服藥(直到惡化)"
+    ]
+  },
+  "9.97": {
+    "drug_class": "PDGFRA / KIT TKI",
+    "mechanism": "選擇性抑制 PDGFRA D842V 突變,用於該突變之 GIST(對 imatinib 抗藥)。",
+    "side_effects": [
+      {
+        "name": "認知障礙、健忘",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "70%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "顱內出血",
+        "frequency": "<2%",
+        "timing": "用藥中",
+        "note": "罕見但嚴重"
+      },
+      {
+        "name": "貧血",
+        "frequency": "50%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "噁心、腹瀉",
+        "frequency": "30-40%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "PDGFRA D842V 檢測陽性",
+      "認知評估",
+      "腦部影像(若懷疑出血)",
+      "CBC"
+    ],
+    "warnings": [
+      "頭痛劇烈、意識變化 - 顱內出血",
+      "嚴重認知障礙",
+      "嚴重貧血"
+    ],
+    "lifestyle": [
+      "空腹服(餐前 1 小時或餐後 2 小時)",
+      "嚴格避孕",
+      "認知保護(避免高處作業)"
+    ],
+    "patient_edu_warnings": [
+      "PDGFRA D842V 是 imatinib 完全抗藥的突變",
+      "顱內出血雖罕見但需警覺"
+    ]
+  },
+  "9.98": {
+    "drug_class": "FGFR1-3 抑制劑",
+    "mechanism": "抑制 FGFR1/2/3 融合或重組,用於 FGFR2 融合膽管癌。",
+    "side_effects": [
+      {
+        "name": "高磷血症",
+        "frequency": ">90%",
+        "timing": "Day 1-14",
+        "note": "代表性副作用,需低磷飲食"
+      },
+      {
+        "name": "脫髮",
+        "frequency": "50%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "45%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "指甲毒性(剝離、脫落)",
+        "frequency": "40%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "35%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "視網膜病變(RPED)",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "需眼科監測"
+      }
+    ],
+    "monitoring": [
+      "**血磷監測**(基準、每月)",
+      "眼科檢查(基準、每 2 個月)",
+      "FGFR2 融合檢測陽性",
+      "高磷時:低磷飲食 + binder"
+    ],
+    "warnings": [
+      "視力模糊 - RPED",
+      "極高血磷無法控制",
+      "嚴重腹瀉",
+      "指甲嚴重感染"
+    ],
+    "lifestyle": [
+      "**低磷飲食**(乳製品、堅果、加工食品控制)",
+      "服 2 週 + 休 1 週為一個週期",
+      "整顆吞服",
+      "規律眼科檢查"
+    ],
+    "patient_edu_warnings": [
+      "高磷血症必發生,飲食控制重要",
+      "膽管癌新標準療法之一",
+      "視力變化要立即報告"
+    ]
+  },
+  "9.100": {
+    "drug_class": "BTK 抑制劑(第二代)",
+    "mechanism": "選擇性 BTK 抑制劑,比 ibrutinib 心臟毒性低,用於 CLL、套細胞淋巴瘤、瓦氏巨球蛋白血症。",
+    "side_effects": [
+      {
+        "name": "頭痛",
+        "frequency": "40%",
+        "timing": "Week 1-2",
+        "note": "通常自行緩解"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "出血",
+        "frequency": "30%",
+        "timing": "用藥中",
+        "note": "比 ibrutinib 輕"
+      },
+      {
+        "name": "心房顫動",
+        "frequency": "5%",
+        "timing": "累積後",
+        "note": "比 ibrutinib 少很多"
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "與 ibrutinib 相同警覺(出血、AF)但較輕",
+      "**避免 PPI(質子幫浦抑制劑)**(降低吸收 50%)",
+      "與 H2 阻斷劑可錯開 2 小時"
+    ],
+    "warnings": [
+      "嚴重出血",
+      "心悸不規則 - AF",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "**不可與 PPI 併用**(omeprazole、pantoprazole 等)",
+      "整顆吞服",
+      "手術前停藥告知"
+    ],
+    "patient_edu_warnings": [
+      "比 ibrutinib 心臟毒性低",
+      "PPI 互動嚴重(吸收降低)",
+      "胃藥要與醫師討論"
+    ]
+  },
+  "9.101": {
+    "drug_class": "MET 抑制劑",
+    "mechanism": "選擇性 MET 抑制劑,用於 MET Exon 14 跳過突變肺癌。",
+    "side_effects": [
+      {
+        "name": "周邊水腫",
+        "frequency": "60%",
+        "timing": "Week 2-4",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "噁心、腹瀉",
+        "frequency": "30-40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "2%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "胰臟炎",
+        "frequency": "罕見",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "MET Exon 14 跳過突變檢測陽性",
+      "肝功能",
+      "肺部症狀"
+    ],
+    "warnings": [
+      "嚴重水腫(肺水腫、心包積液)",
+      "新發呼吸困難",
+      "嚴重腹痛"
+    ],
+    "lifestyle": [
+      "**隨餐服**",
+      "監測體重",
+      "規律抽血"
+    ],
+    "patient_edu_warnings": [
+      "MET Exon 14 跳過是肺癌特殊基因型",
+      "水腫常見,監測體重"
+    ]
+  },
+  "9.104": {
+    "drug_class": "BTK 抑制劑(第二代)",
+    "mechanism": "與 acalabrutinib 同類選擇性 BTK 抑制劑,用於 CLL、套細胞淋巴瘤、瓦氏巨球蛋白血症。",
+    "side_effects": [
+      {
+        "name": "出血、瘀青",
+        "frequency": "30-50%",
+        "timing": "用藥中",
+        "note": "比 ibrutinib 輕"
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "上呼吸道感染",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "心房顫動",
+        "frequency": "<3%",
+        "timing": "累積後",
+        "note": "比 ibrutinib 少很多"
+      },
+      {
+        "name": "頭痛、皮疹",
+        "frequency": "20-30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "出血史評估",
+      "ECG",
+      "預防感染",
+      "與 PPI 可一起服用(優於 acalabrutinib)"
+    ],
+    "warnings": [
+      "嚴重出血",
+      "心悸不規則",
+      "發燒"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "整顆吞服",
+      "手術前停藥",
+      "可與 PPI 併服"
+    ],
+    "patient_edu_warnings": [
+      "BTK 抑制劑第二代,毒性低",
+      "與其他藥物互動少"
+    ]
+  },
+  "9.110": {
+    "drug_class": "BTK 抑制劑(第二代)",
+    "mechanism": "選擇性 BTK 抑制劑,用於原發性中樞神經系統淋巴瘤(PCNSL)、瓦氏巨球蛋白血症。",
+    "side_effects": [
+      {
+        "name": "皮疹",
+        "frequency": "40%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "出血",
+        "frequency": "30%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**空腹服**",
+      "皮疹評估",
+      "肝功能"
+    ],
+    "warnings": [
+      "皮疹擴散嚴重",
+      "嚴重出血",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**空腹服**(餐前 1 小時或餐後 2 小時)",
+      "皮膚保濕",
+      "預防感染"
+    ],
+    "patient_edu_warnings": [
+      "PCNSL 罕見適應症",
+      "空腹服重要"
+    ]
+  },
+  "9.114": {
+    "drug_class": "JAK2 抑制劑",
+    "mechanism": "選擇性 JAK2 抑制劑,用於骨髓纖維化(ruxolitinib 抗藥或不耐受)。",
+    "side_effects": [
+      {
+        "name": "腹瀉、噁心",
+        "frequency": "60-70%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "貧血、血小板低下",
+        "frequency": "60%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "**Wernicke 腦病(維生素 B1 缺乏)**",
+        "frequency": "<2%但致命",
+        "timing": "用藥後",
+        "note": "黑框警告"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血脂、CK 上升",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**B1 (硫胺) 基準與每月監測**",
+      "B1 缺乏立即補充",
+      "肝功能",
+      "CBC"
+    ],
+    "warnings": [
+      "意識變化、平衡異常、視覺異常 - **Wernicke 腦病,立即補 B1**",
+      "嚴重貧血",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**B1 補充**(預防性)",
+      "與食物無關",
+      "規律抽血",
+      "監測認知功能(家屬參與)"
+    ],
+    "patient_edu_warnings": [
+      "**Wernicke 腦病黑框警告**,B1 補充必須",
+      "腦病早期可逆,晚期致命"
+    ]
+  },
+  "9.123": {
+    "drug_class": "KIT/PDGFRA 抑制劑",
+    "mechanism": "用於先前接受過 3 線以上 TKI 治療失敗之 GIST(廣泛抗藥)。",
+    "side_effects": [
+      {
+        "name": "脫髮",
+        "frequency": "50%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肌肉痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "手足症候群",
+        "frequency": "20%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "皮膚 SCC 等次發癌",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "需皮膚科追蹤"
+      },
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "<5%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "皮膚科檢查",
+      "心臟超音波",
+      "與食物無關"
+    ],
+    "warnings": [
+      "新長出皮膚硬塊",
+      "活動後氣喘",
+      "嚴重肌肉痛"
+    ],
+    "lifestyle": [
+      "防曬",
+      "皮膚自我檢查",
+      "脫髮預期"
+    ],
+    "patient_edu_warnings": [
+      "GIST 多線抗藥才用",
+      "次發皮膚癌警覺"
+    ]
+  },
+  "9.125": {
+    "drug_class": "FLT3 抑制劑",
+    "mechanism": "選擇性 FLT3-ITD 抑制劑,用於 FLT3-ITD(+) 急性骨髓性白血病。",
+    "side_effects": [
+      {
+        "name": "QT 間期延長",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": "**黑框警告**"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "持續性",
+        "note": "AML 病人本就骨髓功能差"
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肌肉骨骼痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**ECG 監測**(基準、Day 2、4、8、22、48)",
+      "電解質維持",
+      "FLT3-ITD 檢測陽性",
+      "嚴格避孕"
+    ],
+    "warnings": [
+      "心悸、暈厥 - QTc 延長",
+      "嚴重感染",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "整顆吞服",
+      "規律 ECG"
+    ],
+    "patient_edu_warnings": [
+      "**QTc 延長黑框警告**",
+      "AML 維持期治療"
+    ]
+  },
+  "9.127": {
+    "drug_class": "JAK1/JAK2/ACVR1 抑制劑",
+    "mechanism": "用於骨髓纖維化合併中重度貧血,可改善貧血(其他 JAK 抑制劑會惡化貧血)。",
+    "side_effects": [
+      {
+        "name": "血小板低下",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "頭暈、頭痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "包括 TB 重激"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "TB 篩檢(用藥前)",
+      "肝功能",
+      "**對貧血合併的 MF 病人有獨特優勢**"
+    ],
+    "warnings": [
+      "發燒",
+      "嚴重出血",
+      "新發 TB 症狀"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "預防感染",
+      "規律抽血"
+    ],
+    "patient_edu_warnings": [
+      "新藥,適合貧血型骨髓纖維化",
+      "比 ruxolitinib 對貧血友善"
+    ]
+  },
+  "9.131": {
+    "drug_class": "ROS1/NTRK TKI(新一代)",
+    "mechanism": "對 ROS1 和 NTRK 都有效,可克服第一代抑制劑(crizotinib、entrectinib)的抗藥突變。",
+    "side_effects": [
+      {
+        "name": "頭暈、平衡感異常",
+        "frequency": "60%",
+        "timing": "Day 1-14",
+        "note": "中樞神經穿透"
+      },
+      {
+        "name": "感覺異常",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "便秘",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "貧血",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "ROS1/NTRK 檢測陽性",
+      "肝功能",
+      "認知/平衡評估"
+    ],
+    "warnings": [
+      "嚴重頭暈影響日常",
+      "嚴重感覺異常",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**空腹服**",
+      "避免高處作業、開車(平衡感問題)",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "ROS1 抗藥後新選項",
+      "NTRK 融合癌種無關性",
+      "中樞副作用明顯"
+    ]
+  },
+  "9.132": {
+    "drug_class": "BCR-ABL TKI(第二代)",
+    "mechanism": "用於 CML 多線抗藥,腹瀉特別常見。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "70%",
+        "timing": "Day 1-14",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "噁心、嘔吐",
+        "frequency": "40%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "腹痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "40%",
+        "timing": "Cycle 1",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**隨餐服**(增加吸收降低腹瀉)",
+      "肝功能",
+      "BCR-ABL PCR"
+    ],
+    "warnings": [
+      "嚴重腹瀉(>7 次/天)",
+      "黃疸",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "**隨餐服**",
+      "備腹瀉藥",
+      "與抗酸藥分開 2 小時"
+    ],
+    "patient_edu_warnings": [
+      "腹瀉是代表副作用",
+      "CML 多線後選擇"
+    ]
+  },
+  "9.18": {
+    "drug_class": "抗 HER2 單株抗體",
+    "mechanism": "結合 HER2 受體胞外區,阻斷信號傳遞並誘導 ADCC,用於 HER2(+) 乳癌、轉移性胃癌。",
+    "side_effects": [
+      {
+        "name": "心臟毒性(LVEF 下降)",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "代表性副作用,可逆"
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "30%(首次)",
+        "timing": "輸注中",
+        "note": "需慢速給藥"
+      },
+      {
+        "name": "上呼吸道感染",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<2%",
+        "timing": "用藥後",
+        "note": "罕見但嚴重"
+      }
+    ],
+    "monitoring": [
+      "**心臟超音波**(基準、用藥後每 3 個月)",
+      "LVEF <50% 或下降 ≥10% 需暫停",
+      "與 anthracycline(doxorubicin)併用心臟毒性增加",
+      "懷孕禁用(羊水過少)"
+    ],
+    "warnings": [
+      "活動後氣喘、下肢水腫 - 心衰竭",
+      "輸注中胸悶、皮疹、低血壓",
+      "新發乾咳、呼吸困難 - ILD",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "規律心臟追蹤",
+      "預防感染",
+      "嚴格避孕(治療期間及結束後 7 個月)",
+      "皮下劑型可在 5-10 分鐘內注射"
+    ],
+    "patient_edu_warnings": [
+      "**HER2(+) 乳癌標準療法**,通常用 1 年(輔助)或長期(轉移)",
+      "心臟毒性多可逆,但需暫停藥",
+      "與 anthracycline 不可同時(分開使用)"
+    ]
+  },
+  "9.27": {
+    "drug_class": "抗 EGFR 單株抗體",
+    "mechanism": "結合 EGFR 阻斷信號,用於 RAS 原生型大腸直腸癌、頭頸癌。",
+    "side_effects": [
+      {
+        "name": "皮疹(類青春痘,伴瘙癢)",
+        "frequency": "85%",
+        "timing": "Day 7-14",
+        "note": "代表性,與療效正相關"
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "20%(首次)",
+        "timing": "輸注中",
+        "note": "嚴重時危及生命,需前用藥"
+      },
+      {
+        "name": "低鎂血症",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": "代表性副作用,需補充"
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "15%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "腹瀉(併用化療時)",
+        "frequency": "20-30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<1%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "前用藥:diphenhydramine(預防輸注反應)",
+      "**RAS 原生型必須**(突變者無效)",
+      "電解質(鎂)每 2 週",
+      "皮膚科支持"
+    ],
+    "warnings": [
+      "輸注中嚴重過敏 - 立即停藥",
+      "嚴重皮疹擴散(罕見 SJS/TEN)",
+      "肌肉抽搐、嗜睡 - 嚴重低鎂"
+    ],
+    "lifestyle": [
+      "**鎂補充**(口服或靜脈)",
+      "皮膚保濕、抗痘外用藥",
+      "防曬",
+      "甲溝炎護理"
+    ],
+    "patient_edu_warnings": [
+      "皮疹與療效正相關(有皮疹反而好)",
+      "**RAS 突變者不能用**(基因檢測必要)",
+      "頭頸癌與大腸直腸癌雙適應症"
+    ]
+  },
+  "9.37": {
+    "drug_class": "抗 VEGF 單株抗體",
+    "mechanism": "中和 VEGF,抑制血管新生,用於多種癌症(大腸、肺、卵巢、膠質瘤、子宮頸、肝細胞癌)。",
+    "side_effects": [
+      {
+        "name": "高血壓",
+        "frequency": "30%",
+        "timing": "Week 2-4",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "蛋白尿",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "出血(包括嚴重)",
+        "frequency": "5-10%",
+        "timing": "用藥中",
+        "note": "**肺鱗癌禁用**(肺出血)"
+      },
+      {
+        "name": "傷口癒合不良、消化道穿孔(罕見)",
+        "frequency": "1-2%",
+        "timing": "用藥中",
+        "note": "手術前 4-8 週停藥"
+      },
+      {
+        "name": "靜脈血栓栓塞",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "可逆性後腦病症候群(PRES)",
+        "frequency": "罕見",
+        "timing": "用藥中",
+        "note": "頭痛、視覺異常"
+      }
+    ],
+    "monitoring": [
+      "血壓(可能需多種降壓藥)",
+      "尿蛋白(每月)",
+      "**手術前 4-8 週停藥**",
+      "**肺鱗癌禁用**(出血致死)",
+      "與 cetuximab/panitumumab 不可併用"
+    ],
+    "warnings": [
+      "嚴重高血壓",
+      "突發劇烈腹痛 - 消化道穿孔",
+      "突發胸痛、呼吸困難 - 肺栓塞",
+      "嚴重頭痛、視力異常 - PRES 或腦出血",
+      "傷口不癒"
+    ],
+    "lifestyle": [
+      "監測血壓",
+      "侵入性處置必須告知醫師(停藥)",
+      "充足水份(腎保護)"
+    ],
+    "patient_edu_warnings": [
+      "肺鱗癌禁用警告",
+      "手術前必須停藥(癒合問題)",
+      "高血壓常見,在家量血壓"
+    ]
+  },
+  "9.53": {
+    "drug_class": "抗 EGFR 單株抗體(全人源)",
+    "mechanism": "與 cetuximab 同類但全人源(輸注反應較少),用於 RAS 原生型大腸直腸癌。",
+    "side_effects": [
+      {
+        "name": "皮疹(類青春痘)",
+        "frequency": "90%",
+        "timing": "Day 7-14",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "低鎂血症",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "<5%",
+        "timing": "輸注中",
+        "note": "比 cetuximab 少很多"
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "15%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "腹瀉、口腔黏膜炎",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**RAS 原生型必須**",
+      "電解質(鎂)",
+      "皮膚科支持",
+      "**與 cetuximab 二者擇一**"
+    ],
+    "warnings": [
+      "嚴重皮疹",
+      "肌肉抽搐 - 低鎂",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "鎂補充",
+      "皮膚保濕、抗痘藥",
+      "防曬"
+    ],
+    "patient_edu_warnings": [
+      "與 cetuximab 二者擇一,通常擇 cetuximab",
+      "輸注反應較少是優點"
+    ]
+  },
+  "9.70": {
+    "drug_class": "抗 HER2 單株抗體(雙聚化阻斷)",
+    "mechanism": "與 trastuzumab 不同表位,阻斷 HER2 與 HER3 雙聚化,通常與 trastuzumab + 化療併用於 HER2(+) 乳癌。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "65%",
+        "timing": "持續性",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "脫髮(併用化療)",
+        "frequency": "60%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性",
+        "frequency": "1-2%",
+        "timing": "累積後",
+        "note": "與 trastuzumab 併用要注意"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10-15%",
+        "timing": "首次",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "30%",
+        "timing": "Week 2-3",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "心臟超音波(基準與每 3-6 個月)",
+      "**通常 trastuzumab + pertuzumab + docetaxel 三藥併用**",
+      "預防性止瀉",
+      "嚴格避孕"
+    ],
+    "warnings": [
+      "嚴重腹瀉",
+      "活動後氣喘 - 心衰",
+      "輸注中過敏"
+    ],
+    "lifestyle": [
+      "備止瀉藥",
+      "三藥療程,規律回診",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "HER2(+) 乳癌前線標準",
+      "腹瀉是代表副作用",
+      "與 trastuzumab 不可互換,二者併用"
+    ]
+  },
+  "9.78": {
+    "drug_class": "抗 CD38 單株抗體",
+    "mechanism": "結合 CD38(MM 高度表現),誘導 ADCC、CDC、ADCP,用於多發性骨髓瘤。",
+    "side_effects": [
+      {
+        "name": "輸注反應",
+        "frequency": "50%(首次)",
+        "timing": "輸注中",
+        "note": "需前用藥,可能持續多小時"
+      },
+      {
+        "name": "感染(包括上呼吸道、肺炎)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下、血小板低下",
+        "frequency": "60%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "干擾血型檢測",
+        "frequency": "100%",
+        "timing": "持續性",
+        "note": "影響輸血前配對"
+      }
+    ],
+    "monitoring": [
+      "**前用藥**:dexamethasone + acetaminophen + diphenhydramine",
+      "前後輸液監測 4-6 小時",
+      "**輸血前需告知**(影響血型配對至少 6 個月)",
+      "預防 PCP、HBV/VZV 重激"
+    ],
+    "warnings": [
+      "輸注中嚴重反應(每次都可能)",
+      "發燒 - 感染",
+      "嚴重出血",
+      "新發呼吸困難"
+    ],
+    "lifestyle": [
+      "**戴醫療警示牌**(註明用 daratumumab,輸血前要特別檢驗)",
+      "預防感染",
+      "皮下劑型可 5 分鐘注射(IV 改 SC 接受度高)",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "輸血前必須告知藥物使用",
+      "首次輸注時間最長,病人要有預期",
+      "MM 多線治療標準藥"
+    ]
+  },
+  "9.79": {
+    "drug_class": "抗 CD20 單株抗體(第二代)",
+    "mechanism": "比 rituximab 強的 CD20 抗體,用於 CLL、和緩性非何杰金氏淋巴瘤。",
+    "side_effects": [
+      {
+        "name": "輸注反應",
+        "frequency": "65%(首次)",
+        "timing": "輸注中",
+        "note": "代表性,可能嚴重"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "高 tumor burden",
+        "timing": "首次治療",
+        "note": "**需嚴格預防**"
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "50%",
+        "timing": "Cycle 1-2",
+        "note": "可能延遲"
+      },
+      {
+        "name": "感染(包括 HBV 重激)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "**HBV 篩檢必須**"
+      },
+      {
+        "name": "血小板低下",
+        "frequency": "20%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "PML",
+        "frequency": "罕見",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**HBV 篩檢必須**(陽性者需預防性抗病毒)",
+      "前用藥:類固醇 + 抗組織胺 + acetaminophen",
+      "**腫瘤溶解預防**:充分水化、allopurinol、住院觀察",
+      "預防 PCP"
+    ],
+    "warnings": [
+      "輸注中嚴重反應(過敏、低血壓、呼吸困難)",
+      "腫瘤溶解症狀(高鉀、高磷、腎衰)",
+      "黃疸 - HBV 重激",
+      "意識變化 - PML"
+    ],
+    "lifestyle": [
+      "首次輸注住院觀察",
+      "預防感染",
+      "預防 HBV 重激藥不可漏",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "HBV 重激是嚴重副作用",
+      "首次輸注時間長,可能整天",
+      "比 rituximab 反應嚴重"
+    ]
+  },
+  "9.92": {
+    "drug_class": "抗 VEGFR2 單株抗體",
+    "mechanism": "結合 VEGFR2 阻斷血管新生,用於胃癌、肺癌、肝細胞癌、大腸直腸癌。",
+    "side_effects": [
+      {
+        "name": "高血壓",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "蛋白尿",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "出血",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "5%",
+        "timing": "首次",
+        "note": ""
+      },
+      {
+        "name": "靜脈血栓",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "傷口癒合不良",
+        "frequency": "用藥中",
+        "timing": "用藥中",
+        "note": "手術前停藥"
+      }
+    ],
+    "monitoring": [
+      "血壓",
+      "尿蛋白",
+      "手術前 4 週停藥"
+    ],
+    "warnings": [
+      "嚴重高血壓",
+      "嚴重出血",
+      "突發胸痛 - 心血管事件"
+    ],
+    "lifestyle": [
+      "監測血壓",
+      "侵入性處置告知"
+    ],
+    "patient_edu_warnings": [
+      "與 bevacizumab 同類但靶點不同(VEGFR2)",
+      "胃癌晚期重要選擇"
+    ]
+  },
+  "9.108": {
+    "drug_class": "抗 CD38 單株抗體",
+    "mechanism": "與 daratumumab 同類但結構不同,用於 MM(多線抗藥)。",
+    "side_effects": [
+      {
+        "name": "輸注反應",
+        "frequency": "40%(首次)",
+        "timing": "輸注中",
+        "note": "需前用藥"
+      },
+      {
+        "name": "嗜中性球低下、血小板低下",
+        "frequency": "60%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "干擾血型檢測",
+        "frequency": "100%",
+        "timing": "持續性",
+        "note": "同 daratumumab"
+      }
+    ],
+    "monitoring": [
+      "前用藥",
+      "輸血前告知",
+      "預防感染"
+    ],
+    "warnings": [
+      "輸注中嚴重反應",
+      "發燒"
+    ],
+    "lifestyle": [
+      "醫療警示牌",
+      "預防感染"
+    ],
+    "patient_edu_warnings": [
+      "與 daratumumab 同類,選擇依適應症",
+      "輸血前告知"
+    ]
+  },
+  "9.111": {
+    "drug_class": "抗 SLAMF7 單株抗體",
+    "mechanism": "結合 SLAMF7(MM 表現),激活 NK 細胞攻擊腫瘤,用於 MM(與 lenalidomide + dexamethasone 併用)。",
+    "side_effects": [
+      {
+        "name": "輸注反應",
+        "frequency": "10%",
+        "timing": "首次",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "25%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "前用藥:類固醇 + 抗組織胺 + ranitidine",
+      "與 lenalidomide + dexamethasone 三藥併用",
+      "預防感染"
+    ],
+    "warnings": [
+      "輸注反應",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "MM 第二線後選擇",
+      "三藥併用"
+    ]
+  },
+  "9.124": {
+    "drug_class": "抗 CD19 單株抗體",
+    "mechanism": "結合 CD19 誘導 ADCC,用於復發性瀰漫性大 B 細胞淋巴瘤(DLBCL),通常與 lenalidomide 併用。",
+    "side_effects": [
+      {
+        "name": "嗜中性球低下",
+        "frequency": "55%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "貧血、血小板低下",
+        "frequency": "35%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10%",
+        "timing": "首次",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "前用藥:acetaminophen + 抗組織胺 + 類固醇",
+      "與 lenalidomide 併用 12 個月後單用",
+      "CBC"
+    ],
+    "warnings": [
+      "發燒",
+      "嚴重出血",
+      "輸注反應"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "與 lenalidomide 併用嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "DLBCL 第二線後不適合移植病人",
+      "與 lenalidomide 併用 12 個月後改單用"
+    ]
+  },
+  "9.126": {
+    "drug_class": "EGFR-MET 雙特異性抗體",
+    "mechanism": "雙靶點抗體,用於 EGFR Exon 20 插入突變肺癌。",
+    "side_effects": [
+      {
+        "name": "輸注反應",
+        "frequency": "65%(首次)",
+        "timing": "輸注中",
+        "note": "代表性,首次需分段輸注"
+      },
+      {
+        "name": "皮疹(類青春痘)",
+        "frequency": "75%",
+        "timing": "Day 7-14",
+        "note": "嚴重時嚴峻"
+      },
+      {
+        "name": "甲溝炎",
+        "frequency": "45%",
+        "timing": "Week 4-8",
+        "note": ""
+      },
+      {
+        "name": "低白蛋白血症",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "3%",
+        "timing": "用藥後",
+        "note": "致命警告"
+      }
+    ],
+    "monitoring": [
+      "**首次輸注分 2 天**(每天半量)以降低反應",
+      "前用藥:抗組織胺 + 類固醇 + acetaminophen",
+      "EGFR Exon 20 插入突變陽性",
+      "肺部症狀警覺"
+    ],
+    "warnings": [
+      "輸注中嚴重反應",
+      "新發呼吸困難 - ILD",
+      "嚴重皮疹擴散"
+    ],
+    "lifestyle": [
+      "首次輸注住院觀察",
+      "皮膚保濕、防曬",
+      "甲溝炎護理",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "EGFR Exon 20 插入是罕見突變,osimertinib 等不適用",
+      "皮膚毒性與 EGFR TKI 類似但更嚴重"
+    ]
+  },
+  "9.133": {
+    "drug_class": "抗 CLDN18.2 單株抗體",
+    "mechanism": "結合 CLDN18.2(胃癌表現),用於 CLDN18.2 陽性、HER2 陰性胃腺癌第一線(併用化療)。",
+    "side_effects": [
+      {
+        "name": "噁心嘔吐",
+        "frequency": "70%",
+        "timing": "輸注後",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "20%",
+        "timing": "首次",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "食慾下降",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊神經病變(併用化療)",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "前用藥:強效止吐藥(NK1 拮抗劑、5-HT3、類固醇)",
+      "**CLDN18.2 IHC ≥75% 才用**",
+      "與化療(FOLFOX/CAPOX)併用",
+      "與免疫檢查點抑制劑擇一"
+    ],
+    "warnings": [
+      "嚴重嘔吐無法進食",
+      "輸注反應",
+      "脫水"
+    ],
+    "lifestyle": [
+      "前用藥嚴格(止吐)",
+      "少量多餐",
+      "充足水份"
+    ],
+    "patient_edu_warnings": [
+      "胃癌新標準(CLDN18.2 陽性)",
+      "嘔吐是代表副作用,前用藥很重要"
+    ]
+  },
+  "9.20": {
+    "drug_class": "抗 CD20 單株抗體(第一代)",
+    "mechanism": "結合 CD20(B 細胞表現),誘導 ADCC、CDC,用於 B 細胞淋巴瘤、CLL、自體免疫疾病。",
+    "side_effects": [
+      {
+        "name": "輸注反應",
+        "frequency": "30%(首次)",
+        "timing": "輸注中",
+        "note": "代表性,後續減少"
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "包括 PCP、HBV 重激"
+      },
+      {
+        "name": "**HBV 重激**",
+        "frequency": "HBV(+) 病人高風險",
+        "timing": "用藥中或停藥後",
+        "note": "**篩檢必須**"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "高 tumor burden",
+        "timing": "首次治療",
+        "note": ""
+      },
+      {
+        "name": "PML(進行性多病灶腦白質病變)",
+        "frequency": "罕見",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下(延遲性)",
+        "frequency": "20%",
+        "timing": "用藥後 1-3 個月",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**HBV、HCV 篩檢必須**(陽性需抗病毒預防)",
+      "前用藥:acetaminophen + 抗組織胺 +/- 類固醇",
+      "首次輸注速度慢、住院觀察",
+      "預防 PCP"
+    ],
+    "warnings": [
+      "輸注中嚴重反應",
+      "黃疸、肝功能急速惡化 - HBV 重激",
+      "意識變化、視力異常 - PML",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "HBV 預防性藥不可漏",
+      "皮下劑型可 5 分鐘注射",
+      "避免活疫苗"
+    ],
+    "patient_edu_warnings": [
+      "**HBV 重激是嚴重副作用**,B 肝病人特別注意",
+      "首次輸注時間長",
+      "可能影響 6-12 個月免疫力"
+    ]
+  },
+  "9.34": {
+    "drug_class": "多重激酶 TKI",
+    "mechanism": "抑制 VEGFR、PDGFR、Raf、c-KIT,用於肝細胞癌、腎細胞癌、放射性碘抗藥分化型甲狀腺癌。",
+    "side_effects": [
+      {
+        "name": "手足症候群",
+        "frequency": "50%",
+        "timing": "Week 2-4",
+        "note": "代表性副作用,可能很嚴重"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "40%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "20%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "45%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "脫髮",
+        "frequency": "25%",
+        "timing": "Week 4-8",
+        "note": "輕度"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "血壓",
+      "肝功能",
+      "皮膚評估",
+      "**不可與高脂飲食併用**(影響吸收)"
+    ],
+    "warnings": [
+      "嚴重手足疼痛無法行走",
+      "嚴重腹瀉",
+      "黃疸",
+      "嚴重高血壓"
+    ],
+    "lifestyle": [
+      "**空腹服或低脂餐後**",
+      "手足保護:寬鬆鞋、保濕、避免摩擦",
+      "監測血壓",
+      "肝細胞癌病人注意肝功能"
+    ],
+    "patient_edu_warnings": [
+      "手足症候群是代表副作用,提前預防",
+      "肝細胞癌經典標靶藥",
+      "與 lenvatinib、ICI 等比較選擇"
+    ]
+  },
+  "9.36.1": {
+    "drug_class": "mTOR 抑制劑",
+    "mechanism": "抑制 mTORC1,用於 HR(+) 乳癌、晚期腎細胞癌、神經內分泌瘤。",
+    "side_effects": [
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "65%",
+        "timing": "Week 2-4",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "高血糖、高血脂",
+        "frequency": "30-50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染(包括非典型,如 PCP)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎(非感染性)",
+        "frequency": "10-15%",
+        "timing": "用藥後 8-12 週",
+        "note": "代表性副作用"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**口腔護理:預防性 dexamethasone 漱口水可降低黏膜炎 70%**",
+      "肺部症狀警覺、必要時 HRCT",
+      "血糖、血脂、肝功能",
+      "**避免活疫苗**"
+    ],
+    "warnings": [
+      "嚴重口腔潰瘍無法進食",
+      "新發呼吸困難、乾咳 - ILD",
+      "嚴重感染",
+      "嚴重皮疹"
+    ],
+    "lifestyle": [
+      "**dexamethasone 漱口水預防**(臨床試驗證實)",
+      "與食物無關但要規律時間",
+      "預防感染",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "**口腔黏膜炎可預防**:漱口水按時用",
+      "間質性肺炎雖較少但嚴重",
+      "感染風險長期存在"
+    ]
+  },
+  "9.36.2": {
+    "drug_class": "mTOR 抑制劑(兒童適應症)",
+    "mechanism": "與 9.36.1 同藥但用於結節性硬化症之 SEGA、腎血管肌脂肪瘤。",
+    "side_effects": [
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "60%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "兒童感染風險高"
+      },
+      {
+        "name": "皮疹、痤瘡",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血脂",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "白血球低下",
+        "frequency": "20%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "兒科監測",
+      "藥物濃度監測(目標 5-15 ng/mL)",
+      "口腔護理",
+      "預防感染"
+    ],
+    "warnings": [
+      "嚴重感染",
+      "嚴重口腔潰瘍",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "兒童家長配合度關鍵",
+      "藥物濃度抽血監測",
+      "預防感染"
+    ],
+    "patient_edu_warnings": [
+      "兒童適應症,劑量依年齡調整",
+      "結節性硬化症長期治療"
+    ]
+  },
+  "9.38": {
+    "drug_class": "mTOR 抑制劑(IV)",
+    "mechanism": "與 everolimus 同類但 IV 注射,用於晚期腎細胞癌(預後不良族群)。",
+    "side_effects": [
+      {
+        "name": "皮疹",
+        "frequency": "45%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "40%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血糖、高血脂",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10%",
+        "timing": "首次",
+        "note": ""
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "5-10%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "前用藥:抗組織胺",
+      "肺部症狀",
+      "血糖、血脂",
+      "口腔護理"
+    ],
+    "warnings": [
+      "新發呼吸困難",
+      "嚴重感染",
+      "輸注反應"
+    ],
+    "lifestyle": [
+      "預防感染",
+      "口腔護理",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "腎細胞癌預後不良族群選項",
+      "IV 給藥,需要每週回診"
+    ]
+  },
+  "9.41": {
+    "drug_class": "多重激酶 TKI(VEGFR)",
+    "mechanism": "抑制 VEGFR、PDGFR、c-KIT,用於晚期腎細胞癌、軟組織肉瘤。",
+    "side_effects": [
+      {
+        "name": "高血壓",
+        "frequency": "40%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": "**黑框警告致命性**"
+      },
+      {
+        "name": "頭痛、疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "髮色變化(灰白)",
+        "frequency": "40%",
+        "timing": "Week 4-8",
+        "note": "停藥可恢復"
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**肝功能基準與每月**(嚴重肝毒性致死報告)",
+      "血壓",
+      "ECG",
+      "**空腹服**"
+    ],
+    "warnings": [
+      "黃疸、暗尿 - 肝毒性立即停藥",
+      "嚴重高血壓",
+      "心悸、暈厥",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "**空腹服**(餐前 1 小時或餐後 2 小時)",
+      "整顆吞服",
+      "監測血壓",
+      "規律抽血肝功能"
+    ],
+    "patient_edu_warnings": [
+      "**肝毒性黑框警告**",
+      "髮色變化屬正常"
+    ]
+  },
+  "9.51": {
+    "drug_class": "多重激酶 TKI",
+    "mechanism": "抑制 VEGFR、PDGFR、FGFR、Raf、c-KIT,用於大腸直腸癌、GIST、肝細胞癌(後線)。",
+    "side_effects": [
+      {
+        "name": "手足症候群",
+        "frequency": "50%",
+        "timing": "Week 2-4",
+        "note": "代表性副作用,嚴重"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "30%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常(嚴重)",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": "黑框警告"
+      },
+      {
+        "name": "出血",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**肝功能黑框警告**",
+      "手足症候群嚴格管理",
+      "血壓",
+      "**3 週用 + 1 週休 = 1 cycle**"
+    ],
+    "warnings": [
+      "黃疸 - 肝毒性",
+      "嚴重手足疼痛",
+      "嚴重高血壓",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "**低脂早餐 30 分鐘內服**(高脂降低吸收)",
+      "整顆吞服",
+      "手足保護",
+      "監測血壓",
+      "用 3 週休 1 週"
+    ],
+    "patient_edu_warnings": [
+      "**肝毒性黑框警告**",
+      "後線治療,病人通常已多線",
+      "服藥週期要清楚"
+    ]
+  },
+  "9.71": {
+    "drug_class": "BCL-2 抑制劑",
+    "mechanism": "抑制 BCL-2(抗凋亡蛋白),恢復細胞凋亡,用於 CLL、AML。",
+    "side_effects": [
+      {
+        "name": "**腫瘤溶解症候群(TLS)**",
+        "frequency": "首劑高風險",
+        "timing": "首次治療",
+        "note": "**致命警告,需嚴格 ramp-up**"
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "60%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "35%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "貧血、血小板低下",
+        "frequency": "30%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**Ramp-up dose schedule**(20→50→100→200→400mg 每週加量)",
+      "TLS 高風險者:住院 + 充分水化 + allopurinol",
+      "電解質監測(高 K、高磷、低鈣)",
+      "**避免 CYP3A4 抑制劑**(增加血中濃度)",
+      "與 ibrutinib 等併用(CLL 維持)"
+    ],
+    "warnings": [
+      "首次治療後嚴重肌肉抽搐、心律不整 - TLS",
+      "尿少 - 急性腎衰",
+      "發燒",
+      "嚴重出血"
+    ],
+    "lifestyle": [
+      "**充分水化**(每天 >2L)",
+      "**隨餐服**(增加吸收)",
+      "整顆吞服",
+      "前 5 週嚴格按 ramp-up",
+      "避免 grapefruit"
+    ],
+    "patient_edu_warnings": [
+      "**TLS 致命警告**",
+      "首 5 週劑量逐步加,不可自行加量",
+      "CLL 治療突破性藥物"
+    ]
+  },
+  "9.76": {
+    "drug_class": "多重激酶 TKI(FLT3、KIT)",
+    "mechanism": "用於 FLT3(+) AML(誘導/緩解期)、肥大細胞病。",
+    "side_effects": [
+      {
+        "name": "噁心嘔吐",
+        "frequency": "80%",
+        "timing": "用藥後",
+        "note": "強致吐"
+      },
+      {
+        "name": "黏膜炎",
+        "frequency": "60%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "頭痛、肌肉痛",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "發燒",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "5%",
+        "timing": "用藥中",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "FLT3 突變陽性",
+      "ECG、電解質",
+      "**隨餐服**",
+      "前用藥強效止吐"
+    ],
+    "warnings": [
+      "持續嘔吐無法服藥",
+      "心悸、暈厥",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "**隨餐服**",
+      "前用藥止吐",
+      "預防感染"
+    ],
+    "patient_edu_warnings": [
+      "FLT3(+) AML 誘導期",
+      "嘔吐嚴重,前用藥很重要"
+    ]
+  },
+  "9.86": {
+    "drug_class": "多重激酶 TKI(RET、VEGFR、EGFR)",
+    "mechanism": "抑制 RET 突變,用於甲狀腺髓質癌。",
+    "side_effects": [
+      {
+        "name": "QT 間期延長",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": "**黑框警告**"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "55%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "光敏感",
+        "frequency": "30%",
+        "timing": "用藥中",
+        "note": "嚴重防曬"
+      },
+      {
+        "name": "間質性肺炎",
+        "frequency": "<2%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**ECG 嚴格監測**(基準、Day 7、4、12 週後)",
+      "電解質維持",
+      "甲狀腺髓質癌(MTC)RET 突變檢測"
+    ],
+    "warnings": [
+      "心悸、暈厥",
+      "嚴重防曬不足",
+      "新發呼吸困難"
+    ],
+    "lifestyle": [
+      "嚴格防曬(SPF 50+、長袖)",
+      "與食物無關",
+      "規律 ECG"
+    ],
+    "patient_edu_warnings": [
+      "**QTc 延長黑框警告**",
+      "MTC 罕見癌種"
+    ]
+  },
+  "9.112": {
+    "drug_class": "HER2 雙抗體皮下複方",
+    "mechanism": "Pertuzumab + Trastuzumab 皮下注射複方,用於 HER2(+) 乳癌(取代 IV 雙抗體)。",
+    "side_effects": [
+      {
+        "name": "注射部位反應",
+        "frequency": "10-15%",
+        "timing": "注射後",
+        "note": "局部紅腫、疼痛"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "55%(併用化療)",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "脫髮(併用化療)",
+        "frequency": "60%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "心臟毒性",
+        "frequency": "1-2%",
+        "timing": "累積後",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "20-30%",
+        "timing": "Day 7-21",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "心臟超音波(基準、每 3-6 個月)",
+      "5-8 分鐘皮下注射(取代 IV 數小時)",
+      "與化療併用"
+    ],
+    "warnings": [
+      "嚴重腹瀉",
+      "活動後氣喘 - 心衰",
+      "嚴重注射部位反應"
+    ],
+    "lifestyle": [
+      "皮下注射輪換部位(大腿)",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "HER2(+) 乳癌新方便選項",
+      "省下 IV 注射時間,適合維持期"
+    ]
+  },
+  "9.117": {
+    "drug_class": "XPO1 抑制劑",
+    "mechanism": "抑制 nuclear export(XPO1),用於 MM 多線抗藥。",
+    "side_effects": [
+      {
+        "name": "噁心嘔吐",
+        "frequency": ">70%",
+        "timing": "用藥後",
+        "note": "嚴重,需強效止吐"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "食慾下降、體重減輕",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "血小板低下",
+        "frequency": "70%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "嗜中性球低下",
+        "frequency": "40%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "低鈉血症",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "認知異常、頭暈",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**前用藥:olanzapine、5HT3 + 類固醇 + acetaminophen**",
+      "電解質(尤其鈉)",
+      "CBC",
+      "認知評估"
+    ],
+    "warnings": [
+      "持續嘔吐無法進食",
+      "嚴重低鈉(意識變化)",
+      "嚴重出血",
+      "嚴重認知異常"
+    ],
+    "lifestyle": [
+      "充分水化",
+      "前用藥嚴格(止吐)",
+      "與食物無關",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "MM 多線抗藥後選項,毒性大",
+      "嘔吐管理是關鍵",
+      "病人通常已虛弱"
+    ]
+  },
+  "9.122": {
+    "drug_class": "STAMP 機轉 BCR-ABL 抑制劑",
+    "mechanism": "與其他 TKI 不同的結合位(myristoyl pocket),克服 T315I 等抗藥突變,用於 CML 多線抗藥。",
+    "side_effects": [
+      {
+        "name": "肌肉骨骼痛",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "20%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "胰臟炎(amylase/lipase 上升)",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "高血壓",
+        "frequency": "15%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "QT 延長",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "30%",
+        "timing": "Cycle 1",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "肝功能、amylase/lipase",
+      "ECG",
+      "**空腹服**(食物降低吸收)",
+      "與其他 TKI 不可同時"
+    ],
+    "warnings": [
+      "嚴重腹痛 - 胰臟炎",
+      "心悸、暈厥",
+      "嚴重高血壓"
+    ],
+    "lifestyle": [
+      "**空腹服**(餐前 1 小時或餐後 2 小時)",
+      "規律抽血"
+    ],
+    "patient_edu_warnings": [
+      "T315I 等多線抗藥的新選項",
+      "比 ponatinib 心血管副作用低"
+    ]
+  },
+  "9.128": {
+    "drug_class": "HDAC 抑制劑",
+    "mechanism": "口服組織蛋白去乙醯化酶(HDAC)抑制劑,用於 HR(+)/HER2(-) 乳癌(與 exemestane 併用)。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制(尤其血小板)",
+        "frequency": "60%",
+        "timing": "Cycle 1-2",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "<5%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "CBC、肝功能",
+      "ECG、電解質",
+      "與 exemestane 併用",
+      "與 everolimus 二者擇一"
+    ],
+    "warnings": [
+      "嚴重出血、瘀青",
+      "心悸、暈厥",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "與食物無關",
+      "週 2 次服(週一、週四)",
+      "嚴格避孕"
+    ],
+    "patient_edu_warnings": [
+      "亞洲開發藥物,在台灣用於乳癌",
+      "服藥頻率特殊(週 2 次)"
+    ]
+  },
+  "9.129": {
+    "drug_class": "PI3Kα 抑制劑",
+    "mechanism": "選擇性 PI3Kα 抑制劑,用於 PIK3CA 突變的 HR(+)/HER2(-) 乳癌(與 fulvestrant 併用)。",
+    "side_effects": [
+      {
+        "name": "高血糖",
+        "frequency": ">80%",
+        "timing": "Day 1-14",
+        "note": "**代表性,可能 DKA**"
+      },
+      {
+        "name": "皮疹(包括嚴重 SJS)",
+        "frequency": "55%",
+        "timing": "Day 7-21",
+        "note": "**罕見 SJS/TEN 致死**"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "30%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "噁心、食慾下降",
+        "frequency": "45%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "**血糖嚴格監測**(基準、每週前 4 週、之後每月)",
+      "皮疹(可預防性 cetirizine 抗組織胺)",
+      "PIK3CA 突變陽性必須",
+      "與 fulvestrant 併用"
+    ],
+    "warnings": [
+      "頻尿、口渴、噁心 - 高血糖/DKA",
+      "皮疹擴散、口腔潰瘍 - **SJS 警訊**",
+      "嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "**監測血糖**(尤其糖尿病病人)",
+      "**隨餐服**",
+      "整顆吞服",
+      "預防性抗組織胺(降低皮疹)"
+    ],
+    "patient_edu_warnings": [
+      "**血糖監測必須**,糖尿病風險增加",
+      "**皮膚嚴重反應警覺**",
+      "PIK3CA 檢測陽性才用"
+    ]
+  },
+  "9.32.1": {
+    "drug_class": "BCR-ABL TKI(第二代) (200mg)",
+    "mechanism": "比 imatinib 強,用於 CML(包括 imatinib 抗藥)。",
+    "side_effects": [
+      {
+        "name": "QT 間期延長",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": "黑框警告,可致命心律不整"
+      },
+      {
+        "name": "高血糖",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "頭痛",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "胰臟炎(amylase/lipase 上升)",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "周邊動脈疾病、心血管事件",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "心血管風險病人慎用"
+      }
+    ],
+    "monitoring": [
+      "**ECG 監測**(基準、用藥 7 天、每變動劑量後)",
+      "電解質維持(K、Mg)",
+      "每月血糖、肝功能、amylase/lipase",
+      "心血管風險評估",
+      "**空腹服**(餐前 1 小時或餐後 2 小時)"
+    ],
+    "warnings": [
+      "心悸、暈厥 - QT 延長性心律不整",
+      "嚴重腹痛 - 胰臟炎",
+      "下肢冰冷、跛行 - 周邊動脈疾病",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**嚴格空腹**(食物大幅增加吸收與毒性)",
+      "與其他延長 QTc 藥避免",
+      "規律 ECG",
+      "心血管病史病人風險較高"
+    ],
+    "patient_edu_warnings": [
+      "QT 延長黑框警告,空腹服很重要",
+      "心血管病人選 dasatinib 較安全",
+      "用藥晝夜兩次,空腹時間規律"
+    ]
+  },
+  "9.32.2": {
+    "drug_class": "BCR-ABL TKI(第二代) (150mg,慢性期)",
+    "mechanism": "比 imatinib 強,用於 CML(包括 imatinib 抗藥)。",
+    "side_effects": [
+      {
+        "name": "QT 間期延長",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": "黑框警告,可致命心律不整"
+      },
+      {
+        "name": "高血糖",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "Day 7-21",
+        "note": ""
+      },
+      {
+        "name": "頭痛",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "胰臟炎(amylase/lipase 上升)",
+        "frequency": "10%",
+        "timing": "用藥中",
+        "note": ""
+      },
+      {
+        "name": "周邊動脈疾病、心血管事件",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "心血管風險病人慎用"
+      }
+    ],
+    "monitoring": [
+      "**ECG 監測**(基準、用藥 7 天、每變動劑量後)",
+      "電解質維持(K、Mg)",
+      "每月血糖、肝功能、amylase/lipase",
+      "心血管風險評估",
+      "**空腹服**(餐前 1 小時或餐後 2 小時)"
+    ],
+    "warnings": [
+      "心悸、暈厥 - QT 延長性心律不整",
+      "嚴重腹痛 - 胰臟炎",
+      "下肢冰冷、跛行 - 周邊動脈疾病",
+      "黃疸"
+    ],
+    "lifestyle": [
+      "**嚴格空腹**(食物大幅增加吸收與毒性)",
+      "與其他延長 QTc 藥避免",
+      "規律 ECG",
+      "心血管病史病人風險較高"
+    ],
+    "patient_edu_warnings": [
+      "QT 延長黑框警告,空腹服很重要",
+      "心血管病人選 dasatinib 較安全",
+      "用藥晝夜兩次,空腹時間規律"
+    ]
   }
 };
-const educationParentMap = {"9.5": ["9.5.1", "9.5.2"], "9.12": ["9.12.1", "9.12.2"], "9.16": ["9.16.1", "9.16.2"], "9.44": ["9.44.1", "9.44.2"]};
+const educationParentMap = {"9.5": ["9.5.1", "9.5.2"], "9.12": ["9.12.1", "9.12.2"], "9.16": ["9.16.1", "9.16.2"], "9.32": ["9.32.1", "9.32.2"], "9.36": ["9.36.1", "9.36.2"], "9.44": ["9.44.1", "9.44.2"]};
 
 const drugs = [
   {
