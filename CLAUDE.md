@@ -121,6 +121,16 @@
     - 從 location.hostname 推斷 GitHub repo (限 GitHub Pages 環境)
     - 失敗時靜默,不影響使用
 
+26. **【V3.7】教學資料按鈕的事件冒泡問題**
+    - 症狀:點教學資料按鈕反而觸發了藥物展開/收合
+    - 原因:藥物 header 整塊綁了 click handler,按鈕在 header 內按下會冒泡
+    - 做法:用事件委派(document level)+ stopPropagation() 阻止冒泡
+
+27. **【V3.7】教學資料 JS 沒包 <script> 標籤**
+    - 症狀:openEducation is not defined
+    - 原因:程式插入 HTML 時忘了在新區塊外圍加 <script> 標籤,造成 JS 變成 HTML body 文字
+    - 做法:確保插入位置前後是 </script> + <script> 配對,或自己包
+
 ## 四、版本歷程
 
 | 版本 | 重點 |

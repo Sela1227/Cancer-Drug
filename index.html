@@ -1199,6 +1199,271 @@
     color: var(--primary-darker);
   }
 
+
+  /* 教學資料按鈕 */
+  .edu-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    flex-shrink: 0;
+    margin-top: 0;
+    margin-right: 4px;
+  }
+  
+  .edu-btn:hover {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+  }
+  
+  .edu-btn:active {
+    transform: scale(0.95);
+  }
+  
+  /* 教學資料對話框 */
+  #edu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 480px;
+    background: var(--surface);
+    z-index: 350;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: -4px 0 24px rgba(31,58,77,0.2);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #edu-panel.open { transform: translateX(0); }
+  
+  #edu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 58, 77, 0);
+    z-index: 340;
+    pointer-events: none;
+    transition: background 0.25s ease;
+  }
+  
+  #edu-overlay.open {
+    background: rgba(31, 58, 77, 0.5);
+    pointer-events: auto;
+  }
+  
+  .edu-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+    gap: 12px;
+  }
+  
+  .edu-header-content { flex: 1; min-width: 0; }
+  
+  .edu-header-num {
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+  }
+  
+  .edu-header-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 2px;
+    word-break: break-word;
+  }
+  
+  .edu-header-class {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12px;
+    padding: 3px 10px;
+    background: var(--primary-soft);
+    color: var(--primary-darker);
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  
+  .edu-body { padding: 16px 20px 60px; flex: 1; }
+  
+  .edu-section {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  
+  .edu-section:last-child { border-bottom: none; }
+  
+  .edu-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-darker);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  
+  .edu-section-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .edu-mechanism {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 6px;
+    border-left: 2px solid var(--primary);
+  }
+  
+  .edu-side-effect {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line-2);
+  }
+  
+  .edu-side-effect:last-child { border-bottom: none; }
+  
+  .edu-side-effect-name {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  
+  .edu-side-effect-meta {
+    font-size: 11px;
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  
+  .edu-side-effect-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  
+  .edu-side-effect-meta b {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  
+  .edu-side-effect-note {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    font-style: italic;
+  }
+  
+  .edu-bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .edu-bullet-list li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.7;
+    border-bottom: 1px dashed var(--line-3);
+  }
+  
+  .edu-bullet-list li:last-child { border-bottom: none; }
+  
+  .edu-bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  
+  .edu-warning-list li::before {
+    content: "⚠";
+    color: var(--warn);
+    font-size: 11px;
+  }
+  
+  .edu-warning-block {
+    background: var(--warn-bg);
+    border-left: 2px solid var(--warn);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+  }
+  
+  .edu-warning-block .edu-bullet-list li {
+    border-bottom: 1px dashed rgba(198, 106, 44, 0.2);
+  }
+  
+  .edu-edu-block {
+    background: linear-gradient(to right, rgba(67, 111, 138, 0.06), transparent);
+    border-left: 2px solid var(--primary);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+  }
+  
+  .edu-multi-section {
+    background: var(--surface-2);
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .edu-multi-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-darker);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  
+  /* 父項目教學資料,多個子藥物時的分隔 */
+  .edu-child-divider {
+    margin: 16px -20px;
+    padding: 12px 20px;
+    background: var(--primary-darker);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  @media (max-width: 768px) {
+    #edu-panel { max-width: 100%; }
+  }
+
 </style>
 </head>
 <body>
@@ -1232,7 +1497,7 @@
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v3.6</span>
+        <span class="brand-version">v3.7</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -1333,6 +1598,24 @@
   </div>
 </main>
 
+
+<div id="edu-overlay"></div>
+<div id="edu-panel">
+  <div class="edu-header">
+    <div class="edu-header-content">
+      <div class="edu-header-num" id="edu-num"></div>
+      <div class="edu-header-title" id="edu-title"></div>
+      <div class="edu-header-class" id="edu-class"></div>
+    </div>
+    <button class="icon-btn" id="edu-close" aria-label="關閉" style="color: var(--ink-2);">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="M4 4l10 10M14 4L4 14"/>
+      </svg>
+    </button>
+  </div>
+  <div class="edu-body" id="edu-body"></div>
+</div>
+
 <button class="fab" id="back-to-top" aria-label="回到頂端">
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M9 14V4M4 8l5-5 5 5"/>
@@ -1383,6 +1666,2032 @@
 </div>
 
 <script>
+const drugEducation = {
+  "9.2": {
+    "drug_class": "鉑類化合物 (Platinum compound)",
+    "mechanism": "與 DNA 形成交聯,干擾 DNA 複製與轉錄,造成腫瘤細胞死亡。為 cisplatin 的較不腎毒性類似藥,適用於腎功能不佳患者。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "70%以上",
+        "timing": "Day 14-21 最低點",
+        "note": "血小板下降為主,白血球次之"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "70%",
+        "timing": "用藥後數小時",
+        "note": "中度致吐性,需預防性止吐藥"
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "20-30%",
+        "timing": "累積劑量後",
+        "note": "手指腳趾麻木,可能不可逆"
+      },
+      {
+        "name": "過敏反應",
+        "frequency": "5-10%",
+        "timing": "多次治療後",
+        "note": "皮疹、支氣管痙攣、低血壓,使用 6-8 次後風險增加"
+      },
+      {
+        "name": "腎毒性",
+        "frequency": "<10%",
+        "timing": "累積後",
+        "note": "比 cisplatin 低很多,但仍需監測腎功能"
+      }
+    ],
+    "monitoring": [
+      "每次治療前查 CBC、肝腎功能、電解質",
+      "依 Calvert formula 計算劑量(以 GFR 為基礎)",
+      "監測血小板與白血球最低點(通常第 2-3 週)",
+      "累積劑量大者注意聽力檢查(雖比 cisplatin 少)"
+    ],
+    "warnings": [
+      "發燒 ≥38°C - 中性球低下發燒(緊急情況)",
+      "全身性過敏症狀(蕁麻疹、呼吸困難、面部腫脹) - 立即停藥",
+      "牙齦或皮下不明出血、瘀青擴散 - 血小板過低警訊",
+      "排尿減少、下肢水腫 - 腎功能急性惡化"
+    ],
+    "lifestyle": [
+      "充足水份攝取(每日 2000-2500ml)",
+      "避免擁擠場所、戴口罩",
+      "用軟毛牙刷、避免刮傷",
+      "性行為使用避孕措施(治療期間及結束後 6 個月)",
+      "可能造成不孕,治療前可諮詢生殖醫學"
+    ],
+    "patient_edu_warnings": [
+      "與 cisplatin 不同藥,但同類,部分病人會混淆",
+      "強調過敏反應晚期才出現,即使前幾次沒事仍要警覺",
+      "周邊神經病變可能持續數月才恢復,治療結束不會立即消失"
+    ]
+  },
+  "9.3": {
+    "drug_class": "紫杉烷類 (Taxane)",
+    "mechanism": "與 β-tubulin 結合,穩定微管導致細胞週期停滯於 G2/M 期,引發細胞凋亡。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制(嗜中性球低下)",
+        "frequency": ">90%",
+        "timing": "Day 7-10 最低",
+        "note": "Grade 4 達 75%,需警覺發燒"
+      },
+      {
+        "name": "過敏反應",
+        "frequency": "5-10%(預防後)",
+        "timing": "前 2 次治療",
+        "note": "需於前 1 天起服 dexamethasone 8mg BID 共 3 天"
+      },
+      {
+        "name": "體液滯留(周邊水腫、肋膜積水)",
+        "frequency": "累積後常見",
+        "timing": "累積劑量 >400mg/m²",
+        "note": "預防性類固醇可減輕"
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "30-50%",
+        "timing": "累積後",
+        "note": "感覺異常為主"
+      },
+      {
+        "name": "皮膚變化",
+        "frequency": "30%",
+        "timing": "數週後",
+        "note": "指甲變色、變脆、剝落,皮膚色素沉著"
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "30%",
+        "timing": "Day 5-10",
+        "note": "輕中度為主"
+      },
+      {
+        "name": "肌肉骨骼疼痛",
+        "frequency": "15%",
+        "timing": "Day 2-5",
+        "note": "肌痛、關節痛,類似流感樣症狀"
+      }
+    ],
+    "monitoring": [
+      "前 1 天起預服類固醇(dexamethasone 8mg BID × 3 天)以預防過敏與水腫",
+      "每次治療前查 CBC、肝功能",
+      "肝功能異常需減量(AST/ALT >1.5× 上限或 ALK-P >2.5×)",
+      "累積劑量達 400mg/m² 時加強水腫評估"
+    ],
+    "warnings": [
+      "發燒 ≥38°C(治療後 7-10 天最危險) - 立即就醫",
+      "雙腳明顯水腫、呼吸困難 - 體液滯留警訊",
+      "輸注中胸悶、皮疹、低血壓 - 過敏反應",
+      "嚴重口腔潰瘍導致無法進食"
+    ],
+    "lifestyle": [
+      "預服類固醇要按時服用,別漏服",
+      "保護指甲(避免美甲、戴手套做家事)",
+      "口腔護理:溫鹽水漱口、軟毛牙刷",
+      "穿寬鬆衣物減少水腫不適",
+      "暫停飲酒(藥物影響肝功能)"
+    ],
+    "patient_edu_warnings": [
+      "強調發燒立即就醫,Day 7-10 最危險",
+      "提醒類固醇前一天就要開始服用",
+      "肌肉痛常見且難避免,可預先告知讓病人有心理準備"
+    ]
+  },
+  "9.4": {
+    "drug_class": "嘧啶類核苷酸抑制劑 (Pyrimidine antimetabolite)",
+    "mechanism": "為去氧胞嘧啶核苷類似物,在細胞內磷酸化後抑制 DNA 合成。具放射敏感化效應。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "60-70%",
+        "timing": "Day 8-14",
+        "note": "血小板下降較明顯"
+      },
+      {
+        "name": "類流感症狀",
+        "frequency": "20%",
+        "timing": "用藥後數小時至 24 小時",
+        "note": "發燒、肌痛、頭痛,自限性"
+      },
+      {
+        "name": "肝功能異常(肝酵素上升)",
+        "frequency": "60%(輕度)",
+        "timing": "累積後",
+        "note": "通常無症狀,可恢復"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "30%",
+        "timing": "1-2 週後",
+        "note": "輕度為主"
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "10-20%",
+        "timing": "累積後",
+        "note": "雙下肢為主"
+      },
+      {
+        "name": "肺毒性(間質性肺炎)",
+        "frequency": "<5%但嚴重",
+        "timing": "任何時間",
+        "note": "呼吸困難需立即停藥"
+      },
+      {
+        "name": "血栓性微血管病變(TMA)",
+        "frequency": "罕見但致命",
+        "timing": "累積後",
+        "note": "溶血性貧血、腎衰、血小板低"
+      }
+    ],
+    "monitoring": [
+      "每次治療前 CBC、肝腎功能",
+      "監測尿蛋白(可能 TMA 早期跡象)",
+      "肺部症狀必要時 HRCT",
+      "膽道癌患者注意膽道感染風險(因其原本膽管問題)"
+    ],
+    "warnings": [
+      "發燒、寒顫(類流感樣) - 通常可自行緩解,但發燒 >38.5°C 仍需就醫排除感染",
+      "新發呼吸喘、乾咳 - 警覺肺毒性,立即停藥就醫",
+      "下肢明顯水腫、尿量減少 - 警覺 TMA",
+      "牙齦出血、瘀青 - 血小板低警訊"
+    ],
+    "lifestyle": [
+      "用藥後 24 小時內可能類流感症狀,可服用 acetaminophen 緩解",
+      "保持口腔衛生",
+      "充足休息與水分",
+      "避免感染源"
+    ],
+    "patient_edu_warnings": [
+      "類流感症狀常見,讓病人有預期,別誤以為感染",
+      "肺毒性雖少但致命,呼吸喘要警惕",
+      "膽道癌病患特別注意膽道感染症狀"
+    ]
+  },
+  "9.5.1": {
+    "drug_class": "紫杉烷類 (Taxane)",
+    "mechanism": "與 β-tubulin 結合穩定微管,阻止微管解聚,導致細胞週期停滯與凋亡。",
+    "side_effects": [
+      {
+        "name": "過敏反應",
+        "frequency": "10%(預防後降到 1-2%)",
+        "timing": "輸注初期",
+        "note": "由溶劑 Cremophor EL 引起,需前用藥"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": ">80%",
+        "timing": "Day 8-11",
+        "note": "嗜中性球低下為主"
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "60%",
+        "timing": "累積後",
+        "note": "感覺異常為主,可能不可逆"
+      },
+      {
+        "name": "肌肉關節痛",
+        "frequency": "60%",
+        "timing": "Day 2-5",
+        "note": "可服 NSAID 緩解"
+      },
+      {
+        "name": "脫髮",
+        "frequency": ">90%",
+        "timing": "Week 2-3",
+        "note": "通常完全脫髮,治療結束會長回"
+      },
+      {
+        "name": "心律異常",
+        "frequency": "5%",
+        "timing": "輸注中",
+        "note": "心搏過慢、傳導阻滯"
+      },
+      {
+        "name": "口腔黏膜炎、腹瀉",
+        "frequency": "30%",
+        "timing": "Day 5-10",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "需前用藥:dexamethasone、diphenhydramine、ranitidine 預防過敏",
+      "輸注前 30 分鐘觀察生命徵象",
+      "每次治療前 CBC、肝功能",
+      "周邊神經病變評估(每次回診)"
+    ],
+    "warnings": [
+      "輸注中胸悶、呼吸困難、皮疹 - 立即停藥",
+      "發燒 ≥38°C(嗜中性球最低點 Day 8-11) - 緊急就醫",
+      "心悸、頭暈、暈厥 - 心律異常",
+      "手腳麻木嚴重影響日常 - 神經病變需告知醫師考慮減量"
+    ],
+    "lifestyle": [
+      "預服藥物按時不可省略",
+      "脫髮為過渡性,可準備假髮或頭巾",
+      "穿著寬鬆鞋襪、保護手腳避免外傷(神經病變降低敏感度)",
+      "暫停飲酒、注意肝功能"
+    ],
+    "patient_edu_warnings": [
+      "脫髮幾乎不可避免,提前心理建設很重要",
+      "周邊神經病變可能影響日常活動(扣鈕扣、開門)",
+      "強調預服類固醇的重要性"
+    ]
+  },
+  "9.5.2": {
+    "drug_class": "紫杉烷類 - 白蛋白結合型 (Albumin-bound taxane)",
+    "mechanism": "與一般 paclitaxel 相同(微管穩定),但用白蛋白載體取代 Cremophor EL 溶劑,降低過敏風險,可使用較高劑量。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">80%",
+        "timing": "Day 8-11",
+        "note": "比一般 paclitaxel 略重(因可用較高劑量)"
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "60-70%",
+        "timing": "累積後",
+        "note": "比一般 paclitaxel 略多但較易恢復"
+      },
+      {
+        "name": "脫髮",
+        "frequency": "85%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "腹瀉、噁心",
+        "frequency": "30-50%",
+        "timing": "Day 1-7",
+        "note": ""
+      },
+      {
+        "name": "過敏反應",
+        "frequency": "<5%",
+        "timing": "輸注中",
+        "note": "比一般 paclitaxel 低"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "不需前用藥(無 Cremophor 過敏問題)",
+      "每次 CBC、肝功能",
+      "胰腺癌使用時注意營養狀態"
+    ],
+    "warnings": [
+      "發燒 ≥38°C - 緊急就醫",
+      "嚴重腹瀉(每天 >7 次或脫水) - 就醫補液",
+      "手腳麻木嚴重影響日常"
+    ],
+    "lifestyle": [
+      "胰腺癌病患:配合營養補充、少量多餐",
+      "注意手足保護",
+      "脫髮預期"
+    ],
+    "patient_edu_warnings": [
+      "強調此為新型紫杉醇,雖然過敏少但仍有骨髓抑制",
+      "胰腺癌病患整體狀況差,留意脫水、感染"
+    ]
+  },
+  "9.9": {
+    "drug_class": "長春花鹼類 (Vinca alkaloid)",
+    "mechanism": "與 tubulin 結合阻止微管聚合,使細胞週期停滯於有絲分裂期。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">80%",
+        "timing": "Day 7-10",
+        "note": "嗜中性球低下為主"
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "20-30%",
+        "timing": "累積後",
+        "note": "比 paclitaxel 輕"
+      },
+      {
+        "name": "便秘",
+        "frequency": "30-40%",
+        "timing": "用藥後數天",
+        "note": "嚴重時可能腸阻塞"
+      },
+      {
+        "name": "靜脈炎(注射部位)",
+        "frequency": "30%",
+        "timing": "輸注後",
+        "note": "嚴重外滲會組織壞死,屬泡疹劑(vesicant)"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "30%",
+        "timing": "用藥當天",
+        "note": "輕度致吐性"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝功能、神經學評估",
+      "注射部位嚴格中心靜脈導管或大靜脈",
+      "監測排便狀況(便秘預防)",
+      "外滲處置:立即停止輸注、抽吸殘餘藥物、熱敷"
+    ],
+    "warnings": [
+      "注射部位疼痛、紅腫擴散 - 外滲緊急處置",
+      "腹脹、無排便超過 3 天 - 便秘性腸阻塞",
+      "發燒 ≥38°C - 中性球低下發燒",
+      "嚴重手腳麻木無力 - 神經毒性"
+    ],
+    "lifestyle": [
+      "高纖飲食、充足水份預防便秘",
+      "必要時使用軟便劑(stool softener)",
+      "避免注射部位活動過度",
+      "口服劑型需整顆吞服勿咬碎"
+    ],
+    "patient_edu_warnings": [
+      "便秘是主要副作用,提早預防比治療容易",
+      "外滲緊急性強調(立即叫護理師)",
+      "口服與注射不可同時使用"
+    ]
+  },
+  "9.10": {
+    "drug_class": "鉑類化合物 (Platinum compound)",
+    "mechanism": "與 DNA 形成交聯(類似 cisplatin),但較不腎毒性。為大腸直腸癌標準用藥。",
+    "side_effects": [
+      {
+        "name": "急性冷誘發感覺異常",
+        "frequency": ">90%",
+        "timing": "輸注中至 1-2 天內",
+        "note": "特徵性副作用:接觸冷物或喝冷飲時喉嚨、手指刺痛"
+      },
+      {
+        "name": "慢性周邊神經病變",
+        "frequency": "50%(累積劑量 >800mg/m²)",
+        "timing": "累積後",
+        "note": "可能不可逆,影響精細動作"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "60%",
+        "timing": "Day 10-14",
+        "note": "比 carboplatin 輕"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "65%",
+        "timing": "用藥當天",
+        "note": "中度致吐性"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "40%",
+        "timing": "Day 3-5",
+        "note": "FOLFOX 合併 5-FU 時更常見"
+      },
+      {
+        "name": "過敏反應",
+        "frequency": "10%(累積後)",
+        "timing": "通常 6-8 次後",
+        "note": "可能延遲性"
+      },
+      {
+        "name": "肝竇阻塞症候群(SOS)",
+        "frequency": "累積後",
+        "timing": "長期使用",
+        "note": "影響後續肝切除手術"
+      }
+    ],
+    "monitoring": [
+      "每次治療前 CBC、肝腎功能",
+      "神經學評估(冷誘發症狀問診)",
+      "累積劑量達 850mg/m² 時神經病變風險高",
+      "肝轉移病患若考慮手術,評估肝臟 SOS 風險"
+    ],
+    "warnings": [
+      "輸注中下顎痙攣、吞嚥困難 - 急性神經毒性",
+      "全身癢、皮疹、呼吸喘 - 過敏反應(累積後)",
+      "嚴重腹瀉合併脫水 - 可能合併 5-FU 毒性",
+      "嚴重周邊麻木無法做精細動作 - 考慮減量或停藥"
+    ],
+    "lifestyle": [
+      "輸注期間及輸注後 3-5 天避免冷飲、冷物(包括冰箱拿出的食物)",
+      "穿手套拿冷藏物品",
+      "戴手套圍巾避免冷風",
+      "冷天外出加強保暖",
+      "用溫水洗手、漱口"
+    ],
+    "patient_edu_warnings": [
+      "強調冷誘發症狀的特殊性,讓病人預期(很多病人因此驚慌就醫)",
+      "周邊神經病變累積後可能不可逆,影響日常如扣鈕扣、寫字",
+      "FOLFOX 療程通常 12 次為限,過量增加神經病變風險"
+    ]
+  },
+  "9.11": {
+    "drug_class": "口服 5-FU 前驅藥",
+    "mechanism": "Tegafur 在體內轉換為 5-FU,Uracil 抑制 5-FU 代謝延長作用時間,屬抗代謝劑(嘧啶類)。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制(輕度)",
+        "frequency": "30%",
+        "timing": "持續用藥後",
+        "note": "比注射 5-FU 輕"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30-40%",
+        "timing": "Week 2-3",
+        "note": "需注意脫水"
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "20%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "手足症候群",
+        "frequency": "10-20%",
+        "timing": "累積後",
+        "note": "手腳紅腫、脫皮、刺痛"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": "通常輕度"
+      },
+      {
+        "name": "色素沉著",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": "皮膚、指甲變黑"
+      }
+    ],
+    "monitoring": [
+      "每月 CBC、肝功能",
+      "手足皮膚變化評估",
+      "與 warfarin 併用會增加抗凝效果(注意 INR)"
+    ],
+    "warnings": [
+      "嚴重腹瀉 >7 次/天 - 立即就醫補液",
+      "嚴重口腔潰瘍無法進食",
+      "手足紅腫疼痛無法行走 - 手足症候群 grade 3",
+      "牙齦出血、瘀青 - 血小板低"
+    ],
+    "lifestyle": [
+      "餐後服藥減少消化道不適",
+      "手腳保濕、避免摩擦熱(穿寬鬆鞋、戴手套做家事)",
+      "口腔衛生:溫鹽水漱口、用軟牙刷",
+      "避免日曬(色素沉著)",
+      "嚴禁與 warfarin 自行併用"
+    ],
+    "patient_edu_warnings": [
+      "口服化療仍是化療,不是『比較輕』的藥",
+      "手足症候群最常見,提前預防勝於治療",
+      "藥物互動多,所有用藥(包括補品)都要告知醫師"
+    ]
+  },
+  "9.12.1": {
+    "drug_class": "拓樸異構酶 I 抑制劑",
+    "mechanism": "抑制 topoisomerase I,造成 DNA 雙股斷裂,主要 metabolite SN-38 為活性代謝物。",
+    "side_effects": [
+      {
+        "name": "腹瀉(早發或晚發)",
+        "frequency": ">80%",
+        "timing": "早發:輸注中-24h內(膽鹼性);晚發:24h後(累積性)",
+        "note": "晚發性腹瀉可致死"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "60%",
+        "timing": "Day 8-14",
+        "note": "嗜中性球低下"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "60%",
+        "timing": "用藥當天",
+        "note": "中度致吐性"
+      },
+      {
+        "name": "膽鹼性症候群",
+        "frequency": "20%",
+        "timing": "輸注中",
+        "note": "腹痛、流汗、流鼻水、流淚,給 atropine 緩解"
+      },
+      {
+        "name": "脫髮",
+        "frequency": "60%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "70%",
+        "timing": "用藥後 1 週",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝功能、bilirubin",
+      "UGT1A1 基因型(*28/*28 同型結合者風險高,可能需減量)",
+      "監測腹瀉嚴重度與時間點",
+      "監測脫水徵象"
+    ],
+    "warnings": [
+      "腹瀉超過 24 小時或每天 >7 次 - 緊急就醫,可能脫水休克",
+      "腹瀉合併發燒 - 嗜中性球低下發燒合併腹瀉,致死率高",
+      "輸注中腹痛、大量流汗 - 膽鹼性症候群,通常給 atropine 後緩解",
+      "嚴重虛弱無法進食 - 脫水"
+    ],
+    "lifestyle": [
+      "家中常備 loperamide(易蒙停),腹瀉首次出現立即服用 4mg,之後每 2 小時 2mg(每天最多 16mg)",
+      "腹瀉時清淡飲食、補充電解質飲料",
+      "避免乳製品、油膩、高纖食物(腹瀉期間)",
+      "腹瀉症狀消失 12 小時後才能停 loperamide",
+      "若用藥前 24 小時內未排便,先評估再給藥"
+    ],
+    "patient_edu_warnings": [
+      "晚發性腹瀉是 irinotecan 的代表性副作用,致死案例不少",
+      "病人必須學會自己處理早期腹瀉(loperamide)",
+      "強調腹瀉合併發燒是緊急狀況",
+      "UGT1A1 基因檢測建議"
+    ]
+  },
+  "9.12.2": {
+    "drug_class": "拓樸異構酶 I 抑制劑(微脂體)",
+    "mechanism": "Irinotecan 包覆於微脂體中,延長半衰期,主要用於胰腺癌第二線。",
+    "side_effects": [
+      {
+        "name": "腹瀉",
+        "frequency": "60%",
+        "timing": "Day 5-10",
+        "note": "比一般 irinotecan 略晚"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "70%",
+        "timing": "Day 8-14",
+        "note": "嗜中性球低下顯著"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "60%",
+        "timing": "Day 1-3",
+        "note": ""
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10%",
+        "timing": "輸注中",
+        "note": "需慢速給藥 90 分鐘"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "70%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "與 5-FU/leucovorin 併用,監測雙重毒性",
+      "每次 CBC、肝功能",
+      "胰腺癌病患整體狀況評估(已第二線)"
+    ],
+    "warnings": [
+      "腹瀉嚴重(>5 次/天或脫水) - 立即就醫",
+      "發燒 - 中性球低下發燒",
+      "輸注中反應(皮疹、低血壓)"
+    ],
+    "lifestyle": [
+      "與一般 irinotecan 相同,備好 loperamide",
+      "胰腺癌病患特別注意營養",
+      "充足水份"
+    ],
+    "patient_edu_warnings": [
+      "微脂體版本作用時間長,腹瀉可能較晚出現",
+      "胰腺癌第二線使用,病人通常已虛弱"
+    ]
+  },
+  "9.14": {
+    "drug_class": "蒽環類抗生素(微脂體)",
+    "mechanism": "Doxorubicin 包覆在微脂體中,降低心臟毒性與其他副作用。為 anthracycline 類,抑制 topoisomerase II 與產生自由基損傷 DNA。",
+    "side_effects": [
+      {
+        "name": "手足症候群(掌蹠紅斑感覺異常)",
+        "frequency": "50%",
+        "timing": "Week 2-6",
+        "note": "微脂體版本特徵性副作用,嚴重時水泡、脫皮"
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "40%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "30%",
+        "timing": "Week 2-3",
+        "note": "比一般 doxorubicin 輕"
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "10-15%",
+        "timing": "輸注初期",
+        "note": "面紅、胸悶,需慢速給藥"
+      },
+      {
+        "name": "心臟毒性",
+        "frequency": "比一般 doxo 低",
+        "timing": "累積劑量 >550mg/m² 時"
+      },
+      {
+        "name": "皮膚色素沉著",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": "黝黑、指甲變色"
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝功能",
+      "心臟超音波(基礎、累積後追蹤 LVEF)",
+      "皮膚、口腔評估",
+      "尿液變橘色(屬正常,無需擔心)"
+    ],
+    "warnings": [
+      "手足紅腫水泡疼痛影響行走 - 手足症候群 G3",
+      "輸注中胸悶呼吸困難 - 立即停藥",
+      "活動後氣喘、下肢水腫 - 心衰竭警訊",
+      "嚴重口腔潰瘍"
+    ],
+    "lifestyle": [
+      "預防手足症候群:勿穿緊鞋、避免熱水、加強保濕、避免摩擦",
+      "用藥前後幾天減少手腳活動量",
+      "避免長時間站立、走路",
+      "口腔護理(溫鹽水漱口)",
+      "保持涼爽避免出汗(汗水加重手足症候群)"
+    ],
+    "patient_edu_warnings": [
+      "手足症候群是此藥代表副作用,可能影響日常活動 4-8 週",
+      "尿液變橘色屬正常,別嚇到",
+      "強調心臟毒性雖低但累積後仍可能,定期心臟超音波"
+    ]
+  },
+  "9.15": {
+    "drug_class": "全反式 A 酸 (ATRA)",
+    "mechanism": "全反式維 A 酸,誘導急性前髓細胞白血病(APL)的腫瘤細胞分化成熟,而非直接殺死。屬分化誘導療法。",
+    "side_effects": [
+      {
+        "name": "ATRA 症候群(分化症候群)",
+        "frequency": "25%",
+        "timing": "Day 2-21",
+        "note": "致命性!發燒、呼吸困難、肺浸潤、體液滯留、低血壓"
+      },
+      {
+        "name": "頭痛",
+        "frequency": "60%",
+        "timing": "用藥初期",
+        "note": "腦壓上升,假性腦瘤"
+      },
+      {
+        "name": "皮膚乾燥、龜裂",
+        "frequency": "75%",
+        "timing": "用藥 1-2 週後",
+        "note": "嘴唇、皮膚、黏膜"
+      },
+      {
+        "name": "高三酸甘油脂血症",
+        "frequency": "40%",
+        "timing": "持續用藥",
+        "note": "需監測"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "50%(輕度)",
+        "timing": "持續用藥",
+        "note": ""
+      },
+      {
+        "name": "骨痛",
+        "frequency": "30%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每天監測呼吸、發燒、體重(分化症候群早期警示)",
+      "出現分化症候群立即給 dexamethasone 10mg IV q12h",
+      "每週 CBC、肝功能、脂質",
+      "懷孕禁用(嚴重致畸胎),女性用藥前後需避孕",
+      "頭痛嚴重需 brain CT 排除真性腦壓上升"
+    ],
+    "warnings": [
+      "發燒 + 呼吸困難 + 體重增加 - 分化症候群,立即就醫",
+      "頭痛劇烈 + 視力模糊 + 嘔吐 - 假性腦瘤,需就醫",
+      "嚴重皮膚或黏膜出血",
+      "懷孕(女性) - 立即停藥"
+    ],
+    "lifestyle": [
+      "皮膚黏膜保濕(凡士林、潤唇膏)",
+      "餐後服藥(增加吸收)",
+      "避光、戴墨鏡(光敏感)",
+      "戒酒(肝毒性)",
+      "嚴格避孕,女性月經前 1 個月起避孕,治療結束後 1 個月內持續",
+      "孕期禁用(嚴重致畸)"
+    ],
+    "patient_edu_warnings": [
+      "ATRA 症候群是致命性副作用,任何發燒呼吸喘都要警覺",
+      "分化誘導劑不是傳統化療,作用機轉不同",
+      "致畸胎嚴重性需強調(尤其育齡女性)"
+    ]
+  },
+  "9.16.1": {
+    "drug_class": "拓樸異構酶 I 抑制劑",
+    "mechanism": "與 irinotecan 同類,但結構與藥代動力學不同。抑制 topoisomerase I,主要用於小細胞肺癌、卵巢癌、子宮頸癌。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "Day 8-12",
+        "note": "嚴重,嗜中性球與血小板都受影響"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30-40%",
+        "timing": "Day 5-10",
+        "note": "比 irinotecan 輕"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "60%",
+        "timing": "用藥當天",
+        "note": ""
+      },
+      {
+        "name": "脫髮",
+        "frequency": "40%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "70%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每次治療前 CBC、肝腎功能",
+      "嗜中性球 <1500 或血小板 <100K 不可給藥",
+      "腎功能調整劑量(CrCl 20-39 ml/min 減量 50%)"
+    ],
+    "warnings": [
+      "發燒 ≥38°C - 中性球低下發燒,風險高",
+      "嚴重出血、瘀青 - 血小板過低",
+      "腹瀉 + 脫水"
+    ],
+    "lifestyle": [
+      "預防感染(戴口罩、避免人群)",
+      "監測體溫",
+      "充足水份"
+    ],
+    "patient_edu_warnings": [
+      "強烈骨髓抑制,Day 8-12 最危險",
+      "口服與注射劑型都有,兩者不可同時用"
+    ]
+  },
+  "9.16.2": {
+    "drug_class": "拓樸異構酶 I 抑制劑(口服)",
+    "mechanism": "口服劑型,主要用於小細胞肺癌第二線。生體可用率約 40%。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "80%",
+        "timing": "Day 8-12",
+        "note": "嗜中性球低下為主"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "40%",
+        "timing": "Day 3-7",
+        "note": "比注射劑常見"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "30%",
+        "timing": "服藥後",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝腎功能",
+      "膠囊整顆吞服,勿剝開",
+      "與食物無關(不影響吸收)"
+    ],
+    "warnings": [
+      "發燒 - 中性球低下",
+      "嚴重腹瀉 - 脫水",
+      "膠囊破損接觸皮膚 - 細胞毒性危險"
+    ],
+    "lifestyle": [
+      "膠囊整顆吞服",
+      "若膠囊破損,皮膚接觸後立即用大量水沖洗",
+      "與注射劑型不可同時使用",
+      "存放於兒童取不到的地方"
+    ],
+    "patient_edu_warnings": [
+      "口服化療仍有完整化療毒性",
+      "膠囊處理安全(避免破損接觸)"
+    ]
+  },
+  "9.17": {
+    "drug_class": "口服 5-FU 前驅藥",
+    "mechanism": "經三步驟酵素轉化(肝、肺、腫瘤)變成 5-FU,腫瘤組織轉化率高,選擇性較好。屬抗代謝劑(嘧啶類)。",
+    "side_effects": [
+      {
+        "name": "手足症候群",
+        "frequency": "50%",
+        "timing": "Week 2-6",
+        "note": "代表性副作用,可能要減量"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "40%",
+        "timing": "持續用藥",
+        "note": ""
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "20-30%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "30%",
+        "timing": "服藥後",
+        "note": "中度"
+      },
+      {
+        "name": "骨髓抑制(輕度)",
+        "frequency": "30%",
+        "timing": "持續後",
+        "note": "比注射 5-FU 輕"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "40%",
+        "timing": "持續後",
+        "note": "通常輕度"
+      },
+      {
+        "name": "心臟毒性(冠狀動脈痙攣)",
+        "frequency": "<5%但嚴重",
+        "timing": "用藥後",
+        "note": "胸痛需立即停藥"
+      }
+    ],
+    "monitoring": [
+      "DPD 缺乏者風險高(嚴重毒性,可致命),建議檢測",
+      "每月 CBC、肝腎功能",
+      "腎功能 CrCl 30-50 ml/min 減量 75%",
+      "與 warfarin 強烈交互作用(INR 升高),儘量避免併用"
+    ],
+    "warnings": [
+      "手足紅腫水泡疼痛影響日常 - 暫停藥物",
+      "嚴重腹瀉 >7 次/天",
+      "嚴重口腔潰瘍無法進食",
+      "胸痛、心悸 - 心臟毒性,立即停藥",
+      "持續發燒"
+    ],
+    "lifestyle": [
+      "餐後 30 分鐘內服藥(分早晚兩次)",
+      "整顆吞服,勿剝開",
+      "手足保護:寬鬆鞋、保濕、避免摩擦熱、避免使用熱水",
+      "口腔護理:溫鹽水漱口、軟牙刷",
+      "避免日曬(光敏感)",
+      "嚴禁自行併用 warfarin、avoid grapefruit"
+    ],
+    "patient_edu_warnings": [
+      "Xeloda 是口服 5-FU,毒性與注射相同",
+      "手足症候群嚴重時可能需停藥幾天",
+      "DPD 缺乏者罕見但嚴重(可致命),有家族史告知醫師",
+      "藥物互動風險高,所有用藥必須告知"
+    ]
+  },
+  "9.19": {
+    "drug_class": "雌激素+烷化劑複合物",
+    "mechanism": "雌激素(estradiol)與 nornitrogen mustard 複合,雙重作用:雌激素效應與抗微管作用,用於前列腺癌。",
+    "side_effects": [
+      {
+        "name": "心血管事件(血栓)",
+        "frequency": "10%",
+        "timing": "持續用藥",
+        "note": "深部靜脈血栓、心肌梗塞、中風"
+      },
+      {
+        "name": "男性女乳",
+        "frequency": "50%",
+        "timing": "用藥 1-2 個月後",
+        "note": "雌激素效應"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "30%",
+        "timing": "服藥後",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "20%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "20%",
+        "timing": "持續用藥",
+        "note": ""
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每月肝功能、血壓",
+      "血栓風險評估(年齡、既往血栓史)",
+      "心血管風險病人慎用",
+      "餐前 1 小時或餐後 2 小時服藥(避免與奶製品、鈣同時)"
+    ],
+    "warnings": [
+      "下肢腫脹疼痛 - 深部靜脈血栓",
+      "突發胸痛、呼吸困難 - 肺栓塞或心肌梗塞",
+      "口齒不清、肢體無力 - 中風警訊",
+      "嚴重腹瀉、嘔吐"
+    ],
+    "lifestyle": [
+      "服藥時間:餐前 1 小時或餐後 2 小時",
+      "服藥後 1 小時內避免奶製品、鈣補充劑、多種維他命(影響吸收)",
+      "鼓勵活動避免久坐(降低血栓風險)",
+      "戒菸(增加血栓風險)",
+      "充足水份"
+    ],
+    "patient_edu_warnings": [
+      "血栓風險高,任何下肢腫痛或胸痛要立即就醫",
+      "男性女乳是預期副作用,提前心理建設",
+      "與奶製品互動會大幅降低吸收"
+    ]
+  },
+  "9.21": {
+    "drug_class": "嘌呤類核苷酸抑制劑",
+    "mechanism": "嘌呤類似物,抑制 DNA 合成酵素,主要用於慢性淋巴性白血病(CLL)。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制(嚴重)",
+        "frequency": ">90%",
+        "timing": "Day 7-14",
+        "note": "全血球減少,可能持續數月"
+      },
+      {
+        "name": "感染(免疫抑制)",
+        "frequency": "高風險",
+        "timing": "用藥後 6 個月內",
+        "note": "尤其機會性感染如 PCP、CMV"
+      },
+      {
+        "name": "自體免疫溶血性貧血(AIHA)",
+        "frequency": "5-10%",
+        "timing": "累積後",
+        "note": "罕見但嚴重"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "高 tumor burden 病人",
+        "timing": "首次治療後",
+        "note": "預防性 allopurinol、水化"
+      },
+      {
+        "name": "神經毒性",
+        "frequency": "罕見",
+        "timing": "高劑量後",
+        "note": "意識變化、視覺異常"
+      }
+    ],
+    "monitoring": [
+      "每次 CBC + 分類",
+      "需預防性抗生素(PCP 預防:Bactrim)",
+      "預防 CMV 感染(必要時 valganciclovir)",
+      "輸血前需照射(預防 GVHD)",
+      "Coombs test 監測 AIHA"
+    ],
+    "warnings": [
+      "發燒 - 任何感染症狀都要緊急就醫",
+      "突發呼吸困難 - PCP 或 CMV 肺炎",
+      "嚴重貧血(臉色蒼白、頭暈) - AIHA",
+      "意識變化、視力異常 - 神經毒性"
+    ],
+    "lifestyle": [
+      "嚴格避免感染:戴口罩、避免人群、勤洗手",
+      "避免生食(沙拉、生肉、未殺菌乳製品)",
+      "預防性抗生素按時服用",
+      "輸血必須是『照射過的血品』(可避免 GVHD)",
+      "治療結束後仍有 6-12 個月免疫低下期"
+    ],
+    "patient_edu_warnings": [
+      "免疫抑制嚴重且持續長,治療結束後仍要小心感染",
+      "輸血必須說明『要照射過的血』(口頭和病歷都要)",
+      "AIHA 雖少見但嚴重"
+    ]
+  },
+  "9.23": {
+    "drug_class": "三氧化二砷(分化誘導劑)",
+    "mechanism": "誘導 APL 腫瘤細胞分化與凋亡,與 ATRA 並用為 APL 標準療法。砷化合物。",
+    "side_effects": [
+      {
+        "name": "QT 間期延長",
+        "frequency": "40%",
+        "timing": "用藥前 4 週",
+        "note": "可能致命性心律不整(尖端扭轉型室性心搏過速)"
+      },
+      {
+        "name": "分化症候群(同 ATRA)",
+        "frequency": "25%",
+        "timing": "用藥 7-14 天內",
+        "note": "發燒、呼吸困難、體液滯留"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "60%",
+        "timing": "持續用藥",
+        "note": "常見但通常可恢復"
+      },
+      {
+        "name": "頭痛、疲倦",
+        "frequency": "60%",
+        "timing": "持續用藥",
+        "note": ""
+      },
+      {
+        "name": "高血糖",
+        "frequency": "50%",
+        "timing": "用藥期間",
+        "note": ""
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每週 ECG(QTc 監測,需 <500ms)",
+      "電解質維持正常(K >4, Mg >1.8) - 預防 QTc 延長",
+      "每週 CBC、肝腎功能、血糖",
+      "懷孕禁用(致畸胎)",
+      "出現分化症候群立即用 dexamethasone"
+    ],
+    "warnings": [
+      "心悸、暈眩、暈厥 - QTc 延長導致心律不整",
+      "發燒 + 呼吸困難 + 體重增加 - 分化症候群",
+      "嚴重頭暈、視力模糊",
+      "懷孕(女性)"
+    ],
+    "lifestyle": [
+      "嚴格避孕(致畸,治療期間及結束後 6 個月)",
+      "勿與其他延長 QTc 藥物併用(某些抗生素、止吐藥)",
+      "充足電解質補充",
+      "規律監測心電圖",
+      "充足水份"
+    ],
+    "patient_edu_warnings": [
+      "QTc 延長是嚴重副作用,任何心悸暈眩立即就醫",
+      "分化症候群與 ATRA 類似,警覺呼吸喘",
+      "與 ATRA 合併治療時兩者副作用會疊加"
+    ]
+  },
+  "9.25": {
+    "drug_class": "口服烷化劑",
+    "mechanism": "DNA 烷化劑,可穿透血腦屏障,主要用於膠質母細胞瘤等腦瘤。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制(尤其血小板)",
+        "frequency": "20-30%",
+        "timing": "Week 3-4",
+        "note": "Grade 3-4 約 5-10%"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "50%",
+        "timing": "服藥後",
+        "note": "需預防性止吐藥"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "便秘",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "頭痛、頭暈",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": "可能與腦瘤本身有關"
+      },
+      {
+        "name": "PCP 肺炎(肺囊蟲)",
+        "frequency": "3%",
+        "timing": "累積後",
+        "note": "需預防性抗生素"
+      }
+    ],
+    "monitoring": [
+      "每週 CBC(治療中)、每月(放療後維持階段)",
+      "PCP 預防:Bactrim(同步放療期間)",
+      "懷孕禁用",
+      "肝功能異常需減量",
+      "服藥前 1 小時服止吐藥"
+    ],
+    "warnings": [
+      "嚴重出血、瘀青 - 血小板過低",
+      "發燒 + 呼吸困難 - PCP 肺炎可能",
+      "持續嘔吐無法服藥",
+      "癲癇發作頻率增加 - 腦瘤進展可能"
+    ],
+    "lifestyle": [
+      "空腹服藥(餐前 1 小時或餐後 2 小時)",
+      "服藥前先服止吐藥",
+      "膠囊整顆吞服,勿剝開",
+      "若嘔吐(吐出膠囊),不要再補服",
+      "避光保存膠囊",
+      "充足水份預防便秘"
+    ],
+    "patient_edu_warnings": [
+      "血小板低為主,有出血傾向要警覺",
+      "PCP 肺炎雖少但嚴重,服 Bactrim 不要漏",
+      "膠囊操作要小心(細胞毒性)"
+    ]
+  },
+  "9.26": {
+    "drug_class": "葉酸抗代謝劑",
+    "mechanism": "抑制多個葉酸代謝酵素(TS、DHFR、GARFT),阻斷 DNA/RNA 合成。主要用於非鱗狀非小細胞肺癌、惡性肋膜間皮瘤。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "70%",
+        "timing": "Day 8-14",
+        "note": "需補充葉酸與 B12 預防"
+      },
+      {
+        "name": "皮疹",
+        "frequency": "40%",
+        "timing": "Day 8-10",
+        "note": "需前用藥 dexamethasone 預防"
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "30%",
+        "timing": "Week 2",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "20%",
+        "timing": "Week 2",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "70%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "肝腎功能異常",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "預服葉酸 0.4-1 mg PO daily(治療前 7 天起,持續整療程)",
+      "預服 B12 1000 mcg IM(治療前 7-10 天,每 9 週一次)",
+      "前 1 天起 dexamethasone 4mg BID × 3 天(預防皮疹)",
+      "每次 CBC、肝腎功能",
+      "腎功能 CrCl <45 ml/min 不建議使用"
+    ],
+    "warnings": [
+      "發燒 - 中性球低下",
+      "嚴重皮疹、剝皮 - Stevens-Johnson 罕見但嚴重",
+      "嚴重口腔潰瘍",
+      "尿量明顯減少"
+    ],
+    "lifestyle": [
+      "葉酸與 B12 補充嚴格按時(漏掉骨髓毒性大幅增加)",
+      "預服類固醇按時",
+      "口腔護理:溫鹽水漱口",
+      "充足水份保護腎臟",
+      "皮膚保濕、避免日曬"
+    ],
+    "patient_edu_warnings": [
+      "葉酸與 B12 補充是關鍵,絕對不能漏",
+      "腎功能不佳禁用",
+      "皮疹預防:類固醇按時服用"
+    ]
+  },
+  "9.35": {
+    "drug_class": "亞硝基脲類烷化劑(植入劑)",
+    "mechanism": "BCNU 浸潤的可吸收聚合物晶圓片,於腦瘤切除後植入瘤腔,局部緩釋化療藥物 2-3 週。",
+    "side_effects": [
+      {
+        "name": "腦水腫",
+        "frequency": "20%",
+        "timing": "術後 1-2 週",
+        "note": "顱內壓升高,可能需減壓"
+      },
+      {
+        "name": "癲癇",
+        "frequency": "20%",
+        "timing": "術後",
+        "note": "預防性抗癲癇藥"
+      },
+      {
+        "name": "傷口癒合不良",
+        "frequency": "15%",
+        "timing": "術後 4-8 週",
+        "note": ""
+      },
+      {
+        "name": "感染(腦膜炎、傷口感染)",
+        "frequency": "5-10%",
+        "timing": "術後",
+        "note": ""
+      },
+      {
+        "name": "腦脊髓液漏",
+        "frequency": "5%",
+        "timing": "術後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "術後密切監測神經學症狀",
+      "預防性抗癲癇藥",
+      "傷口照護",
+      "MRI 追蹤(注意水腫與晶圓片溶解過程的影像表現)"
+    ],
+    "warnings": [
+      "頭痛加劇、意識變化 - 腦水腫或顱內壓升高",
+      "癲癇發作",
+      "傷口紅腫、發燒 - 感染",
+      "頸部僵硬 - 腦膜炎可能"
+    ],
+    "lifestyle": [
+      "術後傷口照護依神經外科指示",
+      "癲癇藥按時服用",
+      "避免劇烈活動",
+      "術後追蹤門診不可漏"
+    ],
+    "patient_edu_warnings": [
+      "為一次性植入劑(手術中放),不是長期服藥",
+      "晶圓片在 MRI 上會持續顯影 6-8 週,別誤以為腫瘤復發",
+      "腦水腫風險高,警覺神經症狀"
+    ]
+  },
+  "9.42": {
+    "drug_class": "烷化劑+嘌呤類似物 hybrid",
+    "mechanism": "兼具烷化劑與嘌呤類似物的雙重結構,用於 CLL、和緩性非何杰金氏淋巴瘤。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "Day 14-21",
+        "note": "嚴重,可持續長期"
+      },
+      {
+        "name": "輸注反應",
+        "frequency": "30%",
+        "timing": "首次輸注",
+        "note": "發燒、寒顫、皮疹"
+      },
+      {
+        "name": "感染(免疫抑制)",
+        "frequency": "高",
+        "timing": "持續用藥後",
+        "note": "包括 PCP、CMV"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "60%",
+        "timing": "用藥當天",
+        "note": "中度致吐"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "tumor burden 高者",
+        "timing": "首次治療",
+        "note": "預防性 allopurinol"
+      },
+      {
+        "name": "皮膚反應(嚴重 SJS/TEN)",
+        "frequency": "罕見但致命",
+        "timing": "用藥後",
+        "note": "與 allopurinol 併用風險增加"
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝腎功能",
+      "預防 PCP(Bactrim)",
+      "輸注前抗組織胺 + 類固醇(降低輸注反應)",
+      "首次治療水化、預防腫瘤溶解"
+    ],
+    "warnings": [
+      "輸注中發燒、皮疹、低血壓 - 立即停藥",
+      "發燒 - 中性球低下發燒",
+      "嚴重皮疹擴散 - SJS/TEN 警訊,立即停藥",
+      "突發呼吸困難 - PCP 或 CMV"
+    ],
+    "lifestyle": [
+      "嚴格避免感染",
+      "預防抗生素按時",
+      "避免疫苗(尤其活疫苗)",
+      "輸血需照射處理"
+    ],
+    "patient_edu_warnings": [
+      "免疫抑制效果持久,治療結束後仍要避免感染",
+      "皮膚嚴重反應雖少但致命",
+      "與 allopurinol 併用 SJS 風險增加"
+    ]
+  },
+  "9.44.1": {
+    "drug_class": "去甲基化劑(嘧啶類核苷酸類似物)",
+    "mechanism": "DNA 去甲基化,恢復腫瘤抑制基因的表現。主要用於骨髓化生不良症候群(MDS)、AML。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "Cycle 1-2 最重",
+        "note": "整體後可能改善"
+      },
+      {
+        "name": "注射部位反應",
+        "frequency": "70%",
+        "timing": "皮下注射後",
+        "note": "紅腫、瘀青、結節"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "70%",
+        "timing": "用藥當天",
+        "note": ""
+      },
+      {
+        "name": "便秘",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "70%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "Cycle 1-2",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每個療程前 CBC + 分類",
+      "至少需 4-6 個療程才能評估療效(早期不要因骨髓抑制中斷)",
+      "肝腎功能異常需減量",
+      "懷孕禁用"
+    ],
+    "warnings": [
+      "發燒 - 緊急就醫",
+      "持續嘔吐、無法進食",
+      "嚴重出血、瘀青",
+      "注射部位嚴重反應"
+    ],
+    "lifestyle": [
+      "皮下注射輪換部位(腹部、大腿、手臂)",
+      "注射後不要熱敷",
+      "預防感染",
+      "充足休息"
+    ],
+    "patient_edu_warnings": [
+      "前 1-2 個療程骨髓抑制最重,要堅持,後續會改善",
+      "MDS 病人本身就有骨髓功能不全,需區分",
+      "需要至少 4-6 個療程才知道有沒有效"
+    ]
+  },
+  "9.44.2": {
+    "drug_class": "去甲基化劑(口服)",
+    "mechanism": "與注射劑同機轉,口服劑型用於 AML 緩解後維持治療。",
+    "side_effects": [
+      {
+        "name": "噁心嘔吐",
+        "frequency": "70%",
+        "timing": "服藥後",
+        "note": "預防性止吐藥"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": "比注射劑型輕"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "60%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每月 CBC",
+      "每天同時間服藥",
+      "預服止吐藥",
+      "服藥期間嚴格避孕"
+    ],
+    "warnings": [
+      "嚴重腹瀉",
+      "嚴重嘔吐無法服藥",
+      "發燒"
+    ],
+    "lifestyle": [
+      "每天固定時間服藥(連續 14 天,休 14 天為一療程)",
+      "膠囊整顆吞服,勿剝開",
+      "服藥前 30 分鐘服止吐藥",
+      "若漏服超過 8 小時,跳過該次"
+    ],
+    "patient_edu_warnings": [
+      "AML 維持期治療,目標延長緩解",
+      "規律服藥很重要,別自行停藥"
+    ]
+  },
+  "9.46": {
+    "drug_class": "口服 5-FU 複方(tegafur + gimeracil + oteracil)",
+    "mechanism": "Tegafur 為 5-FU 前驅藥,gimeracil 抑制 DPD 延長 5-FU 作用,oteracil 減少消化道毒性。主要用於胃癌、頭頸癌、胰腺癌。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "40-50%",
+        "timing": "Week 2-4",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": "比 capecitabine 略輕"
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "20%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "色素沉著",
+        "frequency": "30%",
+        "timing": "累積後",
+        "note": "特徵性,皮膚、指甲、黏膜變黑"
+      },
+      {
+        "name": "手足症候群",
+        "frequency": "10-20%",
+        "timing": "累積後",
+        "note": "比 capecitabine 少"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "20%",
+        "timing": "累積後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每月 CBC、肝腎功能",
+      "依體表面積決定劑量(BSA <1.25:40mg BID, BSA 1.25-1.5:50mg BID, BSA >1.5:60mg BID)",
+      "DPD 缺乏者風險高",
+      "與 warfarin 強烈交互"
+    ],
+    "warnings": [
+      "嚴重腹瀉 - 脫水",
+      "嚴重口腔潰瘍",
+      "黑色素沉著到全身 - 屬正常,治療結束會淡化",
+      "嚴重手足症候群"
+    ],
+    "lifestyle": [
+      "餐後服藥(早晚兩次)",
+      "間隔 12 小時",
+      "色素沉著屬預期,避免日曬可減輕",
+      "手足保護",
+      "與 warfarin、phenytoin 嚴格避免併用"
+    ],
+    "patient_edu_warnings": [
+      "色素沉著是 TS-1 特徵副作用,別嚇到",
+      "口服劑量依體表面積算,不可自行加減",
+      "胃癌術後輔助治療為日本/台灣標準療法"
+    ]
+  },
+  "9.48": {
+    "drug_class": "微管動態抑制劑",
+    "mechanism": "從海綿萃取的化合物,抑制微管聚合(與 paclitaxel 不同機轉),用於轉移性乳癌、軟組織肉瘤。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">80%",
+        "timing": "Day 8-14",
+        "note": "嗜中性球低下顯著"
+      },
+      {
+        "name": "周邊神經病變",
+        "frequency": "35%",
+        "timing": "累積後",
+        "note": "比 paclitaxel 略輕"
+      },
+      {
+        "name": "脫髮",
+        "frequency": "55%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "QT 間期延長",
+        "frequency": "罕見",
+        "timing": "用藥中",
+        "note": "監測 ECG"
+      }
+    ],
+    "monitoring": [
+      "每次 CBC、肝功能、電解質",
+      "電解質維持正常(預防 QT 延長)",
+      "肝功能或腎功能異常需減量",
+      "已重度治療過的乳癌病人,評估體力"
+    ],
+    "warnings": [
+      "發燒 - 中性球低下",
+      "心悸、暈厥 - QT 延長",
+      "嚴重周邊神經病變影響日常"
+    ],
+    "lifestyle": [
+      "脫髮預期",
+      "保護手腳避免外傷",
+      "充足電解質補充",
+      "預防感染"
+    ],
+    "patient_edu_warnings": [
+      "通常為晚期治療(已 anthracycline 與 taxane 治療過)",
+      "雖為新藥,毒性仍類似化療"
+    ]
+  },
+  "9.57": {
+    "drug_class": "嘌呤類核苷酸抑制劑",
+    "mechanism": "嘌呤類似物,結合 fludarabine 與 cladribine 的結構特性,主要用於兒童急性淋巴性白血病。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "Day 8-14",
+        "note": "嚴重"
+      },
+      {
+        "name": "感染",
+        "frequency": ">70%",
+        "timing": "持續性",
+        "note": "免疫抑制嚴重"
+      },
+      {
+        "name": "腫瘤溶解症候群",
+        "frequency": "首療程",
+        "timing": "Day 1-7",
+        "note": "需預防性 allopurinol、水化"
+      },
+      {
+        "name": "毛細血管滲漏症候群",
+        "frequency": "5-10%",
+        "timing": "用藥中",
+        "note": "致命性,水腫、低血壓、低蛋白血症"
+      },
+      {
+        "name": "肝功能異常",
+        "frequency": "70%",
+        "timing": "用藥後",
+        "note": "可能 grade 3-4"
+      },
+      {
+        "name": "腎功能異常",
+        "frequency": "30%",
+        "timing": "用藥後",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每天 CBC、電解質、肝腎功能",
+      "預防腫瘤溶解(allopurinol、水化)",
+      "監測體重、血壓、尿量(早期偵測毛細血管滲漏)",
+      "需用於有腫瘤學經驗的醫療機構"
+    ],
+    "warnings": [
+      "突發水腫、呼吸困難、低血壓 - 毛細血管滲漏",
+      "發燒 - 嚴重感染風險",
+      "尿量大幅減少 - 急性腎衰",
+      "意識變化 - 多重器官衰竭警訊"
+    ],
+    "lifestyle": [
+      "兒童病人為主,家長配合度關鍵",
+      "嚴密在院監測",
+      "預防感染"
+    ],
+    "patient_edu_warnings": [
+      "兒童白血病第二線藥物,毒性比成人化療強",
+      "毛細血管滲漏雖少但致命,警惕水腫",
+      "腫瘤溶解預防是首要"
+    ]
+  },
+  "9.65": {
+    "drug_class": "葉酸抗代謝劑",
+    "mechanism": "葉酸代謝抑制劑(類似 methotrexate 但更強),用於周邊 T 細胞淋巴瘤。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "60%",
+        "timing": "Day 7-14",
+        "note": "血小板下降為主"
+      },
+      {
+        "name": "口腔黏膜炎",
+        "frequency": "70%",
+        "timing": "Week 2-3",
+        "note": "代表性副作用,嚴重時 grade 3-4"
+      },
+      {
+        "name": "疲倦",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "40%",
+        "timing": "用藥後",
+        "note": ""
+      },
+      {
+        "name": "皮膚反應",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "預服葉酸與 B12(類似 pemetrexed)",
+      "每週 CBC、口腔黏膜評估",
+      "肝腎功能",
+      "監測同型半胱氨酸與甲基丙二酸(B12 不足指標)"
+    ],
+    "warnings": [
+      "嚴重口腔潰瘍無法進食 - 暫停藥物",
+      "發燒 - 中性球低下",
+      "嚴重皮疹",
+      "持續嚴重腹瀉"
+    ],
+    "lifestyle": [
+      "葉酸與 B12 補充嚴格按時",
+      "口腔護理(溫鹽水漱口、避免刺激性食物)",
+      "預防感染",
+      "皮膚保濕"
+    ],
+    "patient_edu_warnings": [
+      "口腔黏膜炎是主要毒性,影響進食",
+      "葉酸 B12 補充不可漏",
+      "罕見藥物,熟悉度有限"
+    ]
+  },
+  "9.66": {
+    "drug_class": "嘧啶類核苷酸類似物複方",
+    "mechanism": "Trifluridine 為核苷酸類似物併入 DNA,tipiracil 抑制其代謝。用於轉移性大腸直腸癌、胃癌晚期。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "50-60%",
+        "timing": "Day 14-21",
+        "note": "嗜中性球與血小板皆受影響"
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "40%",
+        "timing": "服藥後",
+        "note": ""
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "食慾降低",
+        "frequency": "40%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每療程前 CBC",
+      "嗜中性球 <1500 或血小板 <75K 不可開藥",
+      "餐後服藥(早晚)",
+      "晚期病人營養評估"
+    ],
+    "warnings": [
+      "發燒 - 中性球低下",
+      "嚴重出血 - 血小板低",
+      "持續嘔吐無法進食"
+    ],
+    "lifestyle": [
+      "餐後 1 小時內服藥(早晚)",
+      "Day 1-5 連續服 5 天,休 2 天,再 Day 8-12 服 5 天,休 14 天為一療程",
+      "整顆吞服",
+      "充足休息"
+    ],
+    "patient_edu_warnings": [
+      "晚期治療藥物,目標延長存活",
+      "服藥週期複雜,日曆記錄很重要"
+    ]
+  },
+  "9.68": {
+    "drug_class": "α 粒子放射性同位素",
+    "mechanism": "放射性鐳-223,類似鈣離子被骨骼吸收,釋放短距離高能量 α 粒子破壞骨轉移癌細胞。用於去勢抗性攝護腺癌的骨轉移。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": "50%",
+        "timing": "Cycle 2-3",
+        "note": "血小板與貧血較明顯"
+      },
+      {
+        "name": "腹瀉",
+        "frequency": "25%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "35%",
+        "timing": "用藥當天",
+        "note": ""
+      },
+      {
+        "name": "周邊水腫",
+        "frequency": "13%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "骨痛(暫時加重)",
+        "frequency": "10%",
+        "timing": "用藥初期",
+        "note": "Flare,通常會緩解"
+      }
+    ],
+    "monitoring": [
+      "每月 CBC(嗜中性球 >1500、血小板 >100K、Hb >10)",
+      "ECOG 0-2 才能用",
+      "需專門核醫單位施打",
+      "與 abiraterone + prednisone 不可併用(增加骨折風險)"
+    ],
+    "warnings": [
+      "嚴重貧血 - 輸血評估",
+      "嚴重骨痛(初期) - 通常自限",
+      "突發骨折",
+      "嚴重感染"
+    ],
+    "lifestyle": [
+      "用藥後 1 週內小便、糞便有微量放射性,馬桶沖水兩次,之後肥皂洗手",
+      "嬰幼兒、孕婦避免密切接觸",
+      "鈣補充劑、雙磷酸鹽不影響此藥",
+      "癌症骨痛若加重屬暫時性"
+    ],
+    "patient_edu_warnings": [
+      "α 射線距離短,對家人輻射風險低",
+      "用藥後 1 週內衛生習慣加強",
+      "與 abiraterone 不可併用",
+      "為核醫藥,需在醫院由放射師施打,不是化療科"
+    ]
+  },
+  "9.88": {
+    "drug_class": "Epothilone 類抗微管劑",
+    "mechanism": "與 paclitaxel 類似的微管穩定機轉,但結構不同,可用於 taxane 抗藥的乳癌。",
+    "side_effects": [
+      {
+        "name": "周邊神經病變",
+        "frequency": "60-70%",
+        "timing": "累積後",
+        "note": "代表性,可能影響日常活動"
+      },
+      {
+        "name": "骨髓抑制",
+        "frequency": "70%",
+        "timing": "Day 8-14",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "55%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "脫髮",
+        "frequency": "50%",
+        "timing": "Week 2-3",
+        "note": ""
+      },
+      {
+        "name": "肌肉關節痛",
+        "frequency": "45%",
+        "timing": "Day 2-5",
+        "note": ""
+      },
+      {
+        "name": "過敏反應",
+        "frequency": "10%",
+        "timing": "輸注初期",
+        "note": "需前用藥"
+      }
+    ],
+    "monitoring": [
+      "前用藥:diphenhydramine + ranitidine 預防過敏",
+      "每次 CBC、肝功能",
+      "肝功能異常需減量",
+      "神經學評估"
+    ],
+    "warnings": [
+      "輸注中過敏反應",
+      "發燒 - 中性球低下",
+      "嚴重周邊神經病變"
+    ],
+    "lifestyle": [
+      "前用藥按時",
+      "周邊保護",
+      "脫髮預期"
+    ],
+    "patient_edu_warnings": [
+      "用於 taxane 失敗的乳癌,病人通常已多線治療",
+      "周邊神經病變比 paclitaxel 還重"
+    ]
+  },
+  "9.96": {
+    "drug_class": "去甲基化劑",
+    "mechanism": "與 azacitidine 相似機轉的 DNA 去甲基化劑,主要用於骨髓化生不良症候群、AML。",
+    "side_effects": [
+      {
+        "name": "骨髓抑制",
+        "frequency": ">90%",
+        "timing": "Cycle 1-2",
+        "note": "嚴重"
+      },
+      {
+        "name": "感染",
+        "frequency": "高",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "噁心嘔吐",
+        "frequency": "40%",
+        "timing": "用藥當天",
+        "note": ""
+      },
+      {
+        "name": "疲倦",
+        "frequency": "50%",
+        "timing": "持續性",
+        "note": ""
+      },
+      {
+        "name": "高血糖",
+        "frequency": "30%",
+        "timing": "持續性",
+        "note": ""
+      }
+    ],
+    "monitoring": [
+      "每療程前 CBC + 分類",
+      "至少 4-6 療程才評估療效",
+      "預防 PCP",
+      "肝腎功能異常需減量"
+    ],
+    "warnings": [
+      "發燒 - 緊急就醫",
+      "嚴重出血",
+      "持續無法進食"
+    ],
+    "lifestyle": [
+      "嚴格避免感染",
+      "預防抗生素",
+      "充足休息"
+    ],
+    "patient_edu_warnings": [
+      "與 azacitidine 機轉相似,選擇依醫療團隊判斷",
+      "至少需 4-6 療程才評估,中間骨髓抑制不要中斷"
+    ]
+  }
+};
+const educationParentMap = {"9.5": ["9.5.1", "9.5.2"], "9.12": ["9.12.1", "9.12.2"], "9.16": ["9.16.1", "9.16.2"], "9.44": ["9.44.1", "9.44.2"]};
+
 const drugs = [
   {
     "num": "9.1",
@@ -13126,6 +15435,13 @@ function renderList() {
             </div>
             <div class="drug-tags">${tagsHTML}</div>
           </div>
+          ${(drugEducation[d.num] || educationParentMap[d.num]) ? `<button class="edu-btn" data-edu="${d.num}" aria-label="教學資料" title="個管師教學資料">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 4h12v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4z"/>
+              <path d="M2 4l6 4 6-4"/>
+              <path d="M5 9h6M5 11h4"/>
+            </svg>
+          </button>` : ''}
           <span class="arrow">${ICONS.arrow}</span>
         </div>
         <div class="drug-body">
@@ -13224,6 +15540,165 @@ fab.onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
 
 document.getElementById("info-total").textContent = drugs.length;
 renderAll();
+</script>
+
+<script>
+// === 教學資料對話框 ===
+const eduPanel = document.getElementById("edu-panel");
+const eduOverlay = document.getElementById("edu-overlay");
+
+function openEducation(drugNum) {
+  // 找這個藥物的資料
+  let edus = [];
+  let drug = drugs.find(d => d.num === drugNum);
+  
+  if (drugEducation[drugNum]) {
+    edus.push({ num: drugNum, drug: drug, edu: drugEducation[drugNum] });
+  } else if (educationParentMap[drugNum]) {
+    // 父項目: 顯示所有子項目
+    educationParentMap[drugNum].forEach(childNum => {
+      const childDrug = drugs.find(d => d.num === childNum);
+      if (drugEducation[childNum] && childDrug) {
+        edus.push({ num: childNum, drug: childDrug, edu: drugEducation[childNum] });
+      }
+    });
+  }
+  
+  if (edus.length === 0) return;
+  
+  // 設定 header (用第一個或父項目)
+  if (edus.length === 1) {
+    document.getElementById("edu-num").textContent = edus[0].num;
+    document.getElementById("edu-title").textContent = edus[0].drug.name + (edus[0].drug.brand ? ` (${edus[0].drug.brand})` : '');
+    document.getElementById("edu-class").textContent = edus[0].edu.drug_class;
+  } else {
+    document.getElementById("edu-num").textContent = drugNum;
+    document.getElementById("edu-title").textContent = drug ? drug.name : drugNum;
+    document.getElementById("edu-class").textContent = "(本項涵蓋多個子藥物)";
+  }
+  
+  // 渲染 body
+  let bodyHTML = '';
+  edus.forEach((e, idx) => {
+    if (edus.length > 1) {
+      bodyHTML += `<div class="edu-child-divider">${e.num}　${escapeHTML(e.drug.name)}${e.drug.brand ? ` (${escapeHTML(e.drug.brand)})` : ''}</div>`;
+      bodyHTML += `<div style="margin-bottom:10px;font-size:11px;color:var(--ink-3);padding:0 4px;">${escapeHTML(e.edu.drug_class)}</div>`;
+    }
+    
+    // 作用機轉
+    bodyHTML += `<div class="edu-section">
+      <div class="edu-section-title">
+        <span class="edu-section-icon">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="3"/><path d="M7 1v2M7 11v2M1 7h2M11 7h2M3 3l1.5 1.5M9.5 9.5L11 11M3 11l1.5-1.5M9.5 4.5L11 3"/></svg>
+        </span>
+        作用機轉
+      </div>
+      <div class="edu-mechanism">${escapeHTML(e.edu.mechanism)}</div>
+    </div>`;
+    
+    // 副作用
+    if (e.edu.side_effects && e.edu.side_effects.length > 0) {
+      bodyHTML += `<div class="edu-section">
+        <div class="edu-section-title">
+          <span class="edu-section-icon">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M7 1L13 12H1L7 1Z"/><path d="M7 5v3M7 10v0.3"/></svg>
+          </span>
+          常見副作用
+        </div>`;
+      e.edu.side_effects.forEach(se => {
+        bodyHTML += `<div class="edu-side-effect">
+          <div class="edu-side-effect-name">${escapeHTML(se.name)}</div>
+          <div class="edu-side-effect-meta">
+            ${se.frequency ? `<span><b>發生率:</b>${escapeHTML(se.frequency)}</span>` : ''}
+            ${se.timing ? `<span><b>時機:</b>${escapeHTML(se.timing)}</span>` : ''}
+          </div>
+          ${se.note ? `<div class="edu-side-effect-note">${escapeHTML(se.note)}</div>` : ''}
+        </div>`;
+      });
+      bodyHTML += `</div>`;
+    }
+    
+    // 監測重點
+    if (e.edu.monitoring && e.edu.monitoring.length > 0) {
+      bodyHTML += `<div class="edu-section">
+        <div class="edu-section-title">
+          <span class="edu-section-icon">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><path d="M7 3v4l2.5 1.5"/></svg>
+          </span>
+          療程中監測重點
+        </div>
+        <ul class="edu-bullet-list">${e.edu.monitoring.map(m => `<li>${escapeHTML(m)}</li>`).join('')}</ul>
+      </div>`;
+    }
+    
+    // 警訊識別
+    if (e.edu.warnings && e.edu.warnings.length > 0) {
+      bodyHTML += `<div class="edu-section">
+        <div class="edu-section-title">
+          <span class="edu-section-icon" style="background:var(--warn-bg);color:var(--warn);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 1L13 12H1L7 1Z"/><path d="M7 5v3M7 10v0.3" stroke-linecap="round"/></svg>
+          </span>
+          警訊識別 (病人需立即就醫)
+        </div>
+        <div class="edu-warning-block">
+          <ul class="edu-bullet-list edu-warning-list">${e.edu.warnings.map(w => `<li>${escapeHTML(w)}</li>`).join('')}</ul>
+        </div>
+      </div>`;
+    }
+    
+    // 生活衛教
+    if (e.edu.lifestyle && e.edu.lifestyle.length > 0) {
+      bodyHTML += `<div class="edu-section">
+        <div class="edu-section-title">
+          <span class="edu-section-icon">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2 7L7 2L12 7L7 12Z"/><circle cx="7" cy="7" r="2"/></svg>
+          </span>
+          生活衛教
+        </div>
+        <ul class="edu-bullet-list">${e.edu.lifestyle.map(l => `<li>${escapeHTML(l)}</li>`).join('')}</ul>
+      </div>`;
+    }
+    
+    // 講解時的示警規範
+    if (e.edu.patient_edu_warnings && e.edu.patient_edu_warnings.length > 0) {
+      bodyHTML += `<div class="edu-section">
+        <div class="edu-section-title">
+          <span class="edu-section-icon">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2 4h10v6a1 1 0 01-1 1H3a1 1 0 01-1-1V4z"/><path d="M2 4l5 3 5-3"/></svg>
+          </span>
+          個管師講解重點
+        </div>
+        <div class="edu-edu-block">
+          <ul class="edu-bullet-list">${e.edu.patient_edu_warnings.map(p => `<li>${escapeHTML(p)}</li>`).join('')}</ul>
+        </div>
+      </div>`;
+    }
+  });
+  
+  document.getElementById("edu-body").innerHTML = bodyHTML;
+  eduPanel.classList.add("open");
+  eduOverlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeEducation() {
+  eduPanel.classList.remove("open");
+  eduOverlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("edu-close").onclick = closeEducation;
+eduOverlay.onclick = closeEducation;
+
+// 委派事件 - 點教學按鈕
+document.addEventListener("click", function(e) {
+  const btn = e.target.closest(".edu-btn");
+  if (btn) {
+    e.stopPropagation();  // 防止觸發藥物展開
+    openEducation(btn.dataset.edu);
+  }
+});
+
 </script>
 
 <script>
