@@ -131,6 +131,32 @@
     - 原因:程式插入 HTML 時忘了在新區塊外圍加 <script> 標籤,造成 JS 變成 HTML body 文字
     - 做法:確保插入位置前後是 </script> + <script> 配對,或自己包
 
+28. **【V3.10】Header 加「最後檢查時間」確認爬蟲沒掛**
+    - 需求:目前只有「有新版」才會跳通知,沒新版時 Sela 無法確認 workflow 是否還在跑
+    - 做法:打 GitHub API `/actions/workflows/check-nhi-update.yml/runs?per_page=1` 抓最後一次 run 的 `created_at`
+    - 顯示策略: 剛剛 / 今天 / 昨天 / N 天前 / 30 天以上顯示日期
+    - 警示門檻:超過 14 天沒跑顯示橘色 (workflow 排程是每週一)
+    - hover tooltip 補完整時間 + workflow 結果 (成功/失敗/⋯)
+    - 順便把資料日期文字從「資料截止 115/4/23」改成「程式參考的資料是 115年4月23日」
+    - 重點:`brand-data-date` 加 `data-date="115.4.23"` 屬性,讓 `checkUpdateNotice` 比對日期時讀屬性而非顯示文字 — 之後改顯示格式不會打到 regex
+
+29. **【V3.11】PDF parser 漏抓的「歷史藥」直到健保署更新才被發現**
+    - 症狀:做 115/5/22 更新差異報告時發現「新增」5 個藥(9.49/9.84/9.99/9.135/9.136),但其中 9.49 Abiraterone (條文最新日 114/6/1)、9.99 Gilteritinib (條文最新日 113/6/1)、9.84 Copanlisib (這次標"刪除")實際在 115/4/23 規定本來就有,是 V3.9 解析時就漏抓
+    - 連帶:9.48 (Eribulin) 的 items / per_cancer["其他癌"] / search_text 都吃進了 9.49 整段內容; 9.98 (Pemigatinib) 的最後 item.header 吃進 9.99 字首
+    - 原因:parser 沒設「下一個 9.X. 編號就是切點」這個邊界,造成漏抓的編號條文被合併到前一個藥
+    - 做法:這次手工清理 — 把 9.48 items 從 7 個截回 2 個 (轉移性乳癌 + 脂肪肉瘤);per_cancer["其他癌"] / common_data / search_text 也都重建; 補加 9.49 / 9.99 / 9.135 / 9.136 完整條文;9.84 標 `deleted: true` 保留編號 (灰底淡出 + 紅色"已刪除 115/6/1"標籤,健保署也是用"(刪除)"寫法保留條文編號)
+    - 教訓:下次重跑 parser 時應加上「9.X. 編號 + 英文藥名」邊界檢測,任一藥的條文若包含其他 9.X. 編號 = parser bug,該報錯而非靜默合併
+
+## 四、發版同步清單 (Rule 1 補完)
+
+每次發版必須同步改的位置 (這次 V3.10/V3.11 中間有 5 版斷檔的教訓):
+
+1. `index.html` 行 ~1521 `<span class="brand-version">vX.Y</span>`
+2. `index.html` 行 ~1526 `<span class="brand-data-date" data-date="115.X.Y" data-effective="115.X.Y">` 顯示文字
+3. `CLAUDE.md`「踩過的坑」加新編號 (只加不刪)
+4. `CLAUDE.md`「版本歷程」表加 row
+5. `CLAUDE.md`「一句話總結」更新
+
 ## 四、版本歷程
 
 | 版本 | 重點 |
@@ -142,10 +168,11 @@
 | V3.4 | GitHub Actions 自動檢測健保署資料更新 |
 | V3.4.1 | 加多重備援策略 (r.jina.ai 等) |
 | V3.4.2 | 偵測到更新時自動下載 PDF**,上傳為 artifact,Issue 直接附下載連結 |
+| V3.10 | Header 加「最後檢查 N 天前」(GitHub Actions API);資料日期文字改為「程式參考的資料是 115年4月23日」+ data-date 屬性 |
+| V3.11 | 跟進 115/5/22 公告 (6/1 生效):補回 9.49 Abiraterone / 9.99 Gilteritinib (V3.9 parser 漏抓的歷史藥);新增 9.135 Capivasertib / 9.136 Fruquitinib;9.84 Copanlisib 標"已刪除"(灰底淡出 + 紅色標籤);Header 改「115年5月22日公告，115年6月1日生效」|
+| V3.12 | 「關於」面板的資料來源加上「前往健保署藥品給付規定下載最新版」連結 (https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html),方便 Sela 拿到下次更新 PDF |
 
----
-
-## 五、關鍵路徑
+> 註:V3.5–V3.9 的版本歷程未記錄於本表,改動內容散見「踩過的坑 #19–#27」。
 
 ```
 專案結構:
@@ -213,4 +240,4 @@
 
 ## 九、一句話總結
 
-V3.4.2 完成了「**健保署有更新 → 自動下載 PDF → 寄 Email 通知 Sela → 點連結下載 PDF → 給 Claude 重做 → 推送**」的閉環自動化。Sela 完全不用主動查健保署網站,系統永遠跟最新規定同步。下版重點是抽樣驗證自動切片正確性。
+V3.4.2 完成了「**健保署有更新 → 自動下載 PDF → 寄 Email 通知 Sela → 點連結下載 PDF → 給 Claude 重做 → 推送**」的閉環自動化。V3.10 補上「最後檢查 N 天前」讓沒新版時也能確認爬蟲還活著。V3.11 完整跑過第一次健保更新流程 (115/4/23 → 115/5/22),意外撿回 V3.9 parser 漏抓的 2 個歷史藥。V3.12 加上健保署下載頁連結,讓 Sela 找下次更新 PDF 不用再 Google。下版重點仍是 parser 邊界檢測 (避免條文溢出合併)。

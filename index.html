@@ -135,6 +135,26 @@
     font-variant-numeric: tabular-nums;
   }
   
+  .brand-last-check {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    margin-left: 8px;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .brand-last-check::before {
+    content: "· ";
+    color: rgba(255,255,255,0.35);
+    margin-right: 4px;
+  }
+  .brand-last-check.warn {
+    color: #f5b860;
+    font-weight: 500;
+  }
+  .brand-last-check:empty {
+    display: none;
+  }
+  
   /* 有新版警示徽章 */
   .update-badge {
     display: inline-flex;
@@ -552,6 +572,27 @@
   .drug.open { background: var(--surface-2); }
   
   .drug.pre-review { border-left: 2px solid var(--warn); }
+  
+  /* 已刪除藥物: 灰底淡出, 顯示刪除日期標籤 */
+  .drug.deleted {
+    background: rgba(0,0,0,0.025);
+    opacity: 0.6;
+  }
+  .drug.deleted:hover {
+    opacity: 0.8;
+  }
+  .drug.deleted .drug-title {
+    text-decoration: line-through;
+    color: var(--ink-3);
+  }
+  .drug.deleted .drug-brand {
+    text-decoration: line-through;
+  }
+  .tag.deleted-tag {
+    background: #b85450;
+    color: white;
+    font-weight: 600;
+  }
   
   .drug-header {
     padding: 14px 16px;
@@ -1153,6 +1194,15 @@
       margin-top: 1px;
       color: rgba(255,255,255,0.7);
     }
+    .brand-last-check {
+      display: block;
+      margin-left: 0;
+      margin-top: 1px;
+      font-size: 10px;
+    }
+    .brand-last-check::before {
+      display: none;
+    }
   }
   
   @media (max-width: 380px) {
@@ -1497,12 +1547,13 @@
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v3.9</span>
+        <span class="brand-version">v3.12</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
         <span class="brand-divider">·</span> 
-        <span class="brand-data-date">資料截止 115/4/23</span>
+        <span class="brand-data-date" data-date="115.5.22" data-effective="115.6.1">程式參考的資料是 115年5月22日公告，115年6月1日生效</span>
+        <span class="brand-last-check" id="brand-last-check"></span>
       </div>
       <a class="update-badge" id="update-badge" style="display:none" target="_blank" rel="noopener">
         <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
@@ -1640,7 +1691,15 @@
     <p style="color: var(--ink-2); margin-bottom: 16px;">
       衛生福利部中央健康保險署<br>
       藥品給付規定 第 9 節 抗癌瘤藥物<br>
-      115 年 4 月 23 日更新版
+      115 年 5 月 22 日公告 (115/6/1 生效)<br>
+      <a href="https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; color: var(--primary); text-decoration: none; font-size: 13px;">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 2h4v4"/>
+          <path d="M14 2L7 9"/>
+          <path d="M13 9v4a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1h4"/>
+        </svg>
+        前往健保署藥品給付規定下載最新版
+      </a>
     </p>
     <div class="filter-label" style="margin-bottom: 6px;">逐癌切片狀態</div>
     <p style="color: var(--ink-2); margin-bottom: 16px;">
@@ -15767,75 +15826,9 @@ const drugs = [
           },
           {
             "num": "(2)",
-            "text": "須經事前審查核准後使用，每次申請以3個療程為限，再次申請時應檢附前次治 療結果評估資料證實無惡化，才可繼續使用。 9.49. Abiraterone(如 Zytiga）：（103/12/1、105/9/1、106/9/1、108/3/1、 1.與雄性素去除療法及 prednisone 或 prednisolone 併用，治療新診斷高風險轉移性 的去勢敏感性前列腺癌(mCSPC)的成年男性(ECOG 分數須≦1)。高風險需符合下列三 項條件中至少兩項："
-          },
-          {
-            "num": "(1)",
-            "text": "葛里森分數(Gleason score)≧8；"
-          },
-          {
-            "num": "(2)",
-            "text": "骨骼掃描出現三個(含)以上病灶且至少其中一處以上為非脊柱及非骨盆腔轉移；"
-          },
-          {
-            "num": "(3)",
-            "text": "出現內臟轉移。 2.與 prednisone 或 prednisolone 併用，治療藥物或手術去勢抗性的轉移性前列腺癌 (mCRPC)，且在雄性素去除療法失敗後屬無症狀或輕度症狀(ECOG 分數0或1)，未曾 接受化學治療者："
-          },
-          {
-            "num": "(1)",
-            "text": "若病患先前接受雄性素去除療法時，在小於12個月的時間內演化成去勢抗性前列 腺癌(CRPC)，且葛里森分數(Gleason score)≧8時，不得於使用化學治療前使 用 abiraterone。"
-          },
-          {
-            "num": "(2)",
-            "text": "申請時需另檢附： I.用藥紀錄(證明未常規使用止痛藥物，屬無症狀或輕度症狀)。 II.三個月內影像報告證明無臟器轉移。"
+            "text": "須經事前審查核准後使用，每次申請以3個療程為限，再次申請時應檢附前次治 療結果評估資料證實無惡化，才可繼續使用。"
           }
         ]
-      },
-      {
-        "num": "3",
-        "header": "與 prednisone 或 prednisolone 併用，治療藥物或手術去勢抗性的轉移性前列腺癌 (ECOG 分數須≦2)且已使用過 docetaxel 2個療程以上治療無效者。",
-        "subitems": []
-      },
-      {
-        "num": "4",
-        "header": "與 olaparib 及 prednisone 或 prednisolone，用於具 germline 或 somatic BRCA 1/2致病性或疑似致病性突變之成人病人，患者需符合 olaparib 藥品給付規定。",
-        "subitems": []
-      },
-      {
-        "num": "5",
-        "header": "前述1、2、3項須經事前審查核准後使用，每3個月需再次申請。",
-        "subitems": [
-          {
-            "num": "(1)",
-            "text": "申請時需檢附病理報告、使用雄性素去除療法紀錄及系列 PSA 和睪固酮數據。"
-          },
-          {
-            "num": "(2)",
-            "text": "再申請時若 PSA 值下降未超過治療前的50%以上，則需停藥。(106/9/1、"
-          },
-          {
-            "num": "(3)",
-            "text": "下降達最低值後之持續追蹤出現 PSA 較最低值上升50%以上且 PSA≧2ng/ml，則 需停藥，但影像學證據尚無疾病進展者，可以繼續使用。（106/9/1、"
-          },
-          {
-            "num": "(4)",
-            "text": "用於治療新診斷高風險轉移性的去勢敏感性前列腺癌(mCSPC)的成年男性，總療 程以36個月為上限（惟 Ateron 總療程以24個月為上限）。(109/5/1、110/2/1、"
-          },
-          {
-            "num": "(5)",
-            "text": "去勢抗性前列腺癌(CRPC)病患若於化學治療前先使用過 abiraterone，當化學治 療失敗後不得再申請使用 abiraterone。"
-          }
-        ]
-      },
-      {
-        "num": "6",
-        "header": "不論病人處於轉移或非轉移的狀態下，新型荷爾蒙藥品(abiraterone、 apalutamide、darolutamide 和 enzalutamide) 及 olaparib 與 abiraterone 併 用，終生僅給付一種治療，且除非出現嚴重不耐受反應導致必須永久停止治療，不 得互換。",
-        "subitems": []
-      },
-      {
-        "num": "7",
-        "header": "本品與 radium-223 dichloride 不得合併使用。",
-        "subitems": []
       }
     ],
     "per_cancer": {
@@ -15873,27 +15866,7 @@ const drugs = [
               },
               {
                 "num": "(2)",
-                "text": "須經事前審查核准後使用，每次申請以3個療程為限，再次申請時應檢附前次治 療結果評估資料證實無惡化，才可繼續使用。 9.49. Abiraterone(如 Zytiga）：（103/12/1、105/9/1、106/9/1、108/3/1、 1.與雄性素去除療法及 prednisone 或 prednisolone 併用，治療新診斷高風險轉移性 的去勢敏感性前列腺癌(mCSPC)的成年男性(ECOG 分數須≦1)。高風險需符合下列三 項條件中至少兩項："
-              },
-              {
-                "num": "(1)",
-                "text": "葛里森分數(Gleason score)≧8；"
-              },
-              {
-                "num": "(2)",
-                "text": "骨骼掃描出現三個(含)以上病灶且至少其中一處以上為非脊柱及非骨盆腔轉移；"
-              },
-              {
-                "num": "(3)",
-                "text": "出現內臟轉移。 2.與 prednisone 或 prednisolone 併用，治療藥物或手術去勢抗性的轉移性前列腺癌 (mCRPC)，且在雄性素去除療法失敗後屬無症狀或輕度症狀(ECOG 分數0或1)，未曾 接受化學治療者："
-              },
-              {
-                "num": "(1)",
-                "text": "若病患先前接受雄性素去除療法時，在小於12個月的時間內演化成去勢抗性前列 腺癌(CRPC)，且葛里森分數(Gleason score)≧8時，不得於使用化學治療前使 用 abiraterone。"
-              },
-              {
-                "num": "(2)",
-                "text": "申請時需另檢附： I.用藥紀錄(證明未常規使用止痛藥物，屬無症狀或輕度症狀)。 II.三個月內影像報告證明無臟器轉移。"
+                "text": "須經事前審查核准後使用，每次申請以3個療程為限，再次申請時應檢附前次治 療結果評估資料證實無惡化，才可繼續使用。"
               }
             ]
           }
@@ -15953,7 +15926,102 @@ const drugs = [
         "subitems": []
       }
     ],
-    "search_text": "eribulin halaven 轉移性乳癌： 用於治療轉移性乳癌患者且先前曾接受過 anthracycline 和 taxane 兩種針對轉 移性乳癌之化學治療輔助性治療。 每3個療程需進行療效評估，病歷應留存評估紀錄，無疾病惡化方可繼續使用。 eribulin 與 ixabepilone 用於治療上述之轉移性乳癌患者時，僅得擇一使用， 且不得互換（eribulin 限用於未曾使用過 ixabepilone 之病患）。 脂肪肉瘤： 限單獨使用於治療無法手術切除或轉移性脂肪肉瘤成人患者，且先前應至少接受 一次含 anthracycline 之全身化療。 須經事前審查核准後使用，每次申請以3個療程為限，再次申請時應檢附前次治 療結果評估資料證實無惡化，才可繼續使用。 9.49. abiraterone(如 zytiga）：（103/12/1、105/9/1、106/9/1、108/3/1、 1.與雄性素去除療法及 prednisone 或 prednisolone 併用，治療新診斷高風險轉移性 的去勢敏感性前列腺癌(mcspc)的成年男性(ecog 分數須≦1)。高風險需符合下列三 項條件中至少兩項： 葛里森分數(gleason score)≧8； 骨骼掃描出現三個(含)以上病灶且至少其中一處以上為非脊柱及非骨盆腔轉移； 出現內臟轉移。 2.與 prednisone 或 prednisolone 併用，治療藥物或手術去勢抗性的轉移性前列腺癌 (mcrpc)，且在雄性素去除療法失敗後屬無症狀或輕度症狀(ecog 分數0或1)，未曾 接受化學治療者： 若病患先前接受雄性素去除療法時，在小於12個月的時間內演化成去勢抗性前列 腺癌(crpc)，且葛里森分數(gleason score)≧8時，不得於使用化學治療前使 用 abiraterone。 申請時需另檢附： i.用藥紀錄(證明未常規使用止痛藥物，屬無症狀或輕度症狀)。 ii.三個月內影像報告證明無臟器轉移。 與 prednisone 或 prednisolone 併用，治療藥物或手術去勢抗性的轉移性前列腺癌 (ecog 分數須≦2)且已使用過 docetaxel 2個療程以上治療無效者。 與 olaparib 及 prednisone 或 prednisolone，用於具 germline 或 somatic brca 1/2致病性或疑似致病性突變之成人病人，患者需符合 olaparib 藥品給付規定。 前述1、2、3項須經事前審查核准後使用，每3個月需再次申請。 申請時需檢附病理報告、使用雄性素去除療法紀錄及系列 psa 和睪固酮數據。 再申請時若 psa 值下降未超過治療前的50%以上，則需停藥。(106/9/1、 下降達最低值後之持續追蹤出現 psa 較最低值上升50%以上且 psa≧2ng/ml，則 需停藥，但影像學證據尚無疾病進展者，可以繼續使用。（106/9/1、 用於治療新診斷高風險轉移性的去勢敏感性前列腺癌(mcspc)的成年男性，總療 程以36個月為上限（惟 ateron 總療程以24個月為上限）。(109/5/1、110/2/1、 去勢抗性前列腺癌(crpc)病患若於化學治療前先使用過 abiraterone，當化學治 療失敗後不得再申請使用 abiraterone。 不論病人處於轉移或非轉移的狀態下，新型荷爾蒙藥品(abiraterone、 apalutamide、darolutamide 和 enzalutamide) 及 olaparib 與 abiraterone 併 用，終生僅給付一種治療，且除非出現嚴重不耐受反應導致必須永久停止治療，不 得互換。 本品與 radium-223 dichloride 不得合併使用。"
+    "search_text": "eribulin halaven 轉移性乳癌： 用於治療轉移性乳癌患者且先前曾接受過 anthracycline 和 taxane 兩種針對轉 移性乳癌之化學治療輔助性治療。 每3個療程需進行療效評估，病歷應留存評估紀錄，無疾病惡化方可繼續使用。 eribulin 與 ixabepilone 用於治療上述之轉移性乳癌患者時，僅得擇一使用， 且不得互換（eribulin 限用於未曾使用過 ixabepilone 之病患）。 脂肪肉瘤： 限單獨使用於治療無法手術切除或轉移性脂肪肉瘤成人患者，且先前應至少接受 一次含 anthracycline 之全身化療。 須經事前審查核准後使用，每次申請以3個療程為限，再次申請時應檢附前次治 療結果評估資料證實無惡化，才可繼續使用。"
+  },
+  {
+    "num": "9.49",
+    "name": "Abiraterone",
+    "brand": "Zytiga",
+    "cancers": [
+      "泌尿癌"
+    ],
+    "types": [
+      "荷爾蒙"
+    ],
+    "pre_review": true,
+    "form_no": "",
+    "is_parent": false,
+    "is_real_parent_with_children": false,
+    "items": [
+      {
+        "num": "1",
+        "header": "與雄性素去除療法及 prednisone 或 prednisolone 併用，治療新診斷高風險轉移性的去勢敏感性前列腺癌(mCSPC)的成年男性(ECOG 分數須≦1)。高風險需符合下列三項條件中至少兩項：",
+        "subitems": [
+          {
+            "num": "(1)",
+            "text": "葛里森分數(Gleason score)≧8；"
+          },
+          {
+            "num": "(2)",
+            "text": "骨骼掃描出現三個(含)以上病灶且至少其中一處以上為非脊柱及非骨盆腔轉移；"
+          },
+          {
+            "num": "(3)",
+            "text": "出現內臟轉移。"
+          }
+        ]
+      },
+      {
+        "num": "2",
+        "header": "與 prednisone 或 prednisolone 併用，治療藥物或手術去勢抗性的轉移性前列腺癌(mCRPC)，且在雄性素去除療法失敗後屬無症狀或輕度症狀(ECOG 分數 0 或 1)，未曾接受化學治療者：",
+        "subitems": [
+          {
+            "num": "(1)",
+            "text": "若病患先前接受雄性素去除療法時，在小於 12 個月的時間內演化成去勢抗性前列腺癌(CRPC)，且葛里森分數(Gleason score)≧8 時，不得於使用化學治療前使用 abiraterone。"
+          },
+          {
+            "num": "(2)",
+            "text": "申請時需另檢附：I. 用藥紀錄(證明未常規使用止痛藥物，屬無症狀或輕度症狀)。II. 三個月內影像報告證明無臟器轉移。"
+          }
+        ]
+      },
+      {
+        "num": "3",
+        "header": "與 prednisone 或 prednisolone 併用，治療藥物或手術去勢抗性的轉移性前列腺癌(ECOG 分數須≦2)且已使用過 docetaxel 2 個療程以上治療無效者。",
+        "subitems": []
+      },
+      {
+        "num": "4",
+        "header": "與 olaparib 及 prednisone 或 prednisolone，用於具 germline 或 somatic BRCA 1/2 致病性或疑似致病性突變之成人病人，患者需符合 olaparib 藥品給付規定。(114/6/1)",
+        "subitems": []
+      },
+      {
+        "num": "5",
+        "header": "前述 1、2、3 項須經事前審查核准後使用，每 3 個月需再次申請。",
+        "subitems": [
+          {
+            "num": "(1)",
+            "text": "申請時需檢附病理報告、使用雄性素去除療法紀錄及系列 PSA 和睪固酮數據。"
+          },
+          {
+            "num": "(2)",
+            "text": "再申請時若 PSA 值下降未超過治療前的 50% 以上，則需停藥。"
+          },
+          {
+            "num": "(3)",
+            "text": "下降達最低值後之持續追蹤出現 PSA 較最低值上升 50% 以上且 PSA≧2ng/ml，則需停藥，但影像學證據尚無疾病進展者，可以繼續使用。"
+          },
+          {
+            "num": "(4)",
+            "text": "用於治療新診斷高風險轉移性的去勢敏感性前列腺癌(mCSPC)的成年男性，總療程以 36 個月為上限（惟 Ateron 總療程以 24 個月為上限）。"
+          },
+          {
+            "num": "(5)",
+            "text": "去勢抗性前列腺癌(CRPC)病患若於化學治療前先使用過 abiraterone，當化學治療失敗後不得再申請使用 abiraterone。"
+          }
+        ]
+      },
+      {
+        "num": "6",
+        "header": "不論病人處於轉移或非轉移的狀態下，新型荷爾蒙藥品(abiraterone、apalutamide、darolutamide 和 enzalutamide) 及 olaparib 與 abiraterone 併用，終生僅給付一種治療，且除非出現嚴重不耐受反應導致必須永久停止治療，不得互換。(114/6/1)",
+        "subitems": []
+      },
+      {
+        "num": "7",
+        "header": "本品與 radium-223 dichloride 不得合併使用。",
+        "subitems": []
+      }
+    ]
   },
   {
     "num": "9.50",
@@ -18525,6 +18593,27 @@ const drugs = [
     "search_text": "dacomitinib vizimpro 限單獨使用具有 egfr-tk exon 19 del 或 exon 21 l858r 點突變，且無腦轉移 (non-cns)之局部侵犯性或轉移性(即第ⅲb、ⅲc 或第ⅳ期)之肺腺癌病患之第一線 治療，需檢附 egfr 基因檢測結果報告，且需符合全民健康保險藥品給付規定之通 則十二。 使用注意事項 病歷應留存確實患有肺腺癌之病理或細胞檢查報告，及 egfr-tk 基因 突變檢測報告。 每次處方以4週為限，再次處方時需於病歷記錄治療後相關臨床資 料，如每4週需追蹤胸部 x 光或電腦斷層等影像檢查，每8至12週需 進行完整療效評估（如胸部 x 光或電腦斷層）。 本藥品與 gefitinib、erlotinib 及 afatinib，僅得擇一使用，除因 耐受性不良，不得互換。如需更換使用本藥品，必須符合本藥品第一 線使用於具有 egfr-tk exon 19 del 或 exon 21 l858r 點突變，且無 腦轉移(non-cns)之局部侵犯性或轉移性(即第ⅲb、ⅲc 或第ⅳ期)肺 腺癌之限制。 每日限用1粒。"
   },
   {
+    "num": "9.84",
+    "name": "Copanlisib",
+    "brand": "Aliqopa",
+    "cancers": [],
+    "types": [],
+    "pre_review": false,
+    "form_no": "",
+    "is_parent": false,
+    "is_real_parent_with_children": false,
+    "deleted": true,
+    "deleted_date": "115/5/22",
+    "deleted_effective": "115/6/1",
+    "items": [
+      {
+        "num": "—",
+        "header": "本藥已於 115/6/1 起刪除給付（115/5/22 公告）。原條文已不再適用。",
+        "subitems": []
+      }
+    ]
+  },
+  {
     "num": "9.85",
     "name": "PARP 抑制劑",
     "brand": "olaparib、niraparib、talazoparib",
@@ -19832,25 +19921,8 @@ const drugs = [
       },
       {
         "num": "4",
-        "header": "每日限處方1粒。 9.99.Gilteritinib(如 Xospata)： 1.限單獨使用於具有 FLT3突變的復發性或難治性急性骨髓性白血病(R/R AML)且計畫 進行造血幹細胞移植的成年病人，限移植前使用，每位病人限給付6療程。病患須至 少接受過一次 含 anthracycline 藥物的化學治療。 2.須事前審查核准後使用，初次申請時須檢附：",
-        "subitems": [
-          {
-            "num": "(1)",
-            "text": "相關病歷資料。"
-          },
-          {
-            "num": "(2)",
-            "text": "完整之造血幹細胞移植計畫，並詳細記載確認捐贈者名單及移植前調適治療等資 料。需由具訓練血液及骨髓移植醫師能力之醫院申請，並由完成血液及骨髓移植訓 練之醫師確認移植計畫。"
-          },
-          {
-            "num": "(3)",
-            "text": "染色體檢驗報告，若為 unfavorable karyotype(包含 complex karyotype、-5、- 5q、 -7、-7q、除 t(9;11)外的11q23 abnormalities、inv(3)、(3;3)、t(6;9)以 及 t(9;22)等) 則不予給付。"
-          },
-          {
-            "num": "(4)",
-            "text": "檢附之 FLT3突變檢測結果報告，需符合全民健康保險藥品給付規定之通則十二。 3.每次申請為二個療程；續申請次二個療程時須檢附達到 PR、CRi 或 CR 的證明方可 續用。申請劑量以每日120mg 為上限。"
-          }
-        ]
+        "header": "每日限處方1粒。",
+        "subitems": []
       }
     ],
     "per_cancer": {
@@ -19904,6 +19976,55 @@ const drugs = [
       }
     ],
     "search_text": "pemigatinib pemazyre 適用於成人接受過全身性藥物治療、腫瘤具有 fgfr2融合或重排、不可手術切除的 局部晚期或轉移性肝內膽管癌。 需經事前審查核准後使用，初次申請需檢附腫瘤組織具有 fgfr2基因融合或重排之 基因變異檢測報告，且需符合全民健康保險藥品給付規定之通則十二。 核准後每12週需再次申請，再次申請時需檢附療效評估資料證實無疾病惡化，才可 繼續使用。 每日限處方1粒。 9.99.gilteritinib(如 xospata)： 1.限單獨使用於具有 flt3突變的復發性或難治性急性骨髓性白血病(r/r aml)且計畫 進行造血幹細胞移植的成年病人，限移植前使用，每位病人限給付6療程。病患須至 少接受過一次 含 anthracycline 藥物的化學治療。 2.須事前審查核准後使用，初次申請時須檢附： 相關病歷資料。 完整之造血幹細胞移植計畫，並詳細記載確認捐贈者名單及移植前調適治療等資 料。需由具訓練血液及骨髓移植醫師能力之醫院申請，並由完成血液及骨髓移植訓 練之醫師確認移植計畫。 染色體檢驗報告，若為 unfavorable karyotype(包含 complex karyotype、-5、- 5q、 -7、-7q、除 t(9;11)外的11q23 abnormalities、inv(3)、(3;3)、t(6;9)以 及 t(9;22)等) 則不予給付。 檢附之 flt3突變檢測結果報告，需符合全民健康保險藥品給付規定之通則十二。 3.每次申請為二個療程；續申請次二個療程時須檢附達到 pr、cri 或 cr 的證明方可 續用。申請劑量以每日120mg 為上限。"
+  },
+  {
+    "num": "9.99",
+    "name": "Gilteritinib",
+    "brand": "Xospata",
+    "cancers": [
+      "血液淋巴癌"
+    ],
+    "types": [
+      "標靶"
+    ],
+    "pre_review": true,
+    "form_no": "",
+    "is_parent": false,
+    "is_real_parent_with_children": false,
+    "items": [
+      {
+        "num": "1",
+        "header": "限單獨使用於具有 FLT3 突變的復發性或難治性急性骨髓性白血病(R/R AML)且計畫進行造血幹細胞移植的成年病人，限移植前使用，每位病人限給付 6 療程。病患須至少接受過一次含 anthracycline 藥物的化學治療。",
+        "subitems": []
+      },
+      {
+        "num": "2",
+        "header": "須事前審查核准後使用，初次申請時須檢附：",
+        "subitems": [
+          {
+            "num": "(1)",
+            "text": "相關病歷資料。"
+          },
+          {
+            "num": "(2)",
+            "text": "完整之造血幹細胞移植計畫，並詳細記載確認捐贈者名單及移植前調適治療等資料。需由具訓練血液及骨髓移植醫師能力之醫院申請，並由完成血液及骨髓移植訓練之醫師確認移植計畫。"
+          },
+          {
+            "num": "(3)",
+            "text": "染色體檢驗報告，若為 unfavorable karyotype (包含 complex karyotype、-5、-5q、-7、-7q、除 t(9;11) 外的 11q23 abnormalities、inv(3)、(3;3)、t(6;9) 以及 t(9;22) 等) 則不予給付。"
+          },
+          {
+            "num": "(4)",
+            "text": "檢附之 FLT3 突變檢測結果報告，需符合全民健康保險藥品給付規定之通則十二。(113/6/1)"
+          }
+        ]
+      },
+      {
+        "num": "3",
+        "header": "每次申請為二個療程；續申請次二個療程時須檢附達到 PR、CRi 或 CR 的證明方可續用。申請劑量以每日 120mg 為上限。",
+        "subitems": []
+      }
+    ]
   },
   {
     "num": "9.100",
@@ -22090,8 +22211,113 @@ const drugs = [
     "is_manual_split": false,
     "common_data": null,
     "search_text": "encorafenib braftovi 與 cetuximab 併用，作為具有 braf v600e 突變的轉移性結腸直腸癌(crc)成人病人 之第二線治療，需同時符合下列條件： 曾接受 bevacizumab 與 folfiri（folinicacid/5-fluorouracil/irinotecan）或 folfox（folinicacid/5-fluorouracil/oxaliplatin）或5- fluorouracil/leucovorin 合併使用之全身性療法。 未曾接受過抗表皮生長因子受體(anti-egfr)藥品治療。 ecog 分數≦2。 需檢附 braf v600e 突變之基因檢測報告，且需符合全民健康保險藥品給付規定之 通則十二。 須經事前審查核准後使用，初次申請之療程以12週為限，之後每12週申請一次，再 次申請時必須提出客觀影像學證據（如：影像學）證實無惡化，才可繼續使用。 使用總療程以24週為上限。 使用本品併用 cetuximab 作為第二線治療，不得再申請給付抗表皮生長因子受體 (anti-egfr)藥品作為後續治療。"
+  },
+  {
+    "num": "9.135",
+    "name": "Capivasertib",
+    "brand": "Truqap",
+    "cancers": [
+      "乳癌"
+    ],
+    "types": [
+      "標靶"
+    ],
+    "pre_review": true,
+    "form_no": "",
+    "is_parent": false,
+    "is_real_parent_with_children": false,
+    "items": [
+      {
+        "num": "1",
+        "header": "與 fulvestrant 併用於曾接受 CDK4/6 抑制劑治療但疾病惡化的停經後轉移性乳癌病人，且須完全符合下列條件：",
+        "subitems": [
+          {
+            "num": "(1)",
+            "text": "荷爾蒙受體為陽性 (ER 或 PR>30%)。"
+          },
+          {
+            "num": "(2)",
+            "text": "第二型人類表皮生長因子受體 (HER2) 陰性。"
+          },
+          {
+            "num": "(3)",
+            "text": "具 PIK3CA/AKT1/PTEN 任一變異。"
+          }
+        ]
+      },
+      {
+        "num": "2",
+        "header": "需經事前審查核准後使用：",
+        "subitems": [
+          {
+            "num": "(1)",
+            "text": "初次申請需檢附 PIK3CA/AKT1/PTEN 任一變異檢測報告，且需符合全民健康保險藥品給付規定之通則十二。"
+          },
+          {
+            "num": "(2)",
+            "text": "核准後每 12 週需檢附療效評估資料再次申請，若疾病惡化即必須停止使用。"
+          }
+        ]
+      },
+      {
+        "num": "3",
+        "header": "本藥品併用 fulvestrant 與 alpelisib 併用 fulvestrant 用於 PIK3CA 基因變異病人時，僅得擇一給付。",
+        "subitems": []
+      }
+    ]
+  },
+  {
+    "num": "9.136",
+    "name": "Fruquitinib",
+    "brand": "Fruzaqla",
+    "cancers": [
+      "大腸直腸癌"
+    ],
+    "types": [
+      "標靶"
+    ],
+    "pre_review": true,
+    "form_no": "",
+    "is_parent": false,
+    "is_real_parent_with_children": false,
+    "items": [
+      {
+        "num": "1",
+        "header": "用於先前曾接受下列療法的轉移性大腸直腸癌(mCRC)病人，療法包括 fluoropyrimidine、oxaliplatin、irinotecan 為基礎的化療，和抗血管內皮生長因子(anti-VEGF)等療法；若 K-RAS 為原生型(wild type)，則需再加上接受過抗表皮生長因子受體(anti-EGFR)療法。",
+        "subitems": []
+      },
+      {
+        "num": "2",
+        "header": "需檢附 All-RAS 基因突變分析檢測結果報告，且需符合全民健康保險藥品給付規定之通則十二。",
+        "subitems": []
+      },
+      {
+        "num": "3",
+        "header": "須經事前審查核准後使用，每次申請之療程以 8 週為限，再次申請必須提出客觀證據（如：影像學）證實無惡化，才可繼續使用。",
+        "subitems": []
+      },
+      {
+        "num": "4",
+        "header": "Fruzaqla 5mg 每日至多給付 1 粒，Fruzaqla 1mg 每日至多給付 4 粒。",
+        "subitems": []
+      }
+    ]
   }
 ];
+
+// 補完缺失 search_text 的藥物 (新增藥物資料時自動產生,避免搜尋崩潰)
+drugs.forEach(d => {
+  if (!d.search_text) {
+    const parts = [d.name, d.brand];
+    if (d.items) {
+      d.items.forEach(it => {
+        parts.push(it.header || '');
+        (it.subitems || []).forEach(sub => parts.push(sub.text || ''));
+      });
+    }
+    d.search_text = parts.filter(x => x).join(' ').toLowerCase();
+  }
+});
 
 const cancers = ["乳癌", "肺癌", "食道癌", "大腸直腸癌", "血液淋巴癌", "婦癌", "肝膽胰胃癌", "泌尿癌", "頭頸癌", "其他癌"];
 const types = ["化療", "標靶", "免疫", "荷爾蒙"];
@@ -22329,8 +22555,13 @@ function renderList() {
   
   document.getElementById("drug-list").innerHTML = filtered.map(d => {
     const reviewClass = d.pre_review ? "pre-review" : "";
+    const deletedClass = d.deleted ? "deleted" : "";
     
     let tagsHTML = '';
+    if (d.deleted) {
+      // 已刪除藥物: 優先顯示刪除標籤,其他 tag 略過或淡化
+      tagsHTML += `<span class="tag deleted-tag">已刪除 ${d.deleted_effective || d.deleted_date || ''}</span>`;
+    }
     d.types.forEach(t => tagsHTML += `<span class="tag type" data-type="${t}">${t}</span>`);
     d.cancers.forEach(c => {
       const activeClass = selectedCancers.has(c) ? "cancer-active" : "";
@@ -22412,7 +22643,7 @@ function renderList() {
     }
     
     return `
-      <div class="drug ${reviewClass}" data-num="${d.num}">
+      <div class="drug ${reviewClass} ${deletedClass}" data-num="${d.num}">
         <div class="drug-header">
           <span class="num-tag">${d.num}</span>
           <div class="drug-main">
@@ -22760,6 +22991,8 @@ document.addEventListener("click", function(e) {
     }, 100);
     // 查 GitHub API 看有無新版警示
     checkUpdateNotice();
+    // 顯示最後一次 workflow 檢查時間,讓使用者知道爬蟲還活著
+    fetchLastCheckTime();
   }
   
   // 從 location 推斷 GitHub repo (用 GitHub Pages URL 格式: <user>.github.io/<repo>/)
@@ -22790,11 +23023,9 @@ document.addEventListener("click", function(e) {
       if (!m) return;
       
       const newDate = m[1];
-      // 跟系統當前日期比對 (寫死從 brand-data-date 抓)
+      // 跟系統當前日期比對 — 從 data-date attribute 讀,避免被顯示文字格式變動影響
       const currentDateEl = document.querySelector(".brand-data-date");
-      const currentText = currentDateEl?.textContent || "";
-      const currentMatch = currentText.match(/[\d.\/]+/);
-      const currentDate = currentMatch ? currentMatch[0].replace(/\//g, ".") : "";
+      const currentDate = (currentDateEl?.dataset.date || "").replace(/\//g, ".");
       
       // 如果 newDate 不等於 currentDate,顯示警示
       if (newDate.replace(/\//g, ".") !== currentDate) {
@@ -22808,6 +23039,54 @@ document.addEventListener("click", function(e) {
       // 靜默失敗 (API rate limit 等),不影響使用
       console.log("更新檢查失敗:", e);
     }
+  }
+  
+  async function fetchLastCheckTime() {
+    const r = detectGithubRepo();
+    if (!r) return;
+    const span = document.getElementById("brand-last-check");
+    if (!span) return;
+    
+    try {
+      const url = `https://api.github.com/repos/${r.owner}/${r.repo}/actions/workflows/check-nhi-update.yml/runs?per_page=1`;
+      const resp = await fetch(url, { headers: { "Accept": "application/vnd.github+json" }});
+      if (!resp.ok) return;
+      const data = await resp.json();
+      if (!data.workflow_runs || data.workflow_runs.length === 0) return;
+      
+      const lastRun = data.workflow_runs[0];
+      const runTime = new Date(lastRun.created_at);
+      const daysSince = (Date.now() - runTime.getTime()) / (1000 * 60 * 60 * 24);
+      
+      span.textContent = `最後檢查 ${formatRelativeTime(runTime)}`;
+      
+      const statusZh = {
+        success: "成功",
+        failure: "失敗",
+        cancelled: "已取消",
+        skipped: "略過",
+        timed_out: "逾時",
+      }[lastRun.conclusion] || (lastRun.status === "completed" ? lastRun.conclusion : "進行中");
+      span.title = `${runTime.toLocaleString("zh-TW", { hour12: false })}（${statusZh}）`;
+      
+      if (daysSince > 14) {
+        span.classList.add("warn");
+      }
+    } catch (e) {
+      console.log("最後檢查時間擷取失敗:", e);
+    }
+  }
+  
+  function formatRelativeTime(date) {
+    const diffMs = Date.now() - date.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+    const diffDays = diffHours / 24;
+    
+    if (diffHours < 1) return "剛剛";
+    if (diffHours < 24) return "今天";
+    if (diffDays < 2) return "昨天";
+    if (diffDays < 30) return `${Math.floor(diffDays)} 天前`;
+    return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
   }
   
   function showError() {
