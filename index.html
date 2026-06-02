@@ -1552,7 +1552,7 @@
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v4.0.0</span>
+        <span class="brand-version">v4.1.0</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -23154,6 +23154,130 @@ document.addEventListener("click", function(e) {
   });
   
   input.addEventListener("input", () => errorMsg.classList.remove("visible"));
+
+
+/* ===== V4.1.0 增強功能：複製連結 / 常用清單 / 最近搜尋 / 副作用照護 / 列印優化 ===== */
+(function(){
+  try {
+    var LS_FAV='cdq_fav', LS_RECENT='cdq_recent';
+    var favOnly=false;
+    function getFav(){ try{return new Set(JSON.parse(localStorage.getItem(LS_FAV)||'[]'));}catch(e){return new Set();} }
+    function saveFav(s){ try{localStorage.setItem(LS_FAV,JSON.stringify([...s]));}catch(e){} }
+    function getRecent(){ try{return JSON.parse(localStorage.getItem(LS_RECENT)||'[]');}catch(e){return [];} }
+    function saveRecent(a){ try{localStorage.setItem(LS_RECENT,JSON.stringify(a.slice(0,8)));}catch(e){} }
+
+    // 樣式
+    var st=document.createElement('style');
+    st.textContent=
+      '#cdq-toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:#1f3a4d;color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:9999;max-width:80%;text-align:center}'+
+      '#cdq-toast.show{opacity:.96}'+
+      '#cdq-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:2px 0 12px}'+
+      '#cdq-fav-toggle{border:1px solid var(--border,#d0d7de);background:#fff;border-radius:16px;padding:4px 12px;font-size:13px;cursor:pointer;color:var(--ink-2,#436f8a)}'+
+      '#cdq-fav-toggle.on{background:var(--primary,#436f8a);color:#fff;border-color:var(--primary,#436f8a)}'+
+      '.cdq-recent-label{font-size:12px;color:var(--ink-3,#7a93a3)}'+
+      '.cdq-chip{border:1px solid var(--border,#d0d7de);background:#fff;border-radius:14px;padding:3px 10px;font-size:12px;margin:2px;cursor:pointer;color:var(--ink-2,#436f8a)}'+
+      '.cdq-chip:hover{background:var(--surface-2,#eef3f6)}'+
+      '.cdq-actions{display:flex;align-items:center;gap:2px;margin-left:auto}'+
+      '.cdq-btn{border:1px solid transparent;background:transparent;cursor:pointer;font-size:12px;padding:4px 7px;border-radius:6px;color:var(--ink-3,#7a93a3);line-height:1;white-space:nowrap}'+
+      '.cdq-btn:hover{background:rgba(67,111,138,.12);color:var(--primary,#436f8a)}'+
+      '.cdq-fav.on{color:#f5a623}'+
+      '@media print{'+
+        'body * {visibility:hidden}'+
+        '#drug-list, #drug-list * {visibility:visible}'+
+        '#drug-list .drug:not(.open){display:none !important}'+
+        '.cdq-actions,.edu-btn,#cdq-bar{display:none !important}'+
+        '#drug-list{position:absolute;left:0;top:0;width:100%}'+
+        '.topbar,.filter-panel,.filter-overlay,.fab,.gate,#cdq-toast{display:none !important}'+
+      '}';
+    document.head.appendChild(st);
+
+    var toast=document.createElement('div'); toast.id='cdq-toast'; document.body.appendChild(toast);
+    var toastT; function showToast(m){ toast.textContent=m; toast.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){toast.classList.remove('show');},1800); }
+
+    var list=document.getElementById('drug-list');
+    if(!list) return;
+
+    // 工具列（常用切換 + 最近搜尋）
+    var bar=document.createElement('div'); bar.id='cdq-bar';
+    bar.innerHTML='<button id="cdq-fav-toggle" type="button">★ 只看常用 <span id="cdq-fav-count"></span></button><span id="cdq-recent"></span>';
+    list.parentNode.insertBefore(bar,list);
+    var favToggle=document.getElementById('cdq-fav-toggle');
+    favToggle.onclick=function(){ favOnly=!favOnly; favToggle.classList.toggle('on',favOnly); enhance(); };
+
+    function renderRecent(){
+      var r=getRecent(), box=document.getElementById('cdq-recent');
+      if(!box) return;
+      box.innerHTML = r.length ? '<span class="cdq-recent-label">最近：</span>'+r.map(function(t){
+        var safe=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+        return '<button class="cdq-chip" data-recent="'+safe+'">'+safe+'</button>';
+      }).join('') : '';
+    }
+    function pushRecent(term){
+      term=(term||'').trim(); if(term.length<2) return;
+      var r=getRecent().filter(function(x){return x!==term;}); r.unshift(term); saveRecent(r); renderRecent();
+    }
+
+    function enhance(){
+      var fav=getFav();
+      var cnt=document.getElementById('cdq-fav-count'); if(cnt) cnt.textContent='('+fav.size+')';
+      favToggle.style.display = fav.size ? '' : 'none';
+      if(!fav.size && favOnly){ favOnly=false; favToggle.classList.remove('on'); }
+      var cards=document.querySelectorAll('#drug-list .drug');
+      cards.forEach(function(card){
+        var num=card.getAttribute('data-num');
+        card.style.display = (favOnly && !fav.has(num)) ? 'none' : '';
+        var header=card.querySelector('.drug-header'); if(!header) return;
+        var existing=header.querySelector('.cdq-actions');
+        if(existing){ var fb=existing.querySelector('.cdq-fav'); if(fb) fb.classList.toggle('on',fav.has(num)); return; }
+        var nameEl=card.querySelector('.drug-title');
+        var name=nameEl?nameEl.textContent.trim():'';
+        var wrap=document.createElement('div'); wrap.className='cdq-actions';
+        wrap.innerHTML=
+          '<button class="cdq-btn cdq-fav'+(fav.has(num)?' on':'')+'" data-fav="'+num+'" title="加入/移除常用">★</button>'+
+          '<button class="cdq-btn" data-copy="'+num+'" title="複製此藥連結">複製連結</button>'+
+          '<button class="cdq-btn" data-ec="'+encodeURIComponent(name)+'" title="到癌症希望基金會查副作用照護">副作用照護</button>';
+        var edu=header.querySelector('.edu-btn');
+        if(edu) header.insertBefore(wrap,edu); else header.appendChild(wrap);
+      });
+      tryDeep();
+    }
+
+    // 點擊處理（capture 階段先攔截，阻止觸發卡片展開）
+    document.addEventListener('click', function(e){
+      var fav=e.target.closest && e.target.closest('[data-fav]');
+      var copy=e.target.closest && e.target.closest('[data-copy]');
+      var ec=e.target.closest && e.target.closest('[data-ec]');
+      if(fav){ e.stopPropagation(); var n=fav.getAttribute('data-fav'); var s=getFav(); if(s.has(n))s.delete(n); else s.add(n); saveFav(s); enhance(); return; }
+      if(copy){ e.stopPropagation(); var num=copy.getAttribute('data-copy'); var url=location.origin+location.pathname+'#'+num;
+        if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(function(){showToast('已複製連結：'+num);}).catch(function(){showToast('複製失敗，請手動複製');}); }
+        else { showToast(url); } return; }
+      if(ec){ e.stopPropagation(); var nm=decodeURIComponent(ec.getAttribute('data-ec')||''); showToast('已開啟癌症希望基金會用藥資料庫，請搜尋：'+(nm||'藥名')); window.open('https://drug.ecancer.org.tw/','_blank','noopener'); return; }
+    }, true);
+
+    // 最近搜尋：記錄搜尋詞 + chip 點擊回填
+    var si=document.getElementById('search');
+    if(si){ var rt; si.addEventListener('input', function(){ clearTimeout(rt); rt=setTimeout(function(){ pushRecent(si.value); },1200); }); }
+    bar.addEventListener('click', function(e){
+      var c=e.target.closest && e.target.closest('[data-recent]'); if(!c||!si) return;
+      si.value=c.getAttribute('data-recent'); si.dispatchEvent(new Event('input',{bubbles:true})); si.focus();
+    });
+
+    // 深連結：載入時若 hash 對到某藥，展開並捲動
+    var deepDone=false;
+    function tryDeep(){
+      if(deepDone) return;
+      var hash=''; try{ hash=decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){}
+      if(!hash){ deepDone=true; return; }
+      var card=document.querySelector('#drug-list .drug[data-num="'+hash.replace(/"/g,'')+'"]');
+      if(card){ deepDone=true; card.classList.add('open'); setTimeout(function(){ card.scrollIntoView({behavior:'smooth',block:'center'}); },120); }
+    }
+
+    // 監看 #drug-list 重渲染 → 重新增強
+    new MutationObserver(function(){ enhance(); }).observe(list,{childList:true});
+    enhance(); renderRecent();
+  } catch(err){ console.error('cdq enhancement error', err); }
+})();
+
 })();
 </script>
 </body>
