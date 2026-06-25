@@ -171,6 +171,12 @@
     - 做法：把它移到面板最上面（癌別之前），開啟面板即見。
     - 教訓：手機面板上「全域開關/重要選項」要放在不需捲動就看得到的位置；別假設使用者會捲到底。
 
+34. **【V4.1.2 flexbox 面板捲不動 = min-height:0 經典坑】**
+    - 症狀：篩選面板下半（藥物類型下半 + 底部按鈕）看不到，電腦滑鼠滾輪也滾不動。
+    - 原因：`.filter-panel` 是 `display:flex;flex-direction:column;overflow-y:auto` + 100vh；`.filter-body` 是 `flex:1` 但**沒有** `overflow-y` 也**沒有** `min-height:0`。flex 子項預設 `min-height:auto`（不會小於內容），於是 header+body+footer 剛好等於 100vh、面板永遠不溢出 → 不出捲軸；body 自己又沒開捲動 → 內容被裁、捲不動。
+    - 做法：scroll 容器要落在 body：`.filter-body{overflow-y:auto;min-height:0;-webkit-overflow-scrolling:touch}`，面板改 `overflow:hidden`。(同一條 CSS 也修好「關於」面板。)
+    - 教訓：**flex column 裡要捲動的子項，一定要 `min-height:0` + `overflow-y:auto`**；只在外層 flex 容器設 overflow 不會生效。V4.1.1 移位置只是遮掩症狀，沒治本。
+
 ## 四、發版同步清單 (Rule 1 補完)
 
 每次發版必須同步改的位置 (這次 V3.10/V3.11 中間有 5 版斷檔的教訓):
@@ -198,6 +204,7 @@
 | V4.0.0 | **兩層 diff 重做 115/6/1 更新**:13 個法規變動(9.69 術前輔助 nivolumab + P016 表格列、續用評估改 i-RECIST、9.3/9.4/9.5.1 給付架構重整、9.2/9.20/9.51/9.66/9.129/9.130 條文修訂、9.84 刪除日期更正為 113/6/1)。**寬驗證修 3 類既有 bug**:全庫 search_text 重生(含 per_cancer)、補回 9.68/9.19/9.56 前言。多抓到 9.51、排除假陽性 9.71 |
 | V4.1.0 | **對齊 SELA Kit**（.gitignore / favicon 套件 / 根 README / SELA-handoff）。**新增前端功能**：每藥「複製連結」深連結、「常用清單」(localStorage 星號 + 只看常用)、「最近搜尋」chips、「副作用照護」跳轉癌症希望基金會、列印優化(@media print 只印展開的藥)。候選工作 #1 自動切片驗證(32 藥 0 可疑)、#2 自動下載機制審查一併交付。 |
 | V4.1.1 | **修 bug**：「只顯示需事前審查」開關原本是篩選面板**最後一個** section，手機上落在摺疊線以下、要往下捲才看得到（使用者誤以為「勾了別的才出現」）。移到面板**最上面**（癌別之前），開啟即見。 |
+| V4.1.2 | **修真正的根因**：篩選面板（與「關於」面板共用 CSS）根本捲不動——`.filter-body` 是 `flex:1` 但沒 `overflow-y`/`min-height:0`，flex 子項剛好填滿面板、內容被裁掉且不出捲軸（電腦滑鼠也滾不動）。修法：`.filter-body` 加 `overflow-y:auto; min-height:0`，面板改 `overflow:hidden`。V4.1.1 把 事審 移上來只是讓它看得到，沒解決捲動。 |
 
 > **版號規則變更（V4.0.0 起）：** 本專案自 V4.0.0 改採 SELA Kit 嚴格三位版號 `V<a>.<b>.<c>`（每位 0–9、逢十進位）。V3.0–V3.12 為 Kit 前舊編碼，依「保留歷史 + 從下版開始嚴格」保留不動；本次為功能版，因 V3.x 早已超過 .9，依逢十進位由 b 進位至 a，落點 V4.0.0（屬進位、非破壞性大改版）。
 
