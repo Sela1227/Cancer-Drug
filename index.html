@@ -373,23 +373,26 @@
   .clear-link:hover { color: var(--ink); }
   .clear-link:disabled { color: var(--ink-4); cursor: not-allowed; text-decoration: none; }
   
-  .filter-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   
   .pill {
-    padding: 8px 14px;
+    padding: 10px 13px;
     border: 1px solid var(--line);
     background: var(--surface);
-    border-radius: 100px;
+    border-radius: 10px;
     font-size: 13px;
     font-family: inherit;
     cursor: pointer;
     color: var(--ink-2);
     transition: all 0.12s ease;
     letter-spacing: 0.01em;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 6px;
     line-height: 1.3;
+    white-space: nowrap;
+    min-width: 0;
     user-select: none;
   }
   
@@ -407,7 +410,7 @@
     border-color: var(--primary-dark);
   }
   
-  .pill .count { font-size: 11px; opacity: 0.55; font-variant-numeric: tabular-nums; }
+  .pill .count { font-size: 11px; opacity: 0.55; font-variant-numeric: tabular-nums; margin-left: auto; padding-left: 6px; }
   .pill .check { width: 12px; height: 12px; opacity: 0; transition: opacity 0.12s; margin-right: -2px; }
   .pill.active .check { opacity: 1; }
   
@@ -1552,7 +1555,7 @@
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v4.1.2</span>
+        <span class="brand-version">v4.1.3</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
