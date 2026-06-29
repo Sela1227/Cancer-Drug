@@ -16,7 +16,7 @@ import urllib.request
 import urllib.error
 import urllib.parse
 
-CURRENT_DATA_DATE = "115.5.22"
+CURRENT_DATA_DATE = "115.6.23"
 TARGET_URL = "https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html"
 
 STRATEGIES = [
