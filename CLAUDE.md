@@ -227,6 +227,7 @@
 | V4.2.1 | **修 9.98 跨段落 OCR 滲入**（子程式 OncoPA 回報）：9.98 Pemigatinib 的 `per_cancer["血液淋巴癌"]` 切片吃進整段 9.99 Gilteritinib，並害 9.98 被誤分到血液淋巴癌。items 早已乾淨，但 V4.0.0 起 search_text 納入 per_cancer 讓它復現。修法：(1)移除幻影切片+癌別標籤+重生 search_text；(2)加**載入時 de-bleed 守門員**(截斷 per_cancer/items 內的外來 9.X. 段落、清空切片則移除並同步 cancers、重生 search_text)，部署端每次載入自我清理。 |
 | V4.3.0 | **健保 115/7/23 更新（115/8/1 生效，大更新）**：2 新藥 9.137 Cabazitaxel(前列腺)、9.138 Aumolertinib(肺)；13 修訂(9.2/9.3/9.5/9.5.1/9.18/9.24/9.26/9.29/9.45/9.69/9.80/9.83/9.99)。主軸：aumolertinib 進多個 EGFR-TKI 擇一清單、子宮內膜癌免疫組合擴充、9.18 加 Herzuma/Ogivri 生物相似藥、9.99 分移植前/後。**items(預設檢視)全部依乾淨新文字重建正確**；**per_cancer 切片：whole-item 藥(9.2/9.18)內容已更新，但 subitem/manual 切片藥(9.3/9.5.1/9.69)+新增 item 未進切片，需 dev 端重跑 slicer**。 |
 | V4.3.1 | **補新藥事審旗標**：9.137 Cabazitaxel、9.138 Aumolertinib 兩個新藥都須事前審查，但 V4.3.0 加入時漏設 pre_review，導致不進「只顯示需事前審查」篩選/無事審標記。補 pre_review=True。 |
+| V4.4.0 | **回應外部程式審稿意見**：(P0)清 14 個 \u0002 控制字元(Herzuma 去字元、PD-L1/MSI-H/EGFR-TK/Non-epithelioid 補連字號)；癌別篩選加**警示橫幅 + 「完整給付原文」<details> 摺疊**(永不隱藏原文，暫時緩解 per_cancer 切片漏條的 P0 風險)。(P1)搜尋正規化 normSearch(NFKC+去控制字元+併 CJK 內部空白+連字號正規化)；列印永不空白(beforeprint 若無展開項→印全部)；更新偵測改「較新才報」(民國日期數值比較，非 !=)。 |
 
 > **版號規則變更（V4.0.0 起）：** 本專案自 V4.0.0 改採 SELA Kit 嚴格三位版號 `V<a>.<b>.<c>`（每位 0–9、逢十進位）。V3.0–V3.12 為 Kit 前舊編碼，依「保留歷史 + 從下版開始嚴格」保留不動；本次為功能版，因 V3.x 早已超過 .9，依逢十進位由 b 進位至 a，落點 V4.0.0（屬進位、非破壞性大改版）。
 
