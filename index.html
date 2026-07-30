@@ -1547,6 +1547,9 @@ details.revisions>summary::before{content:"▸ ";}
 details.revisions[open]>summary::before{content:"▾ ";}
 .revisions-body{font-family:var(--mono,'IBM Plex Mono',monospace);font-size:11.5px;color:var(--ink-3,#7a8794);
   line-height:1.8;padding:0 0 6px;word-break:break-all}
+.sela-credit{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;
+  font-size:11px;color:var(--ink-3,#7a8794);letter-spacing:.06em}
+.sela-credit img{display:block;opacity:.85}
 .sub-level{display:block;margin-top:4px;font-weight:600;color:var(--primary-dark,#2f5570)}
 .no-match-note{font-size:12.5px;color:var(--ink-3,#7a8794);padding:2px 0 4px}
 /* === PD-L1 / 事審代碼對照表（V5.2.0：原本是壓平的 3900 字純文字）=== */
@@ -1630,7 +1633,7 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v5.3.1</span>
+        <span class="brand-version">v5.4.0</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -1774,7 +1777,7 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     <p style="color: var(--ink-2); margin-bottom: 16px;">
       衛生福利部中央健康保險署<br>
       藥品給付規定 第 9 節 抗癌瘤藥物<br>
-      115 年 5 月 22 日公告 (115/6/1 生效)<br>
+      115 年 7 月 23 日公告 (115/8/1 生效)<br>
       <a href="https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; color: var(--primary); text-decoration: none; font-size: 13px;">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10 2h4v4"/>
@@ -1784,12 +1787,12 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
         前往健保署藥品給付規定下載最新版
       </a>
     </p>
-    <div class="filter-label" style="margin-bottom: 6px;">逐癌切片狀態</div>
+    <div class="filter-label" style="margin-bottom: 6px;">癌別篩選怎麼運作</div>
     <p style="color: var(--ink-2); margin-bottom: 16px;">
       共 <strong id="info-total" style="color: var(--ink);">0</strong> 個藥物項目。<br>
-      跨多癌別的藥物已逐癌切分,選擇癌別時會只顯示該癌別之適應症。<br><br>
-      <strong style="color: var(--primary);">已切片：</strong>9.69 (手工)、其他自動切片<br>
-      <strong style="color: var(--warn);">尚未切片：</strong>9.5、9.16、9.36 (父項目,實際內容在子項目)
+      每一條給付條文（含子條文）都標註了適用癌別，選癌別時直接篩選<strong>健保署原文</strong>，不另存摘要。<br><br>
+      <strong style="color: var(--primary);">標示「通用」者</strong>＝適用所有癌別的共通規定（ECOG／事前審查／療程上限等），任何癌別都會顯示。<br>
+      <strong style="color: var(--warn);">標不到癌別的條文</strong>一律顯示，寧可多顯示，不會把條文藏起來。
     </p>
     <div class="filter-label" style="margin-bottom: 6px;">使用說明</div>
     <ul style="color: var(--ink-2); padding-left: 18px; line-height: 1.9;">
@@ -1802,6 +1805,11 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     <p style="color: var(--ink-3); font-size: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line-2);">
       © 彰濱秀傳癌症中心｜本系統僅供臨床查詢參考,實際給付以健保署最新公告為準。
     </p>
+    <!-- SELA 歸屬印記：引用獨立 SELA 圖檔（不重用 favicon 引用，避免日後 favicon 換成 app logo 時歸屬印記跟著變） -->
+    <div class="sela-credit">
+      <img src="favicon/sela.svg" alt="SELA" width="16" height="16">
+      <span>by SELA</span>
+    </div>
   </div>
 </div>
 
@@ -26486,7 +26494,7 @@ document.addEventListener("click", function(e) {
       }
     } catch (e) {
       // 靜默失敗 (API rate limit 等),不影響使用
-      console.log("更新檢查失敗:", e);
+      console.warn("更新檢查失敗:", e);
     }
   }
   
@@ -26522,7 +26530,7 @@ document.addEventListener("click", function(e) {
         span.classList.add("warn");
       }
     } catch (e) {
-      console.log("最後檢查時間擷取失敗:", e);
+      console.warn("最後檢查時間擷取失敗:", e);
     }
   }
   

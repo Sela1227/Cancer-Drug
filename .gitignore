@@ -48,8 +48,17 @@ Thumbs.db
 # Node (if applicable)
 node_modules/
 
+# Flet
+.flet/
 
-# 開發端產生 index.html 用 (不放 repo)
-drugs_final.json
-per_cancer_data.*
-make_html_v6.py
+# ── 專案特定：建置端腳本與中間產物（不放 repo）──────────────────
+# index.html 是唯一交付產物；下列是產生／驗證它的工具與稽核檔
+repair_text.py
+derive_v51.py
+parse_pdl1.py
+extract_lead.py
+apply_v5*.py
+apply_docs*.py
+validate_v51.py
+drugs*.json
+report_*.txt
