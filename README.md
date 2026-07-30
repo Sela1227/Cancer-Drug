@@ -49,11 +49,11 @@
 
 ## 版本
 
-V5.5.0 — App logo 上線（雙軌品牌）；一鍵複製條文純文字；修手機版面與星號顯示；對齊 SELA Kit V1.27.0；手風琴展開；全文表格稽查、補回藥品層前言與歷次修訂日；9.69 PD-L1／事審代碼對照表結構化；cancerTags 全庫從原文重推 + 原文內容修復 + 建置端驗證。採 SELA Kit 嚴格三位版號（`V<a>.<b>.<c>`，每位 0–9、逢十進位）。詳見 `CLAUDE.md` 版本歷程。
+V5.5.1 — App logo 小尺寸雷達版修正；一鍵複製條文純文字；修手機版面與星號顯示；對齊 SELA Kit V1.27.0；手風琴展開；全文表格稽查、補回藥品層前言與歷次修訂日；9.69 PD-L1／事審代碼對照表結構化；cancerTags 全庫從原文重推 + 原文內容修復 + 建置端驗證。採 SELA Kit 嚴格三位版號（`V<a>.<b>.<c>`，每位 0–9、逢十進位）。詳見 `CLAUDE.md` 版本歷程。
 
 ---
 
 <div align="center">
   <img src="favicon/sela.svg" width="28" alt="SELA"/><br>
-  <sub>Made by <b>SELA</b> · V5.5.0</sub>
+  <sub>Made by <b>SELA</b> · V5.5.1</sub>
 </div>
