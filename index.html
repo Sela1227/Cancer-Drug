@@ -847,7 +847,10 @@
     color: var(--ink);
     line-height: 1.6;
     flex: 1;
+    min-width: 0;
     font-weight: 500;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   .subitems { padding-left: 4px; }
@@ -875,6 +878,9 @@
     color: var(--ink);
     line-height: 1.7;
     flex: 1;
+    /* flex 子項預設 min-width:auto、不會小於內容寬（PD-L1 對照表 min-width:720px）
+       → 手機上整頁被撐開。坑 #34 同型，這行是根因修正。 */
+    min-width: 0;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
@@ -1547,6 +1553,15 @@ details.revisions>summary::before{content:"▸ ";}
 details.revisions[open]>summary::before{content:"▾ ";}
 .revisions-body{font-family:var(--mono,'IBM Plex Mono',monospace);font-size:11.5px;color:var(--ink-3,#7a8794);
   line-height:1.8;padding:0 0 6px;word-break:break-all}
+.fn-mark{font-size:.7em;vertical-align:super;line-height:0;color:var(--primary,#436f8a);margin-left:1px}
+@media (max-width:768px){
+  .cdq-actions{flex-wrap:wrap;justify-content:flex-end}
+  .cdq-btn{font-size:11.5px;padding:3px 5px}
+  .pdl1-row{padding:7px 8px}
+  .pdl1-drug{padding-left:8px}
+  .pdl1-assay{display:block;width:100%}
+  .pdl1-scroll{padding:6px}
+}
 .sela-credit{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;
   font-size:11px;color:var(--ink-3,#7a8794);letter-spacing:.06em}
 .sela-credit img{display:block;opacity:.85}
@@ -1633,7 +1648,7 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v5.4.0</span>
+        <span class="brand-version">v5.4.2</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -1794,12 +1809,24 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
       <strong style="color: var(--primary);">標示「通用」者</strong>＝適用所有癌別的共通規定（ECOG／事前審查／療程上限等），任何癌別都會顯示。<br>
       <strong style="color: var(--warn);">標不到癌別的條文</strong>一律顯示，寧可多顯示，不會把條文藏起來。
     </p>
+    <div class="filter-label" style="margin-bottom: 6px;">相關資源</div>
+    <p style="color: var(--ink-2); margin-bottom: 16px;">
+      副作用照護查詢：癌症希望基金會用藥資料庫（進去後依藥名搜尋）
+      <a href="https://drug.ecancer.org.tw/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; color: var(--primary); text-decoration: none; font-size: 13px;">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 2h4v4"/><path d="M14 2L7 9"/>
+          <path d="M13 9v4a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1h4"/>
+        </svg>
+        開啟癌症希望基金會用藥資料庫
+      </a>
+    </p>
     <div class="filter-label" style="margin-bottom: 6px;">使用說明</div>
     <ul style="color: var(--ink-2); padding-left: 18px; line-height: 1.9;">
       <li>癌別與藥物類型可<strong>多選交叉</strong>篩選</li>
       <li>選擇癌別時,藥物展開後<strong>只顯示該癌別內容</strong></li>
       <li>未選癌別時,顯示完整適應症原文</li>
       <li>左邊框橘色 = 需事前審查</li>
+      <li>「複製條文」把該藥條文複製成<strong>純文字</strong>，可直接貼到 LINE、病歷或送審備註；<strong>會跟著目前的癌別篩選</strong>（選了肺癌就只複製肺癌相關條文），並自動附上資料公告日期</li>
       <li>支援列印</li>
     </ul>
     <p style="color: var(--ink-3); font-size: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line-2);">
@@ -25909,8 +25936,17 @@ function isUniversal(tags) {
 
 // 條文內的 Ⅰ. / i. / I. 等層級標記原本全擠在一行 -> 換行縮排（只認羅馬數字，避免誤斷「第1,4,8,11日」）
 function formatHierarchy(h) {
-  return h.replace(/\s+((?:[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]|[IVX]{1,4}|[ⅰⅱⅲⅳⅴ]|[ivx]{1,4})[.、])\s*/g,
-                   '<span class="sub-level">$1 </span>');
+  h = h.replace(/\s+((?:[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]|[IVX]{1,4}|[ⅰⅱⅲⅳⅴ]|[ivx]{1,4})[.、])\s*/g,
+                '<span class="sub-level">$1 </span>');
+  // 健保署原文用 * 當乘號、指數在轉檔時掉了（如「2*106 CD34+細胞」＝2×10⁶）。
+  // 這是「純顯示」轉換，底層資料仍與原文逐字一致。
+  h = h.replace(/(\d)\s*\*\s*10(\d)(?![\d])/g, '$1×10<sup>$2</sup>');
+  return h;
+}
+
+// 表尾註記符號：原文用半形 *，手機換行後會像誤打的星號 → 改成上標 ※
+function footnoteMark(s) {
+  return escapeHTML(s).replace(/\*/g, '<sup class="fn-mark">※</sup>');
 }
 
 function subitemHTML(sub) {
@@ -25935,7 +25971,7 @@ function pdl1TableHTML(tb) {
       if (c === tb.na) return;
       n++;
       const col = tb.columns[i];
-      h += `<div class="pdl1-drug"><span class="pdl1-dn">${escapeHTML(col.drug)}</span><span class="pdl1-req">${highlight(c, searchTerm)}</span><span class="pdl1-assay">${escapeHTML(col.assay)}</span></div>`;
+      h += `<div class="pdl1-drug"><span class="pdl1-dn">${escapeHTML(col.drug)}</span><span class="pdl1-req">${highlight(c, searchTerm)}</span><span class="pdl1-assay">${footnoteMark(col.assay)}</span></div>`;
     });
     if (n === 0) h += `<div class="pdl1-na">本表列出的 ${tb.columns.length} 支藥品均尚未給付於此適應症</div>`;
     else if (n < tb.columns.length) h += `<div class="pdl1-na">其餘 ${tb.columns.length - n} 支藥品尚未給付於此適應症</div>`;
@@ -25943,7 +25979,7 @@ function pdl1TableHTML(tb) {
   });
   // 完整對照表（原文格式）
   h += `<details class="pdl1-full"><summary>顯示完整對照表（${tb.rows.length} 個給付範圍 × ${tb.columns.length} 支藥，健保署原表）</summary><div class="pdl1-scroll"><table class="pdl1-grid"><thead><tr><th>給付範圍</th><th>事審代碼</th>`;
-  tb.columns.forEach(c => { h += `<th>${escapeHTML(c.drug)}<br><span class="pdl1-assay">${escapeHTML(c.assay)}</span></th>`; });
+  tb.columns.forEach(c => { h += `<th>${escapeHTML(c.drug)}<br><span class="pdl1-assay">${footnoteMark(c.assay)}</span></th>`; });
   h += `</tr></thead><tbody>`;
   tb.rows.forEach(r => {
     const hit = filtering && tagHit(r.cancerTags, sel);
@@ -25953,8 +25989,8 @@ function pdl1TableHTML(tb) {
     });
     h += `</tr>`;
   });
-  h += `</tbody></table><div class="pdl1-note">— ＝ ${escapeHTML(tb.na)}<br>${escapeHTML(tb.note)}</div></div></details>`;
-  h += `<div class="pdl1-note">${escapeHTML(tb.note)}</div></div>`;
+  h += `</tbody></table><div class="pdl1-note">— ＝ ${escapeHTML(tb.na)}<br>${footnoteMark(tb.note)}</div></div></details>`;
+  h += `<div class="pdl1-note">${footnoteMark(tb.note)}</div></div>`;
   return h;
 }
 
@@ -26001,6 +26037,95 @@ function renderFullClauses(items, sel) {
     return html;
   }).join("");
 }
+
+// === V5.4.2：一鍵複製條文（產出可貼到 LINE / 病歷 / 送審備註的純文字）===
+// 註：cdq 工具列在另一個 <script> 區塊，看不到 drugs / tagHit / selectedCancers，
+//     所以這裡掛到 window 當唯一出口。
+const ROMAN_RE = /\s+((?:[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]|[IVX]{1,4}|[ⅰⅱⅲⅳⅴ]|[ivx]{1,4})[.、])\s*/g;
+
+function plainText(s, indent) {
+  let t = (s || "");
+  t = t.replace(/(\d)\s*\*\s*10(\d)(?![\d])/g, "$1\u00d710^$2");   // 2*106 -> 2×10^6
+  t = t.replace(/\*/g, "\u203b");                                      // 註記 * -> ※
+  t = t.replace(/[ \t]+/g, " ");                                        // 先收斂空白（必須在插入縮排之前，否則縮排會被吃掉）
+  t = t.replace(/([\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])/g, "$1");   // 去掉 OCR 塞在中文字間的空白
+  t = t.trim();
+  t = t.replace(ROMAN_RE, "\n" + indent + "$1 ");                       // 羅馬數字層級換行 + 縮排
+  return t;
+}
+
+function tableToText(tb, sel, indent) {
+  const filtering = Array.isArray(sel) && sel.length > 0;
+  const rows = tb.rows.filter(r => !filtering || tagHit(r.cancerTags, sel));
+  const use = rows.length ? rows : tb.rows;
+  let out = `\n${indent}\u2500\u2500 ${tb.title}` +
+            (filtering ? `（顯示 ${use.length} / ${tb.rows.length} 個給付範圍）` : `（共 ${tb.rows.length} 個給付範圍）`) +
+            ` \u2500\u2500`;
+  use.forEach(r => {
+    out += `\n${indent}\u25aa ${plainText(r.scope, indent)}　事審代碼 ${r.code}`;
+    let n = 0;
+    r.cells.forEach((c, i) => {
+      if (c === tb.na) return;
+      n++;
+      out += `\n${indent}  ${tb.columns[i].drug}：${plainText(c, indent)}（${plainText(tb.columns[i].assay, indent)}）`;
+    });
+    if (n === 0) out += `\n${indent}  （本表 ${tb.columns.length} 支藥品均尚未給付於此適應症）`;
+    else if (n < tb.columns.length) out += `\n${indent}  （其餘 ${tb.columns.length - n} 支藥品尚未給付於此適應症）`;
+  });
+  out += `\n${indent}${plainText(tb.note, indent)}`;
+  return out;
+}
+
+function buildClauseText(num) {
+  const d = drugs.find(x => x.num === num);
+  if (!d) return "";
+  const sel = [...selectedCancers];
+  const filtering = sel.length > 0;
+  const lines = [];
+
+  lines.push(`【${d.num}】${d.name}${d.brand ? `（${d.brand}）` : ""}`);
+  if (d.deleted) lines.push(`※ 本藥已於 ${d.deleted_effective || d.deleted_date || ""} 起刪除給付。`);
+  if (filtering) lines.push(`（已依「${sel.join("、")}」篩選，僅列出與該癌別相關之條文；標〔通用〕者適用所有癌別）`);
+  if (d.lead) lines.push(`${plainText(d.lead, "")}`);
+  lines.push("");
+
+  const items = d.items.filter(it => !filtering || tagHit(it.cancerTags, sel));
+  items.forEach(it => {
+    if (it._is_source_marker || (it.header || "").trim().startsWith("\u3010")) {
+      lines.push(plainText(it.header, ""));
+      return;
+    }
+    const badge = (filtering && isUniversal(it.cancerTags)) ? "〔通用〕" : "";
+    lines.push(`${it.num}. ${badge}${plainText(it.header, "   ")}`);
+    const subs = it.subitems || [];
+    const shown = (filtering && subs.some(s => s.cancerTags))
+      ? subs.filter(s => tagHit(s.cancerTags, sel)) : subs;
+    shown.forEach(s => {
+      lines.push(`   ${s.num} ${plainText(s.text, "       ")}`);
+      if (s.table) lines.push(tableToText(s.table, sel, "       "));
+    });
+    const hidden = subs.length - shown.length;
+    if (hidden > 0) lines.push(`   （本條另有其他癌別條文 ${hidden} 項，未列入）`);
+  });
+
+  if (d.pre_review) {
+    lines.push("");
+    lines.push(`\u203b 本藥需經健保署事前審查核准後使用${d.form_no ? `（申請表：${d.form_no}）` : ""}。` +
+               (d.review_scope === "partial" ? "（僅部分子藥物需事審，詳見子項目）" : ""));
+  }
+
+  const dateEl = document.querySelector(".brand-data-date");
+  const dd = dateEl ? dateEl.getAttribute("data-date") : "";
+  const de = dateEl ? dateEl.getAttribute("data-effective") : "";
+  lines.push("");
+  lines.push("\u2500".repeat(20));
+  lines.push(`資料來源：健保署藥品給付規定 第9節 抗癌瘤藥物` +
+             (dd ? `（${dd} 公告${de ? `，${de} 生效` : ""}）` : ""));
+  lines.push("本文由「健保癌症藥物速查系統」擷取，實際給付以健保署最新公告為準。");
+  return lines.join("\n");
+}
+
+window.cdqClauseText = buildClauseText;
 
 function renderList() {
   const filtered = getFiltered();
@@ -26117,10 +26242,10 @@ function renderList() {
   
   document.querySelectorAll(".drug-header").forEach(h => {
     h.onclick = (e) => {
-      // 標題列上的按鈕（教學資料／常用／複製連結／副作用照護）不應觸發展開收合。
+      // 標題列上的按鈕（教學資料／常用／複製條文）不應觸發展開收合。
       // 註：教學按鈕原本靠 document 層的 stopPropagation() 阻擋，但那是冒泡階段、
       //     在 header 自己的 handler 之後才跑，擋不到 → 在這裡直接排除。
-      if (e.target.closest(".edu-btn, .cdq-actions, [data-fav], [data-copy], [data-ec]")) return;
+      if (e.target.closest(".edu-btn, .cdq-actions, [data-fav], [data-copy]")) return;
       const card = h.parentElement;
       const willOpen = !card.classList.contains("open");
       // 手風琴：一次只展開一支藥，打開新的就把原本的收起來
@@ -26592,7 +26717,7 @@ document.addEventListener("click", function(e) {
   }
 
 
-/* ===== V4.1.0 增強功能：複製連結 / 常用清單 / 最近搜尋 / 副作用照護 / 列印優化 ===== */
+/* ===== 增強功能：複製條文(V5.4.2) / 常用清單 / 最近搜尋 / 列印優化 ===== */
 (function(){
   try {
     var LS_FAV='cdq_fav', LS_RECENT='cdq_recent';
@@ -26628,6 +26753,26 @@ document.addEventListener("click", function(e) {
     document.head.appendChild(st);
 
     var toast=document.createElement('div'); toast.id='cdq-toast'; document.body.appendChild(toast);
+    // 複製純文字：優先 clipboard API，失敗改用 textarea + execCommand（舊 iOS Safari 後援）
+    function copyPlain(text, okMsg){
+      function fallback(){
+        try{
+          var ta=document.createElement('textarea');
+          ta.value=text;
+          ta.setAttribute('readonly','');
+          ta.style.cssText='position:fixed;top:0;left:0;opacity:0;width:1px;height:1px';
+          document.body.appendChild(ta);
+          ta.select(); ta.setSelectionRange(0, text.length);
+          var ok=document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast(ok ? okMsg : '複製失敗，請長按選取文字手動複製');
+        }catch(e){ showToast('複製失敗，請長按選取文字手動複製'); }
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ showToast(okMsg); }).catch(fallback);
+      } else { fallback(); }
+    }
+
     var toastT; function showToast(m){ toast.textContent=m; toast.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){toast.classList.remove('show');},1800); }
 
     var list=document.getElementById('drug-list');
@@ -26665,13 +26810,10 @@ document.addEventListener("click", function(e) {
         var header=card.querySelector('.drug-header'); if(!header) return;
         var existing=header.querySelector('.cdq-actions');
         if(existing){ var fb=existing.querySelector('.cdq-fav'); if(fb) fb.classList.toggle('on',fav.has(num)); return; }
-        var nameEl=card.querySelector('.drug-title');
-        var name=nameEl?nameEl.textContent.trim():'';
         var wrap=document.createElement('div'); wrap.className='cdq-actions';
         wrap.innerHTML=
           '<button class="cdq-btn cdq-fav'+(fav.has(num)?' on':'')+'" data-fav="'+num+'" title="加入/移除常用">★</button>'+
-          '<button class="cdq-btn" data-copy="'+num+'" title="複製此藥連結">複製連結</button>'+
-          '<button class="cdq-btn" data-ec="'+encodeURIComponent(name)+'" title="到癌症希望基金會查副作用照護">副作用照護</button>';
+          '<button class="cdq-btn" data-copy="'+num+'" title="複製本藥條文純文字（依目前癌別篩選）">複製條文</button>';
         var edu=header.querySelector('.edu-btn');
         if(edu) header.insertBefore(wrap,edu); else header.appendChild(wrap);
       });
@@ -26682,12 +26824,14 @@ document.addEventListener("click", function(e) {
     document.addEventListener('click', function(e){
       var fav=e.target.closest && e.target.closest('[data-fav]');
       var copy=e.target.closest && e.target.closest('[data-copy]');
-      var ec=e.target.closest && e.target.closest('[data-ec]');
       if(fav){ e.stopPropagation(); var n=fav.getAttribute('data-fav'); var s=getFav(); if(s.has(n))s.delete(n); else s.add(n); saveFav(s); enhance(); return; }
-      if(copy){ e.stopPropagation(); var num=copy.getAttribute('data-copy'); var url=location.origin+location.pathname+'#'+num;
-        if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(function(){showToast('已複製連結：'+num);}).catch(function(){showToast('複製失敗，請手動複製');}); }
-        else { showToast(url); } return; }
-      if(ec){ e.stopPropagation(); var nm=decodeURIComponent(ec.getAttribute('data-ec')||''); showToast('已開啟癌症希望基金會用藥資料庫，請搜尋：'+(nm||'藥名')); window.open('https://drug.ecancer.org.tw/','_blank','noopener'); return; }
+      if(copy){ e.stopPropagation();
+        var num=copy.getAttribute('data-copy');
+        var txt='';
+        try{ txt = (typeof window.cdqClauseText==='function') ? window.cdqClauseText(num) : ''; }catch(err){ txt=''; }
+        if(!txt){ showToast('條文擷取失敗，請重新整理後再試'); return; }
+        copyPlain(txt, '已複製 '+num+' 條文（'+txt.length+' 字），可直接貼上');
+        return; }
     }, true);
 
     // 最近搜尋：記錄搜尋詞 + chip 點擊回填
