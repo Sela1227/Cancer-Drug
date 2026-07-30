@@ -1668,7 +1668,7 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v5.6.0</span>
+        <span class="brand-version">v5.7.0</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -11629,7 +11629,7 @@ const drugs = [
       },
       {
         "num": "1",
-        "header": "本類藥品(除 PHYXOL、GENETAXYL CREMLESS 及 TAXOL 之外)依藥品許可證登載之適應症範圍內給付於卵巢癌、非小細胞肺癌、乳癌及卡波西氏肉瘤之病例；倘併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之藥品給付規定。",
+        "header": "本類藥品(除 GENETAXYL CREM LESS 及 TAXOL 以外)依藥品許可證登載之適應症範圍內 給付於卵巢癌、非小細胞肺癌、乳癌及卡波西氏肉瘤之病例。(115/6/1、115/8/1）",
         "subitems": [],
         "cancerTags": [
           "乳癌",
@@ -11640,62 +11640,78 @@ const drugs = [
       },
       {
         "num": "2",
-        "header": "PHYXOL、GENETAXYL CREMLESS 及 TAXOL 限給付於下列情形：",
+        "header": "GENETAXYL CREM LESS 及 TAXOL 限給付於下列情形：(115/6/1、115/8/1）",
         "subitems": [
           {
             "num": "(1)",
-            "text": "晚期卵巢癌，作為第一線治療時需與 cisplatin 併用。",
+            "text": "晚期卵巢癌，作為第一線治療時需與 cisplatin 併用。(94/1/1)",
             "cancerTags": [
               "婦癌"
             ]
           },
           {
             "num": "(2)",
-            "text": "非小細胞肺癌，作為第一線用藥時需與 cisplatin 併用。",
+            "text": "非小細胞肺癌，作為第一線用藥時需與 cisplatin 併用。(94/1/1)",
             "cancerTags": [
               "肺癌"
             ]
           },
           {
             "num": "(3)",
-            "text": "與 pembrolizumab 及 carboplatin 併用於轉移性鱗狀非小細胞肺癌的第一線治療，患者需符合免疫檢查點抑制劑之藥品給付規定。",
+            "text": "已使用合併療法(除非有禁忌症、至少應包括使用 anthracycline)失敗的轉移性 乳癌患者。（91/4/1、94/1/1)",
             "cancerTags": [
-              "肺癌"
+              "乳癌"
             ]
           },
           {
             "num": "(4)",
-            "text": "已使用合併療法(除非有禁忌症、至少應包括使用 anthracycline)失敗的轉移性乳癌患者。",
+            "text": "腋下淋巴轉移之乳癌且動情素受體為陰性之患者，paclitaxel 可作為接續含 doxorubicin 在內之輔助化學治療。（91/4/1、94/1/1、98/8/1)",
             "cancerTags": [
               "乳癌"
             ]
           },
           {
             "num": "(5)",
-            "text": "腋下淋巴轉移之乳癌且動情素受體為陰性之患者，paclitaxel 可作為接續含 doxorubicin 在內之輔助化學治療。",
-            "cancerTags": [
-              "乳癌"
-            ]
-          },
-          {
-            "num": "(6)",
-            "text": "卡波西氏肉瘤第二線用藥。",
+            "text": "卡波西氏肉瘤第二線用藥。（88/11/1)",
             "cancerTags": [
               "其他癌"
             ]
+          }
+        ],
+        "cancerTags": [
+          "*"
+        ]
+      },
+      {
+        "num": "3",
+        "header": "本類藥品併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之 藥品給付規定，並依下列情形使用：(115/8/1）",
+        "subitems": [
+          {
+            "num": "(1)",
+            "text": "本類藥品與 pembrolizumab 及 carboplatin 併用於轉移性鱗狀非小細胞肺癌的第一 線治療，患者需符合免疫檢查點抑制劑之藥品給付規定。(112/12/1)",
+            "cancerTags": [
+              "肺癌"
+            ]
           },
           {
-            "num": "(7)",
-            "text": "與 pembrolizumab 及 carboplatin 併用於早期三陰性乳癌(第 II 期至第 IIIb 期，cT1c N1-2 或 T2-4 N0-2)病人的術前前導性治療用藥，病人需符合免疫檢查點抑制劑之藥品給付規定。",
+            "num": "(2)",
+            "text": "本類藥品與 pembrolizumab 及 carboplatin 併用於早期三陰性乳癌(第 II 期至第 IIIb 期，cT1c N1-2 或 T2-4 N0-2)病人的術前前導性治療用藥，病人需符合免疫 檢查點抑制劑之藥品給付規定。(114/6/1)",
             "cancerTags": [
               "乳癌"
             ]
           },
           {
-            "num": "(8)",
-            "text": "與 atezolizumab 及 bevacizumab(限使用 Alymsys、Avastin、Abevmy、Vegzelma 或 Mvasi)、carboplatin 併用於轉移性非鱗狀非小細胞肺癌第一線治療，患者需符合免疫檢查點抑制劑之藥品給付規定。",
+            "num": "(3)",
+            "text": "本類藥品與 atezolizumab 及 bevacizumab(限使用 Alymsys、Avastin、Abevmy、 Vegzelma 或 Mvasi)、carboplatin 併用於轉移性非鱗狀非小細胞肺癌第一線治 療，患者需符合免疫檢查點抑制劑之藥品給付規定。(114/6/1、114/8/1)",
             "cancerTags": [
               "肺癌"
+            ]
+          },
+          {
+            "num": "(4)",
+            "text": "本類藥品 (除 GENETAXYL CREM LESS 及 TAXOL 以外)與 dostarlimab 及 carboplatin 併用，至多使用6個療程，接續單用 dostarlimab 用於治療患有錯誤配對修復功能 不足（dMMR）或微衛星高度不穩定性（MSI-H）之原發性晚期或首次復發性子宮內 膜癌(EC）成人病人第一線治療，病人需符合免疫檢查點抑制劑之藥品給付規定。 (115/8/1）",
+            "cancerTags": [
+              "婦癌"
             ]
           }
         ],
@@ -11722,7 +11738,7 @@ const drugs = [
         ]
       }
     ],
-    "search_text": "paclitaxel 成分劑 【9.5.1　paclitaxel 成分注射劑】 本類藥品(除 phyxol、genetaxyl cremless 及 taxol 之外)依藥品許可證登載之適應症範圍內給付於卵巢癌、非小細胞肺癌、乳癌及卡波西氏肉瘤之病例；倘併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之藥品給付規定。 phyxol、genetaxyl cremless 及 taxol 限給付於下列情形： 晚期卵巢癌，作為第一線治療時需與 cisplatin 併用。 非小細胞肺癌，作為第一線用藥時需與 cisplatin 併用。 與 pembrolizumab 及 carboplatin 併用於轉移性鱗狀非小細胞肺癌的第一線治療，患者需符合免疫檢查點抑制劑之藥品給付規定。 已使用合併療法(除非有禁忌症、至少應包括使用 anthracycline)失敗的轉移性乳癌患者。 腋下淋巴轉移之乳癌且動情素受體為陰性之患者，paclitaxel 可作為接續含 doxorubicin 在內之輔助化學治療。 卡波西氏肉瘤第二線用藥。 與 pembrolizumab 及 carboplatin 併用於早期三陰性乳癌(第 ii 期至第 iiib 期，ct1c n1-2 或 t2-4 n0-2)病人的術前前導性治療用藥，病人需符合免疫檢查點抑制劑之藥品給付規定。 與 atezolizumab 及 bevacizumab(限使用 alymsys、avastin、abevmy、vegzelma 或 mvasi)、carboplatin 併用於轉移性非鱗狀非小細胞肺癌第一線治療，患者需符合免疫檢查點抑制劑之藥品給付規定。 【9.5.2　albumin-based paclitaxel (abraxane)】 限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。 乳癌 肺癌 婦癌 肝膽胰胃癌 其他癌 88/8/1 88/11/1 89/6/1 89/10/1 91/4/1 91/8/1 93/8/1 94/1/1 98/8/1 108/11/1 112/12/1 114/6/1 114/8/1 115/6/1 115/8/1",
+    "search_text": "paclitaxel 成分劑 【9.5.1　paclitaxel 成分注射劑】 本類藥品(除 genetaxyl crem less 及 taxol 以外)依藥品許可證登載之適應症範圍內 給付於卵巢癌、非小細胞肺癌、乳癌及卡波西氏肉瘤之病例。(115/6/1、115/8/1） genetaxyl crem less 及 taxol 限給付於下列情形：(115/6/1、115/8/1） 晚期卵巢癌，作為第一線治療時需與 cisplatin 併用。(94/1/1) 非小細胞肺癌，作為第一線用藥時需與 cisplatin 併用。(94/1/1) 已使用合併療法(除非有禁忌症、至少應包括使用 anthracycline)失敗的轉移性 乳癌患者。（91/4/1、94/1/1) 腋下淋巴轉移之乳癌且動情素受體為陰性之患者，paclitaxel 可作為接續含 doxorubicin 在內之輔助化學治療。（91/4/1、94/1/1、98/8/1) 卡波西氏肉瘤第二線用藥。（88/11/1) 本類藥品併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之 藥品給付規定，並依下列情形使用：(115/8/1） 本類藥品與 pembrolizumab 及 carboplatin 併用於轉移性鱗狀非小細胞肺癌的第一 線治療，患者需符合免疫檢查點抑制劑之藥品給付規定。(112/12/1) 本類藥品與 pembrolizumab 及 carboplatin 併用於早期三陰性乳癌(第 ii 期至第 iiib 期，ct1c n1-2 或 t2-4 n0-2)病人的術前前導性治療用藥，病人需符合免疫 檢查點抑制劑之藥品給付規定。(114/6/1) 本類藥品與 atezolizumab 及 bevacizumab(限使用 alymsys、avastin、abevmy、 vegzelma 或 mvasi)、carboplatin 併用於轉移性非鱗狀非小細胞肺癌第一線治 療，患者需符合免疫檢查點抑制劑之藥品給付規定。(114/6/1、114/8/1) 本類藥品 (除 genetaxyl crem less 及 taxol 以外)與 dostarlimab 及 carboplatin 併用，至多使用6個療程，接續單用 dostarlimab 用於治療患有錯誤配對修復功能 不足（dmmr）或微衛星高度不穩定性（msi-h）之原發性晚期或首次復發性子宮內 膜癌(ec）成人病人第一線治療，病人需符合免疫檢查點抑制劑之藥品給付規定。 (115/8/1） 【9.5.2　albumin-based paclitaxel (abraxane)】 限併用 gemcitabine，做為轉移性胰腺癌患者之第一線治療。 乳癌 肺癌 婦癌 肝膽胰胃癌 其他癌 88/8/1 88/11/1 89/6/1 89/10/1 91/4/1 91/8/1 93/8/1 94/1/1 98/8/1 108/11/1 112/12/1 114/6/1 114/8/1 115/6/1 115/8/1",
     "review_scope": "none",
     "review_source": [],
     "revisions": [
@@ -25261,14 +25277,14 @@ const drugs = [
         "subitems": [
           {
             "num": "(1)",
-            "text": ".治療新診斷的費城染色體陽性之慢性期慢性骨髓性白血病的成人病人。",
+            "text": "治療新診斷的費城染色體陽性之慢性期慢性骨髓性白血病的成人病人。",
             "cancerTags": [
               "血液淋巴癌"
             ]
           },
           {
             "num": "(2)",
-            "text": ".限每日最大劑量400mg。",
+            "text": "限每日最大劑量400mg。",
             "cancerTags": [
               "*"
             ]
@@ -25284,21 +25300,21 @@ const drugs = [
         "subitems": [
           {
             "num": "(1)",
-            "text": ".治療患有慢性、加速或急性期慢性骨髓性白血病，對先前經 imatinib 400mg(含)以上治療後有抗藥性或無耐受性的成人病人。",
+            "text": "治療患有慢性、加速或急性期慢性骨髓性白血病，對先前經 imatinib 400mg(含)以上治療後有抗藥性或無耐受性的成人病人。",
             "cancerTags": [
               "血液淋巴癌"
             ]
           },
           {
             "num": "(2)",
-            "text": ".需檢送病歷及對 imatinib 耐受性不良或無效的證明。",
+            "text": "需檢送病歷及對 imatinib 耐受性不良或無效的證明。",
             "cancerTags": [
               "*"
             ]
           },
           {
             "num": "(3)",
-            "text": ".每日最大劑量500mg，惟接受起始劑量而未達到維持血液學、細胞遺傳學或分子 反應，且未出現第3級或以上不良反應的病人，可進行遞增劑量，每日以最大劑量 600mg 為限。",
+            "text": "每日最大劑量500mg，惟接受起始劑量而未達到維持血液學、細胞遺傳學或分子 反應，且未出現第3級或以上不良反應的病人，可進行遞增劑量，每日以最大劑量 600mg 為限。",
             "cancerTags": [
               "*"
             ]
@@ -25325,7 +25341,7 @@ const drugs = [
         ]
       }
     ],
-    "search_text": "bosutinib bostini 第一線使用： .治療新診斷的費城染色體陽性之慢性期慢性骨髓性白血病的成人病人。 .限每日最大劑量400mg。 第二線使用： .治療患有慢性、加速或急性期慢性骨髓性白血病，對先前經 imatinib 400mg(含)以上治療後有抗藥性或無耐受性的成人病人。 .需檢送病歷及對 imatinib 耐受性不良或無效的證明。 .每日最大劑量500mg，惟接受起始劑量而未達到維持血液學、細胞遺傳學或分子 反應，且未出現第3級或以上不良反應的病人，可進行遞增劑量，每日以最大劑量 600mg 為限。 1~2項規定內之疾病診斷或追蹤若需依據基因檢測報告，則需符合全民健康保險藥品 給付規定之通則十二。 bosutinib、nilotinib 與 dasatinib 不得合併使用。 血液淋巴癌 115/2/1",
+    "search_text": "bosutinib bostini 第一線使用： 治療新診斷的費城染色體陽性之慢性期慢性骨髓性白血病的成人病人。 限每日最大劑量400mg。 第二線使用： 治療患有慢性、加速或急性期慢性骨髓性白血病，對先前經 imatinib 400mg(含)以上治療後有抗藥性或無耐受性的成人病人。 需檢送病歷及對 imatinib 耐受性不良或無效的證明。 每日最大劑量500mg，惟接受起始劑量而未達到維持血液學、細胞遺傳學或分子 反應，且未出現第3級或以上不良反應的病人，可進行遞增劑量，每日以最大劑量 600mg 為限。 1~2項規定內之疾病診斷或追蹤若需依據基因檢測報告，則需符合全民健康保險藥品 給付規定之通則十二。 bosutinib、nilotinib 與 dasatinib 不得合併使用。 血液淋巴癌 115/2/1",
     "review_scope": "none",
     "review_source": [],
     "revisions": [
@@ -25864,7 +25880,7 @@ drugs.forEach(d => {
 function normSearch(s){
   return (s||'').normalize('NFKC').toLowerCase()
     .replace(/[\u0000-\u001F\u007F]/g,'')
-    .replace(/([\u4e00-\u9fff])\s+([\u4e00-\u9fff])/g,'$1$2')
+    .replace(/([\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])/g,'$1')
     .replace(/[\u2010-\u2015\u2212]/g,'-')
     .replace(/\s+/g,' ').trim();
 }
@@ -25891,11 +25907,20 @@ function escapeHTML(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+// 反白必須跟 normSearch 的比對基準一致：搜尋時忽略中文字間空白，
+// 所以反白也要允許字元之間出現空白，否則會「找得到卻沒反黃」。
+function highlightRe(term) {
+  const chars = [...term.trim()].filter(c => !/\s/.test(c));
+  if (!chars.length) return null;
+  const body = chars.map(c => c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s*");
+  try { return new RegExp("(" + body + ")", "gi"); } catch (e) { return null; }
+}
+
 function highlight(text, term) {
   if (!term) return escapeHTML(text);
   const escaped = escapeHTML(text);
-  const re = new RegExp("(" + term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
-  return escaped.replace(re, "<mark>$1</mark>");
+  const re = highlightRe(term);
+  return re ? escaped.replace(re, "<mark>$1</mark>") : escaped;
 }
 
 // 把 markdown-like 的 **粗體** 轉成 <strong>
@@ -25906,8 +25931,17 @@ function renderInline(text) {
   return html;
 }
 
+// 「只看常用」由 cdq 工具列切換（另一個 script 區塊），透過 window 交換狀態
+function favOnlyActive() {
+  return !!(window.cdqFavOnly && window.cdqFavSet && window.cdqFavSet.size);
+}
+function favPass(d) {
+  return !favOnlyActive() || window.cdqFavSet.has(d.num);
+}
+
 function getFiltered() {
   let f = drugs;
+  if (favOnlyActive()) f = f.filter(favPass);
   if (selectedCancers.size > 0) f = f.filter(d => d.cancers.some(c => selectedCancers.has(c)));
   if (selectedTypes.size > 0) f = f.filter(d => d.types.some(t => selectedTypes.has(t)));
   if (onlyReview) f = f.filter(d => d.pre_review);
@@ -25926,7 +25960,7 @@ function renderFilters() {
   const cancerCounts = {};
   cancers.forEach(c => {
     cancerCounts[c] = drugs.filter(d => 
-      d.cancers.includes(c) &&
+      d.cancers.includes(c) && favPass(d) &&
       (selectedTypes.size === 0 || d.types.some(t => selectedTypes.has(t))) &&
       (!onlyReview || d.pre_review) &&
       (!searchTerm || (d._nsearch || normSearch(d.search_text || '')).includes(normSearch(searchTerm)))
@@ -25936,7 +25970,7 @@ function renderFilters() {
   const typeCounts = {};
   types.forEach(t => {
     typeCounts[t] = drugs.filter(d => 
-      d.types.includes(t) &&
+      d.types.includes(t) && favPass(d) &&
       (selectedCancers.size === 0 || d.cancers.some(c => selectedCancers.has(c))) &&
       (!onlyReview || d.pre_review) &&
       (!searchTerm || (d._nsearch || normSearch(d.search_text || '')).includes(normSearch(searchTerm)))
@@ -26214,11 +26248,14 @@ function buildClauseText(num) {
 }
 
 window.cdqClauseText = buildClauseText;
+window.cdqRerender = () => renderAll();
 
 function renderList() {
   const filtered = getFiltered();
   
-  document.getElementById("stats").innerHTML = `<strong>${filtered.length}</strong> 個藥物項目${searchTerm ? ` ｜ 含「${escapeHTML(searchTerm)}」` : ""}`;
+  document.getElementById("stats").innerHTML = `<strong>${filtered.length}</strong> 個藥物項目`
+    + (favOnlyActive() ? ` ｜ 只看常用` : "")
+    + (searchTerm ? ` ｜ 含「${escapeHTML(searchTerm)}」` : "");
   
   if (filtered.length === 0) {
     document.getElementById("drug-list").innerHTML = `<div class="empty"><div class="empty-icon">${ICONS.empty}</div>沒有符合條件的藥物</div>`;
@@ -26810,6 +26847,7 @@ document.addEventListener("click", function(e) {
   try {
     var LS_FAV='cdq_fav', LS_RECENT='cdq_recent';
     var favOnly=false;
+    window.cdqFavOnly=false; window.cdqFavSet=new Set();
     function getFav(){ try{return new Set(JSON.parse(localStorage.getItem(LS_FAV)||'[]'));}catch(e){return new Set();} }
     function saveFav(s){ try{localStorage.setItem(LS_FAV,JSON.stringify([...s]));}catch(e){} }
     function getRecent(){ try{return JSON.parse(localStorage.getItem(LS_RECENT)||'[]');}catch(e){return [];} }
@@ -26871,7 +26909,13 @@ document.addEventListener("click", function(e) {
     bar.innerHTML='<button id="cdq-fav-toggle" type="button">★ 只看常用 <span id="cdq-fav-count"></span></button><span id="cdq-recent"></span>';
     list.parentNode.insertBefore(bar,list);
     var favToggle=document.getElementById('cdq-fav-toggle');
-    favToggle.onclick=function(){ favOnly=!favOnly; favToggle.classList.toggle('on',favOnly); enhance(); };
+    favToggle.onclick=function(){
+      favOnly=!favOnly;
+      window.cdqFavOnly=favOnly;
+      favToggle.classList.toggle('on',favOnly);
+      // 交回主程式的唯一過濾函式重新渲染（統計數字與 pill 計數才會跟著變）
+      if(typeof window.cdqRerender==='function') window.cdqRerender(); else enhance();
+    };
 
     function renderRecent(){
       var r=getRecent(), box=document.getElementById('cdq-recent');
@@ -26888,13 +26932,14 @@ document.addEventListener("click", function(e) {
 
     function enhance(){
       var fav=getFav();
+      window.cdqFavSet=fav;
       var cnt=document.getElementById('cdq-fav-count'); if(cnt) cnt.textContent='('+fav.size+')';
       favToggle.style.display = fav.size ? '' : 'none';
-      if(!fav.size && favOnly){ favOnly=false; favToggle.classList.remove('on'); }
+      if(!fav.size && favOnly){ favOnly=false; window.cdqFavOnly=false; favToggle.classList.remove('on'); }
       var cards=document.querySelectorAll('#drug-list .drug');
       cards.forEach(function(card){
         var num=card.getAttribute('data-num');
-        card.style.display = (favOnly && !fav.has(num)) ? 'none' : '';
+        // 篩選已由 getFiltered() 負責，這裡不再用 CSS 隱藏
         var header=card.querySelector('.drug-header'); if(!header) return;
         var existing=header.querySelector('.cdq-actions');
         if(existing){ var fb=existing.querySelector('.cdq-fav'); if(fb) fb.classList.toggle('on',fav.has(num)); return; }
@@ -26912,7 +26957,10 @@ document.addEventListener("click", function(e) {
     document.addEventListener('click', function(e){
       var fav=e.target.closest && e.target.closest('[data-fav]');
       var copy=e.target.closest && e.target.closest('[data-copy]');
-      if(fav){ e.stopPropagation(); var n=fav.getAttribute('data-fav'); var s=getFav(); if(s.has(n))s.delete(n); else s.add(n); saveFav(s); enhance(); return; }
+      if(fav){ e.stopPropagation(); var n=fav.getAttribute('data-fav'); var s=getFav(); if(s.has(n))s.delete(n); else s.add(n); saveFav(s);
+        window.cdqFavSet=s;
+        if(favOnly && typeof window.cdqRerender==='function') window.cdqRerender(); else enhance();
+        return; }
       if(copy){ e.stopPropagation();
         var num=copy.getAttribute('data-copy');
         var txt='';
