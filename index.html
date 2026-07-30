@@ -1630,7 +1630,7 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v5.3.0</span>
+        <span class="brand-version">v5.3.1</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
@@ -26108,7 +26108,21 @@ function renderList() {
   }).join("");
   
   document.querySelectorAll(".drug-header").forEach(h => {
-    h.onclick = () => h.parentElement.classList.toggle("open");
+    h.onclick = (e) => {
+      // 標題列上的按鈕（教學資料／常用／複製連結／副作用照護）不應觸發展開收合。
+      // 註：教學按鈕原本靠 document 層的 stopPropagation() 阻擋，但那是冒泡階段、
+      //     在 header 自己的 handler 之後才跑，擋不到 → 在這裡直接排除。
+      if (e.target.closest(".edu-btn, .cdq-actions, [data-fav], [data-copy], [data-ec]")) return;
+      const card = h.parentElement;
+      const willOpen = !card.classList.contains("open");
+      // 手風琴：一次只展開一支藥，打開新的就把原本的收起來
+      document.querySelectorAll("#drug-list .drug.open").forEach(x => {
+        if (x !== card) x.classList.remove("open");
+      });
+      card.classList.toggle("open", willOpen);
+      // 上方長條文收起後版面會上移，把剛點開的標題捲回視野內
+      if (willOpen) requestAnimationFrame(() => h.scrollIntoView({ block: "nearest", behavior: "smooth" }));
+    };
   });
 }
 
