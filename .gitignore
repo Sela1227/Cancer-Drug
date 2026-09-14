@@ -51,14 +51,10 @@ node_modules/
 # Flet
 .flet/
 
-# ── 專案特定：建置端腳本與中間產物（不放 repo）──────────────────
-# index.html 是唯一交付產物；下列是產生／驗證它的工具與稽核檔
-repair_text.py
-derive_v51.py
-parse_pdl1.py
-extract_lead.py
-apply_v5*.py
-apply_docs*.py
-validate_v51.py
-drugs*.json
+# ── 專案特定 ──────────────────────────────────────────────
+# 建置腳本放在 tools/ 且**隨 repo 版控**（坑 #58）：
+#   判斷檔案該不該進 repo，不是問「它是不是部署產物」，
+#   而是問「沒有它，別人能不能安全地改這個專案」。
+# 只忽略「跑出來的」中間產物與報告：
+drugs_audit.json
 report_*.txt

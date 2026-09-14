@@ -52,7 +52,11 @@
   
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* 深連結（#9.46）跳轉時，讓瀏覽器自動避開黏著 header */
+    scroll-padding-top: calc(var(--header-h, 120px) + 12px);
+  }
   
   html, body {
     font-family: ui-sans-serif, -apple-system, "Helvetica Neue", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
@@ -71,13 +75,15 @@
   }
   
   /* === HEADER 純單色深色 === */
+  /* topbar 與搜尋列包在同一個 sticky 容器內自然堆疊。
+     舊做法是 .search-section{top:60px} —— 那是寫死「topbar 高 60px」的假設，
+     手機上 topbar 會長到 130px+，搜尋列就被蓋掉一半（坑 #55）。 */
+  .header-stack { position: sticky; top: 0; z-index: 200; }
+
   .topbar {
     background: var(--primary-darker);
     border-bottom: 1px solid rgba(0,0,0,0.15);
     padding: 12px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 200;
   }
   
   .topbar-inner {
@@ -140,6 +146,8 @@
     color: rgba(255,255,255,0.85);
     font-variant-numeric: tabular-nums;
   }
+
+  .dd-short { display: none; }
   
   .brand-last-check {
     color: rgba(255,255,255,0.5);
@@ -230,9 +238,6 @@
     background: var(--primary-dark);
     border-bottom: 1px solid rgba(0,0,0,0.1);
     padding: 12px 20px;
-    position: sticky;
-    top: 60px;
-    z-index: 100;
   }
   
   .search-inner { max-width: 1400px; margin: 0 auto; position: relative; }
@@ -575,6 +580,8 @@
   }
   
   .drug {
+    /* 手風琴展開後的 scrollIntoView 與深連結捲動都要避開黏著 header */
+    scroll-margin-top: calc(var(--header-h, 120px) + 12px);
     border-bottom: 1px solid var(--line-2);
     transition: background 0.12s ease;
   }
@@ -1022,18 +1029,27 @@
   
   @media (min-width: 900px) {
     .topbar { padding: 14px 32px; }
-    .search-section { padding: 14px 32px; top: 64px; }
+    .search-section { padding: 14px 32px; }
     main { padding: 18px 32px 80px; display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
     .stats-bar { grid-column: 1 / -1; }
     
     #filter-panel {
       position: sticky;
-      top: 134px;
+      /* ⚠ 兩個一定要做的事（坑 #57）：
+         1. 基礎規則是 position:fixed 且 top/right/bottom 全設 0，切成 sticky 後
+            **必須把 bottom / right 重設為 auto** —— sticky 會同時吃四個方向的偏移，
+            殘留的 bottom:0 會把面板往上擠，蓋掉 header。
+         2. top 不可寫死常數（原本 134px 是「header 高 134」的假設，實測 120）——
+            改用 JS 依實際高度寫入的 --header-h。 */
+      top: calc(var(--header-h, 120px) + 12px);
+      bottom: auto;
+      right: auto;
+      left: auto;
       max-width: none;
       width: 100%;
       transform: none !important;
       box-shadow: none;
-      max-height: calc(100vh - 150px);
+      max-height: calc(100vh - var(--header-h, 120px) - 36px);
       border: 1px solid rgba(255,255,255,0.5);
       border-radius: 12px;
       overflow: hidden;
@@ -1199,28 +1215,22 @@
     .brand-version { 
       font-size: 9px;
     }
-    .brand-sub { 
-      font-size: 10px;
-      white-space: normal;
-      line-height: 1.3;
+    /* 手機：brand-sub 收回單行（長句換短版），並隱藏「最後檢查」——
+       它的資訊價值低於垂直空間，且「關於本系統」查得到。 */
+    .brand-sub {
+      font-size: 10.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.35;
     }
-    .brand-divider { 
-      display: none;
-    }
-    .brand-data-date {
-      display: block;
-      margin-top: 1px;
-      color: rgba(255,255,255,0.7);
-    }
-    .brand-last-check {
-      display: block;
-      margin-left: 0;
-      margin-top: 1px;
-      font-size: 10px;
-    }
-    .brand-last-check::before {
-      display: none;
-    }
+    .brand-data-date { color: rgba(255,255,255,0.75); }
+    .dd-long { display: none; }
+    .dd-short { display: inline; }
+    .brand-last-check { display: none; }
+    .topbar { padding: 9px 14px; }
+    .search-section { padding: 8px 14px; }
+    #search { padding: 9px 38px 9px 40px; font-size: 14.5px; }
   }
   
   @media (max-width: 380px) {
@@ -1536,6 +1546,15 @@
 
 <style>
 /* V5：癌別篩選改為條文標籤(cancerTags)，不再另存切片，故移除 V4.4.0 的警示橫幅與完整原文摺疊 */
+.tag-pa{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;font-size:11px;font-weight:600;
+  background:var(--warn-bg,#fff5e6);color:var(--warn,#c1741a);border:1px solid rgba(193,116,26,.35);vertical-align:middle}
+.tag.review-partial{background:var(--warn-bg,#fff5e6);color:var(--warn,#c1741a);display:inline-flex;align-items:center;gap:3px;
+  border:1px dashed rgba(193,116,26,.55);white-space:nowrap}
+.tag.review{white-space:nowrap}
+.tag-pa{white-space:nowrap}
+.drug.pre-review-partial{border-left:2px dashed var(--warn,#c1741a)}
+.review-notice-none{background:var(--surface-2,#eef3f6) !important;border-left-color:var(--primary,#436f8a) !important;
+  color:var(--ink-2,#4a5b68)}
 .tag-universal{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;font-size:11px;font-weight:600;
   background:var(--surface-2,#eef3f6);color:var(--primary,#436f8a);border:1px solid var(--line,#d0d7de);vertical-align:middle}
 .cancer-filter-note{background:var(--surface-2,#eef3f6);border-left:3px solid var(--primary,#436f8a);color:var(--ink-2,#4a5b68);
@@ -1662,18 +1681,19 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
 <!-- 主應用 -->
 <div id="app">
 
+<div class="header-stack">
 <div class="topbar">
   <div class="topbar-inner">
     <div class="logo-wrap"><img src="favicon/app-logo.svg" alt="健保癌症藥物速查系統"></div>
     <div class="brand">
       <div class="brand-name">
         健保癌症藥物速查系統 
-        <span class="brand-version">v5.7.2</span>
+        <span class="brand-version">v5.9.0</span>
       </div>
       <div class="brand-sub">
         彰濱秀傳癌症中心 
         <span class="brand-divider">·</span> 
-        <span class="brand-data-date" data-date="115.7.23" data-effective="115.8.1">程式參考的資料是 115年7月23日公告，115年8月1日生效</span>
+        <span class="brand-data-date" data-date="115.8.21" data-effective="115.9.1"><span class="dd-long">程式參考的資料是 115年8月21日公告，115年9月1日生效</span><span class="dd-short">115/8/21 公告 · 9/1 生效</span></span>
         <span class="brand-last-check" id="brand-last-check"></span>
       </div>
       <a class="update-badge" id="update-badge" style="display:none" target="_blank" rel="noopener">
@@ -1720,6 +1740,7 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     </button>
   </div>
 </div>
+</div><!-- /header-stack -->
 
 <main>
   <div class="stats-bar">
@@ -1820,7 +1841,7 @@ window.addEventListener('afterprint', function(){ document.body.classList.remove
     <p style="color: var(--ink-2); margin-bottom: 16px;">
       衛生福利部中央健康保險署<br>
       藥品給付規定 第 9 節 抗癌瘤藥物<br>
-      115 年 7 月 23 日公告 (115/8/1 生效)<br>
+      115 年 8 月 21 日公告 (115/9/1 生效)<br>
       <a href="https://www.nhi.gov.tw/ch/cp-7593-ad2a9-3397-1.html" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; color: var(--primary); text-decoration: none; font-size: 13px;">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10 2h4v4"/>
@@ -11514,7 +11535,7 @@ const drugs = [
     "items": [
       {
         "num": "1",
-        "header": "本類藥品(除 Gemmis 之外)依藥品許可證登載之適應症範圍內給付於非小細胞肺癌、胰臟癌、膀胱癌、乳癌、卵巢癌及膽道癌之病例；倘併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之藥品給付規定。",
+        "header": "本類藥品依藥品許可證登載之適應症範圍內給付於非小細胞肺癌、胰臟癌、膀胱癌、乳癌、卵巢癌及膽道癌之病例；倘併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之藥品給付規定。",
         "subitems": [],
         "cancerTags": [
           "乳癌",
@@ -11523,68 +11544,9 @@ const drugs = [
           "肝膽胰胃癌",
           "泌尿癌"
         ]
-      },
-      {
-        "num": "2",
-        "header": "Gemmis 限給付於下列情形：",
-        "subitems": [
-          {
-            "num": "(1)",
-            "text": "晚期或無法手術切除之非小細胞肺癌及胰臟癌病患。",
-            "cancerTags": [
-              "肺癌",
-              "肝膽胰胃癌"
-            ]
-          },
-          {
-            "num": "(2)",
-            "text": "晚期膀胱癌病患。",
-            "cancerTags": [
-              "泌尿癌"
-            ]
-          },
-          {
-            "num": "(3)",
-            "text": "Gemcitabine 與 paclitaxel 併用，可使用於曾經使用過 anthracycline 之局部復發且無法手術切除或轉移性之乳癌病患。",
-            "cancerTags": [
-              "乳癌"
-            ]
-          },
-          {
-            "num": "(4)",
-            "text": "用於曾經使用含鉑類藥物(platinum-based)治療後復發且間隔至少6個月之卵巢癌，作為第二線治療。",
-            "cancerTags": [
-              "婦癌"
-            ]
-          },
-          {
-            "num": "(5)",
-            "text": "無法手術切除或晚期或復發之膽道癌(含肝內膽管)病患。",
-            "cancerTags": [
-              "肝膽胰胃癌"
-            ]
-          },
-          {
-            "num": "(6)",
-            "text": "與 durvalumab 及 cisplatin 併用於治療局部晚期或轉移性未接受治療或不可手術之膽道癌(biliary tract cancer)成人病人(壺腹癌除外)，患者需符合免疫檢查點抑制劑之藥品給付規定。",
-            "cancerTags": [
-              "肝膽胰胃癌"
-            ]
-          },
-          {
-            "num": "(7)",
-            "text": "與 nivolumab 及 cisplatin 併用於無法切除或轉移性泌尿道上皮癌成人病人的第一線治療，病人需符合免疫檢查點抑制劑之藥品給付規定，且至多6個療程。",
-            "cancerTags": [
-              "泌尿癌"
-            ]
-          }
-        ],
-        "cancerTags": [
-          "*"
-        ]
       }
     ],
-    "search_text": "gemcitabine gemzar 本類藥品(除 gemmis 之外)依藥品許可證登載之適應症範圍內給付於非小細胞肺癌、胰臟癌、膀胱癌、乳癌、卵巢癌及膽道癌之病例；倘併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之藥品給付規定。 gemmis 限給付於下列情形： 晚期或無法手術切除之非小細胞肺癌及胰臟癌病患。 晚期膀胱癌病患。 gemcitabine 與 paclitaxel 併用，可使用於曾經使用過 anthracycline 之局部復發且無法手術切除或轉移性之乳癌病患。 用於曾經使用含鉑類藥物(platinum-based)治療後復發且間隔至少6個月之卵巢癌，作為第二線治療。 無法手術切除或晚期或復發之膽道癌(含肝內膽管)病患。 與 durvalumab 及 cisplatin 併用於治療局部晚期或轉移性未接受治療或不可手術之膽道癌(biliary tract cancer)成人病人(壺腹癌除外)，患者需符合免疫檢查點抑制劑之藥品給付規定。 與 nivolumab 及 cisplatin 併用於無法切除或轉移性泌尿道上皮癌成人病人的第一線治療，病人需符合免疫檢查點抑制劑之藥品給付規定，且至多6個療程。 乳癌 肺癌 婦癌 肝膽胰胃癌 泌尿癌 92/12/1 93/8/1 94/10/1 96/5/1 99/10/1 105/2/1 114/2/1 115/2/1 115/6/1",
+    "search_text": "gemcitabine gemzar 本類藥品依藥品許可證登載之適應症範圍內給付於非小細胞肺癌、胰臟癌、膀胱癌、乳癌、卵巢癌及膽道癌之病例；倘併用其他標靶治療、免疫檢查點抑制劑等藥品時，病人須符合該併用藥品之藥品給付規定。 乳癌 肺癌 婦癌 肝膽胰胃癌 泌尿癌 92/12/1 93/8/1 94/10/1 96/5/1 99/10/1 105/2/1 114/2/1 115/2/1 115/6/1 115/9/1",
     "review_scope": "none",
     "review_source": [],
     "revisions": [
@@ -11596,7 +11558,8 @@ const drugs = [
       "105/2/1",
       "114/2/1",
       "115/2/1",
-      "115/6/1"
+      "115/6/1",
+      "115/9/1"
     ]
   },
   {
@@ -13084,14 +13047,14 @@ const drugs = [
         "subitems": [
           {
             "num": "(1)",
-            "text": "Rai Stage Ⅲ/Ⅳ(或 Binet C 級)之 CLL 病人。若用於 Rai StageⅠ/Ⅱ(或 Binet A/B 級)併有疾病相關免疫性症候(如自體免疫性溶血、免疫性血小板低下紫瘢症 等)的病人時，需經過至少一種標準的烷化基劑治療無效或病情惡化者，且 CD20 陽性細胞須大於50%。（Rixathon 不受「需經過一種標準的烷化基劑治療無效或病 情惡化，且 CD20陽性細胞須大於50%」限制，僅須符合具 CD20陽性細胞即可使 用，做為第一線用藥需與 fludarabine 及 cyclophosphamide 併用）",
+            "text": "Rai Stage Ⅲ/Ⅳ(或 Binet C 級)之 CLL 病人。若用於 Rai StageⅠ/Ⅱ(或 Binet A/B 級)併有疾病相關免疫性症候(如自體免疫性溶血、免疫性血小板低下紫瘢症等)的病人時，需經過至少一種標準的烷化基劑治療無效或病情惡化者，且 CD20陽性細胞須大於50%。（除 Mabthera 以外，不受「需經過一種標準的烷化基劑治療無效或病情惡化，且 CD20陽性細胞須大於50%」限制，僅須符合具 CD20陽性細胞即可使用，做為第一線用藥需與 fludarabine 及 cyclophosphamide 併用）",
             "cancerTags": [
               "*"
             ]
           },
           {
             "num": "(2)",
-            "text": "與化學療法併用，做為復發或頑固性的 CD20陽性慢性淋巴球性白血病病患的治療 用藥，且 CD20陽性細胞須大於50%。（Rixathon 不受「CD20陽性細胞須大於50%」 限制，僅須符合具 CD20陽性細胞即可使用）",
+            "text": "與化學療法併用，做為復發或頑固性的 CD20陽性慢性淋巴球性白血病病患的治療用藥，且 CD20陽性細胞須大於50%。（除 Mabthera 以外，不受「CD20陽性細胞須大於50%」限制，僅須符合具 CD20陽性細胞即可使用）",
             "cancerTags": [
               "*"
             ]
@@ -13170,7 +13133,7 @@ const drugs = [
       },
       {
         "num": "9",
-        "header": "Rituximab(限使用 Rixathon)合併 lenalidomide(限使用 Revlimid)用於先前曾接受 至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人，需符合 lenalidomide 之藥品給付規定。",
+        "header": "Rituximab(除 Mabthera 以外)合併 lenalidomide(限使用 Revlimid 及 Leavdo)用於先前曾接受至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人，需符合lenalidomide 之藥品給付規定。",
         "subitems": [],
         "cancerTags": [
           "血液淋巴癌"
@@ -13178,14 +13141,14 @@ const drugs = [
       },
       {
         "num": "10",
-        "header": "使用於1、4、5、6、7、8及9病人時，需經事前審查核准後使用，使用 Rixathon 用於1、4、5之病人除外。(102/1/1、103/2/1、103/9/1、113/12/1、115/5/1、115/6/1)",
+        "header": "Rituximab 用於6、7、8、9及 Mabthera 用於1、4、5，需經事前審查核准後使用。",
         "subitems": [],
         "cancerTags": [
           "*"
         ]
       }
     ],
-    "search_text": "rituximab 注射劑 用於抗癌瘤部分 復發或對化學療效有抗性之低惡度 b 細胞非何杰金氏淋巴瘤。 併用 polatuzumab vedotin 或 chop 或其他化學療法，用於 cd20抗原陽性之 b 瀰漫 性大細胞非何杰金氏淋巴瘤之病患。 併用 cvp 化學療法，用於未經治療之和緩性（組織型態為濾泡型）b 細胞非何杰金 氏淋巴瘤的病人。 作為濾泡性淋巴瘤患者於接受含 rituximab 誘導化學治療後產生反應(達 partial remission 或 complete remission)之病患，若在接受含 rituximab 誘導化學治療 前有下列情形之一者，得接受 rituximab 維持治療，限用八劑，每三個月使用一 劑，最多不超過二年。 有單一腫瘤直徑超過7公分者； 有超過三顆腫瘤直徑超過3公分者； 脾臟腫大，其長度超過16公分者； 對 vitalorgans 造成擠壓者； 周邊血中出現淋巴球增生超過5000/mm³者； 出現任一系列血球低下者(platelet<100,000/mm³，或 hb<10gm/dl，或 absolute neutrophil count<1500/mm³)。 慢性淋巴球性白血病： rai stage ⅲ/ⅳ(或 binet c 級)之 cll 病人。若用於 rai stageⅰ/ⅱ(或 binet a/b 級)併有疾病相關免疫性症候(如自體免疫性溶血、免疫性血小板低下紫瘢症 等)的病人時，需經過至少一種標準的烷化基劑治療無效或病情惡化者，且 cd20 陽性細胞須大於50%。（rixathon 不受「需經過一種標準的烷化基劑治療無效或病 情惡化，且 cd20陽性細胞須大於50%」限制，僅須符合具 cd20陽性細胞即可使 用，做為第一線用藥需與 fludarabine 及 cyclophosphamide 併用） 與化學療法併用，做為復發或頑固性的 cd20陽性慢性淋巴球性白血病病患的治療 用藥，且 cd20陽性細胞須大於50%。（rixathon 不受「cd20陽性細胞須大於50%」 限制，僅須符合具 cd20陽性細胞即可使用） 初次申請最多六個（月）療程，再次申請以三個療程為限。 與類固醇併用，治療嗜中性白血球細胞質抗體(anca)陽性之肉芽腫性血管炎及顯微 多發性血管炎病人： 需經事前審查核准後使用，診斷需有病理報告確定及血清學檢驗結果。 初次發作之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週 以上但療效不佳者。 復發之肉芽腫性血管炎(gpa，或稱為韋格納肉芽腫症 wegener’s granulomatosis)及顯微多發性血管炎(mpa)，先前曾接受過 cyclophosphamide 治療者。 對 cyclophosphamide 治療無法耐受且有具體事證，或具使用禁忌之肉芽腫性血管 炎及顯微多發性血管炎。 每次申請，以治療4週之療程為限。復發時可再次申請。 註：原發(初次發作)之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週以上但療效不佳者之定義為： 經 cyclophosphamide 治療4週以上，但至少有一項受侵犯的主要器官症狀未能改 善，包括: a 肺部 b 腎臟 c 神經系統 d 腸胃道系統 申請時需檢附病歷及病理及影像資料等，經專科醫師事前審查同意後使用。 合併 bendamustine 適用於先前未曾接受治療的 cd20陽性、第 iii/iv 期和緩性非何 杰金氏淋巴瘤。 合併 bendamustine 用於先前未曾接受治療且不適合自體幹細胞移植的第 iii/iv 期 被套細胞淋巴瘤。 rituximab(限使用 rixathon)合併 lenalidomide(限使用 revlimid)用於先前曾接受 至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人，需符合 lenalidomide 之藥品給付規定。 使用於1、4、5、6、7、8及9病人時，需經事前審查核准後使用，使用 rixathon 用於1、4、5之病人除外。(102/1/1、103/2/1、103/9/1、113/12/1、115/5/1、115/6/1) 血液淋巴癌 91/4/1 93/1/1 95/3/1 97/2/1 102/1/1 103/2/1 103/9/1 104/6/1 106/9/1 111/6/1 113/2/1 113/12/1 115/5/1 115/6/1",
+    "search_text": "rituximab 注射劑 用於抗癌瘤部分 復發或對化學療效有抗性之低惡度 b 細胞非何杰金氏淋巴瘤。 併用 polatuzumab vedotin 或 chop 或其他化學療法，用於 cd20抗原陽性之 b 瀰漫 性大細胞非何杰金氏淋巴瘤之病患。 併用 cvp 化學療法，用於未經治療之和緩性（組織型態為濾泡型）b 細胞非何杰金 氏淋巴瘤的病人。 作為濾泡性淋巴瘤患者於接受含 rituximab 誘導化學治療後產生反應(達 partial remission 或 complete remission)之病患，若在接受含 rituximab 誘導化學治療 前有下列情形之一者，得接受 rituximab 維持治療，限用八劑，每三個月使用一 劑，最多不超過二年。 有單一腫瘤直徑超過7公分者； 有超過三顆腫瘤直徑超過3公分者； 脾臟腫大，其長度超過16公分者； 對 vitalorgans 造成擠壓者； 周邊血中出現淋巴球增生超過5000/mm³者； 出現任一系列血球低下者(platelet<100,000/mm³，或 hb<10gm/dl，或 absolute neutrophil count<1500/mm³)。 慢性淋巴球性白血病： rai stage ⅲ/ⅳ(或 binet c 級)之 cll 病人。若用於 rai stageⅰ/ⅱ(或 binet a/b 級)併有疾病相關免疫性症候(如自體免疫性溶血、免疫性血小板低下紫瘢症等)的病人時，需經過至少一種標準的烷化基劑治療無效或病情惡化者，且 cd20陽性細胞須大於50%。（除 mabthera 以外，不受「需經過一種標準的烷化基劑治療無效或病情惡化，且 cd20陽性細胞須大於50%」限制，僅須符合具 cd20陽性細胞即可使用，做為第一線用藥需與 fludarabine 及 cyclophosphamide 併用） 與化學療法併用，做為復發或頑固性的 cd20陽性慢性淋巴球性白血病病患的治療用藥，且 cd20陽性細胞須大於50%。（除 mabthera 以外，不受「cd20陽性細胞須大於50%」限制，僅須符合具 cd20陽性細胞即可使用） 初次申請最多六個（月）療程，再次申請以三個療程為限。 與類固醇併用，治療嗜中性白血球細胞質抗體(anca)陽性之肉芽腫性血管炎及顯微 多發性血管炎病人： 需經事前審查核准後使用，診斷需有病理報告確定及血清學檢驗結果。 初次發作之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週 以上但療效不佳者。 復發之肉芽腫性血管炎(gpa，或稱為韋格納肉芽腫症 wegener’s granulomatosis)及顯微多發性血管炎(mpa)，先前曾接受過 cyclophosphamide 治療者。 對 cyclophosphamide 治療無法耐受且有具體事證，或具使用禁忌之肉芽腫性血管 炎及顯微多發性血管炎。 每次申請，以治療4週之療程為限。復發時可再次申請。 註：原發(初次發作)之肉芽腫性血管炎及顯微多發性血管炎，經 cyclophosphamide 治療4週以上但療效不佳者之定義為： 經 cyclophosphamide 治療4週以上，但至少有一項受侵犯的主要器官症狀未能改 善，包括: a 肺部 b 腎臟 c 神經系統 d 腸胃道系統 申請時需檢附病歷及病理及影像資料等，經專科醫師事前審查同意後使用。 合併 bendamustine 適用於先前未曾接受治療的 cd20陽性、第 iii/iv 期和緩性非何 杰金氏淋巴瘤。 合併 bendamustine 用於先前未曾接受治療且不適合自體幹細胞移植的第 iii/iv 期 被套細胞淋巴瘤。 rituximab(除 mabthera 以外)合併 lenalidomide(限使用 revlimid 及 leavdo)用於先前曾接受至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人，需符合lenalidomide 之藥品給付規定。 rituximab 用於6、7、8、9及 mabthera 用於1、4、5，需經事前審查核准後使用。 血液淋巴癌 91/4/1 93/1/1 95/3/1 97/2/1 102/1/1 103/2/1 103/9/1 104/6/1 106/9/1 111/6/1 113/2/1 113/12/1 115/5/1 115/6/1 115/8/1 115/9/1",
     "review_scope": "all",
     "review_source": [
       "explicit_text"
@@ -13205,7 +13168,9 @@ const drugs = [
       "113/2/1",
       "113/12/1",
       "115/5/1",
-      "115/6/1"
+      "115/6/1",
+      "115/8/1",
+      "115/9/1"
     ]
   },
   {
@@ -15824,7 +15789,7 @@ const drugs = [
       },
       {
         "num": "3",
-        "header": "Lenalidomide(限使用 Revlimid)與 rituximab(限使用 Rixathon)併用，治療先前曾接 受至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人：",
+        "header": "Lenalidomide(限使用 Revlimid 及 Leavdo)與 rituximab(除 Mabthera 以外)併用，治療先前曾接受至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人：",
         "subitems": [
           {
             "num": "(1)",
@@ -15874,7 +15839,7 @@ const drugs = [
         ]
       }
     ],
-    "search_text": "lenalidomide revlimid 多發性骨髓瘤： 先前尚未接受過任何治療且不適用造血幹細胞移植的多發性骨髓瘤患者可使用 lenalidomide 併用 dexamethasone 作為第一線治療。開始治療時病患須同時符合下 列 i 與ⅱ的條件： ⅰ.骨髓漿細胞(plasma cells)比例≧10%，或是經切片確認且有≧1顆的 plasmacytoma。 ⅱ.出現下列任一臨床症狀： ⅰ.腎功能不全：serum creatinine＞2.0mg/dl 或 estimated gfr (egfr)＜40 ml/min，且無其他原因可以解釋。 ⅱ.高血鈣(corrected serum calcium＞11.0 mg/dl 或2.75 mmol/l)。 ⅲ.貧血(hemoglobin＜10 gm/dl 且無其他原因可以解釋)。 ⅳ.影像檢查確認之 osteolytic bone lesion(s)。 ⅴ.骨髓漿細胞(plasma cells)比例≧60% ⅵ.serum free light-chain ratio≧100。 ⅲ.每4個療程重新申請時，須重新評估是否適合接受造血幹細胞移植。若經重新評估 為已適合接受造血幹細胞移植者，即須停止 rd 之治療。 與 dexamethasone 合併使用於先前已接受至少一種治療失敗之多發性骨髓瘤患者，且 需同時符合下列 i 與ⅱ的條件： ⅰ.具有下列任一疾病惡化的指標： 病患開始治療前須在連續2次評估中均符合同一指 標 (但若為 plamacytoma 體積增加，或是新產生的 bone lesion(s)或新 plasmacytoma，則僅需1次評估)： ⅰ.若前一線治療中 m component 最低值≧5 g/dl，血清 m 蛋白需增加≧1 g/dl； 若前一線治療中 m component 最低值＜5 g/dl，血清 m 蛋白需增加≧0.5g/dl。 ⅱ.urine m-protein 需增加≧0.2 gm/24hr，且需較前一線治療中的最低值增加≧ 25%。 ⅲ.在 non-secretary myeloma 病患，骨髓漿細胞 (plasma cells)之比例絕對值增 加≧10%，且需較前一線治療中的最低值增加≧25%。 ⅳ.新產生的 bone lesion(s)或 plasmacytoma；且須經病理切片證實。 ⅴ.plasmacytoma 體積增加≧50%。 ⅵ.周邊血液中漿細胞比例≧20%或漿細胞絕對值≧2000 cells/μl。 ⅱ.出現下列任一臨床症狀： ⅰ.新產生的 bone lesion(s)或 plasmacytoma；且須經病理切片證實。 ⅱ.plasmacytoma 體積增加≧50%。 ⅲ.高血鈣(corrected serum calcium＞11.0 mg/dl 或 2.75 mmol/l)。 ⅳ.貧血(hemoglobin 下降幅度≧ 2gm/dl 且無其他原因可以解釋)。 ⅴ.腎功能惡化(egfr 需下降幅度≧25%)，且無其他原因可以解釋。 ⅵ.出現其他 end-organ dysfunctions。 須經事前審查核准後使用，每次申請事前審查之療程以4個療程為限，每4個療程須再 次申請。 ⅰ.每天限給付1粒。 ⅱ.使用4個療程後，必須確定 paraprotein(m-protein)未上升(即表示對藥物有反應或 為穩定狀態)或對部分 non-secretory type mm 病人以骨髓檢查 plasma cell 為療效 依據，方可繼續使用。 每人終生至多給付24個療程為限（每療程為4週）。使用 leavdo、lelimide 及 revlimid 終生至多給付36個療程為限。（106/10/1、109/2/1、109/8/1、112/4/1、115/3/1、115/4/1） 115年2月28日以前已核定使用 leavdo 或 lelimide，及115年3月31日以前已核定使用 revlimid 之病人，得經事前審查核准後，使用至總療程上限（即終生36個療程）或 使用期間發生疾病惡化為止。 瀰漫性大型 b 細胞淋巴瘤： lenalidomide(限使用 leavdo、lelimide 及 revlimid)與 tafasitamab 合併使用於經 一線全身治療含 rituximab 治療復發型，不適合接受造血幹細胞移植瀰漫性大型 b 細 胞淋巴瘤(dlbcl)成人病人，病人須符合 tafasitamab 之藥品給付規定(114/10/1、115/3/1、115/4/1） 須經事前審查核准後使用。 ⅰ.每人至多給付12個療程。 ⅱ.每天限給付1粒。 lenalidomide(限使用 revlimid)與 rituximab(限使用 rixathon)併用，治療先前曾接 受至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人： 具 cd20抗原陽性。 需符合 who 淋巴瘤分類為 i、ii 或 iiia 期的診斷。 開始使用前之疾病狀態需出現下列任一情形： i. 有單一腫瘤直徑7公分以上者； ii. 有三顆以上之腫瘤其直徑大於3公分以上者； iii.脾臟腫大，其長度16公分以上者； iv. 對 vital organs 造成擠壓者； v. 周邊血中出現淋巴球增生超過5000/mm³者； vi. 出現任一系列血球低下者（platelet<100,000/mm³，或 hb<10gm/dl，或 absolute neutrophil count<1500/mm³)。 vii.b symptoms。 需經事前審查核准後使用，每3個月需再次申請，再次申請時需檢附影像資料（ct 或 mri），若未達 partial remission 或 complete remission，則不予給付。 每位病人最多給付12個療程，若病情惡化應即停止使用。 每日限處方1粒。 血液淋巴癌 101/12/1 106/10/1 109/2/1 109/8/1 112/4/1 114/10/1 115/3/1 115/4/1 115/5/1",
+    "search_text": "lenalidomide revlimid 多發性骨髓瘤： 先前尚未接受過任何治療且不適用造血幹細胞移植的多發性骨髓瘤患者可使用 lenalidomide 併用 dexamethasone 作為第一線治療。開始治療時病患須同時符合下 列 i 與ⅱ的條件： ⅰ.骨髓漿細胞(plasma cells)比例≧10%，或是經切片確認且有≧1顆的 plasmacytoma。 ⅱ.出現下列任一臨床症狀： ⅰ.腎功能不全：serum creatinine＞2.0mg/dl 或 estimated gfr (egfr)＜40 ml/min，且無其他原因可以解釋。 ⅱ.高血鈣(corrected serum calcium＞11.0 mg/dl 或2.75 mmol/l)。 ⅲ.貧血(hemoglobin＜10 gm/dl 且無其他原因可以解釋)。 ⅳ.影像檢查確認之 osteolytic bone lesion(s)。 ⅴ.骨髓漿細胞(plasma cells)比例≧60% ⅵ.serum free light-chain ratio≧100。 ⅲ.每4個療程重新申請時，須重新評估是否適合接受造血幹細胞移植。若經重新評估 為已適合接受造血幹細胞移植者，即須停止 rd 之治療。 與 dexamethasone 合併使用於先前已接受至少一種治療失敗之多發性骨髓瘤患者，且 需同時符合下列 i 與ⅱ的條件： ⅰ.具有下列任一疾病惡化的指標： 病患開始治療前須在連續2次評估中均符合同一指 標 (但若為 plamacytoma 體積增加，或是新產生的 bone lesion(s)或新 plasmacytoma，則僅需1次評估)： ⅰ.若前一線治療中 m component 最低值≧5 g/dl，血清 m 蛋白需增加≧1 g/dl； 若前一線治療中 m component 最低值＜5 g/dl，血清 m 蛋白需增加≧0.5g/dl。 ⅱ.urine m-protein 需增加≧0.2 gm/24hr，且需較前一線治療中的最低值增加≧ 25%。 ⅲ.在 non-secretary myeloma 病患，骨髓漿細胞 (plasma cells)之比例絕對值增 加≧10%，且需較前一線治療中的最低值增加≧25%。 ⅳ.新產生的 bone lesion(s)或 plasmacytoma；且須經病理切片證實。 ⅴ.plasmacytoma 體積增加≧50%。 ⅵ.周邊血液中漿細胞比例≧20%或漿細胞絕對值≧2000 cells/μl。 ⅱ.出現下列任一臨床症狀： ⅰ.新產生的 bone lesion(s)或 plasmacytoma；且須經病理切片證實。 ⅱ.plasmacytoma 體積增加≧50%。 ⅲ.高血鈣(corrected serum calcium＞11.0 mg/dl 或 2.75 mmol/l)。 ⅳ.貧血(hemoglobin 下降幅度≧ 2gm/dl 且無其他原因可以解釋)。 ⅴ.腎功能惡化(egfr 需下降幅度≧25%)，且無其他原因可以解釋。 ⅵ.出現其他 end-organ dysfunctions。 須經事前審查核准後使用，每次申請事前審查之療程以4個療程為限，每4個療程須再 次申請。 ⅰ.每天限給付1粒。 ⅱ.使用4個療程後，必須確定 paraprotein(m-protein)未上升(即表示對藥物有反應或 為穩定狀態)或對部分 non-secretory type mm 病人以骨髓檢查 plasma cell 為療效 依據，方可繼續使用。 每人終生至多給付24個療程為限（每療程為4週）。使用 leavdo、lelimide 及 revlimid 終生至多給付36個療程為限。（106/10/1、109/2/1、109/8/1、112/4/1、115/3/1、115/4/1） 115年2月28日以前已核定使用 leavdo 或 lelimide，及115年3月31日以前已核定使用 revlimid 之病人，得經事前審查核准後，使用至總療程上限（即終生36個療程）或 使用期間發生疾病惡化為止。 瀰漫性大型 b 細胞淋巴瘤： lenalidomide(限使用 leavdo、lelimide 及 revlimid)與 tafasitamab 合併使用於經 一線全身治療含 rituximab 治療復發型，不適合接受造血幹細胞移植瀰漫性大型 b 細 胞淋巴瘤(dlbcl)成人病人，病人須符合 tafasitamab 之藥品給付規定(114/10/1、115/3/1、115/4/1） 須經事前審查核准後使用。 ⅰ.每人至多給付12個療程。 ⅱ.每天限給付1粒。 lenalidomide(限使用 revlimid 及 leavdo)與 rituximab(除 mabthera 以外)併用，治療先前曾接受至少一線全身性治療之復發性或難治性濾泡性淋巴瘤成人病人： 具 cd20抗原陽性。 需符合 who 淋巴瘤分類為 i、ii 或 iiia 期的診斷。 開始使用前之疾病狀態需出現下列任一情形： i. 有單一腫瘤直徑7公分以上者； ii. 有三顆以上之腫瘤其直徑大於3公分以上者； iii.脾臟腫大，其長度16公分以上者； iv. 對 vital organs 造成擠壓者； v. 周邊血中出現淋巴球增生超過5000/mm³者； vi. 出現任一系列血球低下者（platelet<100,000/mm³，或 hb<10gm/dl，或 absolute neutrophil count<1500/mm³)。 vii.b symptoms。 需經事前審查核准後使用，每3個月需再次申請，再次申請時需檢附影像資料（ct 或 mri），若未達 partial remission 或 complete remission，則不予給付。 每位病人最多給付12個療程，若病情惡化應即停止使用。 每日限處方1粒。 血液淋巴癌 101/12/1 106/10/1 109/2/1 109/8/1 112/4/1 114/10/1 115/3/1 115/4/1 115/5/1 115/8/1 115/9/1",
     "review_scope": "all",
     "review_source": [
       "explicit_text"
@@ -15888,7 +15853,9 @@ const drugs = [
       "114/10/1",
       "115/3/1",
       "115/4/1",
-      "115/5/1"
+      "115/5/1",
+      "115/8/1",
+      "115/9/1"
     ]
   },
   {
@@ -18676,11 +18643,10 @@ const drugs = [
           },
           {
             "num": "(2)",
-            "text": "非小細胞肺癌：(112/12/1、113/4/1、113/8/1、114/6/1、115/6/1) I. 非小細胞肺癌術前輔助治療：限用於可切除（腫瘤≧4 公分或淋巴結陽性 N1/N2(排除 N3)，且無疾病轉移 M0）之不具 EGFR 或 ALK 腫瘤基因異常成人病 人，且至多 3 個療程，並依下列條件使用：(115/6/1) i.非鱗狀非小細胞肺癌：限 nivolumab 與 pemetrexed(限使用 Pexeda、Apeta 或 Pemetrexed Sandoz)及含鉑化療併用。 ii.鱗狀細胞非小細胞肺癌：限 nivolumab 與含鉑化療併用。 II. 轉移性鱗狀非小細胞肺癌第一線用藥：限 pembrolizumab 與 carboplatin 及 paclitaxel 併用至多使用 4 個療程，接續單用 pembrolizumab 治療。 (112/12/1、113/4/1、113/8/1) III. 轉移性非鱗狀非小細胞肺癌第一線：限 pembrolizumab 與 pemetrexed(限使用 Pexeda、Apeta、Pemetrexed Sandoz 或 Alimta Avos)及含鉑類化學療法併用， 或限 atezolizumab 與 bevacizumab(限使用 Alymsys、Avastin、Abevmy、 Vegzelma 或 Mvasi)及 carboplatin、paclitaxel 併用，做為轉移性且不具有 EGFR/ALK/ROS-1 腫瘤基因異常的非鱗狀非小細胞肺癌第一線治療。(114/6/1、 114/8/1、115/8/1)",
+            "text": "非小細胞肺癌：(112/12/1、113/4/1、113/8/1、114/6/1、115/6/1) I. 非小細胞肺癌術前輔助治療：限用於可切除（腫瘤≧4 公分或淋巴結陽性 N1/N2(排除 N3)，且無疾病轉移 M0）之不具 EGFR 或 ALK 腫瘤基因異常成人病 人，且至多 3 個療程，並依下列條件使用：(115/6/1) i.非鱗狀非小細胞肺癌：限 nivolumab 與 pemetrexed(限使用 Pexeda、Apeta、Pemetrexed Sandoz 或 Alimta Avos)及含鉑化療併用。 ii.鱗狀細胞非小細胞肺癌：限 nivolumab 與含鉑化療併用。 II. 轉移性鱗狀非小細胞肺癌第一線用藥：限 pembrolizumab 與 carboplatin 及 paclitaxel 併用至多使用 4 個療程，接續單用 pembrolizumab 治療。 (112/12/1、113/4/1、113/8/1) III. 轉移性非鱗狀非小細胞肺癌第一線：限 pembrolizumab 與 pemetrexed(限使用 Pexeda、Apeta、Pemetrexed Sandoz 或 Alimta Avos)及含鉑類化學療法併用， 或限 atezolizumab 與 bevacizumab(限使用 Alymsys、Avastin、Abevmy、 Vegzelma 或 Mvasi)及 carboplatin、paclitaxel 併用，做為轉移性且不具有 EGFR/ALK/ROS-1 腫瘤基因異常的非鱗狀非小細胞肺癌第一線治療。(114/6/1、 114/8/1、115/8/1)",
             "cancerTags": [
               "肺癌"
-            ],
-            "xrefNote": "⚠ 官方交叉差異：本條的 pemetrexed 品項為「Pexeda、Apeta 或 Pemetrexed Sandoz」，但 9.26 Pemetrexed 條文中同一個「非鱗狀非小細胞肺癌術前輔助治療」寫的是「Pexeda、Apeta、Pemetrexed Sandoz 或 Alimta Avos」。兩處皆為 115/7/23 版原文，本系統逐字保留，送審前請一併確認。"
+            ]
           },
           {
             "num": "(3)",
@@ -18793,6 +18759,10 @@ const drugs = [
                 {
                   "drug": "cemiplimab",
                   "assay": "Dako 22C3 或 Ventana SP263*"
+                },
+                {
+                  "drug": "dostarlimab",
+                  "assay": ""
                 }
               ],
               "na": "本藥品尚未給付於此適應症",
@@ -18804,6 +18774,7 @@ const drugs = [
                   "cells": [
                     "不需檢附報告",
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -18822,6 +18793,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -18837,6 +18809,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "PD-L1≧1%",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -18852,7 +18825,8 @@ const drugs = [
                     "TC≧50%或IC≧10%",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
-                    "TPS≧50%"
+                    "TPS≧50%",
+                    "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
                     "肺癌"
@@ -18865,6 +18839,7 @@ const drugs = [
                     "不需檢附報告",
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
@@ -18882,6 +18857,7 @@ const drugs = [
                     "TC≧50%或IC≧10%",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -18897,6 +18873,7 @@ const drugs = [
                     "TC≧50%或IC≧10%",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -18908,6 +18885,7 @@ const drugs = [
                   "code": "P014",
                   "cells": [
                     "TPS1~49%",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -18927,6 +18905,7 @@ const drugs = [
                     "不需檢附報告",
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -18939,6 +18918,7 @@ const drugs = [
                   "cells": [
                     "不需檢附報告",
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -18957,6 +18937,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -18972,6 +18953,7 @@ const drugs = [
                     "IC≧5%(113年8月1日前審核同意符合續用申請條件者)",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -18984,6 +18966,7 @@ const drugs = [
                   "cells": [
                     "本藥品尚未給付於此適應症",
                     "TC≥1%",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -19002,6 +18985,7 @@ const drugs = [
                     "IC≧5%(113年8月1日前審核同意符合續用申請條件者)",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19014,6 +18998,7 @@ const drugs = [
                   "cells": [
                     "CPS≧1",
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -19032,6 +19017,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19044,6 +19030,7 @@ const drugs = [
                   "cells": [
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -19062,6 +19049,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19077,6 +19065,7 @@ const drugs = [
                     "不需檢附報告（併用bevacizumab）",
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告(併用tremelimumab)",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19088,6 +19077,7 @@ const drugs = [
                   "code": "P082",
                   "cells": [
                     "CPS≧20",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -19107,6 +19097,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19122,6 +19113,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19134,6 +19126,7 @@ const drugs = [
                   "cells": [
                     "本藥品尚未給付於此適應症",
                     "TC≧1%",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -19152,6 +19145,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19164,6 +19158,7 @@ const drugs = [
                   "cells": [
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告，病理組織為非上皮型(Non-epithelioid)",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -19182,6 +19177,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19193,6 +19189,7 @@ const drugs = [
                   "code": "P131",
                   "cells": [
                     "不需檢附報告",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
@@ -19212,6 +19209,7 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
+                    "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症"
                   ],
                   "cancerTags": [
@@ -19227,12 +19225,12 @@ const drugs = [
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
                     "本藥品尚未給付於此適應症",
-                    "本藥品尚未給付於此適應症"
+                    "本藥品尚未給付於此適應症",
+                    "不需檢附報告"
                   ],
                   "cancerTags": [
                     "婦癌"
-                  ],
-                  "rowNote": "本表 6 支藥品皆未給付於此適應症。子宮內膜癌之給付藥品為 dostarlimab（見上方「併用其他藥品」項下之子宮內膜癌條文），該藥不在本 PD-L1 對照表的欄位內，故本表查不到其檢附要求。"
+                  ]
                 }
               ]
             }
@@ -19308,7 +19306,7 @@ const drugs = [
         ]
       }
     ],
-    "search_text": "免疫檢查點抑制劑 本類藥品得於藥品許可證登載之適應症及藥品仿單內，單獨使用於下列患者： 黑色素瘤：腫瘤無法切除或轉移之第三期或第四期黑色素瘤病人，先前曾接受過 至少一次全身性治療失敗者。 非小細胞肺癌：(109/4/1、109/11/1、114/6/1、114/8/1) i.鞏固治療：限 durvalumab 用於第三期局部晚期、無法手術切除且腫瘤表現 pd-l1 ≥ 1%之非小細胞肺癌成人病人，非鱗狀癌者需為 egfr/alk/ros-1腫瘤基因 原生型、鱗狀癌者需為 egfr/alk 腫瘤基因原生型，病人須於接受根治性同步 放射治療合併至少2個週期含鉑化療後無惡化(無 pd)，且至多使用12個月。 (114/8/1) ii.非小細胞肺癌第一線用藥：轉移性非小細胞肺癌成人病人，非鱗狀癌者需為 egfr/alk/ros-1腫瘤基因原生型、鱗狀癌者需為 egfr/alk 腫瘤基因原生型。 (114/6/1) iii.鱗狀非小細胞肺癌第二線用藥：先前已使用過 platinum 類化學治療失敗後， 又有疾病惡化，且 egfr/alk 腫瘤基因為原生型之晚期鱗狀非小細胞肺癌成人 病人。 iv.肺腺癌第三線用藥：先前已使用過 platinum 類及 docetaxel/paclitaxel 類二 線(含)以上化學治療均失敗，又有疾病惡化，且 egfr/alk/ros-1腫瘤基因為原 生型之晚期非小細胞肺腺癌成人病人。 典型何杰金氏淋巴瘤：先前已接受自體造血幹細胞移植(hsct)與移植後 brentuximab vedotin (bv)治療，但又復發或惡化的典型何杰金氏淋巴瘤成人患 者。 泌尿道上皮癌：使用含 atezolizumab 藥品成分須於113年8月1日前審核同意用 藥。(109/11/1、112/10/1、113/8/1) i.不適合接受化學治療之轉移性泌尿道上皮癌成人患者，且需符合下列條件之 一： i.ctcae(the common terminology criteria for adverse events) v4.0 grade≧2 audiometric hearing loss ii.ctcae v4.0 grade≧2 peripheral neuropathy iii.cirs(the cumulative illness rating scale) score >6 ii. 先前已使用過 platinum 類化學治療失敗後疾病惡化的局部晚期無法切除或 轉移性泌尿道上皮癌成人患者。 iii.限 avelumab 用於接受第一線含鉑化學治療4至6個療程後，疾病未惡化，且 達部分緩解（pr）或疾病呈穩定狀態者(sd)之無法手術切除局部晚期(stage ⅲ)或轉移性泌尿上皮癌(stage ⅳ)成人患者之維持療法。(112/10/1） 頭頸部鱗狀細胞癌(不含鼻咽癌)：(108/4/1、109/11/1、112/12/1、115/2/1) i.先前未曾接受全身性治療且無法手術切除之復發性或轉移性(第三期或第四期) 頭頸部鱗狀細胞癌成人患者。（112/12/1) ii.先前已使用過 platinum 類化學治療失敗後，又有疾病惡化的復發性或轉移性 (第三期或第四期)頭頸部鱗狀細胞癌成人患者。(108/4/1、109/11/1、 112/12/1） 轉移性胃癌：先前已使用過二線(含)以上化學治療均失敗，又有疾病惡化的轉移 性胃腺癌成人患者，且於109年4月1日前經審核同意用藥，後續評估符合續用申 請條件者。(109/4/1) 晚期腎細胞癌：先前已使用過至少二線標靶藥物治療均失敗，又有疾病惡化之晚 期腎細胞癌，其病理上為亮細胞癌(clear cell renal carcinoma)之成人患者。 晚期肝細胞癌：需同時符合下列所有條件： ⅰ.child-pugh a class 肝細胞癌成人患者。 ⅱ.先前經 t.a.c.e.於12個月內>=3次局部治療失敗者。 ⅲ.已使用過至少一線標靶藥物治療失敗，又有疾病惡化者。本類藥品與 regorafenib、ramucirumab 僅能擇一使用，且治療失敗時不可互換。 (108/6/1、110/5/1) ⅳ.未曾進行肝臟移植。 ⅴ.於109年4月1日前經審核同意用藥，後續評估符合續用申請條件者。 (109/4/1) 默克細胞癌：限 avelumab 用於先前已使用過 platinum 類化學治療失敗後，又有 疾病惡化之轉移性第四期默克細胞癌(merkel cell carcinoma)之成人患者。 (109/6/1) 食道鱗狀細胞癌：限 nivolumab 用於曾接受合併含鉑及 fluoropyrimidine 化學 治療之後惡化的無法切除晚期或復發性食道鱗狀細胞癌病人。(113/4/1、 113/6/1、115/2/1) 大腸直腸癌：限 pembrolizumab 做為無法切除或轉移性高微衛星不穩定性(msi-h)或錯誤配對修復功能不足性(dmmr)大腸直腸癌(crc)之成年病人第一線治療。 (114/6/1) 本類藥品得於藥品許可證登載之適應症及藥品仿單內，併用其他藥品於下列患者： (112/12/1、113/4/1、113/6/1、113/8/1、114/2/1、114/6/1、115/2/1、 115/4/1、115/6/1、115/8/1) 晚期肝細胞癌第一線用藥(112/8/1、112/10/1、114/2/1): ⅰ.限 atezolizumab 與 bevacizumab 併用，或限 durvalumab 與 tremelimumab 併 用，適用於治療未曾接受全身性療法之轉移性或無法手術切除且不適合局部 治療或局部治療失敗之 child-pugh a class 晚期肝細胞癌成人患者，並符合 下列條件之一：（112/8/1、112/10/1、114/2/1) i.肝外轉移（遠端轉移或肝外淋巴結侵犯）。 ii.大血管侵犯（腫瘤侵犯主門靜脈或侵犯左/右靜脈第一或第二分支）。 iii.經導管動脈化學藥物栓塞治療（transcatheter arterial chemo embolization, t.a.c.e.）失敗者，需提供患者於12個月內>=3次局部治 療之紀錄。 ii.須排除有以下任一情形： i.曾接受器官移植。 ii.正在接受免疫抑制藥物治療。 iii.有上消化道出血之疑慮且未接受完全治療 (須有半年內之內視鏡評估報 告)。 iii.sorafenib、lenvatinib、atezolizumab 與 bevacizumab 併用、durvalumab 與 tremelimumab 併用僅得擇一給付，不得互換。(114/2/1) iv.atezolizumab 與 bevacizumab 併用或 durvalumab 與 tremelimumab 併用治療 失敗後，不得申請使用 regorafenib 或 ramucirumab。(114/2/1) 非小細胞肺癌：(112/12/1、113/4/1、113/8/1、114/6/1、115/6/1) i. 非小細胞肺癌術前輔助治療：限用於可切除（腫瘤≧4 公分或淋巴結陽性 n1/n2(排除 n3)，且無疾病轉移 m0）之不具 egfr 或 alk 腫瘤基因異常成人病 人，且至多 3 個療程，並依下列條件使用：(115/6/1) i.非鱗狀非小細胞肺癌：限 nivolumab 與 pemetrexed(限使用 pexeda、apeta 或 pemetrexed sandoz)及含鉑化療併用。 ii.鱗狀細胞非小細胞肺癌：限 nivolumab 與含鉑化療併用。 ii. 轉移性鱗狀非小細胞肺癌第一線用藥：限 pembrolizumab 與 carboplatin 及 paclitaxel 併用至多使用 4 個療程，接續單用 pembrolizumab 治療。 (112/12/1、113/4/1、113/8/1) iii. 轉移性非鱗狀非小細胞肺癌第一線：限 pembrolizumab 與 pemetrexed(限使用 pexeda、apeta、pemetrexed sandoz 或 alimta avos)及含鉑類化學療法併用， 或限 atezolizumab 與 bevacizumab(限使用 alymsys、avastin、abevmy、 vegzelma 或 mvasi)及 carboplatin、paclitaxel 併用，做為轉移性且不具有 egfr/alk/ros-1 腫瘤基因異常的非鱗狀非小細胞肺癌第一線治療。(114/6/1、 114/8/1、115/8/1) ⚠ 官方交叉差異：本條的 pemetrexed 品項為「pexeda、apeta 或 pemetrexed sandoz」，但 9.26 pemetrexed 條文中同一個「非鱗狀非小細胞肺癌術前輔助治療」寫的是「pexeda、apeta、pemetrexed sandoz 或 alimta avos」。兩處皆為 115/7/23 版原文，本系統逐字保留，送審前請一併確認。 小細胞肺癌：限 atezolizumab 與 carboplatin 及 etoposide 併用，或 durvalumab 與 etoposide 及 carboplatin 或 cisplatin 兩者之一併用，適用於先 前未曾接受化療，且無腦部或無脊髓轉移之擴散期(extensive stage)小細胞肺 癌成人患者。(112/12/1、114/2/1) 惡性肋膜間皮瘤：限 ipilimumab 與 nivolumab 併用於無法切除之惡性肋膜間皮瘤 且病理組織顯示為非上皮型(non-epithelioid)成人病人的第一線治療。 (113/4/1、113/6/1、115/2/1) 胃癌（不含胃腸基質瘤及神經內分泌腫瘤/癌）：(113/4/1、113/6/1、115/2/1、 115/4/1) i. 限 nivolumab 併用 fluoropyrimidine（5-fu 或 capecitabine）及 oxaliplatin，用於第一線治療晚期或轉移性且不具有 her2過度表現的胃癌病 人。(113/4/1、113/6/1、115/2/1) ii. 與 zolbetuximab 僅得擇一使用，且治療失敗時不可互換。(115/4/1) 膽道癌第一線用藥：限 durvalumab 與 cisplatin 及 gemcitabine 併用至多使用8 個療程，接續單用 durvalumab 於先前未接受過治療或不可手術之局部晚期或轉 移性膽道癌 (biliary tract cancer)，並須排除以下任一情形：(114/2/1) ⅰ.壺腹癌。 ⅱ.曾接受異體器官移植。 ⅲ.具有或曾有活動性自體免疫或發炎性疾病。 早期三陰性乳癌：非轉移性、第 ii 期至第 iiib 期（ct1c n1-2 或 t2-4 n0-2） 成年病人(114/6/1)： ⅰ.術前前導性治療：限 pembrolizumab 每3週1次與 carboplatin 和 paclitaxel 併用至多4個療程，接續限 pembrolizumab 每3週1次與 cyclophosphamide 和 doxorubicin 或 epirubicin 併用至多4個療程，做為初診斷病人前導性治療 用藥。 ⅱ.術後輔助治療：上述病人接受過術前前導性治療後，限手術後未達 pcr 者， 單用 pembrolizumab 每3週1次，做為輔助治療用藥，且至多使用9個療程。 ⅲ.上述 pembrolizumab 用於早期三陰性乳癌依前述療程規定至多使用17個療 程，且用於術後輔助治療，pembrolizumab 與 olaparib 僅能擇一支付。 食道鱗狀細胞癌：限 nivolumab 與 fluoropyrimidine 及 cisplatin 或 oxaliplatin 併用，用於無法接受化學放射性治療或手術切除等治癒性治療之晚 期或轉移性食道鱗狀細胞癌成人病人的第一線治療。(115/2/1) 泌尿道上皮癌：限 nivolumab 與 cisplatin 及 gemcitabine 併用至多6個療程，接 續限單用 nivolumab，做為無法切除或轉移性泌尿道上皮癌成人病人的第一線治療。 (115/2/1) 子宮內膜癌：限 dostarlimab 與 carboplatin 及 paclitaxel(除 genetaxyl crem less 及 taxol 以外)併用至多使用6個療程，接續單用 dostarlimab 用於治療患有 錯誤配對修復功能不足（dmmr）或微衛星高度不穩定性（msi-h）之原發性晚期或 首次復發性子宮內膜癌(ec）成人病人第一線治療，並需符合以下任一條件： (115/8/1） i. 先前未曾接受全身性治療。 ii. 先前曾接受術前/術後輔助全身性治療，且於治療結束後至少6個月以後才首次 復發。 使用條件： 病人身體狀況良好(ecog≦1)。 病人之心肺與肝腎功能須符合下列所有條件： i.nyha(the new york heart association) functional class i 或 ii ii.got<60u/l 及 gpt<60u/l，且 t-bilirubin<1.5mg/dl (晚期肝細胞癌以及膽道癌 病人可免除此條件)(114/2/1) iii.腎功能：(晚期腎細胞癌病人可免除此條件) (109/4/1、112/10/1、115/2/1) i. 泌 尿 道 上 皮 癌 第 一 線 用 藥 ： 單 獨 使 用 pembrolizumab 須 符 合 egfr>30ml/min/1.73 m²且<60ml/min/1.73 m²；nivolumab 併用化療須符合 egfr ≥60ml/min/1.73 m²。 ii.泌尿道上皮癌第二線用藥：egfr>30ml/min/1.73 m²。 iii.泌尿道上皮癌維持治療（112/10/1）：egfr>30ml/min/1.73 m²。 iv.其他癌別：creatinine<1.5mg/dl 且 egfr>60ml/min/1.73 m²。 病人之生物標記表現：除 ipilimumab 與 nivolumab 併用於惡性肋膜間皮瘤外，依 個別藥品使用其對應之第三等級體外診斷醫療器材(class iii ivd)所檢測之 pd-l1表現量需符合下表：(109/4/1、109/6/1、111/4/1、112/8/1、112/10/1、 112/12/1 、 113/2/1 、 113/4/1 、 113/6/1 、 113/8/1 、 114/2/1 、 114/6/1 、 114/8/1、114/10/1、115/2/1、115/5/1、115/6/1、115/8/1) 黑色素瘤 p001 不需檢附報告 不需檢附報告 非小細胞肺癌術前輔助治療(併用) p016 不需檢附報告 非小細胞肺癌鞏固治療 p015 pd-l1≧1% 鱗狀、非鱗狀非小細胞肺癌第一線用藥(單用) p013 tps≧50% tc≧50%或ic≧10% tps≧50% 非鱗狀非小細胞肺癌第一線用藥(併用) p013 不需檢附報告 不需檢附報告 鱗狀非小細胞肺癌第二線用藥 p011 tps≧50% tc≧50% tc≧50%或ic≧10% 非鱗狀非小細胞肺癌第三線用藥 p012 tps≧50% tc≧50% tc≧50%或ic≧10% 鱗狀非小細胞肺癌第一線用藥（併用化療） p014 tps1~49% 小細胞肺癌(併用化療) p021 不需檢附報告 不需檢附報告 典型何杰金氏淋巴瘤 p031 不需檢附報告 不需檢附報告 泌尿道上皮癌維持療法 p043 不需檢附報告 泌尿道上皮癌第一線用藥(單用) p042 cps≧10 ic≧5%(113年8月1日前審核同意符合續用申請條件者) 泌尿道上皮癌第一線用藥(併用化療) p044 tc≥1% 泌尿道上皮癌第二線用藥 p041 cps≧10 tc≧5% ic≧5%(113年8月1日前審核同意符合續用申請條件者) 胃腺癌(109年4月1日前審核同意符合續用申請條件者) p051 cps≧1 不需檢附報告 胃癌第一線用藥(併用化療) p052 cps≧5 晚期腎細胞癌 p061 不需檢附報告 晚期肝細胞癌(109年4月1日前審核同意符合續用) p071 不需檢附報告(109年4月1日前審核同意符合續用申請條件者) 晚期肝細胞癌第一線用藥（併用） p072 不需檢附報告（併用bevacizumab） 不需檢附報告(併用tremelimumab) 頭頸部鱗狀細胞癌第一線用藥 p082 cps≧20 頭頸部鱗狀細胞癌第二線用藥 p081 tps≧50% tc≧10% 默克細胞癌 p091 不需檢附報告 食道鱗狀細胞癌第一線用藥(併用化療) p102 tc≧1% 食道鱗狀細胞癌第二線用藥(單用) p101 tc≧1% 惡性肋膜間皮瘤(ipilimumab併用nivolumab) p111 不需檢附報告，病理組織為非上皮型(non-epithelioid) 膽道癌(併用化療) p121 不需檢附報告 早期三陰性乳癌(併用化療) p131 不需檢附報告 大腸直腸癌 p141 不需檢附報告 子宮內膜癌第一線(併用化療） p151  本表 6 支藥品皆未給付於此適應症。子宮內膜癌之給付藥品為 dostarlimab（見上方「併用其他藥品」項下之子宮內膜癌條文），該藥不在本 pd-l1 對照表的欄位內，故本表查不到其檢附要求。 * ventana sp263 僅適用於檢測非小細胞肺癌或泌尿道上皮癌維持療法 pembrolizumab nivolumab atezolizumab avelumab durvalumab cemiplimab 每位病人每個適應症限給付一種免疫檢查點抑制劑且不得互換，治療期間亦不可 合併申報該適應症之標靶藥物（atezolizumab 與 bevacizumab 併用於晚期肝細 胞癌第一線用藥及非鱗狀非小細胞肺癌第一線用藥除外），無效後或給付時程期 滿後則不再給付該適應症相關之標靶藥物。（enfortumab vedotin 用於局部晚期 或轉移性泌尿道上皮癌第三線用藥及 cetuximab 用於頭頸部鱗狀細胞癌(不含鼻 咽癌) 除外 ）。(108/4/1、111/6/1、112/8/1、113/5/1、115/2/1) 給付時程期限：自初次處方用藥日起算2年（pembrolizumab 用於早期三陰性乳 癌依前述給付時程期限至多使用17個療程、durvalumab 用於鞏固治療自初次處 方用藥日起算1年、nivolumab 用於非小細胞肺癌術前輔助治療至多使用3個療 程）。(109/4/1、109/11/1、114/6/1、114/8/1、115/6/1) 需經事前審查核准後使用。(108/4/1、110/10/1、111/6/1、115/6/1) 每次申請以12週為限，初次申請時需檢附以下資料：(108/6/1、109/11/1、 111/6/1、113/6/1、114/6/1、115/2/1) i.確實患有相關癌症之病理或細胞檢查報告，黑色素瘤患者需另檢附 braf 腫瘤 基因檢測結果、非小細胞肺癌患者需另檢附符合給付適應症內容規定之腫瘤基 因檢測結果報告，上述基因檢測須符合全民健康保險藥品給付規定之通則十二。 (113/6/1) ⅱ.生物標記表現量檢測報告：pd-l1表現量檢測結果需符合全民健康保險藥品 給付規定之通則十二。(111/6/1、113/6/1) ⅲ.病人身體狀況良好(ecog≦1)及心肺與肝腎功能之評估資料。 iv.病人12週內之疾病影像檢查及報告(如胸部 x 光、電腦斷層或其他可作為評估 的影像)，此影像證明以可測量(measurable)的病灶為優先，如沒有可以測量 的病灶，則可評估(evaluable)的病灶亦可採用。 備註：上述影像檢查之給付範圍不包括正子造影(pet)。 v.先前已接受過之治療與完整用藥資料(如化學治療、標靶藥物及自費等用藥之 劑量及療程)及其治療結果；典型何杰金氏淋巴瘤患者需另檢附自體造血幹細 胞移植之病歷紀錄；肝細胞癌患者需另檢附 t.a.c.e.治療紀錄。 vi.使用免疫檢查點抑制劑之治療計畫(treatment protocol)。 ⅶ.單獨使用 pembrolizumab 於泌尿道上皮癌第一線用藥時，須另檢附下列其中 一項佐證資料：(111/2/1、114/6/1、115/2/1) i.ctcae(the common terminology criteria for adverse events) v4.0 grade≧2 audiometric hearing loss ⅱ.ctcae v4.0 grade≧2 peripheral neuropathy ⅲ.cirs(the cumulative illness rating scale) score >6 ⅷ.使用於早期三陰性乳癌用藥時，初次申請時需檢附 er、pr 及 her2為陰性之 檢測報告。(114/6/1) ix. 其他佐證病歷資料。 用藥後每12週至少評估一次，以 i-recist 標準(hcc 患者以 mrecist 標準)評定 藥物療效反應，依下列原則申請續用：(109/4/1、109/11/1、114/6/1、 114/8/1、115/6/1) i.有療效反應 ipr(pr)、icr(cr)者，或限使用 nivolumab、avelumab、 ipilimumab 或 cemiplimab 後評估疾病呈穩定狀態 isd (sd)者，得繼續用 藥；(109/4/1、115/6/1) ii.初始用藥後，如評估疾病呈未確認疾病惡化者(iupd)，可持續用藥4-8週後 再次評估；如再次評估，結果為疾病惡化 icpd (pd)者，應停止用藥。 (115/6/1) ⅲ.出現疾病惡化 icpd (pd)或出現中、重度或危及生命之藥物不良反應者，應 停止用藥；(109/4/1、115/6/1) ⅳ.使用 atezolizumab、pembrolizumab、durvalumab、tremelimumab 後評估 疾病呈穩定狀態者(sd)，可持續再用藥12週，並於12週後再次評估；經連續 二次評估皆為 sd 者，不得申請續用。durvalumab 用於非小細胞肺癌之鞏固 治療不在此限。(114/8/1、115/6/1) ⅴ使用於早期三陰性乳癌，術前前導性治療腫瘤惡化 icpd 者，或術後輔助治療 復發者，不得申請續用。(114/6/1、115/6/1) 申請續用時，需檢附病人12週內之評估資料如下：(108/6/1、109/11/1、 115/6/1) i.病人身體狀況良好(ecog≦1)及心肺與肝腎功能之評估資料。 ii.以 i-recist 標準(hcc 患者以 mrecist 標準)評定之藥物療效反應資料、影像 檢查及報告(如胸部 x 光、電腦斷層或其他可作為評估的影像)，此影像證明以 可測量(measurable)的病灶為優先，如沒有可以測量的病灶，則可評估 (evaluable)的病灶亦可採用。(108/6/1、115/6/1) 備註：上述影像檢查之給付範圍不包括正子造影(pet)。 ⅲ.單獨使用 pembrolizumab 於泌尿道上皮癌第一線用藥時，須另檢附下列其中 一項佐證資料：(108/6/1、109/11/1、114/6/1、115/2/1) i.ctcae(the common terminology criteria for adverse events) v4.0 grade≧2 audiometric hearing loss ⅱ.ctcae v4.0 grade≧2 peripheral neuropathy ⅲ.cirs(the cumulative illness rating scale) score >6 iv.使用於早期三陰性乳癌術後輔助治療時，須檢附於乳房和/或手術切除的淋 巴結中發現有殘餘的侵襲性癌症(non-pcr)佐證。(114/6/1) ⅴ其他佐證病歷資料。 登錄與結案作業：(109/11/1、114/1/1） 醫師處方使用本類藥品，倘病人結束治療、停止用藥、未通過續用申請或達給付 時程期限時，醫事機構須在28天內於 vpn 系統登錄結案。逾期未登錄結案者， 系統自動結案，且不予支付該個案自前次事前審查核定日後申報之藥費。 (109/11/1、114/1/1) 已結案者自結案日後不予支付藥費。 乳癌 肺癌 食道癌 大腸直腸癌 血液淋巴癌 婦癌 肝膽胰胃癌 泌尿癌 頭頸癌 其他癌 108/4/1 108/6/1 109/4/1 109/6/1 109/11/1 110/5/1 110/10/1 111/2/1 111/4/1 111/6/1 112/8/1 112/10/1 112/12/1 113/2/1 113/4/1 113/5/1 113/6/1 113/8/1 114/1/1 114/2/1 114/6/1 114/8/1 114/10/1 115/2/1 115/4/1 115/5/1 115/6/1 115/8/1",
+    "search_text": "免疫檢查點抑制劑 本類藥品得於藥品許可證登載之適應症及藥品仿單內，單獨使用於下列患者： 黑色素瘤：腫瘤無法切除或轉移之第三期或第四期黑色素瘤病人，先前曾接受過 至少一次全身性治療失敗者。 非小細胞肺癌：(109/4/1、109/11/1、114/6/1、114/8/1) i.鞏固治療：限 durvalumab 用於第三期局部晚期、無法手術切除且腫瘤表現 pd-l1 ≥ 1%之非小細胞肺癌成人病人，非鱗狀癌者需為 egfr/alk/ros-1腫瘤基因 原生型、鱗狀癌者需為 egfr/alk 腫瘤基因原生型，病人須於接受根治性同步 放射治療合併至少2個週期含鉑化療後無惡化(無 pd)，且至多使用12個月。 (114/8/1) ii.非小細胞肺癌第一線用藥：轉移性非小細胞肺癌成人病人，非鱗狀癌者需為 egfr/alk/ros-1腫瘤基因原生型、鱗狀癌者需為 egfr/alk 腫瘤基因原生型。 (114/6/1) iii.鱗狀非小細胞肺癌第二線用藥：先前已使用過 platinum 類化學治療失敗後， 又有疾病惡化，且 egfr/alk 腫瘤基因為原生型之晚期鱗狀非小細胞肺癌成人 病人。 iv.肺腺癌第三線用藥：先前已使用過 platinum 類及 docetaxel/paclitaxel 類二 線(含)以上化學治療均失敗，又有疾病惡化，且 egfr/alk/ros-1腫瘤基因為原 生型之晚期非小細胞肺腺癌成人病人。 典型何杰金氏淋巴瘤：先前已接受自體造血幹細胞移植(hsct)與移植後 brentuximab vedotin (bv)治療，但又復發或惡化的典型何杰金氏淋巴瘤成人患 者。 泌尿道上皮癌：使用含 atezolizumab 藥品成分須於113年8月1日前審核同意用 藥。(109/11/1、112/10/1、113/8/1) i.不適合接受化學治療之轉移性泌尿道上皮癌成人患者，且需符合下列條件之 一： i.ctcae(the common terminology criteria for adverse events) v4.0 grade≧2 audiometric hearing loss ii.ctcae v4.0 grade≧2 peripheral neuropathy iii.cirs(the cumulative illness rating scale) score >6 ii. 先前已使用過 platinum 類化學治療失敗後疾病惡化的局部晚期無法切除或 轉移性泌尿道上皮癌成人患者。 iii.限 avelumab 用於接受第一線含鉑化學治療4至6個療程後，疾病未惡化，且 達部分緩解（pr）或疾病呈穩定狀態者(sd)之無法手術切除局部晚期(stage ⅲ)或轉移性泌尿上皮癌(stage ⅳ)成人患者之維持療法。(112/10/1） 頭頸部鱗狀細胞癌(不含鼻咽癌)：(108/4/1、109/11/1、112/12/1、115/2/1) i.先前未曾接受全身性治療且無法手術切除之復發性或轉移性(第三期或第四期) 頭頸部鱗狀細胞癌成人患者。（112/12/1) ii.先前已使用過 platinum 類化學治療失敗後，又有疾病惡化的復發性或轉移性 (第三期或第四期)頭頸部鱗狀細胞癌成人患者。(108/4/1、109/11/1、 112/12/1） 轉移性胃癌：先前已使用過二線(含)以上化學治療均失敗，又有疾病惡化的轉移 性胃腺癌成人患者，且於109年4月1日前經審核同意用藥，後續評估符合續用申 請條件者。(109/4/1) 晚期腎細胞癌：先前已使用過至少二線標靶藥物治療均失敗，又有疾病惡化之晚 期腎細胞癌，其病理上為亮細胞癌(clear cell renal carcinoma)之成人患者。 晚期肝細胞癌：需同時符合下列所有條件： ⅰ.child-pugh a class 肝細胞癌成人患者。 ⅱ.先前經 t.a.c.e.於12個月內>=3次局部治療失敗者。 ⅲ.已使用過至少一線標靶藥物治療失敗，又有疾病惡化者。本類藥品與 regorafenib、ramucirumab 僅能擇一使用，且治療失敗時不可互換。 (108/6/1、110/5/1) ⅳ.未曾進行肝臟移植。 ⅴ.於109年4月1日前經審核同意用藥，後續評估符合續用申請條件者。 (109/4/1) 默克細胞癌：限 avelumab 用於先前已使用過 platinum 類化學治療失敗後，又有 疾病惡化之轉移性第四期默克細胞癌(merkel cell carcinoma)之成人患者。 (109/6/1) 食道鱗狀細胞癌：限 nivolumab 用於曾接受合併含鉑及 fluoropyrimidine 化學 治療之後惡化的無法切除晚期或復發性食道鱗狀細胞癌病人。(113/4/1、 113/6/1、115/2/1) 大腸直腸癌：限 pembrolizumab 做為無法切除或轉移性高微衛星不穩定性(msi-h)或錯誤配對修復功能不足性(dmmr)大腸直腸癌(crc)之成年病人第一線治療。 (114/6/1) 本類藥品得於藥品許可證登載之適應症及藥品仿單內，併用其他藥品於下列患者： (112/12/1、113/4/1、113/6/1、113/8/1、114/2/1、114/6/1、115/2/1、 115/4/1、115/6/1、115/8/1) 晚期肝細胞癌第一線用藥(112/8/1、112/10/1、114/2/1): ⅰ.限 atezolizumab 與 bevacizumab 併用，或限 durvalumab 與 tremelimumab 併 用，適用於治療未曾接受全身性療法之轉移性或無法手術切除且不適合局部 治療或局部治療失敗之 child-pugh a class 晚期肝細胞癌成人患者，並符合 下列條件之一：（112/8/1、112/10/1、114/2/1) i.肝外轉移（遠端轉移或肝外淋巴結侵犯）。 ii.大血管侵犯（腫瘤侵犯主門靜脈或侵犯左/右靜脈第一或第二分支）。 iii.經導管動脈化學藥物栓塞治療（transcatheter arterial chemo embolization, t.a.c.e.）失敗者，需提供患者於12個月內>=3次局部治 療之紀錄。 ii.須排除有以下任一情形： i.曾接受器官移植。 ii.正在接受免疫抑制藥物治療。 iii.有上消化道出血之疑慮且未接受完全治療 (須有半年內之內視鏡評估報 告)。 iii.sorafenib、lenvatinib、atezolizumab 與 bevacizumab 併用、durvalumab 與 tremelimumab 併用僅得擇一給付，不得互換。(114/2/1) iv.atezolizumab 與 bevacizumab 併用或 durvalumab 與 tremelimumab 併用治療 失敗後，不得申請使用 regorafenib 或 ramucirumab。(114/2/1) 非小細胞肺癌：(112/12/1、113/4/1、113/8/1、114/6/1、115/6/1) i. 非小細胞肺癌術前輔助治療：限用於可切除（腫瘤≧4 公分或淋巴結陽性 n1/n2(排除 n3)，且無疾病轉移 m0）之不具 egfr 或 alk 腫瘤基因異常成人病 人，且至多 3 個療程，並依下列條件使用：(115/6/1) i.非鱗狀非小細胞肺癌：限 nivolumab 與 pemetrexed(限使用 pexeda、apeta、pemetrexed sandoz 或 alimta avos)及含鉑化療併用。 ii.鱗狀細胞非小細胞肺癌：限 nivolumab 與含鉑化療併用。 ii. 轉移性鱗狀非小細胞肺癌第一線用藥：限 pembrolizumab 與 carboplatin 及 paclitaxel 併用至多使用 4 個療程，接續單用 pembrolizumab 治療。 (112/12/1、113/4/1、113/8/1) iii. 轉移性非鱗狀非小細胞肺癌第一線：限 pembrolizumab 與 pemetrexed(限使用 pexeda、apeta、pemetrexed sandoz 或 alimta avos)及含鉑類化學療法併用， 或限 atezolizumab 與 bevacizumab(限使用 alymsys、avastin、abevmy、 vegzelma 或 mvasi)及 carboplatin、paclitaxel 併用，做為轉移性且不具有 egfr/alk/ros-1 腫瘤基因異常的非鱗狀非小細胞肺癌第一線治療。(114/6/1、 114/8/1、115/8/1) 小細胞肺癌：限 atezolizumab 與 carboplatin 及 etoposide 併用，或 durvalumab 與 etoposide 及 carboplatin 或 cisplatin 兩者之一併用，適用於先 前未曾接受化療，且無腦部或無脊髓轉移之擴散期(extensive stage)小細胞肺 癌成人患者。(112/12/1、114/2/1) 惡性肋膜間皮瘤：限 ipilimumab 與 nivolumab 併用於無法切除之惡性肋膜間皮瘤 且病理組織顯示為非上皮型(non-epithelioid)成人病人的第一線治療。 (113/4/1、113/6/1、115/2/1) 胃癌（不含胃腸基質瘤及神經內分泌腫瘤/癌）：(113/4/1、113/6/1、115/2/1、 115/4/1) i. 限 nivolumab 併用 fluoropyrimidine（5-fu 或 capecitabine）及 oxaliplatin，用於第一線治療晚期或轉移性且不具有 her2過度表現的胃癌病 人。(113/4/1、113/6/1、115/2/1) ii. 與 zolbetuximab 僅得擇一使用，且治療失敗時不可互換。(115/4/1) 膽道癌第一線用藥：限 durvalumab 與 cisplatin 及 gemcitabine 併用至多使用8 個療程，接續單用 durvalumab 於先前未接受過治療或不可手術之局部晚期或轉 移性膽道癌 (biliary tract cancer)，並須排除以下任一情形：(114/2/1) ⅰ.壺腹癌。 ⅱ.曾接受異體器官移植。 ⅲ.具有或曾有活動性自體免疫或發炎性疾病。 早期三陰性乳癌：非轉移性、第 ii 期至第 iiib 期（ct1c n1-2 或 t2-4 n0-2） 成年病人(114/6/1)： ⅰ.術前前導性治療：限 pembrolizumab 每3週1次與 carboplatin 和 paclitaxel 併用至多4個療程，接續限 pembrolizumab 每3週1次與 cyclophosphamide 和 doxorubicin 或 epirubicin 併用至多4個療程，做為初診斷病人前導性治療 用藥。 ⅱ.術後輔助治療：上述病人接受過術前前導性治療後，限手術後未達 pcr 者， 單用 pembrolizumab 每3週1次，做為輔助治療用藥，且至多使用9個療程。 ⅲ.上述 pembrolizumab 用於早期三陰性乳癌依前述療程規定至多使用17個療 程，且用於術後輔助治療，pembrolizumab 與 olaparib 僅能擇一支付。 食道鱗狀細胞癌：限 nivolumab 與 fluoropyrimidine 及 cisplatin 或 oxaliplatin 併用，用於無法接受化學放射性治療或手術切除等治癒性治療之晚 期或轉移性食道鱗狀細胞癌成人病人的第一線治療。(115/2/1) 泌尿道上皮癌：限 nivolumab 與 cisplatin 及 gemcitabine 併用至多6個療程，接 續限單用 nivolumab，做為無法切除或轉移性泌尿道上皮癌成人病人的第一線治療。 (115/2/1) 子宮內膜癌：限 dostarlimab 與 carboplatin 及 paclitaxel(除 genetaxyl crem less 及 taxol 以外)併用至多使用6個療程，接續單用 dostarlimab 用於治療患有 錯誤配對修復功能不足（dmmr）或微衛星高度不穩定性（msi-h）之原發性晚期或 首次復發性子宮內膜癌(ec）成人病人第一線治療，並需符合以下任一條件： (115/8/1） i. 先前未曾接受全身性治療。 ii. 先前曾接受術前/術後輔助全身性治療，且於治療結束後至少6個月以後才首次 復發。 使用條件： 病人身體狀況良好(ecog≦1)。 病人之心肺與肝腎功能須符合下列所有條件： i.nyha(the new york heart association) functional class i 或 ii ii.got<60u/l 及 gpt<60u/l，且 t-bilirubin<1.5mg/dl (晚期肝細胞癌以及膽道癌 病人可免除此條件)(114/2/1) iii.腎功能：(晚期腎細胞癌病人可免除此條件) (109/4/1、112/10/1、115/2/1) i. 泌 尿 道 上 皮 癌 第 一 線 用 藥 ： 單 獨 使 用 pembrolizumab 須 符 合 egfr>30ml/min/1.73 m²且<60ml/min/1.73 m²；nivolumab 併用化療須符合 egfr ≥60ml/min/1.73 m²。 ii.泌尿道上皮癌第二線用藥：egfr>30ml/min/1.73 m²。 iii.泌尿道上皮癌維持治療（112/10/1）：egfr>30ml/min/1.73 m²。 iv.其他癌別：creatinine<1.5mg/dl 且 egfr>60ml/min/1.73 m²。 病人之生物標記表現：除 ipilimumab 與 nivolumab 併用於惡性肋膜間皮瘤外，依 個別藥品使用其對應之第三等級體外診斷醫療器材(class iii ivd)所檢測之 pd-l1表現量需符合下表：(109/4/1、109/6/1、111/4/1、112/8/1、112/10/1、 112/12/1 、 113/2/1 、 113/4/1 、 113/6/1 、 113/8/1 、 114/2/1 、 114/6/1 、 114/8/1、114/10/1、115/2/1、115/5/1、115/6/1、115/8/1) 黑色素瘤 p001 不需檢附報告 不需檢附報告 非小細胞肺癌術前輔助治療(併用) p016 不需檢附報告 非小細胞肺癌鞏固治療 p015 pd-l1≧1% 鱗狀、非鱗狀非小細胞肺癌第一線用藥(單用) p013 tps≧50% tc≧50%或ic≧10% tps≧50% 非鱗狀非小細胞肺癌第一線用藥(併用) p013 不需檢附報告 不需檢附報告 鱗狀非小細胞肺癌第二線用藥 p011 tps≧50% tc≧50% tc≧50%或ic≧10% 非鱗狀非小細胞肺癌第三線用藥 p012 tps≧50% tc≧50% tc≧50%或ic≧10% 鱗狀非小細胞肺癌第一線用藥（併用化療） p014 tps1~49% 小細胞肺癌(併用化療) p021 不需檢附報告 不需檢附報告 典型何杰金氏淋巴瘤 p031 不需檢附報告 不需檢附報告 泌尿道上皮癌維持療法 p043 不需檢附報告 泌尿道上皮癌第一線用藥(單用) p042 cps≧10 ic≧5%(113年8月1日前審核同意符合續用申請條件者) 泌尿道上皮癌第一線用藥(併用化療) p044 tc≥1% 泌尿道上皮癌第二線用藥 p041 cps≧10 tc≧5% ic≧5%(113年8月1日前審核同意符合續用申請條件者) 胃腺癌(109年4月1日前審核同意符合續用申請條件者) p051 cps≧1 不需檢附報告 胃癌第一線用藥(併用化療) p052 cps≧5 晚期腎細胞癌 p061 不需檢附報告 晚期肝細胞癌(109年4月1日前審核同意符合續用) p071 不需檢附報告(109年4月1日前審核同意符合續用申請條件者) 晚期肝細胞癌第一線用藥（併用） p072 不需檢附報告（併用bevacizumab） 不需檢附報告(併用tremelimumab) 頭頸部鱗狀細胞癌第一線用藥 p082 cps≧20 頭頸部鱗狀細胞癌第二線用藥 p081 tps≧50% tc≧10% 默克細胞癌 p091 不需檢附報告 食道鱗狀細胞癌第一線用藥(併用化療) p102 tc≧1% 食道鱗狀細胞癌第二線用藥(單用) p101 tc≧1% 惡性肋膜間皮瘤(ipilimumab併用nivolumab) p111 不需檢附報告，病理組織為非上皮型(non-epithelioid) 膽道癌(併用化療) p121 不需檢附報告 早期三陰性乳癌(併用化療) p131 不需檢附報告 大腸直腸癌 p141 不需檢附報告 子宮內膜癌第一線(併用化療） p151 不需檢附報告 * ventana sp263 僅適用於檢測非小細胞肺癌或泌尿道上皮癌維持療法 pembrolizumab nivolumab atezolizumab avelumab durvalumab cemiplimab dostarlimab 每位病人每個適應症限給付一種免疫檢查點抑制劑且不得互換，治療期間亦不可 合併申報該適應症之標靶藥物（atezolizumab 與 bevacizumab 併用於晚期肝細 胞癌第一線用藥及非鱗狀非小細胞肺癌第一線用藥除外），無效後或給付時程期 滿後則不再給付該適應症相關之標靶藥物。（enfortumab vedotin 用於局部晚期 或轉移性泌尿道上皮癌第三線用藥及 cetuximab 用於頭頸部鱗狀細胞癌(不含鼻 咽癌) 除外 ）。(108/4/1、111/6/1、112/8/1、113/5/1、115/2/1) 給付時程期限：自初次處方用藥日起算2年（pembrolizumab 用於早期三陰性乳 癌依前述給付時程期限至多使用17個療程、durvalumab 用於鞏固治療自初次處 方用藥日起算1年、nivolumab 用於非小細胞肺癌術前輔助治療至多使用3個療 程）。(109/4/1、109/11/1、114/6/1、114/8/1、115/6/1) 需經事前審查核准後使用。(108/4/1、110/10/1、111/6/1、115/6/1) 每次申請以12週為限，初次申請時需檢附以下資料：(108/6/1、109/11/1、 111/6/1、113/6/1、114/6/1、115/2/1) i.確實患有相關癌症之病理或細胞檢查報告，黑色素瘤患者需另檢附 braf 腫瘤 基因檢測結果、非小細胞肺癌患者需另檢附符合給付適應症內容規定之腫瘤基 因檢測結果報告，上述基因檢測須符合全民健康保險藥品給付規定之通則十二。 (113/6/1) ⅱ.生物標記表現量檢測報告：pd-l1表現量檢測結果需符合全民健康保險藥品 給付規定之通則十二。(111/6/1、113/6/1) ⅲ.病人身體狀況良好(ecog≦1)及心肺與肝腎功能之評估資料。 iv.病人12週內之疾病影像檢查及報告(如胸部 x 光、電腦斷層或其他可作為評估 的影像)，此影像證明以可測量(measurable)的病灶為優先，如沒有可以測量 的病灶，則可評估(evaluable)的病灶亦可採用。 備註：上述影像檢查之給付範圍不包括正子造影(pet)。 v.先前已接受過之治療與完整用藥資料(如化學治療、標靶藥物及自費等用藥之 劑量及療程)及其治療結果；典型何杰金氏淋巴瘤患者需另檢附自體造血幹細 胞移植之病歷紀錄；肝細胞癌患者需另檢附 t.a.c.e.治療紀錄。 vi.使用免疫檢查點抑制劑之治療計畫(treatment protocol)。 ⅶ.單獨使用 pembrolizumab 於泌尿道上皮癌第一線用藥時，須另檢附下列其中 一項佐證資料：(111/2/1、114/6/1、115/2/1) i.ctcae(the common terminology criteria for adverse events) v4.0 grade≧2 audiometric hearing loss ⅱ.ctcae v4.0 grade≧2 peripheral neuropathy ⅲ.cirs(the cumulative illness rating scale) score >6 ⅷ.使用於早期三陰性乳癌用藥時，初次申請時需檢附 er、pr 及 her2為陰性之 檢測報告。(114/6/1) ix. 其他佐證病歷資料。 用藥後每12週至少評估一次，以 i-recist 標準(hcc 患者以 mrecist 標準)評定 藥物療效反應，依下列原則申請續用：(109/4/1、109/11/1、114/6/1、 114/8/1、115/6/1) i.有療效反應 ipr(pr)、icr(cr)者，或限使用 nivolumab、avelumab、 ipilimumab 或 cemiplimab 後評估疾病呈穩定狀態 isd (sd)者，得繼續用 藥；(109/4/1、115/6/1) ii.初始用藥後，如評估疾病呈未確認疾病惡化者(iupd)，可持續用藥4-8週後 再次評估；如再次評估，結果為疾病惡化 icpd (pd)者，應停止用藥。 (115/6/1) ⅲ.出現疾病惡化 icpd (pd)或出現中、重度或危及生命之藥物不良反應者，應 停止用藥；(109/4/1、115/6/1) ⅳ.使用 atezolizumab、pembrolizumab、durvalumab、tremelimumab 後評估 疾病呈穩定狀態者(sd)，可持續再用藥12週，並於12週後再次評估；經連續 二次評估皆為 sd 者，不得申請續用。durvalumab 用於非小細胞肺癌之鞏固 治療不在此限。(114/8/1、115/6/1) ⅴ使用於早期三陰性乳癌，術前前導性治療腫瘤惡化 icpd 者，或術後輔助治療 復發者，不得申請續用。(114/6/1、115/6/1) 申請續用時，需檢附病人12週內之評估資料如下：(108/6/1、109/11/1、 115/6/1) i.病人身體狀況良好(ecog≦1)及心肺與肝腎功能之評估資料。 ii.以 i-recist 標準(hcc 患者以 mrecist 標準)評定之藥物療效反應資料、影像 檢查及報告(如胸部 x 光、電腦斷層或其他可作為評估的影像)，此影像證明以 可測量(measurable)的病灶為優先，如沒有可以測量的病灶，則可評估 (evaluable)的病灶亦可採用。(108/6/1、115/6/1) 備註：上述影像檢查之給付範圍不包括正子造影(pet)。 ⅲ.單獨使用 pembrolizumab 於泌尿道上皮癌第一線用藥時，須另檢附下列其中 一項佐證資料：(108/6/1、109/11/1、114/6/1、115/2/1) i.ctcae(the common terminology criteria for adverse events) v4.0 grade≧2 audiometric hearing loss ⅱ.ctcae v4.0 grade≧2 peripheral neuropathy ⅲ.cirs(the cumulative illness rating scale) score >6 iv.使用於早期三陰性乳癌術後輔助治療時，須檢附於乳房和/或手術切除的淋 巴結中發現有殘餘的侵襲性癌症(non-pcr)佐證。(114/6/1) ⅴ其他佐證病歷資料。 登錄與結案作業：(109/11/1、114/1/1） 醫師處方使用本類藥品，倘病人結束治療、停止用藥、未通過續用申請或達給付 時程期限時，醫事機構須在28天內於 vpn 系統登錄結案。逾期未登錄結案者， 系統自動結案，且不予支付該個案自前次事前審查核定日後申報之藥費。 (109/11/1、114/1/1) 已結案者自結案日後不予支付藥費。 乳癌 肺癌 食道癌 大腸直腸癌 血液淋巴癌 婦癌 肝膽胰胃癌 泌尿癌 頭頸癌 其他癌 108/4/1 108/6/1 109/4/1 109/6/1 109/11/1 110/5/1 110/10/1 111/2/1 111/4/1 111/6/1 112/8/1 112/10/1 112/12/1 113/2/1 113/4/1 113/5/1 113/6/1 113/8/1 114/1/1 114/2/1 114/6/1 114/8/1 114/10/1 115/2/1 115/4/1 115/5/1 115/6/1 115/8/1",
     "review_scope": "all",
     "review_source": [
       "explicit_text"
@@ -25886,6 +25884,55 @@ function normSearch(s){
 }
 drugs.forEach(d => { d._nsearch = normSearch(d.search_text || ''); });
 
+/* === 事前審查是「條文層」的要求，不是「藥品層」的屬性（坑 #56）===
+   同一支藥在不同癌別的事審條件可能不同（實測 5 支：9.34/9.37/9.41/9.46/9.48）。
+   事審條文都掛在特定適應症 item 底下，而那個 item 帶癌別標籤 —— 所以
+   「這個癌別要不要事審」的資訊已完整存在於現有結構，載入時推導即可，
+   不新增資料欄位＝條文更新後自動正確、沒有旗標忘了改的風險。 */
+const PA_RE = /事前審查/;
+
+function paClausesFor(d, sel) {
+  const filtering = Array.isArray(sel) && sel.length > 0;
+  const hits = [];
+  (d.items || []).forEach(it => {
+    if (filtering && !tagHit(it.cancerTags, sel)) return;
+    if (PA_RE.test(it.header || "")) hits.push(`第 ${it.num} 項`);
+    let subs = it.subitems || [];
+    if (filtering && subs.some(s => s.cancerTags)) {
+      subs = subs.filter(s => tagHit(s.cancerTags, sel));
+    }
+    subs.forEach(s => { if (PA_RE.test(s.text || "")) hits.push(`第 ${it.num} 項 ${s.num}`); });
+  });
+  return hits;
+}
+
+drugs.forEach(d => {
+  d._paByCancer = {};
+  (d.cancers || []).forEach(c => { d._paByCancer[c] = paClausesFor(d, [c]).length > 0; });
+  const vals = Object.values(d._paByCancer);
+  const anyClause = paClausesFor(d, null).length > 0;
+  // 注意：跟 review_scope 不同 —— review_scope 講的是「父/子藥物」，這裡講的是「跨癌別」
+  d._paCancerScope = vals.length === 0 ? (anyClause ? "all" : (d.form_no ? "appendix" : "none"))
+    : vals.every(Boolean) ? "all"
+    : vals.some(Boolean) ? "partial"
+    : (d.form_no ? "appendix" : "none");
+});
+
+// 目前檢視下（含癌別篩選）本藥是否需事審
+function paState(d) {
+  const sel = [...selectedCancers];
+  if (sel.length > 0) {
+    const rel = sel.filter(c => (d.cancers || []).includes(c));
+    const hits = paClausesFor(d, sel);
+    return { need: hits.length > 0, where: hits, scope: d._paCancerScope, filtered: true,
+             anyOfSelected: rel.some(c => d._paByCancer[c]) };
+  }
+  // 未選癌別時 need 只在「全癌別皆需」才為真 —— partial 要走「部分適應症」那條訊息，
+  // 否則又會對某些癌別過度斷言（這正是坑 #56 要修的病）。
+  return { need: d._paCancerScope === "all",
+           where: paClausesFor(d, null), scope: d._paCancerScope, filtered: false };
+}
+
 const cancers = ["乳癌", "肺癌", "食道癌", "大腸直腸癌", "血液淋巴癌", "婦癌", "肝膽胰胃癌", "泌尿癌", "頭頸癌", "其他癌"];
 const types = ["化療", "標靶", "免疫", "荷爾蒙"];
 
@@ -25944,7 +25991,13 @@ function getFiltered() {
   if (favOnlyActive()) f = f.filter(favPass);
   if (selectedCancers.size > 0) f = f.filter(d => d.cancers.some(c => selectedCancers.has(c)));
   if (selectedTypes.size > 0) f = f.filter(d => d.types.some(t => selectedTypes.has(t)));
-  if (onlyReview) f = f.filter(d => d.pre_review);
+  // 選了癌別時，用「該癌別是否需事審」判斷（否則 9.46 會在「肺癌＋只看事審」下誤出現）
+  if (onlyReview) {
+    const sel = [...selectedCancers];
+    f = sel.length
+      ? f.filter(d => paClausesFor(d, sel).length > 0 || (!d.cancers.some(c => sel.includes(c)) && d.pre_review))
+      : f.filter(d => d.pre_review);
+  }
   if (searchTerm) {
     const t = normSearch(searchTerm);
     f = f.filter(d => (d._nsearch || normSearch(d.search_text || '')).includes(t));
@@ -25962,7 +26015,7 @@ function renderFilters() {
     cancerCounts[c] = drugs.filter(d => 
       d.cancers.includes(c) && favPass(d) &&
       (selectedTypes.size === 0 || d.types.some(t => selectedTypes.has(t))) &&
-      (!onlyReview || d.pre_review) &&
+      (!onlyReview || paClausesFor(d, [c]).length > 0) &&
       (!searchTerm || (d._nsearch || normSearch(d.search_text || '')).includes(normSearch(searchTerm)))
     ).length;
   });
@@ -26071,6 +26124,7 @@ function footnoteMark(s) {
 
 function subitemHTML(sub) {
   let inner = formatHierarchy(highlight(sub.text, searchTerm));
+  if (PA_RE.test(sub.text || "")) inner += `<span class="tag-pa" title="本條載有事前審查要求">需事審</span>`;
   if (sub.xrefNote) inner += `<div class="xref-note">${highlight(sub.xrefNote, searchTerm)}</div>`;
   if (sub.table) inner += pdl1TableHTML(sub.table);
   return `<div class="subitem"><span class="subitem-num">${sub.num}</span><span class="subitem-text">${inner}</span></div>`;
@@ -26140,8 +26194,10 @@ function renderFullClauses(items, sel) {
     }
     const universalBadge = (filtering && isUniversal(clause.cancerTags))
       ? `<span class="tag-universal" title="此條為通用條件，適用所有癌別">通用</span>` : "";
+    const paBadge = PA_RE.test(clause.header || "")
+      ? `<span class="tag-pa" title="本條載有事前審查要求">需事審</span>` : "";
     let html = `<div class="clause ${subs.length === 0 ? 'no-subs' : ''}">`;
-    html += `<div class="clause-header"><span class="clause-num">${clause.num}.</span><span class="clause-text">${formatHierarchy(highlight(clause.header, searchTerm))}${universalBadge}</span></div>`;
+    html += `<div class="clause-header"><span class="clause-num">${clause.num}.</span><span class="clause-text">${formatHierarchy(highlight(clause.header, searchTerm))}${universalBadge}${paBadge}</span></div>`;
     if (shownSubs.length > 0 || hiddenSubs.length > 0) {
       html += `<div class="subitems">`;
       if (filtering && shownSubs.length === 0 && hiddenSubs.length > 0) {
@@ -26230,10 +26286,23 @@ function buildClauseText(num) {
     if (hidden > 0) lines.push(`   （本條另有其他癌別條文 ${hidden} 項，未列入）`);
   });
 
-  if (d.pre_review) {
+  {
+    const s = paState(d);
     lines.push("");
-    lines.push(`\u203b 本藥需經健保署事前審查核准後使用${d.form_no ? `（申請表：${d.form_no}）` : ""}。` +
-               (d.review_scope === "partial" ? "（僅部分子藥物需事審，詳見子項目）" : ""));
+    if (s.need) {
+      lines.push(`\u203b 本適應症需經健保署事前審查核准後使用${d.form_no ? `（申請表：${d.form_no}）` : ""}。` +
+                 (s.where.length ? `依據：${s.where.slice(0, 4).join("、")}。` : "") +
+                 (d.review_scope === "partial" ? "（僅部分子藥物需事審，詳見子項目）" : ""));
+    } else if (filtering) {
+      lines.push(`\u203b 已依「${sel.join("、")}」篩選，該適應症之給付條文未載事前審查要求。` +
+                 (d.form_no ? `本藥有「${d.form_no}」，若其他適應症需送審時使用。` : ""));
+    } else if (s.scope === "partial") {
+      lines.push(`\u203b 本藥不同癌別的事前審查規範不同，請依上方標示「需事審」之條文判斷${d.form_no ? `（申請表：${d.form_no}）` : ""}。`);
+    } else if (s.scope === "appendix") {
+      lines.push(`\u203b 本藥條文未載事前審查，但有「${d.form_no}」；送審與否請依附表規定確認。`);
+    } else {
+      lines.pop();
+    }
   }
 
   const dateEl = document.querySelector(".brand-data-date");
@@ -26263,7 +26332,11 @@ function renderList() {
   }
   
   document.getElementById("drug-list").innerHTML = filtered.map(d => {
-    const reviewClass = d.pre_review ? "pre-review" : "";
+    const reviewClass = (() => {
+      const s = paState(d);
+      if (s.filtered) return s.need ? "pre-review" : "";
+      return (s.scope === "all") ? "pre-review" : (s.scope === "partial" || s.scope === "appendix") ? "pre-review-partial" : "";
+    })();
     const deletedClass = d.deleted ? "deleted" : "";
     
     let tagsHTML = '';
@@ -26276,7 +26349,17 @@ function renderList() {
       const activeClass = selectedCancers.has(c) ? "cancer-active" : "";
       tagsHTML += `<span class="tag ${activeClass}">${c}</span>`;
     });
-    if (d.pre_review) tagsHTML += `<span class="tag review">${ICONS.warn}事前審查</span>`;
+    const pa = paState(d);
+    if (pa.filtered) {
+      if (pa.need) tagsHTML += `<span class="tag review">${ICONS.warn}事前審查</span>`;
+      // 該癌別條文未載事審 → 不掛標籤，改由下方明確說明（避免沉默造成疑慮）
+    } else if (pa.scope === "all") {
+      tagsHTML += `<span class="tag review">${ICONS.warn}事前審查</span>`;
+    } else if (pa.scope === "partial") {
+      tagsHTML += `<span class="tag review-partial" title="不同癌別的事前審查規範不同，請看條文標示">${ICONS.warn}部分事審</span>`;
+    } else if (pa.scope === "appendix") {
+      tagsHTML += `<span class="tag review-partial" title="條文未載事前審查，本藥有附表">${ICONS.warn}附表待確認</span>`;
+    }
     if (d.form_no) tagsHTML += `<span class="tag form">${d.form_no}</span>`;
     
     // === 決定怎麼渲染 body ===
@@ -26325,13 +26408,25 @@ function renderList() {
     }
 
     let reviewNotice = "";
-    if (d.pre_review) {
-      let parts = [];
-      if (d.form_no) parts.push(`填寫「${d.form_no}」申請表`);
-      parts.push("送健保署事前審查核准後方可使用");
-      const scopeNote = (d.review_scope === "partial")
+    {
+      const s = paState(d);
+      const formPart = d.form_no ? `填寫「${d.form_no}」申請表，` : "";
+      const parentNote = (d.review_scope === "partial")
         ? `<div class="review-scope-note">※ 本項為父分類，僅部分子藥物需事前審查，請看子項目條文</div>` : "";
-      reviewNotice = `<div class="review-notice"><span class="review-notice-icon">${ICONS.warn}</span><div class="review-notice-content"><strong>事前審查</strong>${parts.join("，")}${scopeNote}</div></div>`;
+      const whereNote = s.where.length
+        ? `<div class="review-scope-note">依據：${s.where.slice(0, 4).join("、")}${s.where.length > 4 ? " 等" : ""}</div>` : "";
+      if (s.need) {
+        reviewNotice = `<div class="review-notice"><span class="review-notice-icon">${ICONS.warn}</span><div class="review-notice-content"><strong>事前審查</strong>${formPart}送健保署事前審查核准後方可使用${whereNote}${parentNote}</div></div>`;
+      } else if (s.filtered && (d.cancers || []).some(c => selectedCancers.has(c))) {
+        // 明確的否定 —— 只描述我們看到什麼，不替健保署下結論
+        const appendixPart = d.form_no
+          ? `<br>本藥有「${d.form_no}」，若其他適應症需送審時使用。` : "";
+        reviewNotice = `<div class="review-notice review-notice-none"><span class="review-notice-icon">${ICONS.info || ""}</span><div class="review-notice-content"><strong>本癌別未載事前審查</strong>已依「${[...selectedCancers].join("、")}」篩選，該適應症之給付條文<strong>未載事前審查要求</strong>。${appendixPart}</div></div>`;
+      } else if (s.scope === "appendix") {
+        reviewNotice = `<div class="review-notice review-notice-none"><span class="review-notice-icon">${ICONS.warn}</span><div class="review-notice-content"><strong>附表待確認</strong>本藥條文未載事前審查，但有「${d.form_no}」；送審與否請依附表規定確認。</div></div>`;
+      } else if (s.scope === "partial") {
+        reviewNotice = `<div class="review-notice"><span class="review-notice-icon">${ICONS.warn}</span><div class="review-notice-content"><strong>部分適應症需事前審查</strong>${formPart}本藥<strong>不同癌別的事審規範不同</strong>，請看條文上標示「需事審」者；選擇上方癌別篩選可只看該癌別的規範。${whereNote}${parentNote}</div></div>`;
+      }
     }
     
     return `
@@ -26806,6 +26901,23 @@ document.addEventListener("click", function(e) {
     }, 500);
   }
   
+  // === 把黏著 header 的實際高度寫進 --header-h（坑 #57）===
+  // 之前桌機側欄與行動版搜尋列都各自寫死常數，只要字型/文案/縮放一變就失準。
+  (function trackHeaderHeight() {
+    const stack = document.querySelector(".header-stack");
+    if (!stack) return;
+    const apply = () => {
+      const h = Math.round(stack.getBoundingClientRect().height);
+      if (h > 0) document.documentElement.style.setProperty("--header-h", h + "px");
+    };
+    apply();
+    if (window.ResizeObserver) new ResizeObserver(apply).observe(stack);
+    window.addEventListener("resize", apply);
+    window.addEventListener("orientationchange", apply);
+    // 字型載入後行高會變 → 再量一次
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
+  })();
+
   if (sessionStorage.getItem(STORAGE_KEY) === "1") unlock();
   
   form.addEventListener("submit", async (e) => {
