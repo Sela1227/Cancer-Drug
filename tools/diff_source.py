@@ -21,6 +21,10 @@ MINLEN = 12
 NUMBERING = re.compile(
     r"^(?:[0-9０-９]{1,3}|[（(][0-9０-９]{1,3}[)）]|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]|[IVXivx]{1,4}|[ⅰⅱⅲⅳⅴ])[.、)）]?$")
 DATEONLY = re.compile(r"^[（(]?[0-9０-９/、\s]+[)）]?$")
+# 我們把「標題 + 羅馬數字層級」合併成一個節點，而 DOCX 是一段一個；
+# 整句對不上時拆成子句再比，否則會產生一堆「節點邊界不同」的誤報（坑 #60）
+ROMAN_SPLIT = re.compile(r"\s+(?:[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]|[IVX]{1,4}|[ⅰⅱⅲⅳⅴ]|[ivx]{1,4})[.、]\s*")
+
 LEADSTRIP = [
     re.compile(r"^[（(][0-9０-９/、\s]+[)）]\s*"),
     re.compile(r"^(?:[0-9０-９]{1,3}[.、]|[（(][0-9０-９]{1,3}[)）]|[ⅠⅡⅢⅣⅤ][.、]"
@@ -70,6 +74,8 @@ def run(ship, src):
     SEC = L.split_sections(L.read_source(src))
 
     # 父項目的 items 是子藥物的合併複本，逐節必然對不上 -> 用全庫底本兜底
+    # 表格（PD-L1）在來源文件末尾，會被切到最後一個條號名下；
+    # 出版檔則掛在 9.69 的子項裡 → 用全庫底本比對（內容在就好，歸屬不同不算漏）
     G_SHIP = L.norm("\n".join(L.drug_text(d) for d in drugs) +
                     "\n".join(header_info(d) for d in drugs))
     G_SRC = L.norm("\n".join(SEC.values()))
@@ -92,6 +98,10 @@ def run(ship, src):
             if k in G_SHIP:
                 only_global["miss"] += 1
                 continue
+            subs = [x for x in ROMAN_SPLIT.split(sent) if len(L.norm(x)) >= 12]
+            if subs and all(L.norm(x) in G_SHIP for x in subs):
+                only_global["miss"] += 1
+                continue
             miss.append((num, sent[:100]))
 
         if d.get("deleted"):     # 已刪除條號的說明文字是我們寫的，不做反向
@@ -102,6 +112,11 @@ def run(ship, src):
             if len(k) < MINLEN or k in src_flat:
                 continue
             if k in G_SRC:
+                only_global["extra"] += 1
+                continue
+            # 拆子句再比：每個子句都在原文中 → 只是節點邊界不同，非內容差異
+            subs = [x for x in ROMAN_SPLIT.split(sent) if len(L.norm(x)) >= 12]
+            if subs and all(L.norm(x) in G_SRC for x in subs):
                 only_global["extra"] += 1
                 continue
             extra.append((num, sent[:100]))
